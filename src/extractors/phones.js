@@ -19,6 +19,8 @@ function shouldExcludePhone(phone, snippet = '') {
 
   // Exclure SIRET / TVA via mots-clés proches
   if (/(siret|siren|tva|vat|rcs|capital social)/i.test(s)) return true;
+  // Exclure IDs/refs d'hébergement / tracking (cas datawords: ovh etablissement)
+  if (/(ovh|societe\.com\/etablissement|appId|tracking|initApollo|data center)/i.test(snippet || '')) return true;
 
   return PHONE_EXCLUSIONS.some(pattern => pattern.test(phone) || pattern.test(digits));
 }

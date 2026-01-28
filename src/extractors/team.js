@@ -1,5 +1,7 @@
 import * as cheerio from 'cheerio';
 import { normalizeEmail } from '../utils/normalization.js';
+import { normalizePhone } from '../utils/normalization.js';
+import { cleanSnippet } from '../utils/normalization.js';
 
 /**
  * Extrait les membres d'équipe depuis une page HTML
@@ -7,6 +9,44 @@ import { normalizeEmail } from '../utils/normalization.js';
 export function extractTeam(html, sourceUrl) {
   const teamMembers = [];
   const $ = cheerio.load(html);
+
+  // Ignore scripts/styles
+  $('script, style, noscript').remove();
+
+  // 0) Cas "mentions légales" / "disclaimer": contacts labellisés
+  // Exemple:
+  // Head of publication: Alexandre Crazover
+  // E-mail: dpo@datawords.com
+  // Tel: +33 1 75 33 80 80
+  const bodyTextRaw = $('body').text();
+  const bodyText = bodyTextRaw.replace(/\r/g, '');
+
+  const headPubMatch = bodyText.match(/Head of publication\s*:\s*([^\n]+)\n/i) || bodyText.match(/Directeur(?:\s+de\s+la)?\s+publication\s*:\s*([^\n]+)\n/i);
+  if (headPubMatch) {
+    const name = headPubMatch[1].trim();
+
+    const emailMatch = bodyText.match(/E-?mail\s*:\s*([a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24})/i) ||
+      bodyText.match(/Adresse de courrier électronique\s*:\s*([a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24})/i);
+    const telMatch = bodyText.match(/\bTel(?:\.|ephone)?\s*:\s*([+0-9][0-9\s().-]{6,}[0-9])\b/i);
+
+    const email = emailMatch ? normalizeEmail(emailMatch[1]) : null;
+    const phoneNormalized = telMatch ? normalizePhone(telMatch[1]) : { valueRaw: null, valueE164: null };
+    const phone = phoneNormalized.valueE164 || phoneNormalized.valueRaw || null;
+
+    const signals = ['legal_labeled_contact'];
+    if (email) signals.push('has_email');
+    if (phone) signals.push('has_phone');
+
+    teamMembers.push({
+      name,
+      role: /head of publication/i.test(headPubMatch[0]) ? 'Head of publication' : 'Directeur de la publication',
+      email,
+      phone,
+      linkedin: null,
+      sourceUrl,
+      signals
+    });
+  }
   
   // Détecte les blocs répétés (cards de membres d'équipe)
   // Cherche des structures communes : div.team-member, .person-card, etc.

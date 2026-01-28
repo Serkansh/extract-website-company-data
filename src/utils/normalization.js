@@ -55,35 +55,26 @@ export function cleanSnippet(snippet, maxLen = 240) {
 export function normalizePhone(phoneRaw) {
   if (!phoneRaw) return { valueRaw: null, valueE164: null };
   
-  const cleaned = phoneRaw.trim();
+  let cleaned = phoneRaw.trim();
   let valueE164 = null;
   
   try {
-    // Essaie de parser avec libphonenumber-js
-    // On essaie plusieurs pays courants
-    const countries = ['FR', 'US', 'GB', 'DE', 'ES', 'IT', 'BE', 'CH'];
-    
-    for (const country of countries) {
-      try {
-        const phoneNumber = parsePhoneNumber(cleaned, country);
-        if (isValidPhoneNumber(phoneNumber.number)) {
-          valueE164 = phoneNumber.number;
-          break;
-        }
-      } catch {
-        // Continue avec le pays suivant
-      }
-    }
-    
-    // Si aucun pays ne fonctionne, essaie sans pays
-    if (!valueE164) {
-      try {
+    // Normalisation CONSERVATRICE pour éviter de transformer des IDs en numéros (ex: appId/ovh)
+    // 1) Si ça commence par "+", on parse tel quel (format international explicite)
+    if (cleaned.startsWith('+')) {
+      const phoneNumber = parsePhoneNumber(cleaned);
+      if (phoneNumber?.number && isValidPhoneNumber(phoneNumber.number)) valueE164 = phoneNumber.number;
+    } else {
+      // 2) Si ça commence par "00", on convertit en "+"
+      if (/^00\d/.test(cleaned)) cleaned = `+${cleaned.slice(2)}`;
+
+      if (cleaned.startsWith('+')) {
         const phoneNumber = parsePhoneNumber(cleaned);
-        if (isValidPhoneNumber(phoneNumber.number)) {
-          valueE164 = phoneNumber.number;
-        }
-      } catch {
-        // Ignore les erreurs de parsing
+        if (phoneNumber?.number && isValidPhoneNumber(phoneNumber.number)) valueE164 = phoneNumber.number;
+      } else {
+        // 3) Sinon, on tente uniquement FR (par défaut v1)
+        const phoneNumber = parsePhoneNumber(cleaned, 'FR');
+        if (phoneNumber?.number && isValidPhoneNumber(phoneNumber.number)) valueE164 = phoneNumber.number;
       }
     }
   } catch {
