@@ -126,13 +126,14 @@ export function extractCompany(html, sourceUrl) {
   // Adresse / siège social (best-effort FR)
   // On capture une "phrase" après le label, puis on tente de parser CP/ville
   const addressMatches =
-    legalText.match(/Si[eè]ge\s+social\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
-    legalText.match(/Adresse\s+du\s+si[eè]ge\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
-    legalText.match(/Adresse\s+postale\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
-    legalText.match(/Adresse\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i);
+    // On coupe avant les libellés suivants, très fréquents en mentions légales
+    legalText.match(/Si[eè]ge\s+social\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i) ||
+    legalText.match(/Adresse\s+du\s+si[eè]ge\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i) ||
+    legalText.match(/Adresse\s+postale\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i) ||
+    legalText.match(/Adresse\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i);
 
   if (addressMatches && !company.address) {
-    const addr = addressMatches[1].trim().replace(/\s+/g, ' ');
+    const addr = addressMatches[1].trim().replace(/\s+/g, ' ').replace(/[;,.]$/, '');
     const cpMatch = addr.match(/\b(\d{5})\b/);
     if (cpMatch) {
       const postalCode = cpMatch[1];
