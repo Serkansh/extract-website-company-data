@@ -5,8 +5,21 @@ import { normalizePhone } from '../utils/normalization.js';
 /**
  * Vérifie si un numéro doit être exclu
  */
-function shouldExcludePhone(phone) {
+function shouldExcludePhone(phone, snippet = '') {
   const digits = phone.replace(/\D/g, '');
+  const s = (snippet || '').toLowerCase();
+
+  // Exclure les dates / timestamps (ex: 2023-03-19, 2023-03-19T15:24:21)
+  if (/^\d{4}[-/]\d{2}[-/]\d{2}(?:[tT].*)?$/.test(phone.trim())) return true;
+
+  // Exclure les strings trop courtes (souvent dates, IDs, fragments JSON)
+  // Un téléphone “utile” a quasi toujours >= 9 digits (FR: 10, E.164 max 15)
+  if (digits.length < 9) return true;
+  if (digits.length > 15) return true;
+
+  // Exclure SIRET / TVA via mots-clés proches
+  if (/(siret|siren|tva|vat|rcs|capital social)/i.test(s)) return true;
+
   return PHONE_EXCLUSIONS.some(pattern => pattern.test(phone) || pattern.test(digits));
 }
 
@@ -23,9 +36,9 @@ export function extractPhones(html, sourceUrl) {
     const phoneMatch = href.match(/tel:([^\?&]+)/i);
     if (phoneMatch) {
       const phoneValue = phoneMatch[1].trim();
-      if (!shouldExcludePhone(phoneValue)) {
+      const text = $(el).text().trim();
+      if (!shouldExcludePhone(phoneValue, text)) {
         const normalized = normalizePhone(phoneValue);
-        const text = $(el).text().trim();
         
         phones.push({
           valueRaw: normalized.valueRaw,
@@ -45,9 +58,16 @@ export function extractPhones(html, sourceUrl) {
   
   for (const phoneMatch of phoneMatches) {
     const phoneValue = phoneMatch.trim();
-    if (!shouldExcludePhone(phoneValue)) {
+    // Trouve le contexte autour du phone (avant filtrage, pour keywords)
+    const index = textContent.indexOf(phoneMatch);
+    const snippet = textContent.substring(Math.max(0, index - 80), index + phoneMatch.length + 80).trim();
+
+    if (!shouldExcludePhone(phoneValue, snippet)) {
       const normalized = normalizePhone(phoneValue);
-      
+
+      // Si libphonenumber n'arrive pas à normaliser, on garde quand même (valueE164 = null),
+      // mais uniquement si ça ressemble à un numéro (>= 9 digits déjà vérifié ci-dessus).
+
       // Vérifie si déjà trouvé via tel:
       const alreadyFound = phones.some(p => {
         if (p.valueE164 && normalized.valueE164) {
@@ -57,10 +77,6 @@ export function extractPhones(html, sourceUrl) {
       });
       
       if (!alreadyFound) {
-        // Trouve le contexte autour du phone
-        const index = textContent.indexOf(phoneMatch);
-        const snippet = textContent.substring(Math.max(0, index - 50), index + phoneMatch.length + 50).trim();
-        
         // Détecte si dans footer ou contact
         const signals = ['text'];
         const parentText = $(`*:contains("${phoneMatch}")`).first().closest('footer, .footer, .contact, #contact').length > 0;

@@ -12,14 +12,6 @@
         { "url": "https://example.com" }
       ]
     },
-    "maxDepth": {
-      "title": "Max Depth",
-      "type": "integer",
-      "description": "Maximum crawl depth from homepage",
-      "default": 2,
-      "minimum": 1,
-      "maximum": 5
-    },
     "timeoutSecs": {
       "title": "Timeout (seconds)",
       "type": "integer",

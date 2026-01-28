@@ -10,7 +10,6 @@ await Actor.init();
 const input = await Actor.getInput();
 const {
   startUrls,
-  maxDepth = 2,
   timeoutSecs = 30,
   usePlaywrightFallback = true,
   includeCompany = true,
@@ -77,7 +76,6 @@ for (const url of uniqueDomains) {
     log.info(`Crawling domain: ${domain} (${url})`);
     
     const domainData = await crawlDomain(url, {
-      maxDepth,
       timeoutSecs,
       usePlaywrightFallback,
       includeCompany,

@@ -8,7 +8,9 @@ export const DEFAULT_KEY_PATHS = {
 };
 
 // Patterns regex pour emails
-export const EMAIL_REGEX = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+// - Ajoute une borne de fin pour éviter les concaténations type "contact@domain.frDirecteur"
+// - TLD limité à 2..24 caractères (suffisant pour la majorité des cas)
+export const EMAIL_REGEX = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}(?![a-zA-Z])/g;
 
 // Emails à filtrer
 export const EMAIL_FILTERS = [
@@ -37,14 +39,15 @@ export const EMAIL_TYPE_PATTERNS = {
   billing: ['billing', 'facturation', 'compta', 'accounting']
 };
 
-// Patterns regex pour phones (international + FR)
-export const PHONE_REGEX = /(?:\+?\d{1,4}[\s.-]?)?\(?\d{1,4}\)?[\s.-]?\d{1,4}[\s.-]?\d{1,4}[\s.-]?\d{1,4}[\s.-]?\d{1,4}/g;
+// Patterns regex pour phones (heuristique)
+// On préfère filtrer ensuite par "nombre de digits" pour éviter de capturer des dates.
+export const PHONE_REGEX = /\+?\d[\d\s().-]{6,}\d/g;
 
-// Patterns pour exclure (SIRET, TVA, etc.)
+// Patterns pour exclure (TVA, SIRET, etc.)
+// Note: ne pas exclure sur "9 digits" (peut être un vrai téléphone dans certains pays).
 export const PHONE_EXCLUSIONS = [
-  /^\d{9}$/, // SIRET 9 chiffres
-  /^FR\d{2}/, // TVA française
-  /^\d{14}$/ // SIRET complet
+  /^FR\d{2}/i, // TVA française (format texte)
+  /^\d{14}$/   // SIRET complet (14 digits)
 ];
 
 // Réseaux sociaux à extraire
