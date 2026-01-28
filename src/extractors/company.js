@@ -138,7 +138,13 @@ export function extractCompany(html, sourceUrl) {
     if (cpMatch) {
       const postalCode = cpMatch[1];
       const [before, after] = addr.split(postalCode);
-      const city = (after || '').trim().replace(/^[,\-]/, '').trim() || null;
+      // La partie après le CP contient parfois des libellés collés (ex: "Paris Immatriculée ...").
+      // On coupe au premier libellé connu et on ne garde que le début (souvent 1-3 mots).
+      const afterClean = (after || '').trim().replace(/^[,\-]/, '').trim();
+      const stopAt = afterClean.search(/\b(Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b/i);
+      const cityPart = (stopAt >= 0 ? afterClean.slice(0, stopAt) : afterClean).trim();
+      // Ville FR: généralement 1 à 3 mots, on garde tel quel après nettoyage
+      const city = cityPart || null;
       const street = (before || '').trim().replace(/[,\-]$/, '').trim() || null;
       company.address = {
         street,
@@ -169,6 +175,11 @@ export function extractCompany(html, sourceUrl) {
       };
       company.country = tldToCountry[tld] || null;
     }
+  }
+
+  // Si on a déterminé le pays après coup, on le propage dans l'adresse
+  if (company.country && company.address && !company.address.country) {
+    company.address.country = company.country;
   }
   
   return company;
