@@ -54,9 +54,70 @@ function detectKeyPages(html, baseUrl) {
 }
 
 /**
+ * Extrait des liens internes "pertinents" depuis une page (header/footer/nav priorisés)
+ */
+function extractInternalLinks(html, baseUrl) {
+  const links = [];
+  const $ = cheerio.load(html);
+
+  // On ignore scripts/styles
+  $('script, style, noscript').remove();
+
+  $('a[href]').each((_, el) => {
+    const href = $(el).attr('href');
+    if (!href) return;
+
+    const resolvedUrl = resolveUrl(baseUrl, href);
+    if (!resolvedUrl) return;
+    if (!isSameDomain(resolvedUrl, baseUrl)) return;
+    if (isAsset(resolvedUrl)) return;
+
+    const urlObj = new URL(resolvedUrl);
+    const pathname = urlObj.pathname.toLowerCase();
+    const text = ($(el).text() || '').toLowerCase().trim();
+
+    // Évite pagination & ancres inutiles
+    if (/[?&](page|p)=\d+/i.test(urlObj.search)) return;
+    if (/(\/page\/\d+\/?$)/i.test(pathname)) return;
+
+    let score = 0;
+
+    // Priorité header/footer/nav
+    const inHeaderNavFooter = $(el).closest('header, nav, footer, .header, .nav, .footer').length > 0;
+    if (inHeaderNavFooter) score += 50;
+
+    // Bonus par type de page clé
+    const combined = `${pathname} ${text}`;
+    const has = (arr) => arr.some((p) => combined.includes(p.replace(/^\//, '')));
+
+    if (has(DEFAULT_KEY_PATHS.contact)) score += 120;
+    if (has(DEFAULT_KEY_PATHS.legal)) score += 110;
+    if (has(DEFAULT_KEY_PATHS.privacy)) score += 90;
+    if (has(DEFAULT_KEY_PATHS.about)) score += 80;
+    if (has(DEFAULT_KEY_PATHS.team)) score += 100;
+
+    // Fallback keywords (ex: "legal notice", "imprint", "mentions légales")
+    if (/(legal|imprint|mentions|privacy|cookies|contact|about|team|leadership|careers)/i.test(combined)) {
+      score += 40;
+    }
+
+    links.push({ url: normalizeUrl(resolvedUrl), score });
+  });
+
+  // Dédup par URL en gardant le meilleur score
+  const best = new Map();
+  for (const l of links) {
+    const prev = best.get(l.url);
+    if (!prev || l.score > prev.score) best.set(l.url, l);
+  }
+
+  return Array.from(best.values()).sort((a, b) => b.score - a.score);
+}
+
+/**
  * Détermine si le mode "deep" doit être activé
  */
-function shouldUseDeepCrawl(keyPages, pagesVisited, usedPlaywright) {
+function shouldUseDeepCrawl({ keyPages, pagesVisited, usedPlaywright, includeContacts, includeCompany, includeTeam, emailsCount, phonesCount, teamCount, company }) {
   // 1. Page team détectée mais non visitée dans les 8 premières pages
   if (keyPages.team && !pagesVisited.includes(keyPages.team)) {
     return true;
@@ -71,6 +132,15 @@ function shouldUseDeepCrawl(keyPages, pagesVisited, usedPlaywright) {
   // 3. Fallback Playwright requis
   if (usedPlaywright) {
     return true;
+  }
+
+  // 4. Manque de données critiques -> on pousse en DEEP
+  if (includeContacts && emailsCount === 0 && phonesCount === 0) return true;
+  if (includeTeam && teamCount === 0 && keyPages.team) return true;
+  if (includeCompany) {
+    const missingLegal = !company?.legalName;
+    const missingAddr = !company?.address;
+    if (missingLegal || missingAddr) return true;
   }
   
   return false;
@@ -178,7 +248,6 @@ function selectPrimaryPhone(phones) {
  */
 export async function crawlDomain(startUrl, options) {
   const {
-    maxDepth = 2,
     timeoutSecs = 30,
     usePlaywrightFallback = true,
     includeCompany = true,
@@ -286,26 +355,21 @@ export async function crawlDomain(startUrl, options) {
     if (url) urlsToCrawl.add(normalizeUrl(url));
   });
   
-  // Ajoute des pages internes depuis la homepage (jusqu'à maxPages)
-  const $ = cheerio.load(homepageHtml);
-  const internalLinks = [];
-  $('a[href]').each((_, el) => {
-    const href = $(el).attr('href');
-    const resolvedUrl = resolveUrl(startUrl, href);
-    
-    if (resolvedUrl && 
-        isSameDomain(resolvedUrl, startUrl) && 
-        !isAsset(resolvedUrl) &&
-        !urlsToCrawl.has(normalizeUrl(resolvedUrl))) {
-      internalLinks.push(resolvedUrl);
+  // Pool de liens candidats (priorisés)
+  const candidateLinks = [];
+  const candidateSeen = new Set(urlsToCrawl);
+
+  // Ajoute des liens internes depuis la homepage (header/footer prioritaires)
+  for (const l of extractInternalLinks(homepageHtml, startUrl)) {
+    if (!candidateSeen.has(l.url)) {
+      candidateSeen.add(l.url);
+      candidateLinks.push(l);
     }
-  });
+  }
   
   // Limite le nombre de pages internes selon le tier STANDARD initial
   const maxInternalPages = CRAWL_TIERS.STANDARD.maxPages - urlsToCrawl.size;
-  internalLinks.slice(0, maxInternalPages).forEach(url => {
-    urlsToCrawl.add(normalizeUrl(url));
-  });
+  candidateLinks.slice(0, Math.max(0, maxInternalPages)).forEach(l => urlsToCrawl.add(l.url));
   
   // 5. Crawl toutes les pages (commence avec STANDARD, peut passer en DEEP)
   let pagesToCrawl = Array.from(urlsToCrawl).slice(0, CRAWL_TIERS.STANDARD.maxPages);
@@ -344,6 +408,14 @@ export async function crawlDomain(startUrl, options) {
     if (!html) return false;
     
     domainData.pagesVisited.push(finalUrl);
+
+    // Découverte de liens supplémentaires (sert au mode DEEP)
+    for (const l of extractInternalLinks(html, finalUrl)) {
+      if (!candidateSeen.has(l.url)) {
+        candidateSeen.add(l.url);
+        candidateLinks.push(l);
+      }
+    }
     
     // Extraction selon les options
     if (includeContacts) {
@@ -389,7 +461,18 @@ export async function crawlDomain(startUrl, options) {
   }
   
   // Vérifie si on doit passer en mode DEEP après avoir crawlé les premières pages
-  if (shouldUseDeepCrawl(keyPagesDetected, domainData.pagesVisited, usedPlaywright)) {
+  if (shouldUseDeepCrawl({
+    keyPages: keyPagesDetected,
+    pagesVisited: domainData.pagesVisited,
+    usedPlaywright,
+    includeContacts,
+    includeCompany,
+    includeTeam,
+    emailsCount: domainData.emails.length,
+    phonesCount: domainData.phones.length,
+    teamCount: domainData.team.length,
+    company: domainData.company,
+  })) {
     crawlTier = CRAWL_TIERS.DEEP;
     
     // Ajoute des pages supplémentaires pour atteindre le max du tier DEEP
@@ -397,15 +480,13 @@ export async function crawlDomain(startUrl, options) {
     const remainingPages = CRAWL_TIERS.DEEP.maxPages - alreadyCrawled;
     
     if (remainingPages > 0) {
-      // Ajoute plus de pages internes si nécessaire
-      const additionalLinks = internalLinks.filter(link => {
-        const normalized = normalizeUrl(link);
-        return !urlsToCrawl.has(normalized) && 
-               !domainData.pagesVisited.some(visited => normalizeUrl(visited) === normalized);
-      });
-      
-      const pagesToAdd = additionalLinks.slice(0, remainingPages);
-      
+      // Ajoute plus de pages internes si nécessaire (pool priorisé, alimenté par la découverte)
+      candidateLinks.sort((a, b) => b.score - a.score);
+      const pagesToAdd = candidateLinks
+        .map(l => l.url)
+        .filter(u => !domainData.pagesVisited.some(v => normalizeUrl(v) === u))
+        .slice(0, remainingPages);
+
       for (const url of pagesToAdd) {
         if (domainData.pagesVisited.length >= CRAWL_TIERS.DEEP.maxPages) break;
         await crawlPage(url);
