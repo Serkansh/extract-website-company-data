@@ -274,10 +274,9 @@ export async function crawlDomain(startUrl, options) {
   keyPagesDetected = detectKeyPages(homepageHtml, startUrl);
   domainData.keyPages = { ...keyPagesDetected };
   
-  // 3. Détermine le tier de crawl
-  if (shouldUseDeepCrawl(keyPagesDetected, domainData.pagesVisited, usedPlaywright)) {
-    crawlTier = CRAWL_TIERS.DEEP;
-  }
+  // 3. Détermine le tier initial (commence toujours en STANDARD)
+  // Le passage en DEEP sera vérifié après avoir crawlé les premières pages
+  crawlTier = CRAWL_TIERS.STANDARD;
   
   // 4. Liste des URLs à crawler (homepage + pages clés + pages internes)
   const urlsToCrawl = new Set([normalizeUrl(startUrl)]);
@@ -302,16 +301,17 @@ export async function crawlDomain(startUrl, options) {
     }
   });
   
-  // Limite le nombre de pages internes selon le tier
-  const maxInternalPages = crawlTier.maxPages - urlsToCrawl.size;
+  // Limite le nombre de pages internes selon le tier STANDARD initial
+  const maxInternalPages = CRAWL_TIERS.STANDARD.maxPages - urlsToCrawl.size;
   internalLinks.slice(0, maxInternalPages).forEach(url => {
     urlsToCrawl.add(normalizeUrl(url));
   });
   
-  // 5. Crawl toutes les pages
-  const pagesToCrawl = Array.from(urlsToCrawl).slice(0, crawlTier.maxPages);
+  // 5. Crawl toutes les pages (commence avec STANDARD, peut passer en DEEP)
+  let pagesToCrawl = Array.from(urlsToCrawl).slice(0, CRAWL_TIERS.STANDARD.maxPages);
   
-  for (const url of pagesToCrawl) {
+  // Fonction pour crawler une page
+  async function crawlPage(url) {
     let html;
     let finalUrl = url;
     let retries = 2;
@@ -341,7 +341,7 @@ export async function crawlDomain(startUrl, options) {
       }
     }
     
-    if (!html) continue;
+    if (!html) return false;
     
     domainData.pagesVisited.push(finalUrl);
     
@@ -373,6 +373,38 @@ export async function crawlDomain(startUrl, options) {
     if (includeTeam && (url.includes('/team') || url.includes('/equipe') || url.includes('/staff'))) {
       const team = extractTeam(html, url);
       domainData.team.push(...team);
+    }
+    
+    return true;
+  }
+  
+  // Crawl les premières pages (tier STANDARD)
+  for (const url of pagesToCrawl) {
+    await crawlPage(url);
+  }
+  
+  // Vérifie si on doit passer en mode DEEP après avoir crawlé les premières pages
+  if (shouldUseDeepCrawl(keyPagesDetected, domainData.pagesVisited, usedPlaywright)) {
+    crawlTier = CRAWL_TIERS.DEEP;
+    
+    // Ajoute des pages supplémentaires pour atteindre le max du tier DEEP
+    const alreadyCrawled = domainData.pagesVisited.length;
+    const remainingPages = CRAWL_TIERS.DEEP.maxPages - alreadyCrawled;
+    
+    if (remainingPages > 0) {
+      // Ajoute plus de pages internes si nécessaire
+      const additionalLinks = internalLinks.filter(link => {
+        const normalized = normalizeUrl(link);
+        return !urlsToCrawl.has(normalized) && 
+               !domainData.pagesVisited.some(visited => normalizeUrl(visited) === normalized);
+      });
+      
+      const pagesToAdd = additionalLinks.slice(0, remainingPages);
+      
+      for (const url of pagesToAdd) {
+        if (domainData.pagesVisited.length >= CRAWL_TIERS.DEEP.maxPages) break;
+        await crawlPage(url);
+      }
     }
   }
   

@@ -1,4 +1,4 @@
-import { Actor } from 'apify';
+import { Actor, log } from 'apify';
 import { crawlDomain } from './crawler.js';
 import { getRegistrableDomain, normalizeUrl } from './utils/url-utils.js';
 
@@ -41,7 +41,7 @@ for (const url of urls) {
     const domain = getRegistrableDomain(normalizedUrl);
     
     if (!domain) {
-      Actor.log.warning(`Invalid URL or domain: ${url}`);
+      log.warning(`Invalid URL or domain: ${url}`);
       continue;
     }
     
@@ -60,12 +60,12 @@ for (const url of urls) {
       }
     }
   } catch (error) {
-    Actor.log.warning(`Error processing URL ${url}: ${error.message}`);
+    log.warning(`Error processing URL ${url}: ${error.message}`);
   }
 }
 
 const uniqueDomains = Array.from(domainsMap.values());
-Actor.log.info(`Processing ${uniqueDomains.length} unique domains`);
+log.info(`Processing ${uniqueDomains.length} unique domains`);
 
 // Traite chaque domaine (un seul pushData par domaine)
 const results = [];
@@ -74,7 +74,7 @@ for (const url of uniqueDomains) {
   const domain = getRegistrableDomain(url);
   
   try {
-    Actor.log.info(`Crawling domain: ${domain} (${url})`);
+    log.info(`Crawling domain: ${domain} (${url})`);
     
     const domainData = await crawlDomain(url, {
       maxDepth,
@@ -135,7 +135,7 @@ for (const url of uniqueDomains) {
     results.push({ domain, status: 'success' });
     
   } catch (error) {
-    Actor.log.error(`Error crawling domain ${domain}: ${error.message}`);
+    log.error(`Error crawling domain ${domain}: ${error.message}`);
     
     // Push quand même un record avec l'erreur
     const errorRecord = {
@@ -149,6 +149,6 @@ for (const url of uniqueDomains) {
   }
 }
 
-Actor.log.info(`Completed: ${results.filter(r => r.status === 'success').length} successful, ${results.filter(r => r.status === 'error').length} errors`);
+log.info(`Completed: ${results.filter(r => r.status === 'success').length} successful, ${results.filter(r => r.status === 'error').length} errors`);
 
 await Actor.exit();
