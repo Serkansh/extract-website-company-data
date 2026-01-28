@@ -140,8 +140,11 @@ export function extractCompany(html, sourceUrl) {
       const [before, after] = addr.split(postalCode);
       // La partie après le CP contient parfois des libellés collés (ex: "Paris Immatriculée ...").
       // On coupe au premier libellé connu et on ne garde que le début (souvent 1-3 mots).
-      const afterClean = (after || '').trim().replace(/^[,\-]/, '').trim();
-      const stopAt = afterClean.search(/\b(Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b/i);
+      const afterClean0 = (after || '').trim().replace(/^[,\-]/, '').trim();
+      // Cas fréquent: concaténation sans espace, ex "ParisImmatriculée..."
+      const afterClean = afterClean0.replace(/([a-zÀ-ÿ])([A-ZÀ-Ÿ])/g, '$1 $2');
+      // On ne met PAS de bornes de mot, car on peut avoir "ParisImmatriculée" (pas de \b)
+      const stopAt = afterClean.search(/(Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])/i);
       const cityPart = (stopAt >= 0 ? afterClean.slice(0, stopAt) : afterClean).trim();
       // Ville FR: généralement 1 à 3 mots, on garde tel quel après nettoyage
       const city = cityPart || null;
