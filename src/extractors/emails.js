@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 import { EMAIL_REGEX } from '../constants.js';
-import { normalizeEmail, shouldFilterEmail, detectEmailType } from '../utils/normalization.js';
+import { normalizeEmail, shouldFilterEmail, detectEmailType, cleanSnippet } from '../utils/normalization.js';
 import { getRegistrableDomain } from '../utils/url-utils.js';
 import { parse as tldtsParse } from 'tldts';
 
@@ -51,7 +51,7 @@ export function extractEmails(html, sourceUrl) {
           priority: 'secondary',
           signals,
           sourceUrl,
-          snippet: text || normalized,
+          snippet: cleanSnippet(text) || normalized,
           foundIn: 'mailto'
         });
       }
@@ -85,7 +85,7 @@ export function extractEmails(html, sourceUrl) {
           priority: 'secondary',
           signals,
           sourceUrl,
-          snippet,
+          snippet: cleanSnippet(snippet) || normalized,
           foundIn: 'text'
         });
       }

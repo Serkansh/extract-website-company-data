@@ -110,6 +110,8 @@ export function extractCompany(html, sourceUrl) {
     legalText.match(/Raison\s+sociale\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
     legalText.match(/Dénomination\s+(?:sociale)?\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
     legalText.match(/Société\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
+    // "Le site X est la propriété exclusive de SARL Y, qui l'édite."
+    legalText.match(/propri[eé]t[eé]\s+exclusive\s+de\s+([^,]+?)(?:\s*,\s*qui|\s+qui)\b/i) ||
     legalText.match(/Legal\s+name\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i);
 
   if (legalNameMatches && !company.legalName) {
@@ -126,6 +128,7 @@ export function extractCompany(html, sourceUrl) {
   const addressMatches =
     legalText.match(/Si[eè]ge\s+social\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
     legalText.match(/Adresse\s+du\s+si[eè]ge\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
+    legalText.match(/Adresse\s+postale\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
     legalText.match(/Adresse\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i);
 
   if (addressMatches && !company.address) {

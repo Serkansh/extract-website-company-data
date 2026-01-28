@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 import { PHONE_REGEX, PHONE_EXCLUSIONS } from '../constants.js';
-import { normalizePhone } from '../utils/normalization.js';
+import { normalizePhone, cleanSnippet } from '../utils/normalization.js';
 
 /**
  * Vérifie si un numéro doit être exclu
@@ -49,7 +49,7 @@ export function extractPhones(html, sourceUrl) {
           priority: 'secondary',
           signals: ['tel'],
           sourceUrl,
-          snippet: text || normalized.valueRaw
+          snippet: cleanSnippet(text) || normalized.valueRaw
         });
       }
     }
@@ -105,7 +105,7 @@ export function extractPhones(html, sourceUrl) {
           priority: 'secondary',
           signals,
           sourceUrl,
-          snippet
+          snippet: cleanSnippet(snippet) || normalized.valueRaw
         });
       }
     }

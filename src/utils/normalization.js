@@ -33,6 +33,22 @@ export function digitsOnly(phone) {
 }
 
 /**
+ * Nettoie un snippet pour l'output (JSON stable et lisible)
+ * - supprime les caractères de contrôle
+ * - remplace les retours ligne / tabs par des espaces
+ * - compacte les espaces
+ */
+export function cleanSnippet(snippet, maxLen = 240) {
+  if (!snippet) return null;
+  const cleaned = String(snippet)
+    .replace(/[\u0000-\u001F\u007F]/g, ' ') // contrôle ASCII
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (!cleaned) return null;
+  return cleaned.length > maxLen ? `${cleaned.slice(0, maxLen - 1)}…` : cleaned;
+}
+
+/**
  * Normalise un numéro de téléphone
  * Retourne { valueRaw, valueE164 }
  */
