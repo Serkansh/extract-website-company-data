@@ -20,10 +20,12 @@ export function extractEmails(html, sourceUrl) {
     // Rejette les domaines manifestement invalides (espaces, quotes, etc.)
     if (/[\s"'<>()]/.test(emailDomain)) return false;
     const parsed = tldtsParse(`https://${emailDomain}`);
-    // Si tldts ne reconnaît pas le domaine ICANN (ex: "mysmartdigital.frdirecteur"), on rejette
-    if (!parsed || !parsed.domain) return false;
-    // parsed.domain = registrable domain, doit matcher exactement le domaine email
-    return parsed.domain.toLowerCase() === emailDomain.toLowerCase();
+    // On exige un suffixe ICANN reconnu, sinon on rejette (ex: "mysmartdigital.frdirecteur")
+    if (!parsed || !parsed.domain || parsed.isIcann !== true) return false;
+    const registrable = parsed.domain.toLowerCase();
+    const full = emailDomain.toLowerCase();
+    // Accepte le registrable domain ou un sous-domaine de celui-ci
+    return full === registrable || full.endsWith(`.${registrable}`);
   };
   
   // 1. Liens mailto

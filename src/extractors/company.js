@@ -116,6 +116,11 @@ export function extractCompany(html, sourceUrl) {
     company.legalName = legalNameMatches[1].trim();
   }
 
+  // Si on n'a pas de "name" mais qu'on a une legalName (cas fréquent en mentions légales)
+  if (!company.name && company.legalName) {
+    company.name = company.legalName;
+  }
+
   // Adresse / siège social (best-effort FR)
   // On capture une "phrase" après le label, puis on tente de parser CP/ville
   const addressMatches =
