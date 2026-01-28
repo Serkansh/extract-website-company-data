@@ -13,6 +13,9 @@ export function extractCompany(html, sourceUrl) {
     address: null,
     openingHours: null
   };
+
+  // Ignore scripts/styles pour les extractions textuelles (mentions légales, adresse)
+  $('script, style, noscript').remove();
   
   // 1. Nom de l'entreprise
   // a) og:site_name
@@ -100,15 +103,48 @@ export function extractCompany(html, sourceUrl) {
     }
   });
   
-  // 2. Mentions légales (pour legalName)
-  // Cherche dans les pages legal/mentions-legales
-  const legalText = $('body').text();
-  const legalMatches = legalText.match(/Raison sociale[:\s]+([^\n]+)/i) || 
-                       legalText.match(/Dénomination[:\s]+([^\n]+)/i) ||
-                       legalText.match(/Legal name[:\s]+([^\n]+)/i);
-  
-  if (legalMatches && !company.legalName) {
-    company.legalName = legalMatches[1].trim();
+  // 2. Mentions légales (legalName + siège social / adresse)
+  const legalText = $('body').text().replace(/\s+/g, ' ').trim();
+
+  const legalNameMatches =
+    legalText.match(/Raison\s+sociale\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
+    legalText.match(/Dénomination\s+(?:sociale)?\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
+    legalText.match(/Société\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
+    legalText.match(/Legal\s+name\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i);
+
+  if (legalNameMatches && !company.legalName) {
+    company.legalName = legalNameMatches[1].trim();
+  }
+
+  // Adresse / siège social (best-effort FR)
+  // On capture une "phrase" après le label, puis on tente de parser CP/ville
+  const addressMatches =
+    legalText.match(/Si[eè]ge\s+social\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
+    legalText.match(/Adresse\s+du\s+si[eè]ge\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
+    legalText.match(/Adresse\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i);
+
+  if (addressMatches && !company.address) {
+    const addr = addressMatches[1].trim().replace(/\s+/g, ' ');
+    const cpMatch = addr.match(/\b(\d{5})\b/);
+    if (cpMatch) {
+      const postalCode = cpMatch[1];
+      const [before, after] = addr.split(postalCode);
+      const city = (after || '').trim().replace(/^[,\-]/, '').trim() || null;
+      const street = (before || '').trim().replace(/[,\-]$/, '').trim() || null;
+      company.address = {
+        street,
+        postalCode,
+        city,
+        country: company.country || null
+      };
+    } else {
+      company.address = {
+        street: addr || null,
+        postalCode: null,
+        city: null,
+        country: company.country || null
+      };
+    }
   }
   
   // 3. Pays depuis le domaine (fallback)

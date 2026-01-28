@@ -363,11 +363,16 @@ export async function crawlDomain(startUrl, options) {
       }
     }
     
-    if (includeCompany && !domainData.company) {
+    if (includeCompany) {
       const company = extractCompany(html, url);
-      if (company.name) {
-        domainData.company = company;
-      }
+      if (!domainData.company) domainData.company = { name: null, legalName: null, country: null, address: null, openingHours: null };
+
+      // Merge: on ne remplace que les champs manquants (homepage + mentions légales se complètent)
+      if (!domainData.company.name && company.name) domainData.company.name = company.name;
+      if (!domainData.company.legalName && company.legalName) domainData.company.legalName = company.legalName;
+      if (!domainData.company.country && company.country) domainData.company.country = company.country;
+      if (!domainData.company.address && company.address) domainData.company.address = company.address;
+      if (!domainData.company.openingHours && company.openingHours) domainData.company.openingHours = company.openingHours;
     }
     
     if (includeTeam && (url.includes('/team') || url.includes('/equipe') || url.includes('/staff'))) {

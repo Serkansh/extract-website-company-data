@@ -29,6 +29,9 @@ function shouldExcludePhone(phone, snippet = '') {
 export function extractPhones(html, sourceUrl) {
   const phones = [];
   const $ = cheerio.load(html);
+
+  // IMPORTANT: ne pas parser le texte des scripts/styles (beaucoup de faux positifs: ids, appId, etc.)
+  $('script, style, noscript').remove();
   
   // 1. Liens tel:
   $('a[href^="tel:"]').each((_, el) => {
@@ -62,11 +65,23 @@ export function extractPhones(html, sourceUrl) {
     const index = textContent.indexOf(phoneMatch);
     const snippet = textContent.substring(Math.max(0, index - 80), index + phoneMatch.length + 80).trim();
 
+    // Heuristique anti-ID: si c'est juste une suite de digits sans séparateurs ni +,
+    // on n'accepte que si c'est clairement FR (0xxxxxxxxx / 0x xx xx xx xx) ou si libphonenumber valide.
+    const hasTypicalSeparators = /[+\s().-]/.test(phoneValue);
+    const digits = phoneValue.replace(/\D/g, '');
+    const looksLikeFrenchNational = /^0\d{9}$/.test(digits);
+
+    if (!hasTypicalSeparators && !looksLikeFrenchNational) {
+      // très souvent des IDs (appId, css ids, etc.)
+      continue;
+    }
+
     if (!shouldExcludePhone(phoneValue, snippet)) {
       const normalized = normalizePhone(phoneValue);
 
-      // Si libphonenumber n'arrive pas à normaliser, on garde quand même (valueE164 = null),
-      // mais uniquement si ça ressemble à un numéro (>= 9 digits déjà vérifié ci-dessus).
+      // Pour les numéros trouvés dans le texte (pas tel:), on exige une normalisation E.164
+      // afin d'éviter que des IDs passent (libphonenumber validant parfois des suites de digits).
+      if (!normalized.valueE164) continue;
 
       // Vérifie si déjà trouvé via tel:
       const alreadyFound = phones.some(p => {
