@@ -62,6 +62,7 @@
       "title": "Custom Key Paths",
       "type": "array",
       "description": "Override default key paths (contact, about, team, legal, privacy)",
+      "editor": "stringList",
       "items": {
         "type": "string"
       },
