@@ -1,0 +1,133 @@
+import * as cheerio from 'cheerio';
+import { EMAIL_REGEX } from '../constants.js';
+import { normalizeEmail, shouldFilterEmail, detectEmailType } from '../utils/normalization.js';
+import { getRegistrableDomain } from '../utils/url-utils.js';
+
+/**
+ * Extrait les emails depuis une page HTML
+ */
+export function extractEmails(html, sourceUrl) {
+  const emails = [];
+  const $ = cheerio.load(html);
+  const domain = getRegistrableDomain(sourceUrl);
+  
+  // 1. Liens mailto
+  $('a[href^="mailto:"]').each((_, el) => {
+    const href = $(el).attr('href');
+    const emailMatch = href.match(/mailto:([^\?&]+)/i);
+    if (emailMatch) {
+      const emailValue = emailMatch[1].trim();
+      if (!shouldFilterEmail(emailValue)) {
+        const normalized = normalizeEmail(emailValue);
+        const text = $(el).text().trim();
+        const context = $(el).closest('section, div, article').text().substring(0, 200);
+        
+        const emailDomain = normalized.split('@')[1];
+        const signals = ['mailto'];
+        if (emailDomain === domain) {
+          signals.push('same_domain');
+        }
+        
+        emails.push({
+          value: normalized,
+          type: detectEmailType(normalized, text + ' ' + context),
+          priority: 'secondary',
+          signals,
+          sourceUrl,
+          snippet: text || normalized,
+          foundIn: 'mailto'
+        });
+      }
+    }
+  });
+  
+  // 2. Texte brut (regex)
+  const textContent = $.text();
+  const emailMatches = textContent.match(EMAIL_REGEX) || [];
+  
+  for (const emailMatch of emailMatches) {
+    const emailValue = emailMatch.trim();
+    if (!shouldFilterEmail(emailValue)) {
+      const normalized = normalizeEmail(emailValue);
+      
+      // Vérifie si déjà trouvé via mailto
+      if (!emails.some(e => normalizeEmail(e.value) === normalized)) {
+        // Trouve le contexte autour de l'email
+        const index = textContent.indexOf(emailMatch);
+        const snippet = textContent.substring(Math.max(0, index - 50), index + emailMatch.length + 50).trim();
+        
+        const emailDomain = normalized.split('@')[1];
+        const signals = ['text'];
+        if (emailDomain === domain) {
+          signals.push('same_domain');
+        }
+        
+        emails.push({
+          value: normalized,
+          type: detectEmailType(normalized, snippet),
+          priority: 'secondary',
+          signals,
+          sourceUrl,
+          snippet,
+          foundIn: 'text'
+        });
+      }
+    }
+  }
+  
+  // 3. JSON-LD schema.org
+  $('script[type="application/ld+json"]').each((_, el) => {
+    try {
+      const jsonContent = $(el).html();
+      const data = JSON.parse(jsonContent);
+      
+      function extractFromSchema(obj) {
+        if (typeof obj !== 'object' || obj === null) return;
+        
+        if (Array.isArray(obj)) {
+          obj.forEach(item => extractFromSchema(item));
+          return;
+        }
+        
+        // Cherche les emails dans les propriétés
+        for (const [key, value] of Object.entries(obj)) {
+          if (key === 'email' || key === 'contactPoint') {
+            if (typeof value === 'string') {
+              const emailValue = value.trim();
+              if (!shouldFilterEmail(emailValue)) {
+                const normalized = normalizeEmail(emailValue);
+                if (!emails.some(e => normalizeEmail(e.value) === normalized)) {
+                  const emailDomain = normalized.split('@')[1];
+                  const signals = ['schema'];
+                  if (emailDomain === domain) {
+                    signals.push('same_domain');
+                  }
+                  
+                  emails.push({
+                    value: normalized,
+                    type: detectEmailType(normalized, ''),
+                    priority: 'secondary',
+                    signals,
+                    sourceUrl,
+                    snippet: normalized,
+                    foundIn: 'schema'
+                  });
+                }
+              }
+            } else if (typeof value === 'object' && value.email) {
+              extractFromSchema(value);
+            }
+          } else if (typeof value === 'object') {
+            extractFromSchema(value);
+          }
+        }
+      }
+      
+      extractFromSchema(data);
+    } catch (error) {
+      // Ignore les erreurs de parsing JSON
+    }
+  });
+  
+  return emails;
+}

@@ -1,0 +1,72 @@
+{
+  "title": "Extract Website Company Data",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Start URLs",
+      "type": "array",
+      "description": "List of URLs to crawl (one per domain)",
+      "editor": "requestListSources",
+      "prefill": [
+        { "url": "https://example.com" }
+      ]
+    },
+    "maxDepth": {
+      "title": "Max Depth",
+      "type": "integer",
+      "description": "Maximum crawl depth from homepage",
+      "default": 2,
+      "minimum": 1,
+      "maximum": 5
+    },
+    "timeoutSecs": {
+      "title": "Timeout (seconds)",
+      "type": "integer",
+      "description": "Request timeout in seconds",
+      "default": 30,
+      "minimum": 5,
+      "maximum": 120
+    },
+    "usePlaywrightFallback": {
+      "title": "Use Playwright Fallback",
+      "type": "boolean",
+      "description": "Use Playwright for dynamic pages if HTTP fails",
+      "default": true
+    },
+    "includeCompany": {
+      "title": "Include Company Profile",
+      "type": "boolean",
+      "description": "Extract company information",
+      "default": true
+    },
+    "includeContacts": {
+      "title": "Include Contacts",
+      "type": "boolean",
+      "description": "Extract emails and phones",
+      "default": true
+    },
+    "includeSocials": {
+      "title": "Include Social Profiles",
+      "type": "boolean",
+      "description": "Extract social media links",
+      "default": true
+    },
+    "includeTeam": {
+      "title": "Include Team",
+      "type": "boolean",
+      "description": "Extract team members",
+      "default": true
+    },
+    "keyPaths": {
+      "title": "Custom Key Paths",
+      "type": "array",
+      "description": "Override default key paths (contact, about, team, legal, privacy)",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  },
+  "required": ["startUrls"]
+}

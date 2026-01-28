@@ -1,0 +1,152 @@
+{
+  "domain": "example.com",
+  "finalUrl": "https://www.example.com",
+  "keyPages": {
+    "contact": "https://www.example.com/contact",
+    "about": "https://www.example.com/about-us",
+    "team": "https://www.example.com/team",
+    "legal": "https://www.example.com/legal",
+    "privacy": "https://www.example.com/privacy-policy"
+  },
+  "pagesVisited": [
+    "https://www.example.com",
+    "https://www.example.com/contact",
+    "https://www.example.com/about-us",
+    "https://www.example.com/team",
+    "https://www.example.com/legal",
+    "https://www.example.com/products",
+    "https://www.example.com/services",
+    "https://www.example.com/blog"
+  ],
+  "company": {
+    "name": "Example Corporation",
+    "legalName": "Example Corporation SAS",
+    "country": "FR",
+    "address": {
+      "street": "123 Avenue des Champs-Élysées",
+      "postalCode": "75008",
+      "city": "Paris",
+      "country": "FR"
+    },
+    "openingHours": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    ]
+  },
+  "emails": [
+    {
+      "value": "contact@example.com",
+      "type": "general",
+      "priority": "primary",
+      "signals": ["mailto", "same_domain"],
+      "sourceUrl": "https://www.example.com/contact",
+      "snippet": "Contact us at contact@example.com",
+      "foundIn": "mailto"
+    },
+    {
+      "value": "sales@example.com",
+      "type": "sales",
+      "priority": "secondary",
+      "signals": ["text", "same_domain"],
+      "sourceUrl": "https://www.example.com/contact",
+      "snippet": "For sales inquiries: sales@example.com",
+      "foundIn": "text"
+    },
+    {
+      "value": "support@example.com",
+      "type": "support",
+      "priority": "secondary",
+      "signals": ["text", "same_domain"],
+      "sourceUrl": "https://www.example.com/contact",
+      "snippet": "Support: support@example.com",
+      "foundIn": "text"
+    }
+  ],
+  "primaryEmail": "contact@example.com",
+  "phones": [
+    {
+      "valueRaw": "+33 1 23 45 67 89",
+      "valueE164": "+33123456789",
+      "priority": "primary",
+      "signals": ["tel", "footer_or_contact"],
+      "sourceUrl": "https://www.example.com/contact",
+      "snippet": "Call us: +33 1 23 45 67 89"
+    },
+    {
+      "valueRaw": "01 23 45 67 89",
+      "valueE164": "+33123456789",
+      "priority": "secondary",
+      "signals": ["text"],
+      "sourceUrl": "https://www.example.com",
+      "snippet": "Phone: 01 23 45 67 89"
+    }
+  ],
+  "primaryPhone": "+33123456789",
+  "socials": {
+    "linkedin": [
+      {
+        "url": "https://www.linkedin.com/company/example-corp",
+        "handle": "example-corp",
+        "sourceUrl": "https://www.example.com"
+      }
+    ],
+    "facebook": [
+      {
+        "url": "https://www.facebook.com/examplecorp",
+        "handle": "examplecorp",
+        "sourceUrl": "https://www.example.com"
+      }
+    ],
+    "instagram": [
+      {
+        "url": "https://www.instagram.com/examplecorp",
+        "handle": "examplecorp",
+        "sourceUrl": "https://www.example.com"
+      }
+    ],
+    "x": [
+      {
+        "url": "https://twitter.com/examplecorp",
+        "handle": "examplecorp",
+        "sourceUrl": "https://www.example.com"
+      }
+    ],
+    "youtube": [
+      {
+        "url": "https://www.youtube.com/@examplecorp",
+        "handle": "examplecorp",
+        "sourceUrl": "https://www.example.com"
+      }
+    ]
+  },
+  "team": [
+    {
+      "name": "Jean Dupont",
+      "role": "CEO",
+      "email": "jean.dupont@example.com",
+      "linkedin": "https://www.linkedin.com/in/jeandupont",
+      "sourceUrl": "https://www.example.com/team",
+      "signals": ["has_image", "has_email", "has_linkedin", "has_role"]
+    },
+    {
+      "name": "Marie Martin",
+      "role": "CTO",
+      "email": "marie.martin@example.com",
+      "linkedin": "https://www.linkedin.com/in/mariemartin",
+      "sourceUrl": "https://www.example.com/team",
+      "signals": ["has_image", "has_email", "has_linkedin", "has_role"]
+    },
+    {
+      "name": "Pierre Bernard",
+      "role": "CFO",
+      "email": null,
+      "linkedin": "https://www.linkedin.com/in/pierrebernard",
+      "sourceUrl": "https://www.example.com/team",
+      "signals": ["has_image", "has_linkedin", "has_role"]
+    }
+  ]
+}

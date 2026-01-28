@@ -1,0 +1,14 @@
+{
+  "actorSpec": 1,
+  "name": "extract-website-company-data",
+  "title": "Extract Website Company Data – Email, Phone, Social & Team",
+  "description": "Extract company profile, contacts, social profiles and team from websites",
+  "version": "1.0.0",
+  "meta": {
+    "templateId": "puppeteer-crawler"
+  },
+  "readme": "./README.md",
+  "storages": {
+    "dataset": "./storage/datasets/default"
+  }
+}
