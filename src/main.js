@@ -19,13 +19,30 @@ try {
   const schemaContent = readFileSync(schemaPath, 'utf8');
   const datasetSchema = JSON.parse(schemaContent);
   
-  // Obtient le dataset par défaut et définit le schéma
+  // Essaie plusieurs méthodes pour définir le schéma
   const defaultDataset = await Actor.openDataset();
+  
+  // Méthode 1: setSchema si disponible
   if (defaultDataset && typeof defaultDataset.setSchema === 'function') {
     await defaultDataset.setSchema(datasetSchema);
-    log.info('Dataset schema set successfully');
-  } else {
-    log.warning('Could not set dataset schema programmatically');
+    log.info('Dataset schema set via setSchema()');
+  }
+  // Méthode 2: Utilise l'API Client directement
+  else if (Actor.getClient) {
+    try {
+      const client = Actor.getClient();
+      const datasetId = defaultDataset?.id || Actor.getEnv()?.defaultDatasetId;
+      if (datasetId && client?.datasets) {
+        await client.datasets(datasetId).update({ schema: datasetSchema });
+        log.info('Dataset schema set via API Client');
+      }
+    } catch (clientError) {
+      log.warning(`Could not set schema via API Client: ${clientError.message}`);
+    }
+  }
+  // Méthode 3: Utilise pushData avec metadata (si supporté)
+  else {
+    log.warning('Could not set dataset schema programmatically - schema will be inferred from data');
   }
 } catch (error) {
   log.warning(`Could not load/set dataset schema: ${error.message}`);
