@@ -20,23 +20,20 @@ const {
   includeContacts = true,
   includeSocials = true,
   includeTeam = true,
-  keyPaths = [],
-  useOpenAI = false
+  keyPaths = []
 } = input;
 
 // Modèle OpenAI hardcodé (non configurable par l'utilisateur)
 const openAIModel = 'gpt-4o-mini';
 
-// Vérifie que la clé OpenAI est disponible si OpenAI est activé
-if (useOpenAI) {
-  const apiKey = Actor.getEnv()?.OPENAI_API_KEY || process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    log.warning('useOpenAI is enabled but OPENAI_API_KEY is not set in environment variables. OpenAI features will be disabled.');
-    // Désactive OpenAI si la clé n'est pas disponible
-    useOpenAI = false;
-  } else {
-    log.info('OpenAI API key found, enhanced extraction enabled.');
-  }
+// Active OpenAI automatiquement si la clé API est disponible (par défaut activé, invisible pour l'utilisateur)
+let useOpenAI = true;
+const apiKey = Actor.getEnv()?.OPENAI_API_KEY || process.env.OPENAI_API_KEY;
+if (!apiKey) {
+  log.warning('OPENAI_API_KEY is not set in environment variables. OpenAI features will be disabled.');
+  useOpenAI = false;
+} else {
+  log.info('OpenAI API key found, enhanced extraction enabled.');
 }
 
 // Normalise les startUrls (peut être array ou string multi-ligne)
