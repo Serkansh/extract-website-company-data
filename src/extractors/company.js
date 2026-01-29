@@ -191,6 +191,8 @@ export function extractCompany(html, sourceUrl) {
     legalText.match(/propri[eé]t[eé]\s+exclusive\s+de\s+([^,]+?)(?:\s*,\s*qui|\s+qui)\b/i) ||
     // EN: "owned by [Company Name], a company..."
     legalText.match(/owned\s+by\s+([^,]+?)(?:\s*,\s*a\s+company|\s+\(|$)/i) ||
+    // Format: "HORIZON SOFTWARE SAS" ou "COMPANY NAME SAS" en début de section légale
+    legalText.match(/^([A-Z][A-Z\s]+(?:SAS|SARL|SA|SRL|LTD|LLC|INC|GMBH|BV|SPA))\b/m) ||
     legalText.match(/Legal\s+name\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i);
 
   if (legalNameMatches && !company.legalName) {
@@ -207,6 +209,8 @@ export function extractCompany(html, sourceUrl) {
   const addressMatches =
     // EN: "whose registered office is at [address]"
     legalText.match(/whose\s+registered\s+office\s+is\s+at\s+(.+?)(?=\s*,\s*(?:with\s+capital|registered|VAT|$))/i) ||
+    // Format simple: "60 rue de Monceau, 75008 Paris, France" (ligne directe)
+    legalText.match(/^(\d+\s+[^,\n]+),\s*(\d{5})\s+([^,\n]+?)(?:,\s*(France|United\s+Kingdom|UK|Germany|Spain|Italy|Belgium|Switzerland|Netherlands|Austria|Portugal|United\s+States|USA|Canada|Australia|Japan|China|India|Brazil|Mexico|South\s+Korea|Singapore|Hong\s+Kong|Ireland|Poland|Sweden|Norway|Denmark|Finland|Greece|Romania|Hungary|Russia|Turkey|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia))?\s*$/m) ||
     // FR: On coupe avant les libellés suivants, très fréquents en mentions légales
     legalText.match(/Si[eè]ge\s+social\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i) ||
     legalText.match(/Adresse\s+du\s+si[eè]ge\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i) ||
@@ -214,11 +218,34 @@ export function extractCompany(html, sourceUrl) {
     legalText.match(/Adresse\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i);
 
   if (addressMatches && !company.address) {
-    const addr = addressMatches[1].trim().replace(/\s+/g, ' ').replace(/[;,.]$/, '');
-    const cpMatch = addr.match(/\b(\d{5})\b/);
-    if (cpMatch) {
-      const postalCode = cpMatch[1];
-      const [before, after] = addr.split(postalCode);
+    // Cas spécial: format "60 rue de Monceau, 75008 Paris, France" (match[1]=street, match[2]=CP, match[3]=city, match[4]=country)
+    if (addressMatches[2] && addressMatches[3]) {
+      const street = addressMatches[1].trim();
+      const postalCode = addressMatches[2].trim();
+      const city = addressMatches[3].trim();
+      const countryText = addressMatches[4] ? addressMatches[4].trim() : null;
+      const countryInfo = countryText ? getCountryInfo(countryText) : null;
+      
+      company.address = {
+        street,
+        postalCode,
+        city,
+        country: countryInfo?.code || null,
+        countryName: countryInfo?.name || null
+      };
+      
+      // Si on a un pays dans l'adresse mais pas dans company, on le propage
+      if (countryInfo && !company.country) {
+        company.country = countryInfo.code;
+        company.countryName = countryInfo.name;
+      }
+    } else {
+      // Format classique (une seule chaîne à parser)
+      const addr = addressMatches[1].trim().replace(/\s+/g, ' ').replace(/[;,.]$/, '');
+      const cpMatch = addr.match(/\b(\d{5})\b/);
+      if (cpMatch) {
+        const postalCode = cpMatch[1];
+        const [before, after] = addr.split(postalCode);
       // La partie après le CP contient parfois des libellés collés (ex: "Paris Immatriculée ...").
       // On coupe au premier libellé connu et on ne garde que le début (souvent 1-3 mots).
       const afterClean0 = (after || '').trim().replace(/^[,\-]/, '').trim();

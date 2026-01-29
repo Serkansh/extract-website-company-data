@@ -78,6 +78,22 @@ export function extractTeam(html, sourceUrl) {
         teamCards = teamCards.add($el);
       }
     });
+    
+    // Si toujours rien, cherche des headings (h2, h3) avec des noms suivis d'un rôle
+    if (teamCards.length === 0) {
+      $('h2, h3, h4').each((_, el) => {
+        const $el = $(el);
+        const text = $el.text().trim();
+        const nameMatch = text.match(/^([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)/);
+        if (nameMatch) {
+          // Cherche le parent ou le suivant qui contient le rôle
+          const $parent = $el.parent();
+          if ($parent.length > 0) {
+            teamCards = teamCards.add($parent);
+          }
+        }
+      });
+    }
   }
   
   // Extrait les informations de chaque card
@@ -85,11 +101,21 @@ export function extractTeam(html, sourceUrl) {
     const $card = $(card);
     const cardText = $card.text();
     
-    // Nom (pattern: Prénom Nom)
-    const nameMatch = cardText.match(/([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)/);
+    // Nom (pattern: Prénom Nom) - cherche aussi dans les headings (h2, h3, h4)
+    let nameMatch = cardText.match(/([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)/);
+    if (!nameMatch) {
+      // Essaie dans les headings
+      const heading = $card.find('h2, h3, h4, h5, h6').first();
+      if (heading.length > 0) {
+        const headingText = heading.text();
+        nameMatch = headingText.match(/([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)/);
+      }
+    }
     if (!nameMatch) return;
     
-    const name = nameMatch[1].trim();
+    // Nettoie le nom (supprime tabs, retours ligne, espaces multiples)
+    let name = nameMatch[1].trim();
+    name = name.replace(/[\t\n\r]+/g, ' ').replace(/\s+/g, ' ').trim();
     
     // Role/Position
     const rolePatterns = [
