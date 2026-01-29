@@ -453,6 +453,43 @@ export async function crawlDomain(startUrl, options) {
       const phones = extractPhones(html, url);
       domainData.emails.push(...emails);
       domainData.phones.push(...phones);
+      
+      // Si OpenAI est activé et page contact avec plusieurs téléphones, essaie d'associer les téléphones aux bureaux
+      if (useOpenAI && phones.length > 1 && (url.includes('/contact') || url.includes('/about'))) {
+        try {
+          const openAIData = await extractWithOpenAI(html, finalUrl, 'phones', openAIModel);
+          
+          if (openAIData?.phones && Array.isArray(openAIData.phones)) {
+            // Enrichit les téléphones existants avec les informations de localisation
+            for (const phoneData of domainData.phones) {
+              // Cherche un match dans les données OpenAI
+              const phoneE164 = phoneData.valueE164 || phoneData.valueRaw;
+              if (phoneE164) {
+                const match = openAIData.phones.find(p => 
+                  p.phone === phoneE164 || 
+                  phoneE164.includes(p.phone?.replace(/[^0-9+]/g, '')) ||
+                  p.phone?.replace(/[^0-9+]/g, '') === phoneE164.replace(/[^0-9+]/g, '')
+                );
+                
+                if (match) {
+                  // Enrichit avec les informations de localisation
+                  phoneData.location = match.location || null;
+                  phoneData.city = match.city || null;
+                  phoneData.country = match.country || null;
+                  phoneData.countryName = match.countryName || null;
+                  
+                  // Met à jour le snippet avec la localisation si disponible
+                  if (match.location && phoneData.snippet) {
+                    phoneData.snippet = `${phoneData.snippet} (${match.location})`;
+                  }
+                }
+              }
+            }
+          }
+        } catch (error) {
+          log.warning(`OpenAI phone location extraction failed for ${finalUrl}: ${error.message}`);
+        }
+      }
     }
     
     if (includeSocials) {
@@ -478,7 +515,15 @@ export async function crawlDomain(startUrl, options) {
       if (!domainData.company.openingHours && company.openingHours) domainData.company.openingHours = company.openingHours;
       
       // Si OpenAI est activé et données manquantes, utilise OpenAI
-      if (useOpenAI && (!domainData.company.legalName || !domainData.company.address)) {
+      // Utilise OpenAI si: legalName manquant, address manquant, ou country manquant
+      const needsOpenAI = useOpenAI && (
+        !domainData.company.legalName || 
+        !domainData.company.address || 
+        !domainData.company.address?.country || 
+        !domainData.company.country
+      );
+      
+      if (needsOpenAI) {
         // Détermine le type de page pour le prompt OpenAI
         const urlLower = finalUrl.toLowerCase();
         const pathname = new URL(finalUrl).pathname.toLowerCase();
@@ -548,10 +593,9 @@ export async function crawlDomain(startUrl, options) {
     if (includeTeam) {
       // Extraction classique
       const team = extractTeam(html, url);
-      domainData.team.push(...team);
       
-      // Si OpenAI est activé et pas de team trouvée (ou peu), essaie OpenAI
-      if (useOpenAI && (team.length === 0 || (url.includes('/team') || url.includes('/equipe') || url.includes('/staff') || url.includes('/leadership')))) {
+      // Si OpenAI est activé, utilise toujours OpenAI pour la team (mieux filtrer les faux positifs)
+      if (useOpenAI && (url.includes('/team') || url.includes('/equipe') || url.includes('/staff') || url.includes('/leadership') || url.includes('/about'))) {
         try {
           const openAIData = await extractWithOpenAI(html, finalUrl, 'team', openAIModel);
           

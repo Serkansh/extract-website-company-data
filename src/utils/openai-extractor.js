@@ -63,8 +63,14 @@ Extract ONLY the following information in valid JSON format:
 - company.address.street: Street address (number + street name, e.g., "60 rue de Monceau")
 - company.address.postalCode: Postal/ZIP code (5 digits typically, e.g., "75008")
 - company.address.city: City name (e.g., "Paris")
-- company.address.country: ISO country code (FR, GB, US, etc.)
-- company.address.countryName: Full country name (e.g., "France")
+- company.address.country: ISO country code (FR, GB, US, etc.) - MUST be extracted from context (e.g., "Paris, France" = FR, "London, UK" = GB)
+- company.address.countryName: Full country name (e.g., "France", "United Kingdom")
+
+IMPORTANT: 
+- If you see an address like "60 rue de Monceau 75008 Paris", the country is FRANCE (FR) because Paris is in France
+- If you see "Paris" or "France" mentioned anywhere near the address, extract the country
+- Always try to infer the country from the city name or context, even if not explicitly stated
+- For French addresses, country is usually FR unless stated otherwise
 
 Return ONLY valid JSON, no explanations. If a field is not found, use null.`;
         
@@ -85,14 +91,23 @@ Return JSON in this exact format:
       "countryName": "string or null"
     }
   }
-}`;
+}
+
+IMPORTANT: Extract the country from context. If you see "Paris" or "75008" (French postal code), the country is "FR" and countryName is "France".`;
     } else if (pageType === 'team') {
       // Page team : focus sur les membres
       systemPrompt = `You are an expert at extracting team member information from web pages.
-Extract a list of team members with their names, roles, and LinkedIn profiles.
-Ignore section titles like "Leadership", "Sales & Marketing", "Company Support Department", etc.
-Only extract actual people with real names (First Name + Last Name pattern).
-Each person should be a separate object. Do not group multiple names together.
+Extract ONLY actual people with real names (First Name + Last Name pattern).
+
+CRITICAL FILTERING RULES:
+- IGNORE: Section titles like "Leadership", "Sales & Marketing", "Company Support Department", "Product & Engineering"
+- IGNORE: Button labels like "Send Message", "Contact Us", "View Profile"
+- IGNORE: Company names, product names, or service names (e.g., "Horizon Extend", "Horizon Trading Solutions")
+- IGNORE: Generic text like "Our Team", "Meet the Team", "About Us"
+- IGNORE: Single words that are not names (e.g., "Marketing", "Sales", "Support")
+- EXTRACT ONLY: Real people with first and last names (e.g., "John Smith", "Marie Dupont", "Sylvain Thieullent")
+- Each person should be a separate object. Do not group multiple names together.
+
 Return ONLY valid JSON object format with a "team" array.`;
         
       userPrompt = `Extract team members from this page (URL: ${sourceUrl}):
@@ -110,7 +125,45 @@ Return JSON object in this exact format:
   ]
 }
 
-Each person should be a separate object in the team array. Extract all team members you can find.`;
+IMPORTANT: 
+- Only extract REAL PEOPLE with first and last names
+- Ignore section titles, button labels, company names, and generic text
+- Each person should be a separate object in the team array
+- Extract all actual team members you can find`;
+    } else if (pageType === 'phones') {
+      // Extraction des téléphones avec leurs emplacements
+      systemPrompt = `You are an expert at extracting phone numbers with their office locations from web pages.
+Extract phone numbers and associate them with their office locations (city, country).
+
+Return ONLY valid JSON format with a "phones" array. Each phone should have:
+- phone: The phone number in E.164 format if possible (e.g., "+33142605126")
+- location: The office location (e.g., "Paris, France", "Dubai, UAE", "Hong Kong")
+- city: City name (e.g., "Paris", "Dubai", "Hong Kong")
+- country: ISO country code (e.g., "FR", "AE", "HK")
+- countryName: Full country name (e.g., "France", "United Arab Emirates", "Hong Kong")`;
+        
+      userPrompt = `Extract phone numbers with their office locations from this page (URL: ${sourceUrl}):
+
+${textToAnalyze}
+
+Return JSON in this exact format:
+{
+  "phones": [
+    {
+      "phone": "+33142605126",
+      "location": "Paris, France",
+      "city": "Paris",
+      "country": "FR",
+      "countryName": "France"
+    }
+  ]
+}
+
+IMPORTANT: 
+- Associate each phone number with its office location based on context
+- If you see "Paris 60 rue de Monceau 75008 Paris Phone: +33(0)1 42 60 94 90", the phone is in Paris, France
+- If you see "Dubai Phone: +971-586239345", the phone is in Dubai, UAE
+- Extract all phone numbers with their locations`;
     } else {
       // Page générale : extrait tout
       systemPrompt = `You are an expert at extracting structured company information from web pages.
