@@ -7,5 +7,6 @@
   "meta": {
     "templateId": "puppeteer-crawler"
   },
-  "readme": "./README.md"
+  "readme": "./README.md",
+  "datasetSchema": "./dataset-schema.json"
 }
