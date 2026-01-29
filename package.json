@@ -23,6 +23,6 @@
     "version": "1.0.0",
     "actorSpecification": 1,
     "input": "./INPUT_SCHEMA.json",
-    "datasetSchema": "./.actor/dataset-schema.json"
+    "datasetSchema": "dataset-schema.json"
   }
 }
