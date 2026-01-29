@@ -14,7 +14,8 @@
     "cheerio": "^1.0.0",
     "playwright": "^1.40.0",
     "libphonenumber-js": "^1.11.0",
-    "tldts": "^6.0.0"
+    "tldts": "^6.0.0",
+    "openai": "^4.20.0"
   },
   "apify": {
     "title": "Extract Website Company Data – Email, Phone, Social & Team",

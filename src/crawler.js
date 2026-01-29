@@ -7,6 +7,7 @@ import { extractSocials } from './extractors/socials.js';
 import { extractCompany } from './extractors/company.js';
 import { extractTeam } from './extractors/team.js';
 import { deduplicateEmails, deduplicatePhones, deduplicateTeam } from './utils/deduplication.js';
+import { extractWithOpenAI } from './utils/openai-extractor.js';
 
 /**
  * Détecte les pages clés depuis la homepage
@@ -254,7 +255,9 @@ export async function crawlDomain(startUrl, options) {
     includeContacts = true,
     includeSocials = true,
     includeTeam = true,
-    keyPaths = []
+    keyPaths = [],
+    useOpenAI = false,
+    openAIModel = 'gpt-4o-mini'
   } = options;
   
   const domain = getRegistrableDomain(startUrl);
@@ -474,6 +477,62 @@ export async function crawlDomain(startUrl, options) {
       if (!domainData.company.address && company.address) domainData.company.address = company.address;
       if (!domainData.company.openingHours && company.openingHours) domainData.company.openingHours = company.openingHours;
       
+      // Si OpenAI est activé et données manquantes, utilise OpenAI
+      if (useOpenAI && (!domainData.company.legalName || !domainData.company.address)) {
+        // Détermine le type de page pour le prompt OpenAI
+        const urlLower = finalUrl.toLowerCase();
+        const pathname = new URL(finalUrl).pathname.toLowerCase();
+        let pageType = 'general';
+        
+        if (pathname.includes('/legal') || pathname.includes('/mentions') || pathname.includes('/imprint') || 
+            urlLower.includes('legal') || urlLower.includes('mentions')) {
+          pageType = 'legal';
+        } else if (pathname.includes('/contact') || urlLower.includes('contact')) {
+          pageType = 'contact';
+        }
+        
+        try {
+          const openAIData = await extractWithOpenAI(html, finalUrl, pageType, openAIModel);
+          
+          if (openAIData?.company) {
+            // Merge les données OpenAI avec les données existantes
+            if (!domainData.company.name && openAIData.company.name) {
+              domainData.company.name = openAIData.company.name;
+            }
+            if (!domainData.company.legalName && openAIData.company.legalName) {
+              domainData.company.legalName = openAIData.company.legalName;
+            }
+            if (!domainData.company.address && openAIData.company.address) {
+              domainData.company.address = openAIData.company.address;
+            } else if (domainData.company.address && openAIData.company.address) {
+              // Merge partiel de l'adresse
+              if (!domainData.company.address.street && openAIData.company.address.street) {
+                domainData.company.address.street = openAIData.company.address.street;
+              }
+              if (!domainData.company.address.postalCode && openAIData.company.address.postalCode) {
+                domainData.company.address.postalCode = openAIData.company.address.postalCode;
+              }
+              if (!domainData.company.address.city && openAIData.company.address.city) {
+                domainData.company.address.city = openAIData.company.address.city;
+              }
+              if (!domainData.company.address.country && openAIData.company.address.country) {
+                domainData.company.address.country = openAIData.company.address.country;
+                domainData.company.address.countryName = openAIData.company.address.countryName;
+              }
+            }
+            
+            // Propagation du pays depuis l'adresse OpenAI
+            if (openAIData.company.address?.country && !domainData.company.country) {
+              domainData.company.country = openAIData.company.address.country;
+              domainData.company.countryName = openAIData.company.address.countryName;
+            }
+          }
+        } catch (error) {
+          // Continue avec les données classiques si OpenAI échoue
+          log.warning(`OpenAI extraction failed for ${finalUrl}: ${error.message}`);
+        }
+      }
+      
       // Propagation bidirectionnelle country/countryName (après merge)
       if (domainData.company.address) {
         if (domainData.company.country && !domainData.company.address.country) {
@@ -486,9 +545,43 @@ export async function crawlDomain(startUrl, options) {
       }
     }
     
-    if (includeTeam && (url.includes('/team') || url.includes('/equipe') || url.includes('/staff'))) {
+    if (includeTeam) {
+      // Extraction classique
       const team = extractTeam(html, url);
       domainData.team.push(...team);
+      
+      // Si OpenAI est activé et pas de team trouvée (ou peu), essaie OpenAI
+      if (useOpenAI && (team.length === 0 || (url.includes('/team') || url.includes('/equipe') || url.includes('/staff') || url.includes('/leadership')))) {
+        try {
+          const openAIData = await extractWithOpenAI(html, finalUrl, 'team', openAIModel);
+          
+          if (openAIData?.team && Array.isArray(openAIData.team)) {
+            // Ajoute les membres trouvés par OpenAI
+            for (const member of openAIData.team) {
+              if (member.name) {
+                // Vérifie si le membre n'existe pas déjà
+                const exists = domainData.team.some(t => 
+                  t.name.toLowerCase() === member.name.toLowerCase()
+                );
+                
+                if (!exists) {
+                  domainData.team.push({
+                    name: member.name,
+                    role: member.role || null,
+                    email: null,
+                    linkedin: member.linkedin || null,
+                    sourceUrl: finalUrl,
+                    signals: ['openai_extraction', member.linkedin ? 'has_linkedin' : null, member.role ? 'has_role' : null].filter(Boolean)
+                  });
+                }
+              }
+            }
+          }
+        } catch (error) {
+          // Continue avec les données classiques si OpenAI échoue
+          log.warning(`OpenAI team extraction failed for ${finalUrl}: ${error.message}`);
+        }
+      }
     }
     
     return true;

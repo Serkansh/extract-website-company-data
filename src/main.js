@@ -16,8 +16,22 @@ const {
   includeContacts = true,
   includeSocials = true,
   includeTeam = true,
-  keyPaths = []
+  keyPaths = [],
+  useOpenAI = false,
+  openAIModel = 'gpt-4o-mini'
 } = input;
+
+// Vérifie que la clé OpenAI est disponible si OpenAI est activé
+if (useOpenAI) {
+  const apiKey = Actor.getEnv()?.OPENAI_API_KEY || process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    log.warning('useOpenAI is enabled but OPENAI_API_KEY is not set in environment variables. OpenAI features will be disabled.');
+    // Désactive OpenAI si la clé n'est pas disponible
+    useOpenAI = false;
+  } else {
+    log.info('OpenAI API key found, enhanced extraction enabled.');
+  }
+}
 
 // Normalise les startUrls (peut être array ou string multi-ligne)
 let urls = [];
@@ -82,7 +96,9 @@ for (const url of uniqueDomains) {
       includeContacts,
       includeSocials,
       includeTeam,
-      keyPaths
+      keyPaths,
+      useOpenAI,
+      openAIModel
     });
     
     // Construit le record final (un seul par domaine)
