@@ -15,7 +15,11 @@ await Actor.init();
 
 // Charge et définit le schéma du dataset avant le premier pushData
 try {
-  const schemaPath = join(__dirname, '..', 'DATASET_SCHEMA.json');
+  // Essaie d'abord .actor/dataset-schema.json, puis DATASET_SCHEMA.json à la racine
+  let schemaPath = join(__dirname, '..', '.actor', 'dataset-schema.json');
+  if (!readFileSync(schemaPath, 'utf8').trim()) {
+    schemaPath = join(__dirname, '..', 'DATASET_SCHEMA.json');
+  }
   const schemaContent = readFileSync(schemaPath, 'utf8');
   const datasetSchema = JSON.parse(schemaContent);
   
