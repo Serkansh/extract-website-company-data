@@ -191,8 +191,10 @@ export function extractCompany(html, sourceUrl) {
     legalText.match(/propri[eé]t[eé]\s+exclusive\s+de\s+([^,]+?)(?:\s*,\s*qui|\s+qui)\b/i) ||
     // EN: "owned by [Company Name], a company..."
     legalText.match(/owned\s+by\s+([^,]+?)(?:\s*,\s*a\s+company|\s+\(|$)/i) ||
-    // Format: "HORIZON SOFTWARE SAS" ou "COMPANY NAME SAS" en début de section légale
-    legalText.match(/^([A-Z][A-Z\s]+(?:SAS|SARL|SA|SRL|LTD|LLC|INC|GMBH|BV|SPA))\b/m) ||
+    // Format: "HORIZON SOFTWARE SAS" ou "COMPANY NAME SAS" (cherche partout, pas juste en début de ligne)
+    legalText.match(/\b([A-Z][A-Z\s]{3,}(?:SAS|SARL|SA|SRL|LTD|LLC|INC|GMBH|BV|SPA))\b/) ||
+    // Format alternatif: "Legal information HORIZON SOFTWARE SAS" ou "Company: HORIZON SOFTWARE SAS"
+    legalText.match(/(?:Legal\s+information|Company|Société|Entreprise)\s*:?\s*([A-Z][A-Z\s]{3,}(?:SAS|SARL|SA|SRL|LTD|LLC|INC|GMBH|BV|SPA))\b/i) ||
     legalText.match(/Legal\s+name\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i);
 
   if (legalNameMatches && !company.legalName) {
@@ -209,8 +211,8 @@ export function extractCompany(html, sourceUrl) {
   const addressMatches =
     // EN: "whose registered office is at [address]"
     legalText.match(/whose\s+registered\s+office\s+is\s+at\s+(.+?)(?=\s*,\s*(?:with\s+capital|registered|VAT|$))/i) ||
-    // Format simple: "60 rue de Monceau, 75008 Paris, France" (ligne directe)
-    legalText.match(/^(\d+\s+[^,\n]+),\s*(\d{5})\s+([^,\n]+?)(?:,\s*(France|United\s+Kingdom|UK|Germany|Spain|Italy|Belgium|Switzerland|Netherlands|Austria|Portugal|United\s+States|USA|Canada|Australia|Japan|China|India|Brazil|Mexico|South\s+Korea|Singapore|Hong\s+Kong|Ireland|Poland|Sweden|Norway|Denmark|Finland|Greece|Romania|Hungary|Russia|Turkey|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia))?\s*$/m) ||
+    // Format simple: "60 rue de Monceau, 75008 Paris, France" (cherche partout, pas juste en début de ligne)
+    legalText.match(/(\d+\s+[^,\n]+),\s*(\d{5})\s+([^,\n]+?)(?:,\s*(France|United\s+Kingdom|UK|Germany|Spain|Italy|Belgium|Switzerland|Netherlands|Austria|Portugal|United\s+States|USA|Canada|Australia|Japan|China|India|Brazil|Mexico|South\s+Korea|Singapore|Hong\s+Kong|Ireland|Poland|Sweden|Norway|Denmark|Finland|Greece|Romania|Hungary|Russia|Turkey|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia))?\b/) ||
     // FR: On coupe avant les libellés suivants, très fréquents en mentions légales
     legalText.match(/Si[eè]ge\s+social\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i) ||
     legalText.match(/Adresse\s+du\s+si[eè]ge\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i) ||
