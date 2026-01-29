@@ -409,6 +409,33 @@ export async function crawlDomain(startUrl, options) {
     
     domainData.pagesVisited.push(finalUrl);
 
+    // Détecte si cette page est une "key page" et met à jour domainData.keyPages
+    const urlLower = finalUrl.toLowerCase();
+    const pathname = new URL(finalUrl).pathname.toLowerCase();
+    
+    // Patterns étendus pour chaque type
+    const extendedPatterns = {
+      legal: ['legal', 'disclaimer', 'mentions', 'imprint', 'legal-notice', 'legal-notice'],
+      about: ['about', 'story', 'a-propos', 'qui-sommes', 'our-story'],
+      contact: ['contact', 'contact-us', 'nous-contacter', 'contactez'],
+      team: ['team', 'equipe', 'staff', 'leadership', 'direction'],
+      privacy: ['privacy', 'confidentialite', 'politique-de-confidentialite', 'cookies']
+    };
+    
+    for (const [type, paths] of Object.entries(DEFAULT_KEY_PATHS)) {
+      if (!domainData.keyPages[type]) {
+        const baseMatches = paths.some(path => 
+          pathname === path || pathname.includes(path) || urlLower.includes(path)
+        );
+        const extendedMatches = extendedPatterns[type]?.some(pattern => 
+          pathname.includes(pattern) || urlLower.includes(pattern)
+        );
+        if (baseMatches || extendedMatches) {
+          domainData.keyPages[type] = finalUrl;
+        }
+      }
+    }
+
     // Découverte de liens supplémentaires (sert au mode DEEP)
     for (const l of extractInternalLinks(html, finalUrl)) {
       if (!candidateSeen.has(l.url)) {

@@ -112,6 +112,8 @@ export function extractCompany(html, sourceUrl) {
     legalText.match(/Société\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
     // "Le site X est la propriété exclusive de SARL Y, qui l'édite."
     legalText.match(/propri[eé]t[eé]\s+exclusive\s+de\s+([^,]+?)(?:\s*,\s*qui|\s+qui)\b/i) ||
+    // EN: "owned by [Company Name], a company..."
+    legalText.match(/owned\s+by\s+([^,]+?)(?:\s*,\s*a\s+company|\s+\(|$)/i) ||
     legalText.match(/Legal\s+name\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i);
 
   if (legalNameMatches && !company.legalName) {
@@ -123,10 +125,12 @@ export function extractCompany(html, sourceUrl) {
     company.name = company.legalName;
   }
 
-  // Adresse / siège social (best-effort FR)
+  // Adresse / siège social (best-effort FR + EN)
   // On capture une "phrase" après le label, puis on tente de parser CP/ville
   const addressMatches =
-    // On coupe avant les libellés suivants, très fréquents en mentions légales
+    // EN: "whose registered office is at [address]"
+    legalText.match(/whose\s+registered\s+office\s+is\s+at\s+(.+?)(?=\s*,\s*(?:with\s+capital|registered|VAT|$))/i) ||
+    // FR: On coupe avant les libellés suivants, très fréquents en mentions légales
     legalText.match(/Si[eè]ge\s+social\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i) ||
     legalText.match(/Adresse\s+du\s+si[eè]ge\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i) ||
     legalText.match(/Adresse\s+postale\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i) ||
@@ -165,7 +169,28 @@ export function extractCompany(html, sourceUrl) {
     }
   }
   
-  // 3. Pays depuis le domaine (fallback)
+  // 3. Pays depuis le texte (mentions légales) ou domaine (fallback)
+  if (!company.country) {
+    // Cherche le pays dans le texte (ex: "France", "registered in France", "in France")
+    const countryMatches = legalText.match(/\b(?:registered\s+in|in|at)\s+(France|United\s+Kingdom|UK|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal)\b/i);
+    if (countryMatches) {
+      const countryName = countryMatches[1].toLowerCase();
+      const countryMap = {
+        'france': 'FR', 'united kingdom': 'GB', 'uk': 'GB',
+        'germany': 'DE', 'deutschland': 'DE',
+        'spain': 'ES', 'españa': 'ES',
+        'italy': 'IT', 'italia': 'IT',
+        'belgium': 'BE', 'belgique': 'BE',
+        'switzerland': 'CH', 'suisse': 'CH',
+        'netherlands': 'NL', 'nederland': 'NL',
+        'austria': 'AT', 'österreich': 'AT',
+        'portugal': 'PT'
+      };
+      company.country = countryMap[countryName] || null;
+    }
+  }
+  
+  // Fallback: pays depuis le domaine
   if (!company.country) {
     const domain = getRegistrableDomain(sourceUrl);
     if (domain) {
