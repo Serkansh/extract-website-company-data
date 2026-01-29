@@ -17,9 +17,11 @@ const {
   includeSocials = true,
   includeTeam = true,
   keyPaths = [],
-  useOpenAI = false,
-  openAIModel = 'gpt-4o-mini'
+  useOpenAI = false
 } = input;
+
+// Modèle OpenAI hardcodé (non configurable par l'utilisateur)
+const openAIModel = 'gpt-4o-mini';
 
 // Vérifie que la clé OpenAI est disponible si OpenAI est activé
 if (useOpenAI) {
