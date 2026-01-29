@@ -154,29 +154,26 @@ export function extractCompany(html, sourceUrl) {
       // Extrait le pays depuis cityPart si présent (ex: "Levallois-Perret, France")
       let city = cityPart || null;
       let countryFromCity = null;
-      const countryPatterns = [
-        /\b(France|United\s+Kingdom|UK|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal)\b/i
-      ];
-      for (const pattern of countryPatterns) {
-        const match = cityPart.match(pattern);
-        if (match) {
-          const countryName = match[1].toLowerCase();
-          const countryMap = {
-            'france': 'FR', 'united kingdom': 'GB', 'uk': 'GB',
-            'germany': 'DE', 'deutschland': 'DE',
-            'spain': 'ES', 'españa': 'ES',
-            'italy': 'IT', 'italia': 'IT',
-            'belgium': 'BE', 'belgique': 'BE',
-            'switzerland': 'CH', 'suisse': 'CH',
-            'netherlands': 'NL', 'nederland': 'NL',
-            'austria': 'AT', 'österreich': 'AT',
-            'portugal': 'PT'
-          };
-          countryFromCity = countryMap[countryName] || null;
-          // Retire le pays de la ville (ex: "Levallois-Perret, France" -> "Levallois-Perret")
-          city = cityPart.replace(/,?\s*${match[1]}/i, '').trim() || null;
-          break;
-        }
+      const countryPattern = /\b(France|United\s+Kingdom|UK|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal)\b/i;
+      const countryMatch = cityPart.match(countryPattern);
+      if (countryMatch) {
+        const countryName = countryMatch[1].toLowerCase();
+        const countryMap = {
+          'france': 'FR', 'united kingdom': 'GB', 'uk': 'GB',
+          'germany': 'DE', 'deutschland': 'DE',
+          'spain': 'ES', 'españa': 'ES',
+          'italy': 'IT', 'italia': 'IT',
+          'belgium': 'BE', 'belgique': 'BE',
+          'switzerland': 'CH', 'suisse': 'CH',
+          'netherlands': 'NL', 'nederland': 'NL',
+          'austria': 'AT', 'österreich': 'AT',
+          'portugal': 'PT'
+        };
+        countryFromCity = countryMap[countryName] || null;
+        // Retire le pays de la ville (ex: "Levallois-Perret, France" -> "Levallois-Perret")
+        // On échappe le nom du pays pour la regex
+        const countryNameEscaped = countryMatch[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        city = cityPart.replace(new RegExp(`,?\\s*${countryNameEscaped}`, 'i'), '').trim() || null;
       }
       
       const street = (before || '').trim().replace(/[,\-]$/, '').trim() || null;
