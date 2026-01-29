@@ -624,7 +624,22 @@ export async function crawlDomain(startUrl, options) {
         } catch (error) {
           // Continue avec les données classiques si OpenAI échoue
           log.warning(`OpenAI team extraction failed for ${finalUrl}: ${error.message}`);
+          // En cas d'erreur OpenAI, utilise la team classique filtrée
+          const filteredClassicTeam = team.filter(member => {
+            const nameLower = member.name.toLowerCase();
+            const falsePositives = ['send message', 'horizon extend', 'contact us', 'view profile', 'our team', 'meet the team', 'about us'];
+            return !falsePositives.some(fp => nameLower.includes(fp));
+          });
+          domainData.team.push(...filteredClassicTeam);
         }
+      } else {
+        // Pas d'OpenAI : utilise la team classique avec filtrage basique
+        const filteredClassicTeam = team.filter(member => {
+          const nameLower = member.name.toLowerCase();
+          const falsePositives = ['send message', 'horizon extend', 'contact us', 'view profile', 'our team', 'meet the team', 'about us'];
+          return !falsePositives.some(fp => nameLower.includes(fp));
+        });
+        domainData.team.push(...filteredClassicTeam);
       }
     }
     
