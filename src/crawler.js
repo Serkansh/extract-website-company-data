@@ -616,10 +616,27 @@ export async function crawlDomain(startUrl, options) {
             new Promise((_, reject) => setTimeout(() => reject(new Error('OpenAI timeout')), 20000)) // Timeout 20s
           ]).catch(() => null);
           
-          if (openAIData?.team && Array.isArray(openAIData.team)) {
-            // Ajoute les membres trouvés par OpenAI
+          if (openAIData?.team && Array.isArray(openAIData.team) && openAIData.team.length > 0) {
+            log.info(`OpenAI extracted ${openAIData.team.length} team members from ${finalUrl}`);
+            
+            // Filtre d'abord les faux positifs de l'extraction classique
+            const filteredClassicTeam = team.filter(member => {
+              const nameLower = member.name.toLowerCase();
+              // Exclut les faux positifs connus
+              const falsePositives = ['send message', 'horizon extend', 'contact us', 'view profile', 'our team', 'meet the team', 'about us'];
+              return !falsePositives.some(fp => nameLower.includes(fp));
+            });
+            
+            // Remplace la team classique par la version filtrée
+            domainData.team = domainData.team.filter(t => 
+              !team.some(ct => ct.name === t.name)
+            );
+            domainData.team.push(...filteredClassicTeam);
+            
+            // Priorité à OpenAI : remplace la team classique par celle d'OpenAI (plus précise)
+            // Ajoute les membres trouvés par OpenAI (qui sont déjà filtrés)
             for (const member of openAIData.team) {
-              if (member.name) {
+              if (member.name && member.name.trim().length > 0) {
                 // Vérifie si le membre n'existe pas déjà
                 const exists = domainData.team.some(t => 
                   t.name.toLowerCase() === member.name.toLowerCase()
@@ -627,9 +644,10 @@ export async function crawlDomain(startUrl, options) {
                 
                 if (!exists) {
                   domainData.team.push({
-                    name: member.name,
+                    name: member.name.trim(),
                     role: member.role || null,
                     email: null,
+                    phone: null, // OpenAI ne retourne pas de phone ici
                     linkedin: member.linkedin || null,
                     sourceUrl: finalUrl,
                     signals: ['openai_extraction', member.linkedin ? 'has_linkedin' : null, member.role ? 'has_role' : null].filter(Boolean)
