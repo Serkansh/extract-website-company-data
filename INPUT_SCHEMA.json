@@ -59,12 +59,6 @@
         "type": "string"
       },
       "default": []
-    },
-    "useOpenAI": {
-      "title": "Use OpenAI for Enhanced Extraction",
-      "type": "boolean",
-      "description": "Use OpenAI to analyze page content and improve extraction of company data, addresses, and team members. Requires OPENAI_API_KEY environment variable.",
-      "default": false
     }
   },
   "required": ["startUrls"]
