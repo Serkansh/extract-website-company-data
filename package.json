@@ -22,6 +22,7 @@
     "description": "Extract company profile, contacts, social profiles and team from websites",
     "version": "1.0.0",
     "actorSpecification": 1,
-    "input": "./INPUT_SCHEMA.json"
+    "input": "./INPUT_SCHEMA.json",
+    "datasetSchema": ".actor/dataset-schema.json"
   }
 }
