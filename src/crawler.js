@@ -472,6 +472,15 @@ export async function crawlDomain(startUrl, options) {
       if (!domainData.company.country && company.country) domainData.company.country = company.country;
       if (!domainData.company.address && company.address) domainData.company.address = company.address;
       if (!domainData.company.openingHours && company.openingHours) domainData.company.openingHours = company.openingHours;
+      
+      // Propagation bidirectionnelle country (après merge)
+      if (domainData.company.address) {
+        if (domainData.company.country && !domainData.company.address.country) {
+          domainData.company.address.country = domainData.company.country;
+        } else if (domainData.company.address.country && !domainData.company.country) {
+          domainData.company.country = domainData.company.address.country;
+        }
+      }
     }
     
     if (includeTeam && (url.includes('/team') || url.includes('/equipe') || url.includes('/staff'))) {
