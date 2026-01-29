@@ -8,5 +8,5 @@
     "templateId": "puppeteer-crawler"
   },
   "readme": "./README.md",
-  "datasetSchema": "./DATASET_SCHEMA.json"
+  "datasetSchema": "./dataset-schema.json"
 }
