@@ -1,58 +1,53 @@
 {
-  "title": "Company Data Extraction Results",
-  "type": "object",
   "schemaVersion": 1,
-  "properties": {
-    "domain": {
+  "fields": [
+    {
+      "name": "domain",
       "type": "string"
     },
-    "finalUrl": {
+    {
+      "name": "finalUrl",
       "type": "string"
     },
-    "keyPages": {
+    {
+      "name": "keyPages",
       "type": "object"
     },
-    "pagesVisited": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+    {
+      "name": "pagesVisited",
+      "type": "array"
     },
-    "company": {
+    {
+      "name": "company",
       "type": "object"
     },
-    "emails": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+    {
+      "name": "emails",
+      "type": "array"
     },
-    "primaryEmail": {
-      "type": "string"
+    {
+      "name": "primaryEmail",
+            "type": "string"
     },
-    "phones": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+    {
+      "name": "phones",
+      "type": "array"
     },
-    "primaryPhone": {
-      "type": "string"
+    {
+      "name": "primaryPhone",
+                "type": "string"
+              },
+    {
+      "name": "socials",
+            "type": "object"
     },
-    "socials": {
-      "type": "object"
+    {
+      "name": "team",
+      "type": "array"
     },
-    "team": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
-    },
-    "errors": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+    {
+      "name": "errors",
+      "type": "array"
     }
-  }
+  ]
 }
