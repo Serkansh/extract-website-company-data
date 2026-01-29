@@ -1,53 +1,43 @@
 {
+  "title": "Company Data Extraction Results",
+  "type": "object",
   "schemaVersion": 1,
-  "fields": [
-    {
-      "name": "domain",
+  "properties": {
+    "domain": {
       "type": "string"
     },
-    {
-      "name": "finalUrl",
+    "finalUrl": {
       "type": "string"
     },
-    {
-      "name": "keyPages",
+    "keyPages": {
       "type": "object"
     },
-    {
-      "name": "pagesVisited",
+    "pagesVisited": {
       "type": "array"
     },
-    {
-      "name": "company",
+    "company": {
       "type": "object"
     },
-    {
-      "name": "emails",
+    "emails": {
       "type": "array"
     },
-    {
-      "name": "primaryEmail",
-            "type": "string"
+    "primaryEmail": {
+      "type": "string"
     },
-    {
-      "name": "phones",
+    "phones": {
       "type": "array"
     },
-    {
-      "name": "primaryPhone",
-                "type": "string"
-              },
-    {
-      "name": "socials",
-            "type": "object"
+    "primaryPhone": {
+      "type": "string"
     },
-    {
-      "name": "team",
+    "socials": {
+      "type": "object"
+    },
+    "team": {
       "type": "array"
     },
-    {
-      "name": "errors",
+    "errors": {
       "type": "array"
     }
-  ]
+  }
 }
