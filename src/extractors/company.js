@@ -213,6 +213,8 @@ export function extractCompany(html, sourceUrl) {
     legalText.match(/whose\s+registered\s+office\s+is\s+at\s+(.+?)(?=\s*,\s*(?:with\s+capital|registered|VAT|$))/i) ||
     // Format simple: "60 rue de Monceau, 75008 Paris, France" (cherche partout, pas juste en début de ligne)
     legalText.match(/(\d+\s+[^,\n]+),\s*(\d{5})\s+([^,\n]+?)(?:,\s*(France|United\s+Kingdom|UK|Germany|Spain|Italy|Belgium|Switzerland|Netherlands|Austria|Portugal|United\s+States|USA|Canada|Australia|Japan|China|India|Brazil|Mexico|South\s+Korea|Singapore|Hong\s+Kong|Ireland|Poland|Sweden|Norway|Denmark|Finland|Greece|Romania|Hungary|Russia|Turkey|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia))?\b/) ||
+    // Format multi-lignes: "60 rue de Monceau\n75008 Paris\nFrance" (cherche aussi le pays sur une ligne séparée)
+    legalText.match(/(\d+\s+[^\n]+)\s+(\d{5})\s+([^\n]+?)(?:\s+(France|United\s+Kingdom|UK|Germany|Spain|Italy|Belgium|Switzerland|Netherlands|Austria|Portugal|United\s+States|USA|Canada|Australia|Japan|China|India|Brazil|Mexico|South\s+Korea|Singapore|Hong\s+Kong|Ireland|Poland|Sweden|Norway|Denmark|Finland|Greece|Romania|Hungary|Russia|Turkey|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia))?\b/) ||
     // FR: On coupe avant les libellés suivants, très fréquents en mentions légales
     legalText.match(/Si[eè]ge\s+social\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i) ||
     legalText.match(/Adresse\s+du\s+si[eè]ge\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i) ||
@@ -220,11 +222,12 @@ export function extractCompany(html, sourceUrl) {
     legalText.match(/Adresse\s*[:\-]\s*(.+?)(?=\s+(?:Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse\s+de\s+courrier\s+[eé]lectronique|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])\b|$)/i);
 
   if (addressMatches && !company.address) {
-    // Cas spécial: format "60 rue de Monceau, 75008 Paris, France" (match[1]=street, match[2]=CP, match[3]=city, match[4]=country)
+    // Cas spécial: format "60 rue de Monceau, 75008 Paris, France" ou "60 rue de Monceau\n75008 Paris\nFrance"
+    // (match[1]=street, match[2]=CP, match[3]=city, match[4]=country)
     if (addressMatches[2] && addressMatches[3]) {
-      const street = addressMatches[1].trim();
+      const street = addressMatches[1].trim().replace(/\s+/g, ' ');
       const postalCode = addressMatches[2].trim();
-      const city = addressMatches[3].trim();
+      const city = addressMatches[3].trim().replace(/\s+/g, ' ');
       const countryText = addressMatches[4] ? addressMatches[4].trim() : null;
       const countryInfo = countryText ? getCountryInfo(countryText) : null;
       
@@ -257,7 +260,7 @@ export function extractCompany(html, sourceUrl) {
         const stopAt = afterClean.search(/(Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])/i);
         let cityPart = (stopAt >= 0 ? afterClean.slice(0, stopAt) : afterClean).trim();
         
-        // Extrait le pays depuis cityPart si présent (ex: "Levallois-Perret, France")
+        // Extrait le pays depuis cityPart si présent (ex: "Levallois-Perret, France" ou "Paris\nFrance")
         let city = cityPart || null;
         let countryFromCity = null;
         let countryNameFromCity = null;
@@ -267,10 +270,21 @@ export function extractCompany(html, sourceUrl) {
           const countryInfo = getCountryInfo(countryMatch[1]);
           countryFromCity = countryInfo.code;
           countryNameFromCity = countryInfo.name;
-          // Retire le pays de la ville (ex: "Levallois-Perret, France" -> "Levallois-Perret")
+          // Retire le pays de la ville (ex: "Levallois-Perret, France" -> "Levallois-Perret" ou "Paris\nFrance" -> "Paris")
           // On échappe le nom du pays pour la regex
           const countryNameEscaped = countryMatch[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          city = cityPart.replace(new RegExp(`,?\\s*${countryNameEscaped}`, 'i'), '').trim() || null;
+          city = cityPart.replace(new RegExp(`,?\\s*${countryNameEscaped}|\\s+${countryNameEscaped}`, 'i'), '').trim() || null;
+        }
+        
+        // Si pas de pays dans cityPart, cherche dans le texte après l'adresse (format multi-lignes)
+        if (!countryFromCity) {
+          const afterAddress = legalText.substring(legalText.indexOf(addr) + addr.length);
+          const countryMatchAfter = afterAddress.match(/\b(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)\b/i);
+          if (countryMatchAfter) {
+            const countryInfo = getCountryInfo(countryMatchAfter[1]);
+            countryFromCity = countryInfo.code;
+            countryNameFromCity = countryInfo.name;
+          }
         }
         
         const street = (before || '').trim().replace(/[,\-]$/, '').trim() || null;

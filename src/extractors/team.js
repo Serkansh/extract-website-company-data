@@ -48,141 +48,75 @@ export function extractTeam(html, sourceUrl) {
     });
   }
   
-  // Détecte les blocs répétés (cards de membres d'équipe)
-  // Cherche des structures communes : div.team-member, .person-card, etc.
-  const teamSelectors = [
-    '.team-member', '.team-member-card', '.person-card', '.member-card',
-    '.staff-member', '.employee', '.team-item', '[class*="team"]',
-    '[class*="member"]', '[class*="person"]'
+  // Liste des titres de sections à ignorer (pas des noms de personnes)
+  const sectionTitles = [
+    'Leadership', 'Team', 'Our Team', 'About', 'Contact', 'Company', 'Business',
+    'Services', 'Products', 'Solutions', 'Welcome', 'Home', 'Menu', 'Navigation',
+    'Footer', 'Header', 'Sales', 'Marketing', 'Sales & Marketing',
+    'Company Support Department', 'Product & Engineering', 'Client Management',
+    'Support', 'Engineering', 'Product', 'Management', 'Department'
   ];
   
-  let teamCards = $();
-  for (const selector of teamSelectors) {
-    const found = $(selector);
-    if (found.length > 0) {
-      teamCards = found;
-      break;
-    }
+  // Fonction pour vérifier si un texte est un titre de section (pas un nom de personne)
+  function isSectionTitle(text) {
+    if (!text) return false;
+    const cleanText = text.trim().toLowerCase();
+    // Vérifie si c'est exactement un titre de section
+    if (sectionTitles.some(title => cleanText === title.toLowerCase())) return true;
+    // Vérifie si c'est un titre de section suivi d'un autre mot (ex: "Leadership Team")
+    if (sectionTitles.some(title => cleanText.startsWith(title.toLowerCase() + ' '))) return true;
+    // Vérifie si le texte contient "&" ou "Department" (souvent des titres de sections)
+    if (/\s*&\s*|Department|Management\s*$/.test(cleanText)) return true;
+    return false;
   }
   
-  // Si pas de structure spécifique, cherche des patterns répétés
-  if (teamCards.length === 0) {
-    // Cherche des divs avec des images et du texte (pattern commun pour les cards)
-    $('div, article, section').each((_, el) => {
-      const $el = $(el);
-      const hasImage = $el.find('img').length > 0;
-      const hasText = $el.text().trim().length > 20;
-      const hasName = /[A-Z][a-z]+\s+[A-Z][a-z]+/.test($el.text());
-      
-      if (hasImage && hasText && hasName) {
-        teamCards = teamCards.add($el);
-      }
-    });
+  // Fonction pour extraire un membre individuel depuis un élément
+  function extractMemberFromElement($el) {
+    const text = $el.text().trim();
+    if (!text || text.length < 5) return null;
     
-    // Si toujours rien, cherche dans les listes (li) - structure très commune pour les teams
-    if (teamCards.length === 0) {
-      $('li').each((_, el) => {
-        const $el = $(el);
-        const hasImage = $el.find('img').length > 0;
-        const hasText = $el.text().trim().length > 15;
-        const hasName = /[A-Z][a-z]+\s+[A-Z][a-z]+/.test($el.text());
-        
-        if ((hasImage || hasText) && hasName) {
-          teamCards = teamCards.add($el);
-        }
-      });
-    }
+    // Ignore les titres de sections
+    if (isSectionTitle(text)) return null;
     
-    // Si toujours rien, cherche des headings (h2, h3, h4) avec des noms suivis d'un rôle
-    if (teamCards.length === 0) {
-      $('h2, h3, h4, h5, h6').each((_, el) => {
-        const $el = $(el);
-        const text = $el.text().trim();
-        const nameMatch = text.match(/^([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)/);
-        if (nameMatch) {
-          // Cherche le parent ou le suivant qui contient le rôle
-          const $parent = $el.parent();
-          if ($parent.length > 0) {
-            teamCards = teamCards.add($parent);
-          }
-        }
-      });
-    }
+    // Cherche un nom (2-3 mots max, Prénom Nom ou Prénom Middle Nom)
+    // Pattern: commence par une majuscule, suivi de minuscules, puis espace, puis majuscule...
+    const namePattern = /^([A-Z][a-zÀ-ÿ]+(?:\s+[A-Z][a-zÀ-ÿ]+){1,2})\b/;
+    const nameMatch = text.match(namePattern);
+    if (!nameMatch) return null;
     
-    // Dernière tentative: cherche tous les éléments avec un nom (Prénom Nom) et une image ou un LinkedIn
-    if (teamCards.length === 0) {
-      $('div, article, section, li').each((_, el) => {
-        const $el = $(el);
-        const text = $el.text().trim();
-        const hasName = /[A-Z][a-z]+\s+[A-Z][a-z]+/.test(text);
-        const hasImage = $el.find('img').length > 0;
-        const hasLinkedIn = $el.find('a[href*="linkedin.com/in/"]').length > 0;
-        
-        // Si on a un nom ET (une image OU un LinkedIn), c'est probablement un membre d'équipe
-        if (hasName && (hasImage || hasLinkedIn) && text.length > 10) {
-          teamCards = teamCards.add($el);
-        }
-      });
-    }
-  }
-  
-  // Extrait les informations de chaque card
-  teamCards.each((_, card) => {
-    const $card = $(card);
-    const cardText = $card.text();
-    
-    // Nom (pattern: Prénom Nom) - cherche aussi dans les headings (h2, h3, h4)
-    // Amélioration: cherche TOUS les noms possibles dans la card, pas juste le premier
-    let nameMatch = null;
-    
-    // Priorité 1: headings (h2, h3, h4, h5, h6)
-    const heading = $card.find('h2, h3, h4, h5, h6').first();
-    if (heading.length > 0) {
-      const headingText = heading.text();
-      nameMatch = headingText.match(/([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)/);
-    }
-    
-    // Priorité 2: texte de la card (cherche le premier nom valide, en évitant "Leadership", "Team", etc.)
-    if (!nameMatch) {
-      const namePattern = /([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)/g;
-      let match;
-      while ((match = namePattern.exec(cardText)) !== null) {
-        const potentialName = match[1].trim();
-        // Exclut les mots-clés communs qui ne sont pas des noms
-        if (!/^(Leadership|Team|Our|About|Contact|Company|Business|Services|Products|Solutions|Welcome|Home|Menu|Navigation|Footer|Header)$/i.test(potentialName)) {
-          nameMatch = match;
-          break;
-        }
-      }
-    }
-    
-    if (!nameMatch) return;
-    
-    // Nettoie le nom (supprime tabs, retours ligne, espaces multiples)
     let name = nameMatch[1].trim();
     name = name.replace(/[\t\n\r]+/g, ' ').replace(/\s+/g, ' ').trim();
     
-    // Supprime les préfixes comme "Leadership" qui peuvent être collés au nom
-    name = name.replace(/^(Leadership|Team|Our|About)\s+/i, '').trim();
+    // Ignore si le nom contient des mots de section
+    if (isSectionTitle(name)) return null;
     
-    // Role/Position
+    // Ignore si le nom est trop long (probablement plusieurs noms regroupés)
+    const nameWords = name.split(/\s+/);
+    if (nameWords.length > 3) return null;
+    
+    // Role/Position (cherche après le nom ou dans le texte)
+    let role = null;
     const rolePatterns = [
-      /(?:CEO|CTO|CFO|CMO|COO|Founder|Co-founder|Directeur|Directrice|Président|Présidente|Manager|Chef|Lead)/i,
-      /(?:([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s+(?:Manager|Director|Lead|Head|Chef|Responsable))/i
+      /(?:CEO|CTO|CFO|CMO|COO|Founder|Co-founder|Directeur|Directrice|Président|Présidente|Manager|Chef|Lead|Head|Director|VP|Vice\s+President)/i,
+      /([A-Z][a-zÀ-ÿ]+(?:\s+[A-Z][a-zÀ-ÿ]+)*)\s+(?:Manager|Director|Lead|Head|Chef|Responsable|President|VP)/i
     ];
     
-    let role = null;
     for (const pattern of rolePatterns) {
-      const match = cardText.match(pattern);
+      const match = text.match(pattern);
       if (match) {
-        role = match[1] || match[0];
-        break;
+        role = (match[1] || match[0]).trim();
+        // Ignore si le rôle est en fait un titre de section
+        if (!isSectionTitle(role)) {
+          break;
+        } else {
+          role = null;
+        }
       }
     }
     
-    // Email (mailto proche dans la card)
+    // Email (mailto proche dans l'élément)
     let email = null;
-    const mailtoLink = $card.find('a[href^="mailto:"]').first();
+    const mailtoLink = $el.find('a[href^="mailto:"]').first();
     if (mailtoLink.length > 0) {
       const href = mailtoLink.attr('href');
       const emailMatch = href.match(/mailto:([^\?&]+)/i);
@@ -193,7 +127,7 @@ export function extractTeam(html, sourceUrl) {
     
     // LinkedIn personnel (/in/)
     let linkedin = null;
-    const linkedinLink = $card.find('a[href*="linkedin.com/in/"]').first();
+    const linkedinLink = $el.find('a[href*="linkedin.com/in/"]').first();
     if (linkedinLink.length > 0) {
       const href = linkedinLink.attr('href');
       const linkedinMatch = href.match(/linkedin\.com\/in\/([^\/\?]+)/i);
@@ -204,24 +138,84 @@ export function extractTeam(html, sourceUrl) {
     
     // Signaux de détection
     const signals = [];
-    if ($card.find('img').length > 0) signals.push('has_image');
+    if ($el.find('img').length > 0) signals.push('has_image');
     if (email) signals.push('has_email');
     if (linkedin) signals.push('has_linkedin');
     if (role) signals.push('has_role');
     
     // Accepte si on a un nom ET au moins un signal (image, email, linkedin, ou role)
-    // Réduit le seuil de 2 à 1 pour capturer plus de membres
     if (name && signals.length >= 1) {
-      teamMembers.push({
+      return {
         name,
         role: role || null,
         email,
         linkedin,
         sourceUrl,
         signals
-      });
+      };
     }
-  });
+    
+    return null;
+  }
+  
+  // Stratégie 1: Cherche des sélecteurs spécifiques de team
+  const teamSelectors = [
+    '.team-member', '.team-member-card', '.person-card', '.member-card',
+    '.staff-member', '.employee', '.team-item', '[class*="team"]',
+    '[class*="member"]', '[class*="person"]'
+  ];
+  
+  let foundMembers = false;
+  for (const selector of teamSelectors) {
+    const found = $(selector);
+    if (found.length > 0) {
+      found.each((_, el) => {
+        const member = extractMemberFromElement($(el));
+        if (member) {
+          teamMembers.push(member);
+          foundMembers = true;
+        }
+      });
+      if (foundMembers) break;
+    }
+  }
+  
+  // Stratégie 2: Si pas de sélecteurs spécifiques, cherche des patterns répétés
+  if (!foundMembers) {
+    // Cherche des divs/articles/sections avec image + texte court (probablement des cards individuelles)
+    $('div, article, section, li').each((_, el) => {
+      const $el = $(el);
+      const hasImage = $el.find('img').length > 0;
+      const text = $el.text().trim();
+      const hasLinkedIn = $el.find('a[href*="linkedin.com/in/"]').length > 0;
+      
+      // Si on a (une image OU un LinkedIn) ET un texte court (probablement un membre individuel)
+      if ((hasImage || hasLinkedIn) && text.length > 5 && text.length < 200) {
+        const member = extractMemberFromElement($el);
+        if (member) {
+          teamMembers.push(member);
+          foundMembers = true;
+        }
+      }
+    });
+  }
+  
+  // Stratégie 3: Cherche dans les headings suivis d'un texte court (nom + rôle)
+  if (!foundMembers) {
+    $('h2, h3, h4, h5, h6').each((_, el) => {
+      const $heading = $(el);
+      const headingText = $heading.text().trim();
+      
+      // Si le heading contient un nom (pas un titre de section)
+      if (!isSectionTitle(headingText)) {
+        const $parent = $heading.parent();
+        const member = extractMemberFromElement($parent);
+        if (member) {
+          teamMembers.push(member);
+        }
+      }
+    });
+  }
   
   return teamMembers;
 }
