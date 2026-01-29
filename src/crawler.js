@@ -515,64 +515,72 @@ export async function crawlDomain(startUrl, options) {
       if (!domainData.company.address && company.address) domainData.company.address = company.address;
       if (!domainData.company.openingHours && company.openingHours) domainData.company.openingHours = company.openingHours;
       
-      // Si OpenAI est activé et données manquantes, utilise OpenAI
-      // Utilise OpenAI si: legalName manquant, address manquant, ou country manquant
-      const needsOpenAI = useOpenAI && (
-        !domainData.company.legalName || 
-        !domainData.company.address || 
-        !domainData.company.address?.country || 
-        !domainData.company.country
-      );
-      
-      if (needsOpenAI) {
+      // Si OpenAI est activé, utilise-le systématiquement sur les pages clés pour améliorer les données
+      if (useOpenAI) {
         // Détermine le type de page pour le prompt OpenAI
         const urlLower = finalUrl.toLowerCase();
         const pathname = new URL(finalUrl).pathname.toLowerCase();
         let pageType = 'general';
+        let shouldUseOpenAI = false;
         
+        // Utilise OpenAI sur les pages importantes (legal, contact) ou si des données manquent
         if (pathname.includes('/legal') || pathname.includes('/mentions') || pathname.includes('/imprint') || 
             urlLower.includes('legal') || urlLower.includes('mentions')) {
           pageType = 'legal';
+          shouldUseOpenAI = true;
         } else if (pathname.includes('/contact') || urlLower.includes('contact')) {
           pageType = 'contact';
+          shouldUseOpenAI = true;
+        } else if (!domainData.company.legalName || !domainData.company.address || 
+                   !domainData.company.address?.country || !domainData.company.country) {
+          // Utilise OpenAI si des données importantes manquent
+          shouldUseOpenAI = true;
         }
         
-        try {
-          // Appel OpenAI en mode non-bloquant - si ça échoue, on continue avec les données classiques
-          const openAIData = await Promise.race([
-            extractWithOpenAI(html, finalUrl, pageType, openAIModel),
-            new Promise((_, reject) => setTimeout(() => reject(new Error('OpenAI timeout')), 10000)) // Timeout 10s
-          ]).catch(() => null); // Retourne null si timeout ou erreur
+        if (shouldUseOpenAI) {
+          try {
+            // Appel OpenAI avec timeout plus long (20s) pour laisser le temps à l'IA d'analyser
+            const openAIData = await Promise.race([
+              extractWithOpenAI(html, finalUrl, pageType, openAIModel),
+              new Promise((_, reject) => setTimeout(() => reject(new Error('OpenAI timeout')), 20000)) // Timeout 20s
+            ]).catch(() => null); // Retourne null si timeout ou erreur
           
           if (openAIData?.company) {
-            // Merge les données OpenAI avec les données existantes
-            if (!domainData.company.name && openAIData.company.name) {
+            log.info(`OpenAI extracted company data for ${finalUrl}: legalName=${!!openAIData.company.legalName}, address=${!!openAIData.company.address}, country=${!!openAIData.company.address?.country}`);
+            
+            // Merge agressif : OpenAI améliore toujours les données existantes
+            if (openAIData.company.name && (!domainData.company.name || domainData.company.name.length < openAIData.company.name.length)) {
               domainData.company.name = openAIData.company.name;
             }
-            if (!domainData.company.legalName && openAIData.company.legalName) {
+            if (openAIData.company.legalName) {
               domainData.company.legalName = openAIData.company.legalName;
             }
+            
+            // Merge de l'adresse : OpenAI peut compléter ou corriger
             if (!domainData.company.address && openAIData.company.address) {
               domainData.company.address = openAIData.company.address;
             } else if (domainData.company.address && openAIData.company.address) {
-              // Merge partiel de l'adresse
-              if (!domainData.company.address.street && openAIData.company.address.street) {
+              // Merge partiel : remplace seulement si meilleur ou manquant
+              if (openAIData.company.address.street && 
+                  (!domainData.company.address.street || domainData.company.address.street.length < openAIData.company.address.street.length)) {
                 domainData.company.address.street = openAIData.company.address.street;
               }
-              if (!domainData.company.address.postalCode && openAIData.company.address.postalCode) {
+              if (openAIData.company.address.postalCode && !domainData.company.address.postalCode) {
                 domainData.company.address.postalCode = openAIData.company.address.postalCode;
               }
-              if (!domainData.company.address.city && openAIData.company.address.city) {
+              if (openAIData.company.address.city && 
+                  (!domainData.company.address.city || domainData.company.address.city.length < openAIData.company.address.city.length)) {
                 domainData.company.address.city = openAIData.company.address.city;
               }
-              if (!domainData.company.address.country && openAIData.company.address.country) {
+              // Le pays est toujours amélioré par OpenAI (inférence intelligente)
+              if (openAIData.company.address.country) {
                 domainData.company.address.country = openAIData.company.address.country;
                 domainData.company.address.countryName = openAIData.company.address.countryName;
               }
             }
             
-            // Propagation du pays depuis l'adresse OpenAI
-            if (openAIData.company.address?.country && !domainData.company.country) {
+            // Propagation du pays depuis l'adresse OpenAI (toujours prioritaire)
+            if (openAIData.company.address?.country) {
               domainData.company.country = openAIData.company.address.country;
               domainData.company.countryName = openAIData.company.address.countryName;
             }
@@ -602,7 +610,11 @@ export async function crawlDomain(startUrl, options) {
       // Si OpenAI est activé, utilise toujours OpenAI pour la team (mieux filtrer les faux positifs)
       if (useOpenAI && (url.includes('/team') || url.includes('/equipe') || url.includes('/staff') || url.includes('/leadership') || url.includes('/about'))) {
         try {
-          const openAIData = await extractWithOpenAI(html, finalUrl, 'team', openAIModel);
+          // Timeout plus long pour l'analyse de la team (peut être longue)
+          const openAIData = await Promise.race([
+            extractWithOpenAI(html, finalUrl, 'team', openAIModel),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('OpenAI timeout')), 20000)) // Timeout 20s
+          ]).catch(() => null);
           
           if (openAIData?.team && Array.isArray(openAIData.team)) {
             // Ajoute les membres trouvés par OpenAI

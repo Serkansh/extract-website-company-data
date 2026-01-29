@@ -50,10 +50,15 @@ export async function extractWithOpenAI(html, sourceUrl, pageType = 'general', m
     }
     const cleanText = cleanHtmlForAnalysis(html);
     
-    // Limite à 12000 caractères pour éviter les coûts excessifs
-    const textToAnalyze = cleanText.length > 12000 
-      ? cleanText.substring(0, 12000) + '...' 
+    // Limite à 15000 caractères pour donner plus de contexte à l'IA
+    const textToAnalyze = cleanText.length > 15000 
+      ? cleanText.substring(0, 15000) + '...' 
       : cleanText;
+    
+    if (textToAnalyze.length < 100) {
+      log.warning(`Not enough text content for OpenAI analysis: ${sourceUrl} (${textToAnalyze.length} chars)`);
+      return null;
+    }
     
     // Détermine le prompt selon le type de page
     let systemPrompt, userPrompt;
