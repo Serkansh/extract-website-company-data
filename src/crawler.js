@@ -488,7 +488,8 @@ export async function crawlDomain(startUrl, options) {
             }
           }
         } catch (error) {
-          log.warning(`OpenAI phone location extraction failed for ${finalUrl}: ${error.message}`);
+          const errorMessage = error?.message || error?.error?.message || String(error) || 'Unknown error';
+          log.warning(`OpenAI phone location extraction failed for ${finalUrl}: ${errorMessage}`);
         }
       }
     }
@@ -575,7 +576,8 @@ export async function crawlDomain(startUrl, options) {
           }
         } catch (error) {
           // Continue avec les données classiques si OpenAI échoue
-          log.warning(`OpenAI extraction failed for ${finalUrl}: ${error.message}`);
+          const errorMessage = error?.message || error?.error?.message || String(error) || 'Unknown error';
+          log.warning(`OpenAI extraction failed for ${finalUrl}: ${errorMessage}`);
         }
       }
       
@@ -624,7 +626,8 @@ export async function crawlDomain(startUrl, options) {
           }
         } catch (error) {
           // Continue avec les données classiques si OpenAI échoue
-          log.warning(`OpenAI team extraction failed for ${finalUrl}: ${error.message}`);
+          const errorMessage = error?.message || error?.error?.message || String(error) || 'Unknown error';
+          log.warning(`OpenAI team extraction failed for ${finalUrl}: ${errorMessage}`);
           // En cas d'erreur OpenAI, utilise la team classique filtrée
           const filteredClassicTeam = team.filter(member => {
             const nameLower = member.name.toLowerCase();

@@ -44,6 +44,10 @@ function cleanHtmlForAnalysis(html) {
 export async function extractWithOpenAI(html, sourceUrl, pageType = 'general', model = 'gpt-4o-mini') {
   try {
     const client = getOpenAIClient();
+    if (!html || typeof html !== 'string') {
+      log.warning(`Invalid HTML provided for OpenAI extraction: ${sourceUrl}`);
+      return null;
+    }
     const cleanText = cleanHtmlForAnalysis(html);
     
     // Limite à 12000 caractères pour éviter les coûts excessifs
@@ -235,10 +239,13 @@ Return JSON in this exact format:
     }
     
   } catch (error) {
-    if (error.message.includes('API key') || error.message.includes('OPENAI_API_KEY')) {
-      log.error(`OpenAI API key error: ${error.message}`);
+    // Gère les erreurs de manière sécurisée
+    const errorMessage = error?.message || error?.error?.message || String(error) || 'Unknown error';
+    
+    if (errorMessage.includes('API key') || errorMessage.includes('OPENAI_API_KEY')) {
+      log.error(`OpenAI API key error: ${errorMessage}`);
     } else {
-      log.error(`OpenAI extraction failed for ${sourceUrl}: ${error.message}`);
+      log.error(`OpenAI extraction failed for ${sourceUrl}: ${errorMessage}`);
     }
     return null;
   }
