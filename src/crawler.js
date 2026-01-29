@@ -464,21 +464,24 @@ export async function crawlDomain(startUrl, options) {
     
     if (includeCompany) {
       const company = extractCompany(html, url);
-      if (!domainData.company) domainData.company = { name: null, legalName: null, country: null, address: null, openingHours: null };
+      if (!domainData.company) domainData.company = { name: null, legalName: null, country: null, countryName: null, address: null, openingHours: null };
 
       // Merge: on ne remplace que les champs manquants (homepage + mentions légales se complètent)
       if (!domainData.company.name && company.name) domainData.company.name = company.name;
       if (!domainData.company.legalName && company.legalName) domainData.company.legalName = company.legalName;
       if (!domainData.company.country && company.country) domainData.company.country = company.country;
+      if (!domainData.company.countryName && company.countryName) domainData.company.countryName = company.countryName;
       if (!domainData.company.address && company.address) domainData.company.address = company.address;
       if (!domainData.company.openingHours && company.openingHours) domainData.company.openingHours = company.openingHours;
       
-      // Propagation bidirectionnelle country (après merge)
+      // Propagation bidirectionnelle country/countryName (après merge)
       if (domainData.company.address) {
         if (domainData.company.country && !domainData.company.address.country) {
           domainData.company.address.country = domainData.company.country;
+          domainData.company.address.countryName = domainData.company.countryName;
         } else if (domainData.company.address.country && !domainData.company.country) {
           domainData.company.country = domainData.company.address.country;
+          domainData.company.countryName = domainData.company.address.countryName;
         }
       }
     }

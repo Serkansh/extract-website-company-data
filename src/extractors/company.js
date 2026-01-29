@@ -2,6 +2,82 @@ import * as cheerio from 'cheerio';
 import { getRegistrableDomain } from '../utils/url-utils.js';
 
 /**
+ * Retourne le code ISO et le nom du pays depuis un nom de pays
+ */
+function getCountryInfo(countryName) {
+  if (!countryName) return { code: null, name: null };
+  
+  const countryNameLower = countryName.toLowerCase();
+  const countryMap = {
+    'france': { code: 'FR', name: 'France' },
+    'united kingdom': { code: 'GB', name: 'United Kingdom' },
+    'uk': { code: 'GB', name: 'United Kingdom' },
+    'great britain': { code: 'GB', name: 'United Kingdom' },
+    'germany': { code: 'DE', name: 'Germany' },
+    'deutschland': { code: 'DE', name: 'Germany' },
+    'spain': { code: 'ES', name: 'Spain' },
+    'españa': { code: 'ES', name: 'Spain' },
+    'italy': { code: 'IT', name: 'Italy' },
+    'italia': { code: 'IT', name: 'Italy' },
+    'belgium': { code: 'BE', name: 'Belgium' },
+    'belgique': { code: 'BE', name: 'Belgium' },
+    'switzerland': { code: 'CH', name: 'Switzerland' },
+    'suisse': { code: 'CH', name: 'Switzerland' },
+    'netherlands': { code: 'NL', name: 'Netherlands' },
+    'nederland': { code: 'NL', name: 'Netherlands' },
+    'austria': { code: 'AT', name: 'Austria' },
+    'österreich': { code: 'AT', name: 'Austria' },
+    'portugal': { code: 'PT', name: 'Portugal' },
+    'united states': { code: 'US', name: 'United States' },
+    'usa': { code: 'US', name: 'United States' },
+    'united states of america': { code: 'US', name: 'United States' },
+    'canada': { code: 'CA', name: 'Canada' },
+    'australia': { code: 'AU', name: 'Australia' },
+    'new zealand': { code: 'NZ', name: 'New Zealand' },
+    'japan': { code: 'JP', name: 'Japan' },
+    'china': { code: 'CN', name: 'China' },
+    'india': { code: 'IN', name: 'India' },
+    'brazil': { code: 'BR', name: 'Brazil' },
+    'mexico': { code: 'MX', name: 'Mexico' },
+    'south korea': { code: 'KR', name: 'South Korea' },
+    'korea': { code: 'KR', name: 'South Korea' },
+    'singapore': { code: 'SG', name: 'Singapore' },
+    'hong kong': { code: 'HK', name: 'Hong Kong' },
+    'ireland': { code: 'IE', name: 'Ireland' },
+    'poland': { code: 'PL', name: 'Poland' },
+    'pologne': { code: 'PL', name: 'Poland' },
+    'czech republic': { code: 'CZ', name: 'Czech Republic' },
+    'tchéquie': { code: 'CZ', name: 'Czech Republic' },
+    'sweden': { code: 'SE', name: 'Sweden' },
+    'suède': { code: 'SE', name: 'Sweden' },
+    'norway': { code: 'NO', name: 'Norway' },
+    'norvège': { code: 'NO', name: 'Norway' },
+    'denmark': { code: 'DK', name: 'Denmark' },
+    'danemark': { code: 'DK', name: 'Denmark' },
+    'finland': { code: 'FI', name: 'Finland' },
+    'finlande': { code: 'FI', name: 'Finland' },
+    'greece': { code: 'GR', name: 'Greece' },
+    'grèce': { code: 'GR', name: 'Greece' },
+    'romania': { code: 'RO', name: 'Romania' },
+    'roumanie': { code: 'RO', name: 'Romania' },
+    'hungary': { code: 'HU', name: 'Hungary' },
+    'hongrie': { code: 'HU', name: 'Hungary' },
+    'russia': { code: 'RU', name: 'Russia' },
+    'russie': { code: 'RU', name: 'Russia' },
+    'turkey': { code: 'TR', name: 'Turkey' },
+    'turquie': { code: 'TR', name: 'Turkey' },
+    'south africa': { code: 'ZA', name: 'South Africa' },
+    'israel': { code: 'IL', name: 'Israel' },
+    'uae': { code: 'AE', name: 'United Arab Emirates' },
+    'united arab emirates': { code: 'AE', name: 'United Arab Emirates' },
+    'saudi arabia': { code: 'SA', name: 'Saudi Arabia' },
+    'arabie saoudite': { code: 'SA', name: 'Saudi Arabia' }
+  };
+  
+  return countryMap[countryNameLower] || { code: null, name: null };
+}
+
+/**
  * Extrait les informations entreprise depuis une page HTML
  */
 export function extractCompany(html, sourceUrl) {
@@ -10,6 +86,7 @@ export function extractCompany(html, sourceUrl) {
     name: null,
     legalName: null,
     country: null,
+    countryName: null,
     address: null,
     openingHours: null
   };
@@ -154,50 +231,13 @@ export function extractCompany(html, sourceUrl) {
       // Extrait le pays depuis cityPart si présent (ex: "Levallois-Perret, France")
       let city = cityPart || null;
       let countryFromCity = null;
-      const countryPattern = /\b(France|United\s+Kingdom|UK|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal)\b/i;
+      let countryNameFromCity = null;
+      const countryPattern = /\b(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)\b/i;
       const countryMatch = cityPart.match(countryPattern);
       if (countryMatch) {
-        const countryName = countryMatch[1].toLowerCase();
-      const countryMap = {
-        'france': 'FR', 'united kingdom': 'GB', 'uk': 'GB', 'great britain': 'GB',
-        'germany': 'DE', 'deutschland': 'DE',
-        'spain': 'ES', 'españa': 'ES',
-        'italy': 'IT', 'italia': 'IT',
-        'belgium': 'BE', 'belgique': 'BE',
-        'switzerland': 'CH', 'suisse': 'CH',
-        'netherlands': 'NL', 'nederland': 'NL',
-        'austria': 'AT', 'österreich': 'AT',
-        'portugal': 'PT',
-        'united states': 'US', 'usa': 'US', 'united states of america': 'US',
-        'canada': 'CA',
-        'australia': 'AU',
-        'new zealand': 'NZ',
-        'japan': 'JP',
-        'china': 'CN',
-        'india': 'IN',
-        'brazil': 'BR',
-        'mexico': 'MX',
-        'south korea': 'KR', 'korea': 'KR',
-        'singapore': 'SG',
-        'hong kong': 'HK',
-        'ireland': 'IE',
-        'poland': 'PL', 'pologne': 'PL',
-        'czech republic': 'CZ', 'tchéquie': 'CZ',
-        'sweden': 'SE', 'suède': 'SE',
-        'norway': 'NO', 'norvège': 'NO',
-        'denmark': 'DK', 'danemark': 'DK',
-        'finland': 'FI', 'finlande': 'FI',
-        'greece': 'GR', 'grèce': 'GR',
-        'romania': 'RO', 'roumanie': 'RO',
-        'hungary': 'HU', 'hongrie': 'HU',
-        'russia': 'RU', 'russie': 'RU',
-        'turkey': 'TR', 'turquie': 'TR',
-        'south africa': 'ZA',
-        'israel': 'IL',
-        'uae': 'AE', 'united arab emirates': 'AE',
-        'saudi arabia': 'SA', 'arabie saoudite': 'SA'
-      };
-        countryFromCity = countryMap[countryName] || null;
+        const countryInfo = getCountryInfo(countryMatch[1]);
+        countryFromCity = countryInfo.code;
+        countryNameFromCity = countryInfo.name;
         // Retire le pays de la ville (ex: "Levallois-Perret, France" -> "Levallois-Perret")
         // On échappe le nom du pays pour la regex
         const countryNameEscaped = countryMatch[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -209,14 +249,16 @@ export function extractCompany(html, sourceUrl) {
         street,
         postalCode,
         city,
-        country: countryFromCity || company.country || null
+        country: countryFromCity || company.country || null,
+        countryName: countryNameFromCity || company.countryName || null
       };
     } else {
       company.address = {
         street: addr || null,
         postalCode: null,
         city: null,
-        country: company.country || null
+        country: company.country || null,
+        countryName: company.countryName || null
       };
     }
   }
@@ -226,47 +268,9 @@ export function extractCompany(html, sourceUrl) {
     // Cherche le pays dans le texte (ex: "France", "registered in France", "in France")
     const countryMatches = legalText.match(/\b(?:registered\s+in|in|at)\s+(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)\b/i);
     if (countryMatches) {
-      const countryName = countryMatches[1].toLowerCase();
-      const countryMap = {
-        'france': 'FR', 'united kingdom': 'GB', 'uk': 'GB', 'great britain': 'GB',
-        'germany': 'DE', 'deutschland': 'DE',
-        'spain': 'ES', 'españa': 'ES',
-        'italy': 'IT', 'italia': 'IT',
-        'belgium': 'BE', 'belgique': 'BE',
-        'switzerland': 'CH', 'suisse': 'CH',
-        'netherlands': 'NL', 'nederland': 'NL',
-        'austria': 'AT', 'österreich': 'AT',
-        'portugal': 'PT',
-        'united states': 'US', 'usa': 'US', 'united states of america': 'US',
-        'canada': 'CA',
-        'australia': 'AU',
-        'new zealand': 'NZ',
-        'japan': 'JP',
-        'china': 'CN',
-        'india': 'IN',
-        'brazil': 'BR',
-        'mexico': 'MX',
-        'south korea': 'KR', 'korea': 'KR',
-        'singapore': 'SG',
-        'hong kong': 'HK',
-        'ireland': 'IE',
-        'poland': 'PL', 'pologne': 'PL',
-        'czech republic': 'CZ', 'tchéquie': 'CZ',
-        'sweden': 'SE', 'suède': 'SE',
-        'norway': 'NO', 'norvège': 'NO',
-        'denmark': 'DK', 'danemark': 'DK',
-        'finland': 'FI', 'finlande': 'FI',
-        'greece': 'GR', 'grèce': 'GR',
-        'romania': 'RO', 'roumanie': 'RO',
-        'hungary': 'HU', 'hongrie': 'HU',
-        'russia': 'RU', 'russie': 'RU',
-        'turkey': 'TR', 'turquie': 'TR',
-        'south africa': 'ZA',
-        'israel': 'IL',
-        'uae': 'AE', 'united arab emirates': 'AE',
-        'saudi arabia': 'SA', 'arabie saoudite': 'SA'
-      };
-      company.country = countryMap[countryName] || null;
+      const countryInfo = getCountryInfo(countryMatches[1]);
+      company.country = countryInfo.code;
+      company.countryName = countryInfo.name;
     }
   }
   
@@ -285,12 +289,14 @@ export function extractCompany(html, sourceUrl) {
     }
   }
 
-  // Propagation bidirectionnelle entre company.country et address.country
+  // Propagation bidirectionnelle entre company.country/countryName et address.country/countryName
   if (company.address) {
     if (company.country && !company.address.country) {
       company.address.country = company.country;
+      company.address.countryName = company.countryName;
     } else if (company.address.country && !company.country) {
       company.country = company.address.country;
+      company.countryName = company.address.countryName;
     }
   }
   
