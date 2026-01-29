@@ -488,8 +488,7 @@ export async function crawlDomain(startUrl, options) {
             }
           }
         } catch (error) {
-          const errorMessage = error?.message || error?.error?.message || String(error) || 'Unknown error';
-          log.warning(`OpenAI phone location extraction failed for ${finalUrl}: ${errorMessage}`);
+          // Continue sans enrichissement de localisation - ne bloque jamais le crawl
         }
       }
     }
@@ -539,7 +538,11 @@ export async function crawlDomain(startUrl, options) {
         }
         
         try {
-          const openAIData = await extractWithOpenAI(html, finalUrl, pageType, openAIModel);
+          // Appel OpenAI en mode non-bloquant - si ça échoue, on continue avec les données classiques
+          const openAIData = await Promise.race([
+            extractWithOpenAI(html, finalUrl, pageType, openAIModel),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('OpenAI timeout')), 10000)) // Timeout 10s
+          ]).catch(() => null); // Retourne null si timeout ou erreur
           
           if (openAIData?.company) {
             // Merge les données OpenAI avec les données existantes
@@ -575,9 +578,8 @@ export async function crawlDomain(startUrl, options) {
             }
           }
         } catch (error) {
-          // Continue avec les données classiques si OpenAI échoue
-          const errorMessage = error?.message || error?.error?.message || String(error) || 'Unknown error';
-          log.warning(`OpenAI extraction failed for ${finalUrl}: ${errorMessage}`);
+          // Continue avec les données classiques si OpenAI échoue - ne bloque jamais le crawl
+          // Ne log même pas pour éviter le spam - l'extraction classique continue
         }
       }
       
@@ -625,9 +627,7 @@ export async function crawlDomain(startUrl, options) {
             }
           }
         } catch (error) {
-          // Continue avec les données classiques si OpenAI échoue
-          const errorMessage = error?.message || error?.error?.message || String(error) || 'Unknown error';
-          log.warning(`OpenAI team extraction failed for ${finalUrl}: ${errorMessage}`);
+          // Continue avec les données classiques si OpenAI échoue - ne bloque jamais le crawl
           // En cas d'erreur OpenAI, utilise la team classique filtrée
           const filteredClassicTeam = team.filter(member => {
             const nameLower = member.name.toLowerCase();

@@ -212,6 +212,18 @@ Return JSON in this exact format:
       max_tokens: 2000
     });
     
+    // Vérifie que la réponse est valide
+    if (!response || !response.choices || !Array.isArray(response.choices) || response.choices.length === 0) {
+      log.warning(`OpenAI returned invalid response structure for ${sourceUrl}`);
+      return null;
+    }
+    
+    // Vérifie s'il y a une erreur dans la réponse
+    if (response.error) {
+      log.warning(`OpenAI API error for ${sourceUrl}: ${response.error.message || JSON.stringify(response.error)}`);
+      return null;
+    }
+    
     const content = response.choices[0]?.message?.content;
     if (!content) {
       log.warning(`OpenAI returned empty response for ${sourceUrl}`);
@@ -239,13 +251,24 @@ Return JSON in this exact format:
     }
     
   } catch (error) {
-    // Gère les erreurs de manière sécurisée
-    const errorMessage = error?.message || error?.error?.message || String(error) || 'Unknown error';
+    // Gère les erreurs de manière sécurisée - ne bloque jamais le crawl
+    let errorMessage = 'Unknown error';
     
+    try {
+      if (error && typeof error === 'object') {
+        errorMessage = error.message || error.error?.message || error.toString();
+      } else if (error) {
+        errorMessage = String(error);
+      }
+    } catch (e) {
+      errorMessage = 'Error object could not be stringified';
+    }
+    
+    // Log en warning (pas error) pour ne pas bloquer le crawl
     if (errorMessage.includes('API key') || errorMessage.includes('OPENAI_API_KEY')) {
-      log.error(`OpenAI API key error: ${errorMessage}`);
+      log.warning(`OpenAI API key error: ${errorMessage}`);
     } else {
-      log.error(`OpenAI extraction failed for ${sourceUrl}: ${errorMessage}`);
+      log.warning(`OpenAI extraction failed for ${sourceUrl}: ${errorMessage}`);
     }
     return null;
   }
