@@ -158,17 +158,45 @@ export function extractCompany(html, sourceUrl) {
       const countryMatch = cityPart.match(countryPattern);
       if (countryMatch) {
         const countryName = countryMatch[1].toLowerCase();
-        const countryMap = {
-          'france': 'FR', 'united kingdom': 'GB', 'uk': 'GB',
-          'germany': 'DE', 'deutschland': 'DE',
-          'spain': 'ES', 'españa': 'ES',
-          'italy': 'IT', 'italia': 'IT',
-          'belgium': 'BE', 'belgique': 'BE',
-          'switzerland': 'CH', 'suisse': 'CH',
-          'netherlands': 'NL', 'nederland': 'NL',
-          'austria': 'AT', 'österreich': 'AT',
-          'portugal': 'PT'
-        };
+      const countryMap = {
+        'france': 'FR', 'united kingdom': 'GB', 'uk': 'GB', 'great britain': 'GB',
+        'germany': 'DE', 'deutschland': 'DE',
+        'spain': 'ES', 'españa': 'ES',
+        'italy': 'IT', 'italia': 'IT',
+        'belgium': 'BE', 'belgique': 'BE',
+        'switzerland': 'CH', 'suisse': 'CH',
+        'netherlands': 'NL', 'nederland': 'NL',
+        'austria': 'AT', 'österreich': 'AT',
+        'portugal': 'PT',
+        'united states': 'US', 'usa': 'US', 'united states of america': 'US',
+        'canada': 'CA',
+        'australia': 'AU',
+        'new zealand': 'NZ',
+        'japan': 'JP',
+        'china': 'CN',
+        'india': 'IN',
+        'brazil': 'BR',
+        'mexico': 'MX',
+        'south korea': 'KR', 'korea': 'KR',
+        'singapore': 'SG',
+        'hong kong': 'HK',
+        'ireland': 'IE',
+        'poland': 'PL', 'pologne': 'PL',
+        'czech republic': 'CZ', 'tchéquie': 'CZ',
+        'sweden': 'SE', 'suède': 'SE',
+        'norway': 'NO', 'norvège': 'NO',
+        'denmark': 'DK', 'danemark': 'DK',
+        'finland': 'FI', 'finlande': 'FI',
+        'greece': 'GR', 'grèce': 'GR',
+        'romania': 'RO', 'roumanie': 'RO',
+        'hungary': 'HU', 'hongrie': 'HU',
+        'russia': 'RU', 'russie': 'RU',
+        'turkey': 'TR', 'turquie': 'TR',
+        'south africa': 'ZA',
+        'israel': 'IL',
+        'uae': 'AE', 'united arab emirates': 'AE',
+        'saudi arabia': 'SA', 'arabie saoudite': 'SA'
+      };
         countryFromCity = countryMap[countryName] || null;
         // Retire le pays de la ville (ex: "Levallois-Perret, France" -> "Levallois-Perret")
         // On échappe le nom du pays pour la regex
@@ -196,11 +224,11 @@ export function extractCompany(html, sourceUrl) {
   // 3. Pays depuis le texte (mentions légales) ou domaine (fallback)
   if (!company.country) {
     // Cherche le pays dans le texte (ex: "France", "registered in France", "in France")
-    const countryMatches = legalText.match(/\b(?:registered\s+in|in|at)\s+(France|United\s+Kingdom|UK|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal)\b/i);
+    const countryMatches = legalText.match(/\b(?:registered\s+in|in|at)\s+(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)\b/i);
     if (countryMatches) {
       const countryName = countryMatches[1].toLowerCase();
       const countryMap = {
-        'france': 'FR', 'united kingdom': 'GB', 'uk': 'GB',
+        'france': 'FR', 'united kingdom': 'GB', 'uk': 'GB', 'great britain': 'GB',
         'germany': 'DE', 'deutschland': 'DE',
         'spain': 'ES', 'españa': 'ES',
         'italy': 'IT', 'italia': 'IT',
@@ -208,7 +236,35 @@ export function extractCompany(html, sourceUrl) {
         'switzerland': 'CH', 'suisse': 'CH',
         'netherlands': 'NL', 'nederland': 'NL',
         'austria': 'AT', 'österreich': 'AT',
-        'portugal': 'PT'
+        'portugal': 'PT',
+        'united states': 'US', 'usa': 'US', 'united states of america': 'US',
+        'canada': 'CA',
+        'australia': 'AU',
+        'new zealand': 'NZ',
+        'japan': 'JP',
+        'china': 'CN',
+        'india': 'IN',
+        'brazil': 'BR',
+        'mexico': 'MX',
+        'south korea': 'KR', 'korea': 'KR',
+        'singapore': 'SG',
+        'hong kong': 'HK',
+        'ireland': 'IE',
+        'poland': 'PL', 'pologne': 'PL',
+        'czech republic': 'CZ', 'tchéquie': 'CZ',
+        'sweden': 'SE', 'suède': 'SE',
+        'norway': 'NO', 'norvège': 'NO',
+        'denmark': 'DK', 'danemark': 'DK',
+        'finland': 'FI', 'finlande': 'FI',
+        'greece': 'GR', 'grèce': 'GR',
+        'romania': 'RO', 'roumanie': 'RO',
+        'hungary': 'HU', 'hongrie': 'HU',
+        'russia': 'RU', 'russie': 'RU',
+        'turkey': 'TR', 'turquie': 'TR',
+        'south africa': 'ZA',
+        'israel': 'IL',
+        'uae': 'AE', 'united arab emirates': 'AE',
+        'saudi arabia': 'SA', 'arabie saoudite': 'SA'
       };
       company.country = countryMap[countryName] || null;
     }
@@ -229,9 +285,13 @@ export function extractCompany(html, sourceUrl) {
     }
   }
 
-  // Si on a déterminé le pays après coup, on le propage dans l'adresse
-  if (company.country && company.address && !company.address.country) {
-    company.address.country = company.country;
+  // Propagation bidirectionnelle entre company.country et address.country
+  if (company.address) {
+    if (company.country && !company.address.country) {
+      company.address.country = company.country;
+    } else if (company.address.country && !company.country) {
+      company.country = company.address.country;
+    }
   }
   
   return company;
