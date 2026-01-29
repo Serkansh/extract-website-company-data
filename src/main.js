@@ -1,56 +1,15 @@
 import { Actor, log } from 'apify';
-import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
 import { crawlDomain } from './crawler.js';
 import { getRegistrableDomain, normalizeUrl } from './utils/url-utils.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 /**
  * Point d'entrée principal de l'Actor
+ * 
+ * Note: Le schéma du dataset doit être défini dans .actor/dataset-schema.json
+ * et référencé dans .actor/actor.json. La définition programmatique échoue
+ * à cause des permissions LIMITED_PERMISSIONS.
  */
 await Actor.init();
-
-// Charge et définit le schéma du dataset avant le premier pushData
-try {
-  // Essaie d'abord .actor/dataset-schema.json, puis DATASET_SCHEMA.json à la racine
-  let schemaPath = join(__dirname, '..', '.actor', 'dataset-schema.json');
-  if (!readFileSync(schemaPath, 'utf8').trim()) {
-    schemaPath = join(__dirname, '..', 'DATASET_SCHEMA.json');
-  }
-  const schemaContent = readFileSync(schemaPath, 'utf8');
-  const datasetSchema = JSON.parse(schemaContent);
-  
-  // Essaie plusieurs méthodes pour définir le schéma
-  const defaultDataset = await Actor.openDataset();
-  
-  // Méthode 1: setSchema si disponible
-  if (defaultDataset && typeof defaultDataset.setSchema === 'function') {
-    await defaultDataset.setSchema(datasetSchema);
-    log.info('Dataset schema set via setSchema()');
-  }
-  // Méthode 2: Utilise l'API Client directement
-  else if (Actor.getClient) {
-    try {
-      const client = Actor.getClient();
-      const datasetId = defaultDataset?.id || Actor.getEnv()?.defaultDatasetId;
-      if (datasetId && client?.datasets) {
-        await client.datasets(datasetId).update({ schema: datasetSchema });
-        log.info('Dataset schema set via API Client');
-      }
-    } catch (clientError) {
-      log.warning(`Could not set schema via API Client: ${clientError.message}`);
-    }
-  }
-  // Méthode 3: Utilise pushData avec metadata (si supporté)
-  else {
-    log.warning('Could not set dataset schema programmatically - schema will be inferred from data');
-  }
-} catch (error) {
-  log.warning(`Could not load/set dataset schema: ${error.message}`);
-}
 
 const input = await Actor.getInput();
 const {
