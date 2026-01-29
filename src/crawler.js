@@ -585,9 +585,10 @@ export async function crawlDomain(startUrl, options) {
               domainData.company.countryName = openAIData.company.address.countryName;
             }
           }
-        } catch (error) {
-          // Continue avec les données classiques si OpenAI échoue - ne bloque jamais le crawl
-          // Ne log même pas pour éviter le spam - l'extraction classique continue
+          } catch (error) {
+            // Continue avec les données classiques si OpenAI échoue - ne bloque jamais le crawl
+            // Ne log même pas pour éviter le spam - l'extraction classique continue
+          }
         }
       }
       
