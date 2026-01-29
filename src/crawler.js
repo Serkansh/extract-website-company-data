@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio';
+import { Actor, log } from 'apify';
 import { getRegistrableDomain, normalizeUrl, isSameDomain, isAsset, resolveUrl } from './utils/url-utils.js';
 import { DEFAULT_KEY_PATHS, CRAWL_TIERS, USER_AGENT } from './constants.js';
 import { extractEmails } from './extractors/emails.js';
