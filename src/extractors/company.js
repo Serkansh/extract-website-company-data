@@ -149,15 +149,42 @@ export function extractCompany(html, sourceUrl) {
       const afterClean = afterClean0.replace(/([a-zÀ-ÿ])([A-ZÀ-Ÿ])/g, '$1 $2');
       // On ne met PAS de bornes de mot, car on peut avoir "ParisImmatriculée" (pas de \b)
       const stopAt = afterClean.search(/(Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])/i);
-      const cityPart = (stopAt >= 0 ? afterClean.slice(0, stopAt) : afterClean).trim();
-      // Ville FR: généralement 1 à 3 mots, on garde tel quel après nettoyage
-      const city = cityPart || null;
+      let cityPart = (stopAt >= 0 ? afterClean.slice(0, stopAt) : afterClean).trim();
+      
+      // Extrait le pays depuis cityPart si présent (ex: "Levallois-Perret, France")
+      let city = cityPart || null;
+      let countryFromCity = null;
+      const countryPatterns = [
+        /\b(France|United\s+Kingdom|UK|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal)\b/i
+      ];
+      for (const pattern of countryPatterns) {
+        const match = cityPart.match(pattern);
+        if (match) {
+          const countryName = match[1].toLowerCase();
+          const countryMap = {
+            'france': 'FR', 'united kingdom': 'GB', 'uk': 'GB',
+            'germany': 'DE', 'deutschland': 'DE',
+            'spain': 'ES', 'españa': 'ES',
+            'italy': 'IT', 'italia': 'IT',
+            'belgium': 'BE', 'belgique': 'BE',
+            'switzerland': 'CH', 'suisse': 'CH',
+            'netherlands': 'NL', 'nederland': 'NL',
+            'austria': 'AT', 'österreich': 'AT',
+            'portugal': 'PT'
+          };
+          countryFromCity = countryMap[countryName] || null;
+          // Retire le pays de la ville (ex: "Levallois-Perret, France" -> "Levallois-Perret")
+          city = cityPart.replace(/,?\s*${match[1]}/i, '').trim() || null;
+          break;
+        }
+      }
+      
       const street = (before || '').trim().replace(/[,\-]$/, '').trim() || null;
       company.address = {
         street,
         postalCode,
         city,
-        country: company.country || null
+        country: countryFromCity || company.country || null
       };
     } else {
       company.address = {
