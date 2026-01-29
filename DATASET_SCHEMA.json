@@ -1,0 +1,312 @@
+{
+  "title": "Company Data Extraction Results",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "domain": {
+      "title": "Domain",
+      "type": "string",
+      "description": "Registrable domain name"
+    },
+    "finalUrl": {
+      "title": "Final URL",
+      "type": "string",
+      "description": "Final URL after redirects"
+    },
+    "keyPages": {
+      "title": "Key Pages",
+      "type": "object",
+      "description": "Detected key pages (contact, about, team, legal, privacy)",
+      "properties": {
+        "contact": {
+          "type": "string",
+          "nullable": true
+        },
+        "about": {
+          "type": "string",
+          "nullable": true
+        },
+        "team": {
+          "type": "string",
+          "nullable": true
+        },
+        "legal": {
+          "type": "string",
+          "nullable": true
+        },
+        "privacy": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "pagesVisited": {
+      "title": "Pages Visited",
+      "type": "array",
+      "description": "List of pages crawled",
+      "items": {
+        "type": "string"
+      }
+    },
+    "company": {
+      "title": "Company Information",
+      "type": "object",
+      "description": "Company profile data",
+      "nullable": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "nullable": true
+        },
+        "legalName": {
+          "type": "string",
+          "nullable": true
+        },
+        "country": {
+          "type": "string",
+          "nullable": true
+        },
+        "countryName": {
+          "type": "string",
+          "nullable": true
+        },
+        "address": {
+          "type": "object",
+          "nullable": true,
+          "properties": {
+            "street": {
+              "type": "string",
+              "nullable": true
+            },
+            "postalCode": {
+              "type": "string",
+              "nullable": true
+            },
+            "city": {
+              "type": "string",
+              "nullable": true
+            },
+            "country": {
+              "type": "string",
+              "nullable": true
+            },
+            "countryName": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        },
+        "openingHours": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "emails": {
+      "title": "Emails",
+      "type": "array",
+      "description": "Extracted email addresses",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "string"
+          },
+          "signals": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sourceUrl": {
+            "type": "string"
+          },
+          "snippet": {
+            "type": "string",
+            "nullable": true
+          },
+          "foundIn": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "primaryEmail": {
+      "title": "Primary Email",
+      "type": "string",
+      "description": "Primary email address",
+      "nullable": true
+    },
+    "phones": {
+      "title": "Phones",
+      "type": "array",
+      "description": "Extracted phone numbers",
+      "items": {
+        "type": "object",
+        "properties": {
+          "valueRaw": {
+            "type": "string",
+            "nullable": true
+          },
+          "valueE164": {
+            "type": "string",
+            "nullable": true
+          },
+          "priority": {
+            "type": "string"
+          },
+          "signals": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sourceUrl": {
+            "type": "string"
+          },
+          "snippet": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    },
+    "primaryPhone": {
+      "title": "Primary Phone",
+      "type": "string",
+      "description": "Primary phone number",
+      "nullable": true
+    },
+    "socials": {
+      "title": "Social Media",
+      "type": "object",
+      "description": "Social media profiles",
+      "nullable": true,
+      "properties": {
+        "linkedin": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string"
+              },
+              "handle": {
+                "type": "string",
+                "nullable": true
+              },
+              "sourceUrl": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "facebook": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "instagram": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "x": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "twitter": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "tiktok": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "youtube": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "pinterest": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "google": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "team": {
+      "title": "Team Members",
+      "type": "array",
+      "description": "Team members",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "linkedin": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceUrl": {
+            "type": "string"
+          },
+          "signals": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "errors": {
+      "title": "Errors",
+      "type": "array",
+      "description": "Errors encountered during crawling",
+      "nullable": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
