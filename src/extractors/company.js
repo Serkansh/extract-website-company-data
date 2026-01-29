@@ -246,47 +246,48 @@ export function extractCompany(html, sourceUrl) {
       if (cpMatch) {
         const postalCode = cpMatch[1];
         const [before, after] = addr.split(postalCode);
-      // La partie après le CP contient parfois des libellés collés (ex: "Paris Immatriculée ...").
-      // On coupe au premier libellé connu et on ne garde que le début (souvent 1-3 mots).
-      const afterClean0 = (after || '').trim().replace(/^[,\-]/, '').trim();
-      // Cas fréquent: concaténation sans espace, ex "ParisImmatriculée..."
-      const afterClean = afterClean0.replace(/([a-zÀ-ÿ])([A-ZÀ-Ÿ])/g, '$1 $2');
-      // On ne met PAS de bornes de mot, car on peut avoir "ParisImmatriculée" (pas de \b)
-      const stopAt = afterClean.search(/(Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])/i);
-      let cityPart = (stopAt >= 0 ? afterClean.slice(0, stopAt) : afterClean).trim();
-      
-      // Extrait le pays depuis cityPart si présent (ex: "Levallois-Perret, France")
-      let city = cityPart || null;
-      let countryFromCity = null;
-      let countryNameFromCity = null;
-      const countryPattern = /\b(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)\b/i;
-      const countryMatch = cityPart.match(countryPattern);
-      if (countryMatch) {
-        const countryInfo = getCountryInfo(countryMatch[1]);
-        countryFromCity = countryInfo.code;
-        countryNameFromCity = countryInfo.name;
-        // Retire le pays de la ville (ex: "Levallois-Perret, France" -> "Levallois-Perret")
-        // On échappe le nom du pays pour la regex
-        const countryNameEscaped = countryMatch[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        city = cityPart.replace(new RegExp(`,?\\s*${countryNameEscaped}`, 'i'), '').trim() || null;
+        // La partie après le CP contient parfois des libellés collés (ex: "Paris Immatriculée ...").
+        // On coupe au premier libellé connu et on ne garde que le début (souvent 1-3 mots).
+        const afterClean0 = (after || '').trim().replace(/^[,\-]/, '').trim();
+        // Cas fréquent: concaténation sans espace, ex "ParisImmatriculée..."
+        const afterClean = afterClean0.replace(/([a-zÀ-ÿ])([A-ZÀ-Ÿ])/g, '$1 $2');
+        // On ne met PAS de bornes de mot, car on peut avoir "ParisImmatriculée" (pas de \b)
+        const stopAt = afterClean.search(/(Immatricul|RCS|SIRET|SIREN|Num[eé]ro|N°|Adresse|Email|Courriel|Directeur|H[ée]bergement|H[ée]bergeur|Propri[eé]t[eé])/i);
+        let cityPart = (stopAt >= 0 ? afterClean.slice(0, stopAt) : afterClean).trim();
+        
+        // Extrait le pays depuis cityPart si présent (ex: "Levallois-Perret, France")
+        let city = cityPart || null;
+        let countryFromCity = null;
+        let countryNameFromCity = null;
+        const countryPattern = /\b(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)\b/i;
+        const countryMatch = cityPart.match(countryPattern);
+        if (countryMatch) {
+          const countryInfo = getCountryInfo(countryMatch[1]);
+          countryFromCity = countryInfo.code;
+          countryNameFromCity = countryInfo.name;
+          // Retire le pays de la ville (ex: "Levallois-Perret, France" -> "Levallois-Perret")
+          // On échappe le nom du pays pour la regex
+          const countryNameEscaped = countryMatch[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          city = cityPart.replace(new RegExp(`,?\\s*${countryNameEscaped}`, 'i'), '').trim() || null;
+        }
+        
+        const street = (before || '').trim().replace(/[,\-]$/, '').trim() || null;
+        company.address = {
+          street,
+          postalCode,
+          city,
+          country: countryFromCity || company.country || null,
+          countryName: countryNameFromCity || company.countryName || null
+        };
+      } else {
+        company.address = {
+          street: addr || null,
+          postalCode: null,
+          city: null,
+          country: company.country || null,
+          countryName: company.countryName || null
+        };
       }
-      
-      const street = (before || '').trim().replace(/[,\-]$/, '').trim() || null;
-      company.address = {
-        street,
-        postalCode,
-        city,
-        country: countryFromCity || company.country || null,
-        countryName: countryNameFromCity || company.countryName || null
-      };
-    } else {
-      company.address = {
-        street: addr || null,
-        postalCode: null,
-        city: null,
-        country: company.country || null,
-        countryName: company.countryName || null
-      };
     }
   }
   
