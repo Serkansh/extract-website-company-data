@@ -1,11 +1,35 @@
 import { Actor, log } from 'apify';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import { crawlDomain } from './crawler.js';
 import { getRegistrableDomain, normalizeUrl } from './utils/url-utils.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * Point d'entrée principal de l'Actor
  */
 await Actor.init();
+
+// Charge et définit le schéma du dataset avant le premier pushData
+try {
+  const schemaPath = join(__dirname, '..', 'DATASET_SCHEMA.json');
+  const schemaContent = readFileSync(schemaPath, 'utf8');
+  const datasetSchema = JSON.parse(schemaContent);
+  
+  // Obtient le dataset par défaut et définit le schéma
+  const defaultDataset = await Actor.openDataset();
+  if (defaultDataset && typeof defaultDataset.setSchema === 'function') {
+    await defaultDataset.setSchema(datasetSchema);
+    log.info('Dataset schema set successfully');
+  } else {
+    log.warning('Could not set dataset schema programmatically');
+  }
+} catch (error) {
+  log.warning(`Could not load/set dataset schema: ${error.message}`);
+}
 
 const input = await Actor.getInput();
 const {
