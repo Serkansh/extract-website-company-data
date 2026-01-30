@@ -241,18 +241,34 @@ export function extractCompany(html, sourceUrl) {
       } else {
         const countryInfo = countryText ? getCountryInfo(countryText) : null;
         
+        // Inférence depuis le code postal français (75008 = Paris = France)
+        let inferredCountry = null;
+        let inferredCountryName = null;
+        if (!countryInfo && postalCode && /^75\d{3}$/.test(postalCode)) {
+          inferredCountry = 'FR';
+          inferredCountryName = 'France';
+        }
+        // Inférence depuis la ville "Paris"
+        if (!inferredCountry && city && /^Paris$/i.test(city.trim())) {
+          inferredCountry = 'FR';
+          inferredCountryName = 'France';
+        }
+        
+        const finalCountry = countryInfo?.code || inferredCountry;
+        const finalCountryName = countryInfo?.name || inferredCountryName;
+        
         company.address = {
           street,
           postalCode,
           city,
-          country: countryInfo?.code || null,
-          countryName: countryInfo?.name || null
+          country: finalCountry || null,
+          countryName: finalCountryName || null
         };
         
-        // Si on a un pays dans l'adresse mais pas dans company, on le propage
-        if (countryInfo && !company.country) {
-          company.country = countryInfo.code;
-          company.countryName = countryInfo.name;
+        // PROPAGATION IMMÉDIATE : Si on a un pays dans l'adresse mais pas dans company, on le propage
+        if (finalCountry && !company.country) {
+          company.country = finalCountry;
+          company.countryName = finalCountryName;
         }
       }
     }
@@ -325,6 +341,12 @@ export function extractCompany(html, sourceUrl) {
           countryNameFromCity = 'France';
         }
         
+        // PROPAGATION IMMÉDIATE : Si on a inféré le pays, on le met dans company.country aussi
+        if (countryFromCity && !company.country) {
+          company.country = countryFromCity;
+          company.countryName = countryNameFromCity;
+        }
+        
         const street = (before || '').trim().replace(/[,\-]$/, '').trim() || null;
         company.address = {
           street,
@@ -369,6 +391,17 @@ export function extractCompany(html, sourceUrl) {
           company.country = 'FR';
           company.countryName = 'France';
         }
+      }
+    }
+    
+    // Dernière chance : si on a une adresse avec code postal 75xxx ou ville Paris, infère FR
+    if (!company.country && company.address) {
+      if (company.address.postalCode && /^75\d{3}$/.test(company.address.postalCode)) {
+        company.country = 'FR';
+        company.countryName = 'France';
+      } else if (company.address.city && /^Paris$/i.test(company.address.city.trim())) {
+        company.country = 'FR';
+        company.countryName = 'France';
       }
     }
   }
