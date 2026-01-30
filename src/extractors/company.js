@@ -241,21 +241,8 @@ export function extractCompany(html, sourceUrl) {
       } else {
         const countryInfo = countryText ? getCountryInfo(countryText) : null;
         
-        // Inférence depuis le code postal français (75008 = Paris = France)
-        let inferredCountry = null;
-        let inferredCountryName = null;
-        if (!countryInfo && postalCode && /^75\d{3}$/.test(postalCode)) {
-          inferredCountry = 'FR';
-          inferredCountryName = 'France';
-        }
-        // Inférence depuis la ville "Paris"
-        if (!inferredCountry && city && /^Paris$/i.test(city.trim())) {
-          inferredCountry = 'FR';
-          inferredCountryName = 'France';
-        }
-        
-        const finalCountry = countryInfo?.code || inferredCountry;
-        const finalCountryName = countryInfo?.name || inferredCountryName;
+        const finalCountry = countryInfo?.code || null;
+        const finalCountryName = countryInfo?.name || null;
         
         company.address = {
           street,
@@ -329,19 +316,7 @@ export function extractCompany(html, sourceUrl) {
           }
         }
         
-        // Fallback: inférence depuis le code postal français (75008 = Paris = France)
-        if (!countryFromCity && postalCode && /^75\d{3}$/.test(postalCode)) {
-          countryFromCity = 'FR';
-          countryNameFromCity = 'France';
-        }
-        
-        // Fallback: inférence depuis la ville "Paris" (même sans code postal 75xxx)
-        if (!countryFromCity && city && /^Paris$/i.test(city.trim())) {
-          countryFromCity = 'FR';
-          countryNameFromCity = 'France';
-        }
-        
-        // PROPAGATION IMMÉDIATE : Si on a inféré le pays, on le met dans company.country aussi
+        // PROPAGATION IMMÉDIATE : Si on a détecté le pays, on le met dans company.country aussi
         if (countryFromCity && !company.country) {
           company.country = countryFromCity;
           company.countryName = countryNameFromCity;
@@ -378,30 +353,33 @@ export function extractCompany(html, sourceUrl) {
       company.countryName = countryInfo.name;
     }
     
-    // Cherche aussi "France" seul sur une ligne ou après une adresse (cas fréquent)
+    // Cherche n'importe quel nom de pays seul sur une ligne ou après une adresse (universel)
     if (!company.country) {
-      // Cherche "France" dans le contexte d'une adresse (après un code postal français ou une ville française)
-      const franceStandalone = legalText.match(/(?:^|\n)\s*France\s*(?:\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul)/im);
-      if (franceStandalone) {
-        // Vérifie qu'il y a une adresse française à proximité (code postal 75xxx ou ville française comme Paris)
-        const franceIndex = legalText.indexOf(franceStandalone[0]);
-        const nearbyText = legalText.substring(Math.max(0, franceIndex - 150), franceIndex + 50);
-        // Si on trouve un code postal français (75xxx) ou "Paris" à proximité, c'est la France
-        if (/\b75\d{3}\b|\bParis\b/i.test(nearbyText)) {
-          company.country = 'FR';
-          company.countryName = 'France';
+      // Liste de tous les noms de pays supportés (en plusieurs langues)
+      const countryNames = [
+        'France', 'United Kingdom', 'UK', 'Great Britain', 'Germany', 'Deutschland',
+        'Spain', 'España', 'Italy', 'Italia', 'Belgium', 'Belgique', 'Switzerland', 'Suisse',
+        'Netherlands', 'Nederland', 'Austria', 'Österreich', 'Portugal',
+        'United States', 'USA', 'United States of America', 'Canada', 'Australia', 'New Zealand',
+        'Japan', 'China', 'India', 'Brazil', 'Mexico', 'South Korea', 'Korea',
+        'Singapore', 'Hong Kong', 'Ireland', 'Poland', 'Pologne',
+        'Czech Republic', 'Sweden', 'Suède', 'Norway', 'Norvège', 'Denmark', 'Danemark',
+        'Finland', 'Finlande', 'Greece', 'Grèce', 'Romania', 'Roumanie',
+        'Hungary', 'Hongrie', 'Russia', 'Russie', 'Turkey', 'Turquie',
+        'South Africa', 'Israel', 'UAE', 'United Arab Emirates', 'Saudi Arabia', 'Arabie Saoudite'
+      ];
+      
+      // Construit une regex pour chercher n'importe quel pays seul sur une ligne
+      const countryNamesEscaped = countryNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+      const countryStandalonePattern = new RegExp(`(?:^|\\n)\\s*(${countryNamesEscaped})\\s*(?:\\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])`, 'im');
+      const countryStandalone = legalText.match(countryStandalonePattern);
+      
+      if (countryStandalone) {
+        const countryInfo = getCountryInfo(countryStandalone[1]);
+        if (countryInfo.code) {
+          company.country = countryInfo.code;
+          company.countryName = countryInfo.name;
         }
-      }
-    }
-    
-    // Dernière chance : si on a une adresse avec code postal 75xxx ou ville Paris, infère FR
-    if (!company.country && company.address) {
-      if (company.address.postalCode && /^75\d{3}$/.test(company.address.postalCode)) {
-        company.country = 'FR';
-        company.countryName = 'France';
-      } else if (company.address.city && /^Paris$/i.test(company.address.city.trim())) {
-        company.country = 'FR';
-        company.countryName = 'France';
       }
     }
   }
