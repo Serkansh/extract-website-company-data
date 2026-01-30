@@ -303,12 +303,26 @@ export function extractCompany(html, sourceUrl) {
         // Si pas de pays dans cityPart, cherche dans le texte après l'adresse (format multi-lignes)
         if (!countryFromCity) {
           const afterAddress = legalText.substring(legalText.indexOf(addr) + addr.length);
-          const countryMatchAfter = afterAddress.match(/\b(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)\b/i);
+          // Cherche le pays dans les 200 caractères suivants (peut être sur une ligne séparée)
+          const afterAddressLimited = afterAddress.substring(0, 200);
+          const countryMatchAfter = afterAddressLimited.match(/\b(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)\b/i);
           if (countryMatchAfter) {
             const countryInfo = getCountryInfo(countryMatchAfter[1]);
             countryFromCity = countryInfo.code;
             countryNameFromCity = countryInfo.name;
           }
+        }
+        
+        // Fallback: inférence depuis le code postal français (75008 = Paris = France)
+        if (!countryFromCity && postalCode && /^75\d{3}$/.test(postalCode)) {
+          countryFromCity = 'FR';
+          countryNameFromCity = 'France';
+        }
+        
+        // Fallback: inférence depuis la ville "Paris" (même sans code postal 75xxx)
+        if (!countryFromCity && city && /^Paris$/i.test(city.trim())) {
+          countryFromCity = 'FR';
+          countryNameFromCity = 'France';
         }
         
         const street = (before || '').trim().replace(/[,\-]$/, '').trim() || null;
@@ -340,6 +354,22 @@ export function extractCompany(html, sourceUrl) {
       const countryInfo = getCountryInfo(countryMatches[1]);
       company.country = countryInfo.code;
       company.countryName = countryInfo.name;
+    }
+    
+    // Cherche aussi "France" seul sur une ligne ou après une adresse (cas fréquent)
+    if (!company.country) {
+      // Cherche "France" dans le contexte d'une adresse (après un code postal français ou une ville française)
+      const franceStandalone = legalText.match(/(?:^|\n)\s*France\s*(?:\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul)/im);
+      if (franceStandalone) {
+        // Vérifie qu'il y a une adresse française à proximité (code postal 75xxx ou ville française comme Paris)
+        const franceIndex = legalText.indexOf(franceStandalone[0]);
+        const nearbyText = legalText.substring(Math.max(0, franceIndex - 150), franceIndex + 50);
+        // Si on trouve un code postal français (75xxx) ou "Paris" à proximité, c'est la France
+        if (/\b75\d{3}\b|\bParis\b/i.test(nearbyText)) {
+          company.country = 'FR';
+          company.countryName = 'France';
+        }
+      }
     }
   }
   
