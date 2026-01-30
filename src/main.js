@@ -19,22 +19,8 @@ const {
   includeCompany = true,
   includeContacts = true,
   includeSocials = true,
-  includeTeam = true,
   keyPaths = []
 } = input;
-
-// Modèle OpenAI hardcodé (non configurable par l'utilisateur)
-const openAIModel = 'gpt-4o-mini';
-
-// Active OpenAI automatiquement si la clé API est disponible (par défaut activé, invisible pour l'utilisateur)
-let useOpenAI = true;
-const apiKey = Actor.getEnv()?.OPENAI_API_KEY || process.env.OPENAI_API_KEY;
-if (!apiKey) {
-  log.warning('OPENAI_API_KEY is not set in environment variables. OpenAI features will be disabled.');
-  useOpenAI = false;
-} else {
-  log.info('OpenAI API key found, enhanced extraction enabled.');
-}
 
 // Normalise les startUrls (peut être array ou string multi-ligne)
 let urls = [];
@@ -98,10 +84,7 @@ for (const url of uniqueDomains) {
       includeCompany,
       includeContacts,
       includeSocials,
-      includeTeam,
-      keyPaths,
-      useOpenAI,
-      openAIModel
+      keyPaths
     });
     
     // Construit le record final (un seul par domaine)
@@ -141,10 +124,6 @@ for (const url of uniqueDomains) {
       if (Object.keys(socials).length > 0) {
         record.socials = socials;
       }
-    }
-    
-    if (includeTeam && domainData.team.length > 0) {
-      record.team = domainData.team;
     }
     
     // UN SEUL pushData par domaine (pay per result)

@@ -44,12 +44,6 @@
       "description": "Extract social media links",
       "default": true
     },
-    "includeTeam": {
-      "title": "Include Team",
-      "type": "boolean",
-      "description": "Extract team members",
-      "default": true
-    },
     "keyPaths": {
       "title": "Custom Key Paths",
       "type": "array",

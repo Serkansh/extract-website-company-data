@@ -6,9 +6,7 @@ import { extractEmails } from './extractors/emails.js';
 import { extractPhones } from './extractors/phones.js';
 import { extractSocials } from './extractors/socials.js';
 import { extractCompany } from './extractors/company.js';
-import { extractTeam } from './extractors/team.js';
-import { deduplicateEmails, deduplicatePhones, deduplicateTeam } from './utils/deduplication.js';
-import { extractWithOpenAI } from './utils/openai-extractor.js';
+import { deduplicateEmails, deduplicatePhones } from './utils/deduplication.js';
 
 /**
  * Détecte les pages clés depuis la homepage
@@ -17,7 +15,6 @@ function detectKeyPages(html, baseUrl) {
   const keyPages = {
     contact: null,
     about: null,
-    team: null,
     legal: null,
     privacy: null
   };
@@ -96,10 +93,9 @@ function extractInternalLinks(html, baseUrl) {
     if (has(DEFAULT_KEY_PATHS.legal)) score += 110;
     if (has(DEFAULT_KEY_PATHS.privacy)) score += 90;
     if (has(DEFAULT_KEY_PATHS.about)) score += 80;
-    if (has(DEFAULT_KEY_PATHS.team)) score += 100;
 
     // Fallback keywords (ex: "legal notice", "imprint", "mentions légales")
-    if (/(legal|imprint|mentions|privacy|cookies|contact|about|team|leadership|careers)/i.test(combined)) {
+    if (/(legal|imprint|mentions|privacy|cookies|contact|about)/i.test(combined)) {
       score += 40;
     }
 
@@ -119,26 +115,20 @@ function extractInternalLinks(html, baseUrl) {
 /**
  * Détermine si le mode "deep" doit être activé
  */
-function shouldUseDeepCrawl({ keyPages, pagesVisited, usedPlaywright, includeContacts, includeCompany, includeTeam, emailsCount, phonesCount, teamCount, company }) {
-  // 1. Page team détectée mais non visitée dans les 8 premières pages
-  if (keyPages.team && !pagesVisited.includes(keyPages.team)) {
-    return true;
-  }
-  
-  // 2. Site fortement structuré (plusieurs pages clés pertinentes)
+function shouldUseDeepCrawl({ keyPages, pagesVisited, usedPlaywright, includeContacts, includeCompany, emailsCount, phonesCount, company }) {
+  // 1. Site fortement structuré (plusieurs pages clés pertinentes)
   const keyPagesCount = Object.values(keyPages).filter(Boolean).length;
   if (keyPagesCount >= 4) {
     return true;
   }
   
-  // 3. Fallback Playwright requis
+  // 2. Fallback Playwright requis
   if (usedPlaywright) {
     return true;
   }
 
-  // 4. Manque de données critiques -> on pousse en DEEP
+  // 3. Manque de données critiques -> on pousse en DEEP
   if (includeContacts && emailsCount === 0 && phonesCount === 0) return true;
-  if (includeTeam && teamCount === 0 && keyPages.team) return true;
   if (includeCompany) {
     const missingLegal = !company?.legalName;
     const missingAddr = !company?.address;
@@ -255,10 +245,7 @@ export async function crawlDomain(startUrl, options) {
     includeCompany = true,
     includeContacts = true,
     includeSocials = true,
-    includeTeam = true,
-    keyPaths = [],
-    useOpenAI = false,
-    openAIModel = 'gpt-4o-mini'
+    keyPaths = []
   } = options;
   
   const domain = getRegistrableDomain(startUrl);
@@ -285,8 +272,7 @@ export async function crawlDomain(startUrl, options) {
       pinterest: [],
       google: []
     },
-    company: null,
-    team: []
+    company: null
   };
   
   // Tier de crawl (commence en standard)
@@ -422,7 +408,6 @@ export async function crawlDomain(startUrl, options) {
       legal: ['legal', 'disclaimer', 'mentions', 'imprint', 'legal-notice', 'legal-notice'],
       about: ['about', 'story', 'a-propos', 'qui-sommes', 'our-story'],
       contact: ['contact', 'contact-us', 'nous-contacter', 'contactez'],
-      team: ['team', 'equipe', 'staff', 'leadership', 'direction'],
       privacy: ['privacy', 'confidentialite', 'politique-de-confidentialite', 'cookies']
     };
     
@@ -454,43 +439,6 @@ export async function crawlDomain(startUrl, options) {
       const phones = extractPhones(html, url);
       domainData.emails.push(...emails);
       domainData.phones.push(...phones);
-      
-      // Si OpenAI est activé et page contact avec plusieurs téléphones, essaie d'associer les téléphones aux bureaux
-      if (useOpenAI && phones.length > 1 && (url.includes('/contact') || url.includes('/about'))) {
-        try {
-          const openAIData = await extractWithOpenAI(html, finalUrl, 'phones', openAIModel);
-          
-          if (openAIData?.phones && Array.isArray(openAIData.phones)) {
-            // Enrichit les téléphones existants avec les informations de localisation
-            for (const phoneData of domainData.phones) {
-              // Cherche un match dans les données OpenAI
-              const phoneE164 = phoneData.valueE164 || phoneData.valueRaw;
-              if (phoneE164) {
-                const match = openAIData.phones.find(p => 
-                  p.phone === phoneE164 || 
-                  phoneE164.includes(p.phone?.replace(/[^0-9+]/g, '')) ||
-                  p.phone?.replace(/[^0-9+]/g, '') === phoneE164.replace(/[^0-9+]/g, '')
-                );
-                
-                if (match) {
-                  // Enrichit avec les informations de localisation
-                  phoneData.location = match.location || null;
-                  phoneData.city = match.city || null;
-                  phoneData.country = match.country || null;
-                  phoneData.countryName = match.countryName || null;
-                  
-                  // Met à jour le snippet avec la localisation si disponible
-                  if (match.location && phoneData.snippet) {
-                    phoneData.snippet = `${phoneData.snippet} (${match.location})`;
-                  }
-                }
-              }
-            }
-          }
-        } catch (error) {
-          // Continue sans enrichissement de localisation - ne bloque jamais le crawl
-        }
-      }
     }
     
     if (includeSocials) {
@@ -515,83 +463,6 @@ export async function crawlDomain(startUrl, options) {
       if (!domainData.company.address && company.address) domainData.company.address = company.address;
       if (!domainData.company.openingHours && company.openingHours) domainData.company.openingHours = company.openingHours;
       
-      // Si OpenAI est activé, utilise-le systématiquement sur les pages clés pour améliorer les données
-      if (useOpenAI) {
-        // Détermine le type de page pour le prompt OpenAI
-        const urlLower = finalUrl.toLowerCase();
-        const pathname = new URL(finalUrl).pathname.toLowerCase();
-        let pageType = 'general';
-        let shouldUseOpenAI = false;
-        
-        // Utilise OpenAI sur les pages importantes (legal, contact) ou si des données manquent
-        if (pathname.includes('/legal') || pathname.includes('/mentions') || pathname.includes('/imprint') || 
-            urlLower.includes('legal') || urlLower.includes('mentions')) {
-          pageType = 'legal';
-          shouldUseOpenAI = true;
-        } else if (pathname.includes('/contact') || urlLower.includes('contact')) {
-          pageType = 'contact';
-          shouldUseOpenAI = true;
-        } else if (!domainData.company.legalName || !domainData.company.address || 
-                   !domainData.company.address?.country || !domainData.company.country) {
-          // Utilise OpenAI si des données importantes manquent
-          shouldUseOpenAI = true;
-        }
-        
-        if (shouldUseOpenAI) {
-          try {
-            // Appel OpenAI avec timeout plus long (20s) pour laisser le temps à l'IA d'analyser
-            const openAIData = await Promise.race([
-              extractWithOpenAI(html, finalUrl, pageType, openAIModel),
-              new Promise((_, reject) => setTimeout(() => reject(new Error('OpenAI timeout')), 20000)) // Timeout 20s
-            ]).catch(() => null); // Retourne null si timeout ou erreur
-          
-          if (openAIData?.company) {
-            log.info(`OpenAI extracted company data for ${finalUrl}: legalName=${!!openAIData.company.legalName}, address=${!!openAIData.company.address}, country=${!!openAIData.company.address?.country}`);
-            
-            // Merge agressif : OpenAI améliore toujours les données existantes
-            if (openAIData.company.name && (!domainData.company.name || domainData.company.name.length < openAIData.company.name.length)) {
-              domainData.company.name = openAIData.company.name;
-            }
-            if (openAIData.company.legalName) {
-              domainData.company.legalName = openAIData.company.legalName;
-            }
-            
-            // Merge de l'adresse : OpenAI peut compléter ou corriger
-            if (!domainData.company.address && openAIData.company.address) {
-              domainData.company.address = openAIData.company.address;
-            } else if (domainData.company.address && openAIData.company.address) {
-              // Merge partiel : remplace seulement si meilleur ou manquant
-              if (openAIData.company.address.street && 
-                  (!domainData.company.address.street || domainData.company.address.street.length < openAIData.company.address.street.length)) {
-                domainData.company.address.street = openAIData.company.address.street;
-              }
-              if (openAIData.company.address.postalCode && !domainData.company.address.postalCode) {
-                domainData.company.address.postalCode = openAIData.company.address.postalCode;
-              }
-              if (openAIData.company.address.city && 
-                  (!domainData.company.address.city || domainData.company.address.city.length < openAIData.company.address.city.length)) {
-                domainData.company.address.city = openAIData.company.address.city;
-              }
-              // Le pays est toujours amélioré par OpenAI (inférence intelligente)
-              if (openAIData.company.address.country) {
-                domainData.company.address.country = openAIData.company.address.country;
-                domainData.company.address.countryName = openAIData.company.address.countryName;
-              }
-            }
-            
-            // Propagation du pays depuis l'adresse OpenAI (toujours prioritaire)
-            if (openAIData.company.address?.country) {
-              domainData.company.country = openAIData.company.address.country;
-              domainData.company.countryName = openAIData.company.address.countryName;
-            }
-          }
-        } catch (error) {
-          // Continue avec les données classiques si OpenAI échoue - ne bloque jamais le crawl
-          // Ne log même pas pour éviter le spam - l'extraction classique continue
-        }
-      }
-    }
-      
       // Propagation bidirectionnelle country/countryName (après merge)
       if (domainData.company.address) {
         if (domainData.company.country && !domainData.company.address.country) {
@@ -601,80 +472,6 @@ export async function crawlDomain(startUrl, options) {
           domainData.company.country = domainData.company.address.country;
           domainData.company.countryName = domainData.company.address.countryName;
         }
-      }
-    }
-    
-    if (includeTeam) {
-      // Extraction classique
-      const team = extractTeam(html, url);
-      
-      // Si OpenAI est activé, utilise toujours OpenAI pour la team (mieux filtrer les faux positifs)
-      if (useOpenAI && (url.includes('/team') || url.includes('/equipe') || url.includes('/staff') || url.includes('/leadership') || url.includes('/about'))) {
-        try {
-          // Timeout plus long pour l'analyse de la team (peut être longue)
-          const openAIData = await Promise.race([
-            extractWithOpenAI(html, finalUrl, 'team', openAIModel),
-            new Promise((_, reject) => setTimeout(() => reject(new Error('OpenAI timeout')), 20000)) // Timeout 20s
-          ]).catch(() => null);
-          
-          if (openAIData?.team && Array.isArray(openAIData.team) && openAIData.team.length > 0) {
-            log.info(`OpenAI extracted ${openAIData.team.length} team members from ${finalUrl}`);
-            
-            // Filtre d'abord les faux positifs de l'extraction classique
-            const filteredClassicTeam = team.filter(member => {
-              const nameLower = member.name.toLowerCase();
-              // Exclut les faux positifs connus
-              const falsePositives = ['send message', 'horizon extend', 'contact us', 'view profile', 'our team', 'meet the team', 'about us'];
-              return !falsePositives.some(fp => nameLower.includes(fp));
-            });
-            
-            // Remplace la team classique par la version filtrée
-            domainData.team = domainData.team.filter(t => 
-              !team.some(ct => ct.name === t.name)
-            );
-            domainData.team.push(...filteredClassicTeam);
-            
-            // Priorité à OpenAI : remplace la team classique par celle d'OpenAI (plus précise)
-            // Ajoute les membres trouvés par OpenAI (qui sont déjà filtrés)
-            for (const member of openAIData.team) {
-              if (member.name && member.name.trim().length > 0) {
-                // Vérifie si le membre n'existe pas déjà
-                const exists = domainData.team.some(t => 
-                  t.name.toLowerCase() === member.name.toLowerCase()
-                );
-                
-                if (!exists) {
-                  domainData.team.push({
-                    name: member.name.trim(),
-                    role: member.role || null,
-                    email: null,
-                    phone: null, // OpenAI ne retourne pas de phone ici
-                    linkedin: member.linkedin || null,
-                    sourceUrl: finalUrl,
-                    signals: ['openai_extraction', member.linkedin ? 'has_linkedin' : null, member.role ? 'has_role' : null].filter(Boolean)
-                  });
-                }
-              }
-            }
-          }
-        } catch (error) {
-          // Continue avec les données classiques si OpenAI échoue - ne bloque jamais le crawl
-          // En cas d'erreur OpenAI, utilise la team classique filtrée
-          const filteredClassicTeam = team.filter(member => {
-            const nameLower = member.name.toLowerCase();
-            const falsePositives = ['send message', 'horizon extend', 'contact us', 'view profile', 'our team', 'meet the team', 'about us'];
-            return !falsePositives.some(fp => nameLower.includes(fp));
-          });
-          domainData.team.push(...filteredClassicTeam);
-        }
-      } else {
-        // Pas d'OpenAI : utilise la team classique avec filtrage basique
-        const filteredClassicTeam = team.filter(member => {
-          const nameLower = member.name.toLowerCase();
-          const falsePositives = ['send message', 'horizon extend', 'contact us', 'view profile', 'our team', 'meet the team', 'about us'];
-          return !falsePositives.some(fp => nameLower.includes(fp));
-        });
-        domainData.team.push(...filteredClassicTeam);
       }
     }
     
@@ -693,10 +490,8 @@ export async function crawlDomain(startUrl, options) {
     usedPlaywright,
     includeContacts,
     includeCompany,
-    includeTeam,
     emailsCount: domainData.emails.length,
     phonesCount: domainData.phones.length,
-    teamCount: domainData.team.length,
     company: domainData.company,
   })) {
     crawlTier = CRAWL_TIERS.DEEP;
@@ -728,10 +523,6 @@ export async function crawlDomain(startUrl, options) {
     // Sélection primary
     const primaryEmail = selectPrimaryEmail(domainData.emails, domain);
     const primaryPhone = selectPrimaryPhone(domainData.phones);
-  }
-  
-  if (includeTeam) {
-    domainData.team = deduplicateTeam(domainData.team);
   }
   
   // 7. Déduplique les socials

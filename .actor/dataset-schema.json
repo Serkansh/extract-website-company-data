@@ -33,9 +33,6 @@
     "socials": {
       "type": "object"
     },
-    "team": {
-      "type": "array"
-    },
     "errors": {
       "type": "array"
     }

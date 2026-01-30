@@ -1,7 +1,7 @@
 {
   "name": "extract-website-company-data",
   "version": "1.0.0",
-  "description": "Extract company data (emails, phones, socials, team) from websites",
+  "description": "Extract company data (emails, phones, socials) from websites",
   "type": "module",
   "main": "src/main.js",
   "scripts": {
@@ -14,12 +14,11 @@
     "cheerio": "^1.0.0",
     "playwright": "^1.40.0",
     "libphonenumber-js": "^1.11.0",
-    "tldts": "^6.0.0",
-    "openai": "^4.20.0"
+    "tldts": "^6.0.0"
   },
   "apify": {
-    "title": "Extract Website Company Data – Email, Phone, Social & Team",
-    "description": "Extract company profile, contacts, social profiles and team from websites",
+    "title": "Extract Website Company Data – Email, Phone, Social",
+    "description": "Extract company profile, contacts and social profiles from websites",
     "version": "1.0.0",
     "actorSpecification": 1,
     "input": "./INPUT_SCHEMA.json",
