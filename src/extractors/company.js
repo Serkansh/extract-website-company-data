@@ -237,15 +237,30 @@ export function extractCompany(html, sourceUrl) {
       // Nettoie street : enlève les textes parasites avant l'adresse
       // Exemples: "752 808 113 et dont le siège social est situé", "SIRET: 123456789", etc.
       street = street
-        // Enlève les numéros SIRET/SIREN/RCS au début
-        .replace(/^(?:SIRET|SIREN|RCS|Numéro|N°)\s*[:\-]?\s*[\d\s]+/i, '')
+        // Enlève les numéros SIRET/SIREN/RCS au début (format: "752 808 113" ou "SIRET: 123456789")
+        .replace(/^(?:SIRET|SIREN|RCS|Numéro|N°|SIREN|RCS\s+Paris)\s*[:\-]?\s*[\d\s]{8,}/i, '')
+        .replace(/^[\d\s]{8,}(?:\s+et\s+dont\s+le\s+siège\s+social)/i, '')
         // Enlève les phrases parasites avant l'adresse
-        .replace(/^(?:et\s+dont\s+le\s+siège\s+social\s+est\s+situé|dont\s+le\s+siège\s+social|siège\s+social\s*[:\-]|représentée\s+par|capital\s+de[\s\d,]+euros?)/i, '')
-        // Enlève les numéros de téléphone
-        .replace(/\b(?:\+33|0)[\s\d().-]{8,}\b/g, '')
+        .replace(/^(?:et\s+dont\s+le\s+siège\s+social\s+est\s+situé|dont\s+le\s+siège\s+social\s+est\s+situé|siège\s+social\s*[:\-]\s*|représentée\s+par\s+son\s+Président\.?\s*Siège\s+social\s*[:\-]\s*|représentée\s+par|capital\s+de[\s\d,]+euros?)/i, '')
+        // Enlève les numéros de téléphone (format: "33 3 88 22 02 02" ou "+33 1 42 60 94 90")
+        .replace(/\b(?:\+33|0|33)\s*[\d\s().-]{8,}\b/g, '')
+        // Enlève les numéros longs collés (ex: "58490092871")
+        .replace(/^\d{10,}\s+/g, '')
         // Enlève les mots-clés HTML/formulaire
         .replace(/\s*(Phone|View\s+on|Search|Contact|Get\s+in\s+touch|Please\s+enable|Name\s+\*|Email\s+Address|Subject|Request|Application|Country\s+\*|Company\s+\*|Message|Consent|Send\s+Message).*$/i, '')
+        // Nettoie les espaces multiples et les caractères parasites
+        .replace(/\s+/g, ' ')
+        .replace(/^[,\-.\s]+|[,\-.\s]+$/g, '')
         .trim();
+      
+      // Si street ne commence pas par un numéro suivi d'une rue, essaie de trouver le début réel
+      // Exemple: "33 3 88 22 02 02Origami16 rue du Bataillon" -> "16 rue du Bataillon"
+      if (!/^\d+\s+[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]/i.test(street)) {
+        const realAddressMatch = street.match(/(\d+\s+[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ][^,\n]{5,}?)(?:,|\s+\d{5}|$)/i);
+        if (realAddressMatch) {
+          street = realAddressMatch[1].trim();
+        }
+      }
       
       // Nettoie city
       city = city
@@ -282,8 +297,31 @@ export function extractCompany(html, sourceUrl) {
       // Format classique (une seule chaîne à parser)
       let addr = addressMatches[1].trim().replace(/\s+/g, ' ').replace(/[;,.]$/, '');
       
-      // Nettoie addr pour enlever les mots-clés HTML/formulaire
-      addr = addr.replace(/\s*(Phone|View\s+on|Search|Contact|Get\s+in\s+touch|Please\s+enable|Name\s+\*|Email\s+Address|Subject|Request|Application|Country\s+\*|Company\s+\*|Message|Consent|Send\s+Message).*$/i, '').trim();
+      // Nettoie addr : enlève les textes parasites au début
+      addr = addr
+        // Enlève les numéros SIRET/SIREN/RCS au début
+        .replace(/^(?:SIRET|SIREN|RCS|Numéro|N°)\s*[:\-]?\s*[\d\s]{8,}/i, '')
+        .replace(/^[\d\s]{8,}(?:\s+et\s+dont\s+le\s+siège\s+social)/i, '')
+        // Enlève les phrases parasites
+        .replace(/^(?:et\s+dont\s+le\s+siège\s+social\s+est\s+situé|dont\s+le\s+siège\s+social\s+est\s+situé|siège\s+social\s*[:\-]\s*|représentée\s+par\s+son\s+Président\.?\s*Siège\s+social\s*[:\-]\s*|représentée\s+par)/i, '')
+        // Enlève les numéros de téléphone
+        .replace(/\b(?:\+33|0|33)\s*[\d\s().-]{8,}\b/g, '')
+        // Enlève les numéros longs collés
+        .replace(/^\d{10,}\s+/g, '')
+        // Enlève les mots-clés HTML/formulaire
+        .replace(/\s*(Phone|View\s+on|Search|Contact|Get\s+in\s+touch|Please\s+enable|Name\s+\*|Email\s+Address|Subject|Request|Application|Country\s+\*|Company\s+\*|Message|Consent|Send\s+Message).*$/i, '')
+        // Nettoie les espaces et caractères parasites
+        .replace(/\s+/g, ' ')
+        .replace(/^[,\-.\s]+|[,\-.\s]+$/g, '')
+        .trim();
+      
+      // Si addr ne commence pas par un numéro suivi d'une rue, essaie de trouver le début réel
+      if (!/^\d+\s+[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]/i.test(addr)) {
+        const realAddressMatch = addr.match(/(\d+\s+[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ][^,\n]{5,}?)(?:,|\s+\d{5}|$)/i);
+        if (realAddressMatch) {
+          addr = realAddressMatch[1].trim();
+        }
+      }
       
       // Si addr contient des caractères suspects (HTML, formulaire), on rejette
       if (addr.length > 200 || /[<>{}]|form|input|select|button|textarea/i.test(addr)) {
@@ -418,7 +456,7 @@ export function extractCompany(html, sourceUrl) {
     
     // Cherche le pays dans le texte (ex: "France", "registered in France", "in France")
     // Si contexte français, exclut les pays non-européens
-    const countryPattern = isFrenchPostalCode
+    const countryPattern = isFrenchContext
       ? /\b(?:registered\s+in|in|at)\s+(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie)\b/i
       : /\b(?:registered\s+in|in|at)\s+(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)\b/i;
     
