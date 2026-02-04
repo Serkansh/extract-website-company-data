@@ -181,7 +181,10 @@ export function extractCompany(html, sourceUrl) {
   });
   
   // 2. Mentions légales (legalName + siège social / adresse)
-  const legalText = $('body').text().replace(/\s+/g, ' ').trim();
+  // On garde deux versions : normalisée (pour regex simples) et avec sauts de ligne (pour recherche pays)
+  const legalTextNormalized = $('body').text().replace(/\s+/g, ' ').trim();
+  const legalTextWithNewlines = $('body').text().trim();
+  const legalText = legalTextNormalized; // Utilise la version normalisée par défaut
 
   const legalNameMatches =
     legalText.match(/Raison\s+sociale\s*[:\-]\s*([^.\n]+?)(?:\s{2,}|$)/i) ||
@@ -305,14 +308,20 @@ export function extractCompany(html, sourceUrl) {
         
         // Si pas de pays dans cityPart, cherche dans le texte après l'adresse (format multi-lignes)
         if (!countryFromCity) {
-          const afterAddress = legalText.substring(legalText.indexOf(addr) + addr.length);
-          // Cherche le pays dans les 200 caractères suivants (peut être sur une ligne séparée)
-          const afterAddressLimited = afterAddress.substring(0, 200);
-          const countryMatchAfter = afterAddressLimited.match(/\b(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)\b/i);
-          if (countryMatchAfter) {
-            const countryInfo = getCountryInfo(countryMatchAfter[1]);
-            countryFromCity = countryInfo.code;
-            countryNameFromCity = countryInfo.name;
+          // Utilise la version avec sauts de ligne pour mieux détecter les pays sur ligne séparée
+          const addrIndexInOriginal = legalTextWithNewlines.toLowerCase().indexOf(addr.toLowerCase());
+          if (addrIndexInOriginal >= 0) {
+            const afterAddress = legalTextWithNewlines.substring(addrIndexInOriginal + addr.length);
+            // Cherche le pays dans les 300 caractères suivants (peut être sur une ligne séparée)
+            const afterAddressLimited = afterAddress.substring(0, 300);
+            // Pattern amélioré : cherche le pays même s'il est seul sur une ligne
+            const countryPattern = /(?:^|\n|\s)(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)(?:\s|$|\n|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul)/im;
+            const countryMatchAfter = afterAddressLimited.match(countryPattern);
+            if (countryMatchAfter) {
+              const countryInfo = getCountryInfo(countryMatchAfter[1]);
+              countryFromCity = countryInfo.code;
+              countryNameFromCity = countryInfo.name;
+            }
           }
         }
         
@@ -369,10 +378,11 @@ export function extractCompany(html, sourceUrl) {
         'South Africa', 'Israel', 'UAE', 'United Arab Emirates', 'Saudi Arabia', 'Arabie Saoudite'
       ];
       
-      // Construit une regex pour chercher n'importe quel pays seul sur une ligne
+      // Utilise la version avec sauts de ligne pour mieux détecter les pays sur ligne séparée
       const countryNamesEscaped = countryNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
-      const countryStandalonePattern = new RegExp(`(?:^|\\n)\\s*(${countryNamesEscaped})\\s*(?:\\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])`, 'im');
-      const countryStandalone = legalText.match(countryStandalonePattern);
+      // Pattern amélioré : cherche le pays même s'il est seul sur une ligne, avec ou sans espace avant
+      const countryStandalonePattern = new RegExp(`(?:^|\\n|\\s)\\s*(${countryNamesEscaped})\\s*(?:\\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])`, 'im');
+      const countryStandalone = legalTextWithNewlines.match(countryStandalonePattern);
       
       if (countryStandalone) {
         const countryInfo = getCountryInfo(countryStandalone[1]);
