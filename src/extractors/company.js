@@ -418,7 +418,7 @@ export function extractCompany(html, sourceUrl) {
             
             // Recherche spécifique France en premier (priorité absolue)
             const francePattern = /(?:^|\n|\s)\s*(France)\s*(?:\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])/im;
-            const franceMatch = afterAddress.substring(0, 50).match(francePattern);
+            const franceMatch = afterAddress.substring(0, 100).match(francePattern);
             if (franceMatch) {
               const countryInfo = getCountryInfo('France');
               if (countryInfo.code) {
