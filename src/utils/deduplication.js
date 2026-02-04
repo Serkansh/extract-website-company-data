@@ -36,26 +36,3 @@ export function deduplicatePhones(phones) {
   return deduplicated;
 }
 
-/**
- * Déduplique les membres d'équipe
- */
-export function deduplicateTeam(teamMembers) {
-  const seen = new Set();
-  const deduplicated = [];
-  
-  for (const member of teamMembers) {
-    // Clé de déduplication : name + role + linkedin
-    const key = [
-      member.name?.toLowerCase().trim(),
-      member.role?.toLowerCase().trim(),
-      member.linkedin || ''
-    ].join('|');
-    
-    if (key && !seen.has(key)) {
-      seen.add(key);
-      deduplicated.push(member);
-    }
-  }
-  
-  return deduplicated;
-}

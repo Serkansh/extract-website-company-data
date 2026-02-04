@@ -2,7 +2,6 @@
 export const DEFAULT_KEY_PATHS = {
   contact: ['/contact', '/contact-us', '/nous-contacter', '/contactez-nous'],
   about: ['/about', '/about-us', '/a-propos', '/qui-sommes-nous'],
-  team: ['/team', '/our-team', '/equipe', '/staff', '/leadership', '/direction', '/qui-sommes-nous/equipe'],
   legal: ['/legal', '/mentions-legales', '/imprint', '/mentions', '/legal-notice'],
   privacy: ['/privacy', '/politique-de-confidentialite', '/confidentialite', '/privacy-policy']
 };
@@ -69,12 +68,6 @@ export const SOCIAL_SHARE_PATTERNS = [
   /share\.php/,
   /\/intent\//
 ];
-
-// Patterns pour détecter les membres d'équipe
-export const TEAM_PATTERNS = {
-  name: /(?:name|nom|fullname|full-name)[\s:=]+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)/i,
-  role: /(?:role|title|position|fonction|poste)[\s:=]+([^,\n]+)/i
-};
 
 // User agents
 export const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
