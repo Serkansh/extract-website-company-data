@@ -234,9 +234,23 @@ export function extractCompany(html, sourceUrl) {
       let city = addressMatches[3].trim().replace(/\s+/g, ' ');
       const countryText = addressMatches[4] ? addressMatches[4].trim() : null;
       
-      // Nettoie street et city pour enlever les mots-clés HTML/formulaire
-      street = street.replace(/\s*(Phone|View\s+on|Search|Contact|Get\s+in\s+touch|Please\s+enable|Name\s+\*|Email\s+Address|Subject|Request|Application|Country\s+\*|Company\s+\*|Message|Consent|Send\s+Message).*$/i, '').trim();
-      city = city.replace(/\s*(Phone|View\s+on|Search|Contact|Get\s+in\s+touch|Please\s+enable|Name\s+\*|Email\s+Address|Subject|Request|Application|Country\s+\*|Company\s+\*|Message|Consent|Send\s+Message).*$/i, '').trim();
+      // Nettoie street : enlève les textes parasites avant l'adresse
+      // Exemples: "752 808 113 et dont le siège social est situé", "SIRET: 123456789", etc.
+      street = street
+        // Enlève les numéros SIRET/SIREN/RCS au début
+        .replace(/^(?:SIRET|SIREN|RCS|Numéro|N°)\s*[:\-]?\s*[\d\s]+/i, '')
+        // Enlève les phrases parasites avant l'adresse
+        .replace(/^(?:et\s+dont\s+le\s+siège\s+social\s+est\s+situé|dont\s+le\s+siège\s+social|siège\s+social\s*[:\-]|représentée\s+par|capital\s+de[\s\d,]+euros?)/i, '')
+        // Enlève les numéros de téléphone
+        .replace(/\b(?:\+33|0)[\s\d().-]{8,}\b/g, '')
+        // Enlève les mots-clés HTML/formulaire
+        .replace(/\s*(Phone|View\s+on|Search|Contact|Get\s+in\s+touch|Please\s+enable|Name\s+\*|Email\s+Address|Subject|Request|Application|Country\s+\*|Company\s+\*|Message|Consent|Send\s+Message).*$/i, '')
+        .trim();
+      
+      // Nettoie city
+      city = city
+        .replace(/\s*(Phone|View\s+on|Search|Contact|Get\s+in\s+touch|Please\s+enable|Name\s+\*|Email\s+Address|Subject|Request|Application|Country\s+\*|Company\s+\*|Message|Consent|Send\s+Message).*$/i, '')
+        .trim();
       
       // Si street ou city contient des caractères suspects (HTML, formulaire), on rejette
       if (street.length > 100 || city.length > 50 || /[<>{}]|form|input|select|button|textarea/i.test(street + city)) {
@@ -605,7 +619,37 @@ export function extractCompany(html, sourceUrl) {
     }
   }
   
-  // Fallback: pays depuis le domaine
+  // Fallback 1: Pays depuis la ville française (si pas de code postal mais ville française connue)
+  if (!company.country && company.address?.city) {
+    const cityLower = company.address.city.toLowerCase();
+    // Liste de villes françaises majeures (non exhaustive mais couvre les cas fréquents)
+    const frenchCities = [
+      'paris', 'lyon', 'marseille', 'toulouse', 'nice', 'nantes', 'strasbourg', 'montpellier',
+      'bordeaux', 'lille', 'rennes', 'reims', 'saint-étienne', 'toulon', 'grenoble', 'dijon',
+      'angers', 'villeurbanne', 'saint-denis', 'le havre', 'nîmes', 'aix-en-provence', 'clermont-ferrand',
+      'brest', 'limoges', 'tours', 'amiens', 'perpignan', 'metz', 'besançon', 'boulogne-billancourt',
+      'orléans', 'mulhouse', 'rouen', 'caen', 'argenteuil', 'saint-denis', 'roubaix', 'tourcoing',
+      'nancy', 'avignon', 'vitry-sur-seine', 'créteil', 'dunkirk', 'poitiers', 'asnières-sur-seine',
+      'courbevoie', 'versailles', 'nanterre', 'aubervilliers', 'colombes', 'aulnay-sous-bois',
+      'rueil-malmaison', 'champigny-sur-marne', 'antibes', 'saint-maur-des-fossés', 'cannes',
+      'calais', 'béziers', 'drancy', 'mérignac', 'saint-nazaire', 'colmar', 'issy-les-moulineaux',
+      'noisy-le-grand', 'évry', 'la rochelle', 'bourges', 'hyères', 'cholet', 'meaux', 'pantin',
+      'bondy', 'montauban', 'bayonne', 'sète', 'agen', 'verdun', 'marseille', 'athis', 'hendaye'
+    ];
+    
+    // Vérifie si la ville est française (exact match ou contient)
+    const isFrenchCity = frenchCities.some(fc => cityLower.includes(fc) || fc.includes(cityLower.split(/[,\s]/)[0]));
+    if (isFrenchCity) {
+      company.country = 'FR';
+      company.countryName = 'France';
+      if (company.address) {
+        company.address.country = 'FR';
+        company.address.countryName = 'France';
+      }
+    }
+  }
+  
+  // Fallback 2: pays depuis le domaine
   if (!company.country) {
     const domain = getRegistrableDomain(sourceUrl);
     if (domain) {
