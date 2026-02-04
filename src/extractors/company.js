@@ -415,39 +415,96 @@ export function extractCompany(html, sourceUrl) {
           if (addrIndexInOriginal >= 0) {
             const afterAddress = legalTextWithNewlines.substring(addrIndexInOriginal + addressParts.length);
             
+            // Détection du contexte français : code postal français (commence par 75, 77, 78, 91, 92, 93, 94, 95)
+            const isFrenchContext = company.address?.postalCode && /^(75|77|78|91|92|93|94|95)\d{3}$/.test(company.address.postalCode);
             
-            // Recherche spécifique France en premier (priorité absolue)
-            const francePattern = /(?:^|\n|\s)\s*(France)\s*(?:\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])/im;
-            const franceMatch = afterAddress.substring(0, 100).match(francePattern);
-            if (franceMatch) {
-              const countryInfo = getCountryInfo('France');
-              if (countryInfo.code) {
-                company.country = countryInfo.code;
-                company.countryName = countryInfo.name;
-                return; // Sort immédiatement si France trouvé
+            // PRIORITÉ ABSOLUE : Si contexte français, cherche "France" en premier dans une zone large
+            if (isFrenchContext) {
+              // Cherche "France" dans les 200 premiers caractères (zone large pour capturer même si loin)
+              const francePattern = /(?:^|\n|\r\n|\s)\s*(France)\s*(?:\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])/im;
+              const franceMatch = afterAddress.substring(0, 200).match(francePattern);
+              if (franceMatch) {
+                const countryInfo = getCountryInfo('France');
+                if (countryInfo.code) {
+                  company.country = countryInfo.code;
+                  company.countryName = countryInfo.name;
+                  // Propagation immédiate à l'adresse
+                  if (company.address) {
+                    company.address.country = countryInfo.code;
+                    company.address.countryName = countryInfo.name;
+                  }
+                  return; // Sort immédiatement si France trouvé
+                }
               }
-            }
-            
-            const countryNamesEscaped = countryNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
-            const countryPattern = new RegExp(`(?:^|\\n|\\s)\\s*(${countryNamesEscaped})\\s*(?:\\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])`, 'gim');
-            
-            // PRIORITÉ : Cherche d'abord dans les 100 premiers caractères (zone prioritaire juste après l'adresse)
-            const afterAddressPriority = afterAddress.substring(0, 30);
-            let countryMatches = [...afterAddressPriority.matchAll(countryPattern)];
-            
-            // Si rien dans les 100 premiers, cherche dans les 300 caractères
-            if (countryMatches.length === 0) {
-              const afterAddressExtended = afterAddress.substring(0, 300);
-              countryMatches = [...afterAddressExtended.matchAll(countryPattern)];
-            }
-            
-            // Prend le premier pays trouvé (le plus proche de l'adresse)
-            if (countryMatches.length > 0) {
-              const firstMatch = countryMatches[0];
-              const countryInfo = getCountryInfo(firstMatch[1]);
-              if (countryInfo.code) {
-                company.country = countryInfo.code;
-                company.countryName = countryInfo.name;
+              
+              // Si contexte français mais "France" non trouvé, exclut "China" et autres pays non-européens de la recherche
+              const europeanCountries = countryNames.filter(name => {
+                const lower = name.toLowerCase();
+                return !['china', 'india', 'japan', 'brazil', 'mexico', 'south korea', 'korea', 'singapore', 'hong kong', 'south africa', 'uae', 'united arab emirates', 'saudi arabia', 'arabie saoudite'].includes(lower);
+              });
+              
+              const countryNamesEscaped = europeanCountries.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+              const countryPattern = new RegExp(`(?:^|\\n|\\s)\\s*(${countryNamesEscaped})\\s*(?:\\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])`, 'gim');
+              
+              // Cherche dans les 30 premiers caractères (zone prioritaire)
+              const afterAddressPriority = afterAddress.substring(0, 30);
+              let countryMatches = [...afterAddressPriority.matchAll(countryPattern)];
+              
+              // Si rien dans les 30 premiers, cherche dans les 300 caractères
+              if (countryMatches.length === 0) {
+                const afterAddressExtended = afterAddress.substring(0, 300);
+                countryMatches = [...afterAddressExtended.matchAll(countryPattern)];
+              }
+              
+              // Prend le premier pays trouvé (le plus proche de l'adresse)
+              if (countryMatches.length > 0) {
+                const firstMatch = countryMatches[0];
+                const countryInfo = getCountryInfo(firstMatch[1]);
+                if (countryInfo.code) {
+                  company.country = countryInfo.code;
+                  company.countryName = countryInfo.name;
+                  // Propagation immédiate à l'adresse
+                  if (company.address) {
+                    company.address.country = countryInfo.code;
+                    company.address.countryName = countryInfo.name;
+                  }
+                }
+              }
+            } else {
+              // Contexte non-français : recherche normale avec tous les pays
+              // Recherche spécifique France en premier (priorité absolue)
+              const francePattern = /(?:^|\n|\s)\s*(France)\s*(?:\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])/im;
+              const franceMatch = afterAddress.substring(0, 100).match(francePattern);
+              if (franceMatch) {
+                const countryInfo = getCountryInfo('France');
+                if (countryInfo.code) {
+                  company.country = countryInfo.code;
+                  company.countryName = countryInfo.name;
+                  return; // Sort immédiatement si France trouvé
+                }
+              }
+              
+              const countryNamesEscaped = countryNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+              const countryPattern = new RegExp(`(?:^|\\n|\\s)\\s*(${countryNamesEscaped})\\s*(?:\\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])`, 'gim');
+              
+              // PRIORITÉ : Cherche d'abord dans les 30 premiers caractères (zone prioritaire juste après l'adresse)
+              const afterAddressPriority = afterAddress.substring(0, 30);
+              let countryMatches = [...afterAddressPriority.matchAll(countryPattern)];
+              
+              // Si rien dans les 30 premiers, cherche dans les 300 caractères
+              if (countryMatches.length === 0) {
+                const afterAddressExtended = afterAddress.substring(0, 300);
+                countryMatches = [...afterAddressExtended.matchAll(countryPattern)];
+              }
+              
+              // Prend le premier pays trouvé (le plus proche de l'adresse)
+              if (countryMatches.length > 0) {
+                const firstMatch = countryMatches[0];
+                const countryInfo = getCountryInfo(firstMatch[1]);
+                if (countryInfo.code) {
+                  company.country = countryInfo.code;
+                  company.countryName = countryInfo.name;
+                }
               }
             }
           }
