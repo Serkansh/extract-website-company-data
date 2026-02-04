@@ -303,7 +303,21 @@ export function extractCompany(html, sourceUrl) {
     // Si on n'a pas encore d'adresse, essaie le format classique
     if (!company.address) {
       // Format classique (une seule chaîne à parser)
+      // IMPORTANT: Nettoie d'abord les patterns complexes avant de parser
       let addr = addressMatches[1].trim().replace(/\s+/g, ' ').replace(/[;,.]$/, '');
+      
+      // Nettoie les patterns complexes au début (ex: "421 866 344, représentée par son Président.Siège social : 32, rue...")
+      // Cherche le dernier "Siège social :" ou "siège social" et prend ce qui suit
+      const siegeMatch = addr.match(/Siège\s+social\s*[:\-]\s*(.+)$/i);
+      if (siegeMatch) {
+        addr = siegeMatch[1].trim();
+      }
+      
+      // Cherche aussi "est situé" suivi de l'adresse
+      const estSituéMatch = addr.match(/est\s+situé\s+(.+)$/i);
+      if (estSituéMatch) {
+        addr = estSituéMatch[1].trim();
+      }
       
       // Nettoie addr : enlève les textes parasites au début (plus agressif)
       addr = addr
