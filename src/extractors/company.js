@@ -312,13 +312,24 @@ export function extractCompany(html, sourceUrl) {
           const addrIndexInOriginal = legalTextWithNewlines.toLowerCase().indexOf(addr.toLowerCase());
           if (addrIndexInOriginal >= 0) {
             const afterAddress = legalTextWithNewlines.substring(addrIndexInOriginal + addr.length);
-            // Cherche le pays dans les 300 caractères suivants (peut être sur une ligne séparée)
-            const afterAddressLimited = afterAddress.substring(0, 300);
+            
             // Pattern amélioré : cherche le pays même s'il est seul sur une ligne
-            const countryPattern = /(?:^|\n|\s)(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)(?:\s|$|\n|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul)/im;
-            const countryMatchAfter = afterAddressLimited.match(countryPattern);
-            if (countryMatchAfter) {
-              const countryInfo = getCountryInfo(countryMatchAfter[1]);
+            const countryPattern = /(?:^|\n|\s)(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)(?:\s|$|\n|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul)/gim;
+            
+            // PRIORITÉ : Cherche d'abord dans les 100 premiers caractères (zone prioritaire juste après l'adresse)
+            const afterAddressPriority = afterAddress.substring(0, 100);
+            let countryMatches = [...afterAddressPriority.matchAll(countryPattern)];
+            
+            // Si rien dans les 100 premiers, cherche dans les 300 caractères
+            if (countryMatches.length === 0) {
+              const afterAddressExtended = afterAddress.substring(0, 300);
+              countryMatches = [...afterAddressExtended.matchAll(countryPattern)];
+            }
+            
+            // Prend le premier pays trouvé (le plus proche de l'adresse)
+            if (countryMatches.length > 0) {
+              const firstMatch = countryMatches[0];
+              const countryInfo = getCountryInfo(firstMatch[1]);
               countryFromCity = countryInfo.code;
               countryNameFromCity = countryInfo.name;
             }
@@ -393,18 +404,28 @@ export function extractCompany(html, sourceUrl) {
         ].filter(Boolean).join(' ');
         
         if (addressParts) {
-          // Cherche le pays uniquement dans les 300 caractères après l'adresse
+          // Cherche le pays uniquement dans le contexte de l'adresse
           const addrIndexInOriginal = legalTextWithNewlines.toLowerCase().indexOf(addressParts.toLowerCase());
           if (addrIndexInOriginal >= 0) {
             const afterAddress = legalTextWithNewlines.substring(addrIndexInOriginal + addressParts.length);
-            const afterAddressLimited = afterAddress.substring(0, 300);
             
             const countryNamesEscaped = countryNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
-            const countryPattern = new RegExp(`(?:^|\\n|\\s)\\s*(${countryNamesEscaped})\\s*(?:\\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])`, 'im');
-            const countryStandalone = afterAddressLimited.match(countryPattern);
+            const countryPattern = new RegExp(`(?:^|\\n|\\s)\\s*(${countryNamesEscaped})\\s*(?:\\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])`, 'gim');
             
-            if (countryStandalone) {
-              const countryInfo = getCountryInfo(countryStandalone[1]);
+            // PRIORITÉ : Cherche d'abord dans les 100 premiers caractères (zone prioritaire juste après l'adresse)
+            const afterAddressPriority = afterAddress.substring(0, 100);
+            let countryMatches = [...afterAddressPriority.matchAll(countryPattern)];
+            
+            // Si rien dans les 100 premiers, cherche dans les 300 caractères
+            if (countryMatches.length === 0) {
+              const afterAddressExtended = afterAddress.substring(0, 300);
+              countryMatches = [...afterAddressExtended.matchAll(countryPattern)];
+            }
+            
+            // Prend le premier pays trouvé (le plus proche de l'adresse)
+            if (countryMatches.length > 0) {
+              const firstMatch = countryMatches[0];
+              const countryInfo = getCountryInfo(firstMatch[1]);
               if (countryInfo.code) {
                 company.country = countryInfo.code;
                 company.countryName = countryInfo.name;
