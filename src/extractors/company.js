@@ -316,9 +316,15 @@ export function extractCompany(html, sourceUrl) {
             // Pattern amélioré : cherche le pays même s'il est seul sur une ligne
             const countryPattern = /(?:^|\n|\s)(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)(?:\s|$|\n|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul)/gim;
             
-            // PRIORITÉ : Cherche d'abord dans les 100 premiers caractères (zone prioritaire juste après l'adresse)
-            const afterAddressPriority = afterAddress.substring(0, 30);
-            let countryMatches = [...afterAddressPriority.matchAll(countryPattern)];
+            // ULTRA PRIORITÉ : Cherche d'abord dans les 20 premiers caractères (juste après l'adresse)
+            const afterAddressUltraPriority = afterAddress.substring(0, 10);
+            let countryMatches = [...afterAddressUltraPriority.matchAll(countryPattern)];
+            
+            // Si rien dans les 20 premiers, cherche dans les 30 caractères
+            if (countryMatches.length === 0) {
+              const afterAddressPriority = afterAddress.substring(0, 30);
+              countryMatches = [...afterAddressPriority.matchAll(countryPattern)];
+            }
             
             // Si rien dans les 100 premiers, cherche dans les 300 caractères
             if (countryMatches.length === 0) {
@@ -409,7 +415,20 @@ export function extractCompany(html, sourceUrl) {
           if (addrIndexInOriginal >= 0) {
             const afterAddress = legalTextWithNewlines.substring(addrIndexInOriginal + addressParts.length);
             
-            const countryNamesEscaped = countryNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+            
+            // Recherche spécifique France en premier (priorité absolue)
+            const francePattern = /(?:^|\n|\s)\s*(France)\s*(?:\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])/im;
+            const franceMatch = afterAddress.substring(0, 50).match(francePattern);
+            if (franceMatch) {
+              const countryInfo = getCountryInfo('France');
+              if (countryInfo.code) {
+                company.country = countryInfo.code;
+                company.countryName = countryInfo.name;
+                return; // Sort immédiatement si France trouvé
+              }
+            }
+            
+            const countryNamesEscaped = countryNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\const countryNamesEscaped = countryNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');')).join('|');
             const countryPattern = new RegExp(`(?:^|\\n|\\s)\\s*(${countryNamesEscaped})\\s*(?:\\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])`, 'gim');
             
             // PRIORITÉ : Cherche d'abord dans les 100 premiers caractères (zone prioritaire juste après l'adresse)
