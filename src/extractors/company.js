@@ -631,5 +631,20 @@ export function extractCompany(html, sourceUrl) {
     }
   }
   
+  // PROTECTION FINALE ABSOLUE : Si on a un code postal français mais le pays est incorrect, force FR
+  // Cette protection s'exécute en dernier pour corriger tout faux positif
+  if (company.address?.postalCode) {
+    const isFrenchPostalCodeFinal = /^(75|77|78|91|92|93|94|95)\d{3}$/.test(company.address.postalCode);
+    if (isFrenchPostalCodeFinal && company.country !== 'FR') {
+      // Force FR si code postal français mais pays incorrect (ex: CN, IN, etc.)
+      company.country = 'FR';
+      company.countryName = 'France';
+      if (company.address) {
+        company.address.country = 'FR';
+        company.address.countryName = 'France';
+      }
+    }
+  }
+  
   return company;
 }
