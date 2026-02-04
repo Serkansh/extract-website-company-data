@@ -258,16 +258,25 @@ export function extractCompany(html, sourceUrl) {
       // Si street ne commence pas par un numéro suivi d'une rue, essaie de trouver le début réel
       // Exemple: "33 3 88 22 02 02Origami16 rue du Bataillon" -> "16 rue du Bataillon"
       // Exemple: "est situé 9, rue de Liège" -> "9, rue de Liège"
+      // Exemple: "02Origami16 rue du Bataillon" -> "16 rue du Bataillon"
       if (!/^\d+\s*[,]?\s*[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]/i.test(street)) {
+        // Cherche un pattern d'adresse valide (numéro + rue) même s'il y a du texte avant
         const realAddressMatch = street.match(/(\d+\s*[,]?\s*[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ][^,\n]{5,}?)(?:,|\s+\d{5}|$)/i);
         if (realAddressMatch) {
           street = realAddressMatch[1].trim();
         }
       }
       
-      // Nettoie encore une fois pour enlever les restes de phrases parasites
+      // Nettoie encore une fois pour enlever les restes de phrases parasites et mots collés
       street = street
         .replace(/^(?:est\s+situé\s*|siège\s+social\s*[:\-]\s*|représentée\s+par\s+son\s+Président\.?\s*Siège\s+social\s*[:\-]\s*)/i, '')
+        // Enlève les mots collés avant un numéro (ex: "02Origami16" -> "16")
+        .replace(/^[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]+\d+/i, (match) => {
+          const numMatch = match.match(/\d+/);
+          return numMatch ? numMatch[0] : match;
+        })
+        // Enlève les numéros de téléphone collés (ex: "02" au début si suivi d'un mot)
+        .replace(/^0\d\s*[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]+(\d+)/i, '$1')
         .trim();
       
       // Nettoie city
@@ -318,6 +327,9 @@ export function extractCompany(html, sourceUrl) {
       if (estSituéMatch) {
         addr = estSituéMatch[1].trim();
       }
+      
+      // Enlève les numéros SIRET/SIREN au début même s'ils sont suivis de texte (ex: "421 866 344, représentée")
+      addr = addr.replace(/^[\d\s]{8,}(?:,\s*représentée|\.\s*représentée)/i, '');
       
       // Nettoie addr : enlève les textes parasites au début (plus agressif)
       addr = addr
@@ -494,7 +506,7 @@ export function extractCompany(html, sourceUrl) {
       'orléans', 'mulhouse', 'rouen', 'caen', 'nancy', 'argenteuil', 'montreuil',
       'roubaix', 'tourcoing', 'nanterre', 'avignon', 'créteil', 'dunkirk', 'poitiers', 'asnières-sur-seine',
       'courbevoie', 'versailles', 'vitry-sur-seine', 'aulnay-sous-bois', 'colombes', 'la rochelle',
-      'verdun', 'athis', 'hendaye', 'bastia', 'val d\'isère', 'val-d\'isère', 'corsica', 'corse'
+      'verdun', 'athis', 'hendaye', 'bastia', 'val d\'isère', 'val-d\'isère', 'corsica', 'corse', 'corte', 'ajaccio'
     ];
     
     const isFrenchCity = company.address?.city && frenchCities.some(city => 
