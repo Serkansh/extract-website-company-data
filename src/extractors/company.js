@@ -363,11 +363,11 @@ export function extractCompany(html, sourceUrl) {
         
         // PROTECTION FINALE : Si on a un code postal français, force FR par défaut si pas de pays trouvé
         // Cela évite que "China" ou d'autres pays soient détectés ailleurs dans le code
-        const isFrenchPostalCode = /^(75|77|78|91|92|93|94|95)\d{3}$/.test(postalCode);
+        const isFrenchPostalCodeHere = /^(75|77|78|91|92|93|94|95)\d{3}$/.test(postalCode);
         let finalCountry = countryFromCity || company.country || null;
         let finalCountryName = countryNameFromCity || company.countryName || null;
         
-        if (isFrenchPostalCode && !finalCountry) {
+        if (isFrenchPostalCodeHere && !finalCountry) {
           finalCountry = 'FR';
           finalCountryName = 'France';
           // Propagation immédiate à company
