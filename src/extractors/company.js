@@ -439,6 +439,16 @@ export function extractCompany(html, sourceUrl) {
             
             // PRIORITÉ ABSOLUE : Si contexte français, cherche "France" en premier dans une zone large
             if (isFrenchContext) {
+              // PROTECTION FINALE : Si on a un code postal français mais pas encore de pays, on force FR par défaut
+              // Cela évite que "China" ou d'autres pays soient détectés ailleurs dans le code
+              if (!company.country) {
+                company.country = 'FR';
+                company.countryName = 'France';
+                if (company.address) {
+                  company.address.country = 'FR';
+                  company.address.countryName = 'France';
+                }
+              }
               // Cherche "France" dans les 200 premiers caractères (zone large pour capturer même si loin)
               const francePattern = /(?:^|\n|\r\n|\s)\s*(France)\s*(?:\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])/im;
               const franceMatch = afterAddress.substring(0, 200).match(francePattern);
