@@ -530,19 +530,36 @@ export function extractCompany(html, sourceUrl) {
         }
       } else {
         // PRIORITÉ 3 : Si pas d'adresse, cherche dans tout le texte (mais avec validation)
+        // Détection du contexte français : code postal français (commence par 75, 77, 78, 91, 92, 93, 94, 95)
+        // Même si on n'a pas d'adresse complète, on peut avoir un code postal dans le texte
+        const postalCodeMatch = legalText.match(/\b(75|77|78|91|92|93|94|95)\d{3}\b/);
+        const isFrenchContext = !!postalCodeMatch;
+        
         // Liste de tous les noms de pays supportés (en plusieurs langues)
-        const countryNames = [
-          'France', 'United Kingdom', 'UK', 'Great Britain', 'Germany', 'Deutschland',
-          'Spain', 'España', 'Italy', 'Italia', 'Belgium', 'Belgique', 'Switzerland', 'Suisse',
-          'Netherlands', 'Nederland', 'Austria', 'Österreich', 'Portugal',
-          'United States', 'USA', 'United States of America', 'Canada', 'Australia', 'New Zealand',
-          'Japan', 'China', 'India', 'Brazil', 'Mexico', 'South Korea', 'Korea',
-          'Singapore', 'Hong Kong', 'Ireland', 'Poland', 'Pologne',
-          'Czech Republic', 'Sweden', 'Suède', 'Norway', 'Norvège', 'Denmark', 'Danemark',
-          'Finland', 'Finlande', 'Greece', 'Grèce', 'Romania', 'Roumanie',
-          'Hungary', 'Hongrie', 'Russia', 'Russie', 'Turkey', 'Turquie',
-          'South Africa', 'Israel', 'UAE', 'United Arab Emirates', 'Saudi Arabia', 'Arabie Saoudite'
-        ];
+        // Si contexte français, exclut les pays non-européens
+        const countryNames = isFrenchContext
+          ? [
+              'France', 'United Kingdom', 'UK', 'Great Britain', 'Germany', 'Deutschland',
+              'Spain', 'España', 'Italy', 'Italia', 'Belgium', 'Belgique', 'Switzerland', 'Suisse',
+              'Netherlands', 'Nederland', 'Austria', 'Österreich', 'Portugal',
+              'United States', 'USA', 'United States of America', 'Canada', 'Australia', 'New Zealand',
+              'Ireland', 'Poland', 'Pologne',
+              'Czech Republic', 'Sweden', 'Suède', 'Norway', 'Norvège', 'Denmark', 'Danemark',
+              'Finland', 'Finlande', 'Greece', 'Grèce', 'Romania', 'Roumanie',
+              'Hungary', 'Hongrie', 'Russia', 'Russie', 'Turkey', 'Turquie'
+            ]
+          : [
+              'France', 'United Kingdom', 'UK', 'Great Britain', 'Germany', 'Deutschland',
+              'Spain', 'España', 'Italy', 'Italia', 'Belgium', 'Belgique', 'Switzerland', 'Suisse',
+              'Netherlands', 'Nederland', 'Austria', 'Österreich', 'Portugal',
+              'United States', 'USA', 'United States of America', 'Canada', 'Australia', 'New Zealand',
+              'Japan', 'China', 'India', 'Brazil', 'Mexico', 'South Korea', 'Korea',
+              'Singapore', 'Hong Kong', 'Ireland', 'Poland', 'Pologne',
+              'Czech Republic', 'Sweden', 'Suède', 'Norway', 'Norvège', 'Denmark', 'Danemark',
+              'Finland', 'Finlande', 'Greece', 'Grèce', 'Romania', 'Roumanie',
+              'Hungary', 'Hongrie', 'Russia', 'Russie', 'Turkey', 'Turquie',
+              'South Africa', 'Israel', 'UAE', 'United Arab Emirates', 'Saudi Arabia', 'Arabie Saoudite'
+            ];
         
         // Utilise la version avec sauts de ligne pour mieux détecter les pays sur ligne séparée
         const countryNamesEscaped = countryNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
