@@ -240,12 +240,14 @@ export function extractCompany(html, sourceUrl) {
         // Enlève les numéros SIRET/SIREN/RCS au début (format: "752 808 113" ou "SIRET: 123456789")
         .replace(/^(?:SIRET|SIREN|RCS|Numéro|N°|SIREN|RCS\s+Paris)\s*[:\-]?\s*[\d\s]{8,}/i, '')
         .replace(/^[\d\s]{8,}(?:\s+et\s+dont\s+le\s+siège\s+social)/i, '')
-        // Enlève les phrases parasites avant l'adresse
-        .replace(/^(?:et\s+dont\s+le\s+siège\s+social\s+est\s+situé|dont\s+le\s+siège\s+social\s+est\s+situé|siège\s+social\s*[:\-]\s*|représentée\s+par\s+son\s+Président\.?\s*Siège\s+social\s*[:\-]\s*|représentée\s+par|capital\s+de[\s\d,]+euros?)/i, '')
+        // Enlève les phrases parasites avant l'adresse (plus agressif)
+        .replace(/^(?:et\s+dont\s+le\s+siège\s+social\s+est\s+situé|dont\s+le\s+siège\s+social\s+est\s+situé|siège\s+social\s*[:\-]\s*|représentée\s+par\s+son\s+Président\.?\s*Siège\s+social\s*[:\-]\s*|représentée\s+par|capital\s+de[\s\d,]+euros?|est\s+situé\s*)/i, '')
         // Enlève les numéros de téléphone (format: "33 3 88 22 02 02" ou "+33 1 42 60 94 90")
         .replace(/\b(?:\+33|0|33)\s*[\d\s().-]{8,}\b/g, '')
         // Enlève les numéros longs collés (ex: "58490092871")
         .replace(/^\d{10,}\s+/g, '')
+        // Enlève les montants en euros au début (ex: "10 000,00 EUROS et dont")
+        .replace(/^[\d\s,]+EUROS?\s+et\s+dont\s+le\s+siège\s+social\s+est\s+situé\s*/i, '')
         // Enlève les mots-clés HTML/formulaire
         .replace(/\s*(Phone|View\s+on|Search|Contact|Get\s+in\s+touch|Please\s+enable|Name\s+\*|Email\s+Address|Subject|Request|Application|Country\s+\*|Company\s+\*|Message|Consent|Send\s+Message).*$/i, '')
         // Nettoie les espaces multiples et les caractères parasites
@@ -255,12 +257,18 @@ export function extractCompany(html, sourceUrl) {
       
       // Si street ne commence pas par un numéro suivi d'une rue, essaie de trouver le début réel
       // Exemple: "33 3 88 22 02 02Origami16 rue du Bataillon" -> "16 rue du Bataillon"
-      if (!/^\d+\s+[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]/i.test(street)) {
-        const realAddressMatch = street.match(/(\d+\s+[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ][^,\n]{5,}?)(?:,|\s+\d{5}|$)/i);
+      // Exemple: "est situé 9, rue de Liège" -> "9, rue de Liège"
+      if (!/^\d+\s*[,]?\s*[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]/i.test(street)) {
+        const realAddressMatch = street.match(/(\d+\s*[,]?\s*[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ][^,\n]{5,}?)(?:,|\s+\d{5}|$)/i);
         if (realAddressMatch) {
           street = realAddressMatch[1].trim();
         }
       }
+      
+      // Nettoie encore une fois pour enlever les restes de phrases parasites
+      street = street
+        .replace(/^(?:est\s+situé\s*|siège\s+social\s*[:\-]\s*|représentée\s+par\s+son\s+Président\.?\s*Siège\s+social\s*[:\-]\s*)/i, '')
+        .trim();
       
       // Nettoie city
       city = city
@@ -297,17 +305,19 @@ export function extractCompany(html, sourceUrl) {
       // Format classique (une seule chaîne à parser)
       let addr = addressMatches[1].trim().replace(/\s+/g, ' ').replace(/[;,.]$/, '');
       
-      // Nettoie addr : enlève les textes parasites au début
+      // Nettoie addr : enlève les textes parasites au début (plus agressif)
       addr = addr
         // Enlève les numéros SIRET/SIREN/RCS au début
         .replace(/^(?:SIRET|SIREN|RCS|Numéro|N°)\s*[:\-]?\s*[\d\s]{8,}/i, '')
         .replace(/^[\d\s]{8,}(?:\s+et\s+dont\s+le\s+siège\s+social)/i, '')
-        // Enlève les phrases parasites
-        .replace(/^(?:et\s+dont\s+le\s+siège\s+social\s+est\s+situé|dont\s+le\s+siège\s+social\s+est\s+situé|siège\s+social\s*[:\-]\s*|représentée\s+par\s+son\s+Président\.?\s*Siège\s+social\s*[:\-]\s*|représentée\s+par)/i, '')
+        // Enlève les phrases parasites (plus complet)
+        .replace(/^(?:et\s+dont\s+le\s+siège\s+social\s+est\s+situé|dont\s+le\s+siège\s+social\s+est\s+situé|siège\s+social\s*[:\-]\s*|représentée\s+par\s+son\s+Président\.?\s*Siège\s+social\s*[:\-]\s*|représentée\s+par|est\s+situé\s*)/i, '')
         // Enlève les numéros de téléphone
         .replace(/\b(?:\+33|0|33)\s*[\d\s().-]{8,}\b/g, '')
         // Enlève les numéros longs collés
         .replace(/^\d{10,}\s+/g, '')
+        // Enlève les montants en euros au début (ex: "10 000,00 EUROS et dont")
+        .replace(/^[\d\s,]+EUROS?\s+et\s+dont\s+le\s+siège\s+social\s+est\s+situé\s*/i, '')
         // Enlève les mots-clés HTML/formulaire
         .replace(/\s*(Phone|View\s+on|Search|Contact|Get\s+in\s+touch|Please\s+enable|Name\s+\*|Email\s+Address|Subject|Request|Application|Country\s+\*|Company\s+\*|Message|Consent|Send\s+Message).*$/i, '')
         // Nettoie les espaces et caractères parasites
@@ -316,12 +326,19 @@ export function extractCompany(html, sourceUrl) {
         .trim();
       
       // Si addr ne commence pas par un numéro suivi d'une rue, essaie de trouver le début réel
-      if (!/^\d+\s+[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]/i.test(addr)) {
-        const realAddressMatch = addr.match(/(\d+\s+[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ][^,\n]{5,}?)(?:,|\s+\d{5}|$)/i);
+      // Exemple: "421 866 344, représentée par son Président.Siège social : 32, rue edmond Rostand" -> "32, rue edmond Rostand"
+      if (!/^\d+\s*[,]?\s*[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]/i.test(addr)) {
+        // Cherche un pattern d'adresse valide dans le texte
+        const realAddressMatch = addr.match(/(\d+\s*[,]?\s*[a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ][^,\n]{5,}?)(?:,|\s+\d{5}|$)/i);
         if (realAddressMatch) {
           addr = realAddressMatch[1].trim();
         }
       }
+      
+      // Nettoie encore une fois pour enlever les restes de phrases parasites
+      addr = addr
+        .replace(/^(?:est\s+situé\s*|siège\s+social\s*[:\-]\s*|représentée\s+par\s+son\s+Président\.?\s*Siège\s+social\s*[:\-]\s*|[\d\s]{8,},\s*représentée\s+par\s+son\s+Président\.?\s*Siège\s+social\s*[:\-]\s*)/i, '')
+        .trim();
       
       // Si addr contient des caractères suspects (HTML, formulaire), on rejette
       if (addr.length > 200 || /[<>{}]|form|input|select|button|textarea/i.test(addr)) {
@@ -463,7 +480,7 @@ export function extractCompany(html, sourceUrl) {
       'orléans', 'mulhouse', 'rouen', 'caen', 'nancy', 'argenteuil', 'montreuil',
       'roubaix', 'tourcoing', 'nanterre', 'avignon', 'créteil', 'dunkirk', 'poitiers', 'asnières-sur-seine',
       'courbevoie', 'versailles', 'vitry-sur-seine', 'aulnay-sous-bois', 'colombes', 'la rochelle',
-      'verdun', 'athis', 'hendaye', 'bastia', 'val d\'isère', 'val-d\'isère'
+      'verdun', 'athis', 'hendaye', 'bastia', 'val d\'isère', 'val-d\'isère', 'corsica', 'corse'
     ];
     
     const isFrenchCity = company.address?.city && frenchCities.some(city => 
