@@ -3,3 +3,7 @@ node_modules/
 storage/
 *.log
 .DS_Store
+
+# Scripts d'automatisation (ne pas commiter)
+scripts/auto-optimize.js
+*.local.js

@@ -131,8 +131,7 @@ function shouldUseDeepCrawl({ keyPages, pagesVisited, usedPlaywright, includeCon
   if (includeContacts && emailsCount === 0 && phonesCount === 0) return true;
   if (includeCompany) {
     const missingLegal = !company?.legalName;
-    const missingAddr = !company?.address;
-    if (missingLegal || missingAddr) return true;
+    if (missingLegal) return true;
   }
   
   return false;
@@ -453,10 +452,10 @@ export async function crawlDomain(startUrl, options) {
     
     if (includeCompany) {
       const company = extractCompany(html, url);
-      if (!domainData.company) domainData.company = { name: null, legalName: null, country: null, countryName: null, address: null, openingHours: null };
+      if (!domainData.company) domainData.company = { name: null, legalName: null, country: null, countryName: null };
 
       // Détecte si c'est une page légale (legal/privacy/mentions légales)
-      // Ces pages ont priorité absolue pour country et address (siège social)
+      // Ces pages ont priorité absolue pour country
       const urlLower = url.toLowerCase();
       const isLegalPage = urlLower.includes('/legal') || 
                          urlLower.includes('/privacy') || 
@@ -467,38 +466,21 @@ export async function crawlDomain(startUrl, options) {
 
       // Merge: stratégie différente selon le type de page
       if (isLegalPage) {
-        // PRIORITÉ ABSOLUE pour les pages légales : on écrase country et address même s'ils existent déjà
-        // (car les pages contact peuvent contenir des bureaux internationaux, pas le siège social)
+        // PRIORITÉ ABSOLUE pour les pages légales : on écrase country même s'il existe déjà
         if (company.name) domainData.company.name = company.name;
         if (company.legalName) domainData.company.legalName = company.legalName;
         if (company.country) {
           domainData.company.country = company.country;
           domainData.company.countryName = company.countryName;
         }
-        if (company.address) domainData.company.address = company.address;
-        if (company.openingHours) domainData.company.openingHours = company.openingHours;
       } else {
         // Pour les autres pages : on ne remplace que les champs manquants
         if (!domainData.company.name && company.name) domainData.company.name = company.name;
         if (!domainData.company.legalName && company.legalName) domainData.company.legalName = company.legalName;
-        // IMPORTANT: Ne pas écraser country/address depuis les pages non-légales si elles existent déjà
-        // (pour éviter d'écraser les données de la page légale avec celles de la page contact)
+        // IMPORTANT: Ne pas écraser country depuis les pages non-légales si il existe déjà
         if (!domainData.company.country && company.country) {
           domainData.company.country = company.country;
           domainData.company.countryName = company.countryName;
-        }
-        if (!domainData.company.address && company.address) domainData.company.address = company.address;
-        if (!domainData.company.openingHours && company.openingHours) domainData.company.openingHours = company.openingHours;
-      }
-      
-      // Propagation bidirectionnelle country/countryName (après merge)
-      if (domainData.company.address) {
-        if (domainData.company.country && !domainData.company.address.country) {
-          domainData.company.address.country = domainData.company.country;
-          domainData.company.address.countryName = domainData.company.countryName;
-        } else if (domainData.company.address.country && !domainData.company.country) {
-          domainData.company.country = domainData.company.address.country;
-          domainData.company.countryName = domainData.company.address.countryName;
         }
       }
     }
