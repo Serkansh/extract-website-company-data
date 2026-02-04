@@ -428,7 +428,7 @@ export function extractCompany(html, sourceUrl) {
               }
             }
             
-            const countryNamesEscaped = countryNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\const countryNamesEscaped = countryNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');')).join('|');
+            const countryNamesEscaped = countryNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
             const countryPattern = new RegExp(`(?:^|\\n|\\s)\\s*(${countryNamesEscaped})\\s*(?:\\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])`, 'gim');
             
             // PRIORITÉ : Cherche d'abord dans les 100 premiers caractères (zone prioritaire juste après l'adresse)
