@@ -451,8 +451,27 @@ export function extractCompany(html, sourceUrl) {
   
   // 3. Pays depuis le texte (mentions légales) ou domaine (fallback)
   if (!company.country) {
-    // Détection du contexte français : code postal français (commence par 75, 77, 78, 91, 92, 93, 94, 95)
+    // Détection du contexte français : code postal français OU ville française connue
     const isFrenchPostalCode = company.address?.postalCode && /^(75|77|78|91|92|93|94|95)\d{3}$/.test(company.address.postalCode);
+    
+    // Liste de villes françaises connues (pour détecter le pays même sans code postal)
+    const frenchCities = [
+      'paris', 'lyon', 'marseille', 'toulouse', 'nice', 'nantes', 'strasbourg', 'montpellier',
+      'bordeaux', 'lille', 'rennes', 'reims', 'saint-étienne', 'toulon', 'grenoble', 'dijon',
+      'angers', 'villeurbanne', 'saint-denis', 'le havre', 'nîmes', 'aix-en-provence', 'clermont-ferrand',
+      'brest', 'tours', 'limoges', 'amiens', 'perpignan', 'metz', 'besançon', 'boulogne-billancourt',
+      'orléans', 'mulhouse', 'rouen', 'caen', 'nancy', 'argenteuil', 'montreuil',
+      'roubaix', 'tourcoing', 'nanterre', 'avignon', 'créteil', 'dunkirk', 'poitiers', 'asnières-sur-seine',
+      'courbevoie', 'versailles', 'vitry-sur-seine', 'aulnay-sous-bois', 'colombes', 'la rochelle',
+      'verdun', 'athis', 'hendaye', 'bastia', 'val d\'isère', 'val-d\'isère'
+    ];
+    
+    const isFrenchCity = company.address?.city && frenchCities.some(city => 
+      company.address.city.toLowerCase().includes(city.toLowerCase()) || 
+      city.toLowerCase().includes(company.address.city.toLowerCase())
+    );
+    
+    const isFrenchContext = isFrenchPostalCode || isFrenchCity;
     
     // Cherche le pays dans le texte (ex: "France", "registered in France", "in France")
     // Si contexte français, exclut les pays non-européens
