@@ -382,8 +382,16 @@ export function extractCompany(html, sourceUrl) {
   
   // 3. Pays depuis le texte (mentions légales) ou domaine (fallback)
   if (!company.country) {
+    // Détection du contexte français : code postal français (commence par 75, 77, 78, 91, 92, 93, 94, 95)
+    const isFrenchPostalCode = company.address?.postalCode && /^(75|77|78|91|92|93|94|95)\d{3}$/.test(company.address.postalCode);
+    
     // Cherche le pays dans le texte (ex: "France", "registered in France", "in France")
-    const countryMatches = legalText.match(/\b(?:registered\s+in|in|at)\s+(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)\b/i);
+    // Si contexte français, exclut les pays non-européens
+    const countryPattern = isFrenchPostalCode
+      ? /\b(?:registered\s+in|in|at)\s+(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie)\b/i
+      : /\b(?:registered\s+in|in|at)\s+(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)\b/i;
+    
+    const countryMatches = legalText.match(countryPattern);
     if (countryMatches) {
       const countryInfo = getCountryInfo(countryMatches[1]);
       company.country = countryInfo.code;
