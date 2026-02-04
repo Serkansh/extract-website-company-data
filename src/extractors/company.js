@@ -317,7 +317,7 @@ export function extractCompany(html, sourceUrl) {
             const countryPattern = /(?:^|\n|\s)(France|United\s+Kingdom|UK|Great\s+Britain|Germany|Deutschland|Spain|España|Italy|Italia|Belgium|Belgique|Switzerland|Suisse|Netherlands|Nederland|Austria|Österreich|Portugal|United\s+States|USA|Canada|Australia|New\s+Zealand|Japan|China|India|Brazil|Mexico|South\s+Korea|Korea|Singapore|Hong\s+Kong|Ireland|Poland|Pologne|Czech\s+Republic|Sweden|Suède|Norway|Norvège|Denmark|Danemark|Finland|Finlande|Greece|Grèce|Romania|Roumanie|Hungary|Hongrie|Russia|Russie|Turkey|Turquie|South\s+Africa|Israel|UAE|United\s+Arab\s+Emirates|Saudi\s+Arabia|Arabie\s+Saoudite)(?:\s|$|\n|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul)/gim;
             
             // PRIORITÉ : Cherche d'abord dans les 100 premiers caractères (zone prioritaire juste après l'adresse)
-            const afterAddressPriority = afterAddress.substring(0, 50);
+            const afterAddressPriority = afterAddress.substring(0, 30);
             let countryMatches = [...afterAddressPriority.matchAll(countryPattern)];
             
             // Si rien dans les 100 premiers, cherche dans les 300 caractères
@@ -413,7 +413,7 @@ export function extractCompany(html, sourceUrl) {
             const countryPattern = new RegExp(`(?:^|\\n|\\s)\\s*(${countryNamesEscaped})\\s*(?:\\n|$|Phone|Tel|Téléphone|RCS|SIRET|SIREN|Immatricul|[A-Z])`, 'gim');
             
             // PRIORITÉ : Cherche d'abord dans les 100 premiers caractères (zone prioritaire juste après l'adresse)
-            const afterAddressPriority = afterAddress.substring(0, 50);
+            const afterAddressPriority = afterAddress.substring(0, 30);
             let countryMatches = [...afterAddressPriority.matchAll(countryPattern)];
             
             // Si rien dans les 100 premiers, cherche dans les 300 caractères
