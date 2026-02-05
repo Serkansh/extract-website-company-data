@@ -16,12 +16,11 @@ if (!APIFY_TOKEN) {
 }
 
 const TEST_SITES = [
-  'https://www.hotel-fontarabie.com',
-  'https://www.lefregateprovence.com/',
-  'http://www.hotellegalice-aix.com/',
-  'https://www.legayant-hotel.fr',
-  'https://www.grand-monarque.com/fr/',
-  'https://www.legrandquartier.com/',
+  'https://www.courcheneige.com/',
+  'https://dauphin-arcachon.com/',
+  'https://www.paris-hotel-dauphin.com/',
+  'https://www.ledauphinhotel.com/',
+  'https://www.lediana.com/',
 ];
 
 async function runTest(client, url) {

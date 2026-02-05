@@ -83,17 +83,17 @@ function extractSocialHandle(url, platform) {
           }
         }
         const igMatch = pathname.match(/^\/([^\/\?]+)/);
-        return igMatch ? igMatch[1].replace('@', '') : null;
+        return igMatch && igMatch[1] ? igMatch[1].replace('@', '') : null;
         
       case 'twitter':
       case 'x':
         // Exclut les liens qui ne sont pas vraiment Twitter/X (vérifie le domaine)
-        if (!urlObj.hostname.toLowerCase().includes('twitter.com') && 
-            !urlObj.hostname.toLowerCase().includes('x.com')) {
+        const hostname = urlObj.hostname ? urlObj.hostname.toLowerCase() : '';
+        if (!hostname.includes('twitter.com') && !hostname.includes('x.com')) {
           return null;
         }
         const twMatch = pathname.match(/^\/([^\/\?]+)/);
-        return twMatch ? twMatch[1].replace('@', '') : null;
+        return twMatch && twMatch[1] ? twMatch[1].replace('@', '') : null;
         
       case 'tiktok':
         const ttMatch = pathname.match(/@([^\/\?]+)/);
