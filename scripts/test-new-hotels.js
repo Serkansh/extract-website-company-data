@@ -16,11 +16,13 @@ if (!APIFY_TOKEN) {
 }
 
 const TEST_SITES = [
-  'https://www.le-guyane-hotel.com/',
-  'https://legeneralhotel.com/fr/',
-  'https://www.lemhotelhonfleur.com/',
-  'https://www.letouquetgolfresort.com/fr/notre-hotel/le-manoir-hotel/',
-  'https://www.lenexhotel.com/',
+  'http://www.hotel-leliondor.fr/',
+  'https://hotellittreparis.com/fr/',
+  'https://www.lodgepark.com/fr',
+  'https://www.hotel-le-louvre-cherbourg.com/',
+  'https://www.lumierehotel.fr/',
+  'https://hotelmparis.com/fr/',
+  'http://www.hotelmagellan.com',
 ];
 
 async function runTest(client, url) {

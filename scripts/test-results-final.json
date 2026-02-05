@@ -1,155 +1,82 @@
 [
   {
-    "url": "https://www.le-guyane-hotel.com/",
+    "url": "http://www.hotel-leliondor.fr/",
     "status": "success",
     "data": {
-      "domain": "le-guyane-hotel.com",
-      "finalUrl": "https://www.le-guyane-hotel.com/",
+      "domain": "hotel-leliondor.fr",
+      "finalUrl": "https://www.hotel-leliondor.fr/fr/",
       "keyPages": {
-        "contact": "https://www.le-guyane-hotel.com/contact",
+        "contact": "https://www.hotel-leliondor.fr/fr/contact/",
         "about": null,
-        "legal": "https://www.le-guyane-hotel.com/mentionslegales",
-        "privacy": "https://www.le-guyane-hotel.com/privacy"
+        "legal": "https://www.hotel-leliondor.fr/fr/mentions-legales/",
+        "privacy": null
       },
       "pagesVisited": [
-        "https://www.le-guyane-hotel.com/",
-        "https://www.le-guyane-hotel.com/contact",
-        "https://www.le-guyane-hotel.com/mentionslegales",
-        "https://www.le-guyane-hotel.com/privacy",
-        "https://www.le-guyane-hotel.com/hotel",
-        "https://www.le-guyane-hotel.com/location-salles",
-        "https://www.le-guyane-hotel.com/condition-g%C3%A9n%C3%A9rale-de-vente",
-        "https://www.le-guyane-hotel.com/vieprivee"
+        "https://www.hotel-leliondor.fr/fr/",
+        "https://www.hotel-leliondor.fr/fr/contact",
+        "https://www.hotel-leliondor.fr/fr/mentions-legales",
+        "https://www.hotel-leliondor.fr/fr/panier",
+        "https://www.hotel-leliondor.fr/fr/",
+        "https://www.hotel-leliondor.fr/en/",
+        "https://www.hotel-leliondor.fr/fr/hotel",
+        "https://www.hotel-leliondor.fr/fr/hotel/chambre-premium"
       ],
       "emails": [
         {
-          "value": "guyane.hotel@gmail.com",
-          "type": "general",
-          "priority": "primary",
-          "signals": [
-            "mailto"
-          ],
-          "sourceUrl": "https://www.le-guyane-hotel.com/",
-          "snippet": "✉️ guyane.hotel@gmail.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "cecile.nguyen973@orange.fr",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.le-guyane-hotel.com/mentionslegales",
-          "snippet": "97300 Cayenne Adresse électronique : cecile.nguyen973@orange.fr Téléphone : 0594382828 N° Re",
-          "foundIn": "text"
-        }
-      ],
-      "phones": [
-        {
-          "valueRaw": "05 94 38 28 28",
-          "valueE164": "+33594382828",
-          "priority": "primary",
-          "signals": [
-            "tel"
-          ],
-          "sourceUrl": "https://www.le-guyane-hotel.com/",
-          "snippet": "05 94 38 28 28"
-        }
-      ],
-      "primaryEmail": "guyane.hotel@gmail.com",
-      "primaryPhone": "+33594382828"
-    },
-    "issues": []
-  },
-  {
-    "url": "https://legeneralhotel.com/fr/",
-    "status": "success",
-    "data": {
-      "domain": "legeneralhotel.com",
-      "finalUrl": "https://legeneralhotel.com/fr",
-      "keyPages": {
-        "contact": "https://legeneralhotel.com/fr/contact.html",
-        "about": null,
-        "legal": "https://legeneralhotel.com/fr/disclaimer.html",
-        "privacy": "https://legeneralhotel.com/fr/privacy-policy.html"
-      },
-      "pagesVisited": [
-        "https://legeneralhotel.com/fr",
-        "https://legeneralhotel.com/fr/contact.html",
-        "https://legeneralhotel.com/fr/privacy-policy.html",
-        "https://legeneralhotel.com/fr/disclaimer.html",
-        "https://www.legeneralhotel.com/fr/",
-        "https://legeneralhotel.com/fr/rooms.html",
-        "https://legeneralhotel.com/fr/services.html",
-        "https://legeneralhotel.com/fr/bar.html"
-      ],
-      "emails": [
-        {
-          "value": "info@legeneralhotel.com",
+          "value": "contact@hotel-leliondor.fr",
           "type": "general",
           "priority": "primary",
           "signals": [
             "mailto",
             "same_domain"
           ],
-          "sourceUrl": "https://legeneralhotel.com/fr",
-          "snippet": "Contactez-nous",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "info@www.legeneralhotel.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "mailto"
-          ],
-          "sourceUrl": "https://www.legeneralhotel.com/fr",
-          "snippet": "Contactez-nous",
+          "sourceUrl": "http://www.hotel-leliondor.fr/",
+          "snippet": "contact@hotel-leliondor.fr",
           "foundIn": "mailto"
         }
       ],
       "phones": [
         {
-          "valueRaw": "+33-1-47-00-41-57",
-          "valueE164": "+33147004157",
+          "valueRaw": "02 99 98 61 44",
+          "valueE164": "+33299986144",
           "priority": "primary",
           "signals": [
-            "tel"
+            "text"
           ],
-          "sourceUrl": "https://legeneralhotel.com/fr",
-          "snippet": "+33 1 47 00 41 57"
+          "sourceUrl": "http://www.hotel-leliondor.fr/",
+          "snippet": "02 99 98 61 44"
+        },
+        {
+          "valueRaw": "02 23 45 06 31",
+          "valueE164": "+33223450631",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.hotel-leliondor.fr/fr/mentions-legales",
+          "snippet": "gistre du Commerce et des Sociétés de Rennes sous le numéro 424 967 552. Tél. : 02 23 45 06 31"
         }
       ],
-      "primaryEmail": "info@legeneralhotel.com",
-      "primaryPhone": "+33147004157",
+      "primaryEmail": "contact@hotel-leliondor.fr",
+      "primaryPhone": "+33299986144",
       "socials": {
         "facebook": [
           {
-            "url": "https://www.facebook.com/LeGeneral.hotel",
-            "handle": "legeneral.hotel",
-            "sourceUrl": "https://legeneralhotel.com/fr"
+            "url": "https://www.facebook.com/people/Le-Lion-dOr-The-Originals-Boutique-H%C3%B4tel-Restaurant/61574316841731/",
+            "handle": "people",
+            "sourceUrl": "http://www.hotel-leliondor.fr/"
+          },
+          {
+            "url": "https://fr-fr.facebook.com/leliondor35/",
+            "handle": "leliondor35",
+            "sourceUrl": "https://www.hotel-leliondor.fr/en"
           }
         ],
         "instagram": [
           {
-            "url": "https://www.instagram.com/le_general_hotel/",
-            "handle": "le_general_hotel",
-            "sourceUrl": "https://legeneralhotel.com/fr"
-          }
-        ],
-        "x": [
-          {
-            "url": "https://twitter.com/LeGeneralHotel",
-            "handle": "legeneralhotel",
-            "sourceUrl": "https://legeneralhotel.com/fr"
-          }
-        ],
-        "pinterest": [
-          {
-            "url": "https://fr.pinterest.com/legeneralhotel",
-            "handle": "legeneralhotel",
-            "sourceUrl": "https://legeneralhotel.com/fr"
+            "url": "https://www.instagram.com/hotel_le_lion_dor",
+            "handle": "hotel_le_lion_dor",
+            "sourceUrl": "http://www.hotel-leliondor.fr/"
           }
         ]
       }
@@ -157,137 +84,755 @@
     "issues": []
   },
   {
-    "url": "https://www.lemhotelhonfleur.com/",
+    "url": "https://hotellittreparis.com/fr/",
     "status": "success",
     "data": {
-      "domain": "lemhotelhonfleur.com",
-      "finalUrl": "https://www.lemhotelhonfleur.com/",
+      "domain": "hotellittreparis.com",
+      "finalUrl": "https://hotellittreparis.com/fr/",
       "keyPages": {
-        "contact": "https://www.lemhotelhonfleur.com/contact/",
+        "contact": "https://hotellittreparis.com/fr/contactez-nous.html",
         "about": null,
-        "legal": "https://www.lemhotelhonfleur.com/mentions-legales/",
-        "privacy": "https://www.lemhotelhonfleur.com/gestion-des-cookies"
+        "legal": "https://hotellittreparis.com/fr/mentions-legales.html",
+        "privacy": "https://hotellittreparis.com/fr/politique-confidentialite.html"
       },
       "pagesVisited": [
-        "https://www.lemhotelhonfleur.com/",
-        "https://www.lemhotelhonfleur.com/contact",
-        "https://www.lemhotelhonfleur.com/mentions-legales",
-        "https://www.lemhotelhonfleur.com/gestion-des-cookies",
-        "https://www.lemhotelhonfleur.com/galerie-photos",
-        "https://www.lemhotelhonfleur.com/en",
-        "https://www.lemhotelhonfleur.com/les-chambres",
-        "https://www.lemhotelhonfleur.com/spa-du-m-hotel"
+        "https://hotellittreparis.com/fr/",
+        "https://hotellittreparis.com/fr/contactez-nous.html",
+        "https://hotellittreparis.com/fr/mentions-legales.html",
+        "https://hotellittreparis.com/fr/politique-confidentialite.html",
+        "https://hotellittreparis.com/fr/presentation-chambres.html",
+        "https://hotellittreparis.com/fr/chambre-classique.html",
+        "https://hotellittreparis.com/fr/chambre-superieure.html",
+        "https://hotellittreparis.com/fr/chambre-pmr.html"
       ],
       "emails": [
         {
-          "value": "info@lemhotelhonfleur.com",
+          "value": "hotellittre@hotellittreparis.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text",
+            "same_domain"
+          ],
+          "sourceUrl": "https://hotellittreparis.com/fr",
+          "snippet": "ents Avis Clients Blog Contact + 33 (0)1 53 63 07 07hotellittre@hotellittreparis.com EnglishFrançaisPortuguês RÉSERVEZ RÉSERVEZ Vue",
+          "foundIn": "text"
+        },
+        {
+          "value": "sales@hotellittreparis.com",
+          "type": "sales",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://hotellittreparis.com/fr/contactez-nous.html",
+          "snippet": "SALES@HOTELLITTREPARIS.COM",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "communication@hotellittreparis.com",
+          "type": "sales",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://hotellittreparis.com/fr/contactez-nous.html",
+          "snippet": "COMMUNICATION@HOTELLITTREPARIS.COM",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "ms.bahler@hotellitreparis.com",
+          "type": "sales",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://hotellittreparis.com/fr/contactez-nous.html",
+          "snippet": "MSBAHLER@HOTELLITTREPARIS.COM",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33-1-53-63-0707",
+          "valueE164": "+33153630707",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://hotellittreparis.com/fr",
+          "snippet": "+ 33 (0)1 53 63 07 07"
+        }
+      ],
+      "primaryEmail": "sales@hotellittreparis.com",
+      "primaryPhone": "+33153630707",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/Hotel.Littre.Paris",
+            "handle": "hotel.littre.paris",
+            "sourceUrl": "https://hotellittreparis.com/fr"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/hotellelittre/",
+            "handle": "hotellelittre",
+            "sourceUrl": "https://hotellittreparis.com/fr"
+          }
+        ],
+        "x": [
+          {
+            "url": "https://twitter.com/Le_Littre",
+            "handle": "le_littre",
+            "sourceUrl": "https://hotellittreparis.com/fr"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://www.lodgepark.com/fr",
+    "status": "success",
+    "data": {
+      "domain": "lodgepark.com",
+      "finalUrl": "https://www.lodgepark.com/",
+      "keyPages": {
+        "contact": "https://www.lodgepark.com/contactez-nous",
+        "about": "https://www.lodgepark.com/a-propos-de-nous",
+        "legal": "https://www.lodgepark.com/mentions-legales",
+        "privacy": "https://www.lodgepark.com/politique-de-confidentialite"
+      },
+      "pagesVisited": [
+        "https://www.lodgepark.com/",
+        "https://www.lodgepark.com/contactez-nous",
+        "https://www.lodgepark.com/a-propos-de-nous",
+        "https://www.lodgepark.com/mentions-legales",
+        "https://www.lodgepark.com/politique-de-confidentialite",
+        "https://www.lodgepark.com/?r=0",
+        "https://www.lodgepark.com/en",
+        "https://www.lodgepark.com/es",
+        "https://www.lodgepark.com/en/contactez-nous",
+        "https://www.lodgepark.com/es/contactez-nous",
+        "https://www.lodgepark.com/ar/contactez-nous",
+        "https://www.lodgepark.com/en/mentions-legales",
+        "https://www.lodgepark.com/es/mentions-legales",
+        "https://www.lodgepark.com/ar/mentions-legales",
+        "https://www.lodgepark.com/formulaire-evenements"
+      ],
+      "emails": [
+        {
+          "value": "contact@lodgepark.com",
           "type": "general",
           "priority": "primary",
           "signals": [
             "mailto",
             "same_domain"
           ],
-          "sourceUrl": "https://www.lemhotelhonfleur.com/",
-          "snippet": "info@lemhotelhonfleur.com",
+          "sourceUrl": "https://www.lodgepark.com/fr",
+          "snippet": "contact@lodgepark.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "sibuet@birdtravelpr.com",
+          "type": "press",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
+          "snippet": "sibuet@birdtravelpr.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "‍magazinesibuet@mhsibuet.com",
+          "type": "press",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
+          "snippet": "magazinesibuet@mhsibuet.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "mtissot@mhsibuet.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
+          "snippet": "mtissot@mhsibuet.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "events@mhsibuet.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
+          "snippet": "events@mhsibuet.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "allyouneed@gypsea-beach.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
+          "snippet": "events@mhsibuet.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "contact@mcpmediation.org",
+          "type": "press",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/mentions-legales",
+          "snippet": "ation 12 square Desnouettes 75015 PARISPar Mail : contact@mcpmediation.org‍‍ARTICLE 10 – MODIFICATIONS ET JURIDICTIONS COMPÉ",
+          "foundIn": "text"
+        },
+        {
+          "value": "dpo@mhsibuet.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/politique-de-confidentialite",
+          "snippet": "ls Sibuet est :Monsieur Frédéric MOUNIER, Email : dpo@mhsibuet.com‍‍Pour toute question de l'utilisateur s'agissant",
+          "foundIn": "text"
+        },
+        {
+          "value": "privacy@mhsibuet.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/politique-de-confidentialite",
+          "snippet": "144 chemin du petit Darbon – 74120 MEGEVE, Email: privacy@mhsibuet.comLe délégué à la protection des données personnelle",
+          "foundIn": "text"
+        },
+        {
+          "value": "quotereservationcontact@lodgepark.com",
+          "type": "booking",
+          "priority": "secondary",
+          "signals": [
+            "text",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/en/contactez-nous",
+          "snippet": "y74120 Megève - ENTel: +33 4 50 93 05 03Request a quoteReservationcontact@lodgepark.com",
+          "foundIn": "text"
+        },
+        {
+          "value": "ncontact@lodgepark.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/es/contactez-nous",
+          "snippet": "+33 4 50 93 05 03Solicita una cotizaciónReservacióncontact@lodgepark.com",
+          "foundIn": "text"
+        },
+        {
+          "value": "magazinesibuet@mhsibuet.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/ar/contactez-nous",
+          "snippet": "magazinesibuet@mhsibuet.comقسم المبيعات الوكالة ومشغل الرح",
+          "foundIn": "text"
+        },
+        {
+          "value": "vecontact@lodgepark.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/evenements-contact",
+          "snippet": "omething went wrong while submitting the form.Megèvecontact@lodgepark.com+33 4 50 93 09 77Réserver en lignerejoignez le lod",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33450930977",
+          "valueE164": "+33450930977",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/fr",
+          "snippet": "+33 4 50 93 09 77"
+        },
+        {
+          "valueRaw": "+33450930503",
+          "valueE164": "+33450930503",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/fr",
+          "snippet": "Appeler +33 4 50 93 05 03Hôtel Lodge Park"
+        },
+        {
+          "valueRaw": "+33450930863",
+          "valueE164": "+33450930863",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/fr",
+          "snippet": "Appeler+33 4 50 93 08 63Spa Pure Altitude"
+        },
+        {
+          "valueRaw": "+590590775303",
+          "valueE164": "+590590775303",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
+          "snippet": "+33 4 50 93 09 77"
+        },
+        {
+          "valueRaw": "+590590775252",
+          "valueE164": "+590590775252",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
+          "snippet": "+590590775252"
+        },
+        {
+          "valueRaw": "+33450906336",
+          "valueE164": "+33450906336",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
+          "snippet": "+33 4 50 90 63 36"
+        },
+        {
+          "valueRaw": "+33450906337",
+          "valueE164": "+33450906337",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
+          "snippet": "+33 4 50 90 63 37"
+        },
+        {
+          "valueRaw": "479 345 001",
+          "valueE164": "+33479345001",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.lodgepark.com/ar/mentions-legales",
+          "snippet": "00 يوروضريبة القيمة المضافة الداخلية: FR24479345001الصليب الأحمر القطري: بونفيل 479 345 001المنشئ: مجتمع التأثيرمدير النشر: ماري سيبويهالمسؤول عن الموقع: التأثير على المجت"
+        }
+      ],
+      "primaryEmail": "contact@lodgepark.com",
+      "primaryPhone": "+33450930977",
+      "socials": {
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/lodgeparkmegeve/",
+            "handle": "lodgeparkmegeve",
+            "sourceUrl": "https://www.lodgepark.com/fr"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://www.hotel-le-louvre-cherbourg.com/",
+    "status": "success",
+    "data": {
+      "domain": "hotel-le-louvre-cherbourg.com",
+      "finalUrl": "https://www.hotel-le-louvre-cherbourg.com/de",
+      "keyPages": {
+        "contact": null,
+        "about": null,
+        "legal": "https://www.hotel-le-louvre-cherbourg.com/de/mentions-legales",
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://www.hotel-le-louvre-cherbourg.com/de",
+        "https://www.hotel-le-louvre-cherbourg.com/de/mentions-legales",
+        "https://www.hotel-le-louvre-cherbourg.com/de",
+        "https://www.hotel-le-louvre-cherbourg.com/de/hotel",
+        "https://www.hotel-le-louvre-cherbourg.com/de/tarife",
+        "https://www.hotel-le-louvre-cherbourg.com/de/bietetan",
+        "https://www.hotel-le-louvre-cherbourg.com/de/schlafzimmer",
+        "https://www.hotel-le-louvre-cherbourg.com/de/galerie"
+      ],
+      "emails": [],
+      "phones": [
+        {
+          "valueRaw": "0233530228",
+          "valueE164": "+33233530228",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.hotel-le-louvre-cherbourg.com/",
+          "snippet": "02 33 53 02 28"
+        }
+      ],
+      "primaryPhone": "+33233530228",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/H%C3%B4tel-Le-Louvre-Cherbourg-870052819691997",
+            "handle": "h%c3%b4tel-le-louvre-cherbourg-870052819691997",
+            "sourceUrl": "https://www.hotel-le-louvre-cherbourg.com/"
+          }
+        ]
+      }
+    },
+    "issues": [
+      {
+        "severity": "medium",
+        "type": "missing_emails",
+        "message": "Aucun email trouvé"
+      }
+    ]
+  },
+  {
+    "url": "https://www.lumierehotel.fr/",
+    "status": "success",
+    "data": {
+      "domain": "lumierehotel.fr",
+      "finalUrl": "https://lumierehotel.fr/",
+      "keyPages": {
+        "contact": null,
+        "about": null,
+        "legal": "https://lumierehotel.fr/fr/page/mentions-legales.26045.html",
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://lumierehotel.fr/",
+        "https://lumierehotel.fr/fr/page/mentions-legales.26045.html",
+        "https://lumierehotel.fr/",
+        "https://lumierehotel.fr/en/",
+        "https://lumierehotel.fr/fr/book.html"
+      ],
+      "emails": [
+        {
+          "value": "contact@lumierehotel.fr",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.lumierehotel.fr/",
+          "snippet": "contact@lumierehotel.fr",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "info@mmcreation.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://lumierehotel.fr/fr/page/mentions-legales.26045.html",
+          "snippet": "info@mmcreation.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "cil@ovh.net",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://lumierehotel.fr/fr/page/mentions-legales.26045.html",
+          "snippet": "cil@ovh.net",
           "foundIn": "mailto"
         }
       ],
       "phones": [
         {
-          "valueRaw": "+33 (0)2 31 89 41 77",
-          "valueE164": "+33231894177",
+          "valueRaw": "+33 4 78 00 66 81",
+          "valueE164": "+33478006681",
           "priority": "primary",
           "signals": [
             "tel"
           ],
-          "sourceUrl": "https://www.lemhotelhonfleur.com/",
-          "snippet": "+33 (0)2 31 89 41 77"
+          "sourceUrl": "https://www.lumierehotel.fr/",
+          "snippet": "+33 4 78 00 66 81"
         },
         {
-          "valueRaw": "+33 (0) 1 76 44 04 35",
-          "valueE164": "+33176440435",
+          "valueRaw": "+33972101007",
+          "valueE164": "+33972101007",
           "priority": "secondary",
           "signals": [
-            "text"
+            "tel"
           ],
-          "sourceUrl": "https://www.lemhotelhonfleur.com/mentions-legales",
-          "snippet": "us concernant. » Hébergeur D-Edge 66 rue des archives – 75003 Paris Téléphone : +33 (0) 1 76 44 04 35 Site : https://www.d-edge.com/fr/ La Mediation de la consommation Après avoir s"
+          "sourceUrl": "https://lumierehotel.fr/fr/page/mentions-legales.26045.html",
+          "snippet": "+33 9 72 10 10 07"
         }
       ],
-      "primaryEmail": "info@lemhotelhonfleur.com",
-      "primaryPhone": "+33231894177"
+      "primaryEmail": "contact@lumierehotel.fr",
+      "primaryPhone": "+33478006681"
     },
     "issues": []
   },
   {
-    "url": "https://www.letouquetgolfresort.com/fr/notre-hotel/le-manoir-hotel/",
+    "url": "https://hotelmparis.com/fr/",
     "status": "success",
     "data": {
-      "domain": "letouquetgolfresort.com",
-      "finalUrl": "https://www.letouquetgolfresort.com/fr/notre-hotel/le-manoir-hotel",
-      "errors": [
-        {
-          "url": "https://www.letouquetgolfresort.com/fr/notre-hotel/le-manoir-hotel",
-          "error": "Invalid URL"
-        }
-      ]
-    },
-    "issues": [
-      {
-        "severity": "medium",
-        "type": "missing_emails",
-        "message": "Aucun email trouvé"
-      },
-      {
-        "severity": "medium",
-        "type": "missing_phones",
-        "message": "Aucun téléphone trouvé"
-      }
-    ]
-  },
-  {
-    "url": "https://www.lenexhotel.com/",
-    "status": "success",
-    "data": {
-      "domain": "lenexhotel.com",
-      "finalUrl": "https://www.lenexhotel.com/",
+      "domain": "hotelmparis.com",
+      "finalUrl": "https://hotelmparis.com/fr/",
       "keyPages": {
-        "contact": "https://www.lenexhotel.com/contact-nex-hotel-tarbes",
+        "contact": "https://hotelmparis.com/contactez-nous.html",
         "about": null,
-        "legal": "https://www.lenexhotel.com/mentions-legales-nex-hotel-tarbes",
+        "legal": "https://hotelmparis.com/mentions-legales.html",
         "privacy": null
       },
       "pagesVisited": [
-        "https://www.lenexhotel.com/",
-        "https://www.lenexhotel.com/contact-nex-hotel-tarbes",
-        "https://www.lenexhotel.com/mentions-legales-nex-hotel-tarbes",
-        "https://www.lenexhotel.com/nex-hotel-tarbes",
-        "https://www.lenexhotel.com/chambres-nex-hotel-tarbes",
-        "https://www.lenexhotel.com/offres-speciales-nex-hotel-tarbes",
-        "https://www.lenexhotel.com/seminaires-reunions-nex-hotel-tarbes",
-        "https://www.lenexhotel.com/que-faire-autour-de-tarbes"
+        "https://hotelmparis.com/fr/",
+        "https://hotelmparis.com/fr/chambres.html",
+        "https://hotelmparis.com/fr/offres.html",
+        "https://hotelmparis.com/fr/hotel.html"
       ],
-      "emails": [],
+      "errors": [
+        {
+          "url": "https://hotelmparis.com/contactez-nous.html",
+          "error": "HTTP 403"
+        },
+        {
+          "url": "https://hotelmparis.com/mentions-legales.html",
+          "error": "HTTP 403"
+        },
+        {
+          "url": "https://hotelmparis.com/politique-confidentialite.html",
+          "error": "HTTP 403"
+        },
+        {
+          "url": "https://hotelmparis.com/politica-de-cookies.html",
+          "error": "HTTP 403"
+        }
+      ],
+      "emails": [
+        {
+          "value": "reception@hotelmparis.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://hotelmparis.com/fr",
+          "snippet": "Contactez-nous",
+          "foundIn": "mailto"
+        }
+      ],
       "phones": [
         {
-          "valueRaw": "05 62 360 360",
-          "valueE164": "+33562360360",
+          "valueRaw": "+33-1-40-47-48-49",
+          "valueE164": "+33140474849",
           "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://hotelmparis.com/fr",
+          "snippet": "+33 1 40 47 48 49"
+        },
+        {
+          "valueRaw": "+33 (0) 1 45 53 76 01",
+          "valueE164": "+33145537601",
+          "priority": "secondary",
           "signals": [
             "text"
           ],
-          "sourceUrl": "https://www.lenexhotel.com/contact-nex-hotel-tarbes",
-          "snippet": "ER VENIR AU NEX HOTEL***Réserver NEX HOTEL*** | TarbesTel : 05 62 360 360 ​ 2, Avenue des Forges 65000 TARBESUne demande ? Un devis sur-mesure ? Une q"
+          "sourceUrl": "https://hotelmparis.com/fr",
+          "snippet": "érieures :Hôtel Victor Hugo Paris Kléber ****19 Rue Copernic - 75116 ParisTél : +33 (0) 1 45 53 76 01 - contact@victorhugohotel.comDécouvrez l'Hôtel Le Magnifique"
         }
       ],
-      "primaryPhone": "+33562360360"
-    },
-    "issues": [
-      {
-        "severity": "medium",
-        "type": "missing_emails",
-        "message": "Aucun email trouvé"
+      "primaryEmail": "reception@hotelmparis.com",
+      "primaryPhone": "+33140474849",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/HotelLeM",
+            "handle": "hotellem",
+            "sourceUrl": "https://hotelmparis.com/fr"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/hotelmparis/",
+            "handle": "hotelmparis",
+            "sourceUrl": "https://hotelmparis.com/fr"
+          }
+        ]
       }
-    ]
+    },
+    "issues": []
+  },
+  {
+    "url": "http://www.hotelmagellan.com",
+    "status": "success",
+    "data": {
+      "domain": "hotelmagellan.com",
+      "finalUrl": "https://hotelmagellan.com/",
+      "keyPages": {
+        "contact": "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-pereire-contact-acces-hotel-magellan.23941.html",
+        "about": null,
+        "legal": "https://hotelmagellan.com/fr/page/mentions-legales.23942.html",
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://hotelmagellan.com/",
+        "https://hotelmagellan.com/fr/page/mentions-legales.23942.html",
+        "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-pereire-contact-acces-hotel-magellan.23941.html",
+        "https://hotelmagellan.com/",
+        "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-17eme-hotel-magellan.23933.html",
+        "https://hotelmagellan.com/fr/page/hotel-de-charme-paris-17eme-chambres-hotel-magellan.23934.html",
+        "https://hotelmagellan.com/fr/page/petit-dejeuner.23935.html",
+        "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-17eme-bar-hotel-magellan.23936.html"
+      ],
+      "emails": [
+        {
+          "value": "paris@hotelmagellan.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "http://www.hotelmagellan.com/",
+          "snippet": "paris@hotelmagellan.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "reception@hotelmagellan.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://hotelmagellan.com/fr/page/mentions-legales.23942.html",
+          "snippet": "reception@hotelmagellan.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "info@mmcreation.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://hotelmagellan.com/fr/page/mentions-legales.23942.html",
+          "snippet": "ieu - 75008 Paris Tel : +33 1 45 74 76 00 Email : info@mmcreation.com",
+          "foundIn": "text"
+        },
+        {
+          "value": "olivier.payeux@hotelmagellan.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-pereire-contact-acces-hotel-magellan.23941.html",
+          "snippet": "olivier.payeux@hotelmagellan.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "gouvernante@hotelmagellan.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-pereire-contact-acces-hotel-magellan.23941.html",
+          "snippet": "gouvernante@hotelmagellan.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "frederic.martin@hotelmagellan.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-pereire-contact-acces-hotel-magellan.23941.html",
+          "snippet": "frederic.martin@hotelmagellan.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33 1 45 72 44 51",
+          "valueE164": "+33145724451",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "http://www.hotelmagellan.com/",
+          "snippet": "Tél. +33 1 45 72 44 51"
+        },
+        {
+          "valueRaw": "+33 1 45 74 76 00",
+          "valueE164": "+33145747600",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://hotelmagellan.com/fr/page/mentions-legales.23942.html",
+          "snippet": "été agence MMCREATION, 32 avenue de Wagram, 75008 PARIS ; numéro de téléphone : +33 1 45 74 76 00 ; site officiel : www.mmcreation.com PROPRIÉTÉ INTELLECTUELLE Le site dans so"
+        }
+      ],
+      "primaryEmail": "paris@hotelmagellan.com",
+      "primaryPhone": "+33145724451",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/magellanhotel/",
+            "handle": "magellanhotel",
+            "sourceUrl": "http://www.hotelmagellan.com/"
+          }
+        ],
+        "x": [
+          {
+            "url": "https://x.com/magellanparis",
+            "handle": "magellanparis",
+            "sourceUrl": "http://www.hotelmagellan.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
   }
 ]
