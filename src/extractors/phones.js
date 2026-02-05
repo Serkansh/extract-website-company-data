@@ -111,7 +111,6 @@ export function extractPhones(html, sourceUrl) {
     }
     
     // Exclut les nombres décimaux qui ressemblent à des coordonnées (ex: 43.6062028)
-    const digits = phoneValue.replace(/\D/g, '');
     if (phoneValue.includes('.') && phoneValue.match(/^\d+\.\d+$/)) {
       // Vérifie le contexte : si c'est proche de "Latitude", "Longitude", "GPS", c'est une coordonnée
       if (/(latitude|longitude|lat|lon|coord|gps|position)/i.test(snippet)) {
