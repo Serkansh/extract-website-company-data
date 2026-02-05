@@ -103,6 +103,22 @@ export function extractPhones(html, sourceUrl) {
       continue; // Skip ce numéro, c'est un fax
     }
     
+    // Exclut les coordonnées GPS (latitude/longitude) détectées comme téléphones
+    // Format: "Latitude : 43.6062028" ou "43.6062028, 1.447199"
+    if (/(latitude|longitude|lat|lon|coord|gps)\s*[=:]\s*/i.test(snippet) || 
+        /^\d+\.\d+$/.test(phoneValue.trim()) && snippet.match(/(latitude|longitude|lat|lon|coord|gps)/i)) {
+      continue; // Skip, c'est une coordonnée GPS
+    }
+    
+    // Exclut les nombres décimaux qui ressemblent à des coordonnées (ex: 43.6062028)
+    const digits = phoneValue.replace(/\D/g, '');
+    if (phoneValue.includes('.') && phoneValue.match(/^\d+\.\d+$/)) {
+      // Vérifie le contexte : si c'est proche de "Latitude", "Longitude", "GPS", c'est une coordonnée
+      if (/(latitude|longitude|lat|lon|coord|gps|position)/i.test(snippet)) {
+        continue;
+      }
+    }
+    
     if (!shouldExcludePhone(phoneValue, snippet)) {
       const normalized = normalizePhone(phoneValue);
 

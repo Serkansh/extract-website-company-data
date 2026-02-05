@@ -1,0 +1,928 @@
+[
+  {
+    "url": "http://www.orlysuperior.com/",
+    "status": "success",
+    "data": {
+      "domain": "orlysuperior.com",
+      "finalUrl": "https://www.orlysuperior.com/fr/",
+      "keyPages": {
+        "contact": "http://www.orlysuperior.com/contact@orlysuperior.com",
+        "about": null,
+        "legal": "https://www.orlysuperior.com/fr/mentions-legales/",
+        "privacy": "https://www.orlysuperior.com/fr/politique-des-cookies/"
+      },
+      "pagesVisited": [
+        "https://www.orlysuperior.com/fr/",
+        "https://www.orlysuperior.com/fr/mentions-legales/",
+        "https://www.orlysuperior.com/fr/politique-des-cookies/",
+        "https://www.orlysuperior.com/fr/chambres/",
+        "https://www.orlysuperior.com/fr/offres/",
+        "https://www.orlysuperior.com/fr/services/"
+      ],
+      "errors": [
+        {
+          "url": "http://www.orlysuperior.com/contact@orlysuperior.com",
+          "error": "HTTP 404"
+        },
+        {
+          "url": "mailto:contact@orlysuperior.com",
+          "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+        }
+      ],
+      "emails": [
+        {
+          "value": "contact@orlysuperior.fr",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "http://www.orlysuperior.com/",
+          "snippet": "contact@orlysuperior.fr",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "contact@orlysuperior.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "http://www.orlysuperior.com/",
+          "snippet": "contact@orlysuperior.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "info@mirai.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orlysuperior.com/fr/mentions-legales",
+          "snippet": "ral 6, 4º. 28004 Madrid (Espagne) Email : info@mirai.com Tel : +34 915 913 500 C.I.F. : B8",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33169443367",
+          "valueE164": "+33169443367",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "http://www.orlysuperior.com/",
+          "snippet": "Tel: +33 (0)1 69 44 33 67"
+        },
+        {
+          "valueRaw": "+34 915 913 500",
+          "valueE164": "+34915913500",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orlysuperior.com/fr/mentions-legales",
+          "snippet": "rral 6, 4º. 28004 Madrid (Espagne) Email : info@mirai.com Tel : +34 915 913 500 C.I.F. : B80039340 Copyright Tout le matériel audiovisuel,"
+        }
+      ],
+      "primaryEmail": "contact@orlysuperior.com",
+      "primaryPhone": "+33169443367",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/orlysuperiorhotel/",
+            "handle": "orlysuperiorhotel",
+            "sourceUrl": "http://www.orlysuperior.com/"
+          },
+          {
+            "url": "https://es-es.facebook.com/policies/cookies/",
+            "handle": "policies",
+            "sourceUrl": "http://www.orlysuperior.com/"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/orlysuperior/",
+            "handle": "orlysuperior",
+            "sourceUrl": "http://www.orlysuperior.com/"
+          }
+        ],
+        "x": [
+          {
+            "url": "https://help.twitter.com/es/rules-and-policies/x-cookies",
+            "handle": "es",
+            "sourceUrl": "http://www.orlysuperior.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "http://www.ormelune.com",
+    "status": "success",
+    "data": {
+      "domain": "ormelune.com",
+      "finalUrl": "https://ormelune.com/",
+      "keyPages": {
+        "contact": null,
+        "about": null,
+        "legal": null,
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://ormelune.com/",
+        "https://ormelune.com/",
+        "https://ormelune.com/hotel/chambres/",
+        "https://ormelune.com/hotel/chambres/suite-xxl/",
+        "https://ormelune.com/hotel/chambres/suite-ormelune/",
+        "https://ormelune.com/hotel/chambres/chambre-xl-enfants/",
+        "https://ormelune.com/hotel/chambres/chambre-xl/",
+        "https://ormelune.com/hotel/chambres/chambre-large-plus/"
+      ],
+      "emails": [
+        {
+          "value": "info@ormelune.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "http://www.ormelune.com/",
+          "snippet": "info@ormelune.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33 (0)4 79 06 12 93",
+          "valueE164": "+33479061293",
+          "priority": "primary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "http://www.ormelune.com/",
+          "snippet": "Hotel Ormelune – Rue Noël Machet 73150 – Val d’Isère – France – T: +33 (0)4 79 06 12 93 – E: info@ormelune.com"
+        }
+      ],
+      "primaryEmail": "info@ormelune.com",
+      "primaryPhone": "+33479061293",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://facebook.com/ormelune",
+            "handle": "ormelune",
+            "sourceUrl": "http://www.ormelune.com/"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/ormelune_valdisere/",
+            "handle": "ormelune_valdisere",
+            "sourceUrl": "http://www.ormelune.com/"
+          }
+        ],
+        "x": [
+          {
+            "url": "https://twitter.com/ormelune",
+            "handle": "ormelune",
+            "sourceUrl": "http://www.ormelune.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://www.orsohotels.com/hotel-orphee",
+    "status": "success",
+    "data": {
+      "domain": "orsohotels.com",
+      "finalUrl": "https://www.orsohotels.com/hotel-orphee",
+      "keyPages": {
+        "contact": "https://www.orsohotels.com/hotel-orphee/infos-contact",
+        "about": null,
+        "legal": "https://www.orsohotels.com/hotel-orphee/mentions-legales",
+        "privacy": "https://www.orsohotels.com/hotel-orphee/politique-de-confidentialite"
+      },
+      "pagesVisited": [
+        "https://www.orsohotels.com/hotel-orphee",
+        "https://www.orsohotels.com/hotel-orphee/mentions-legales",
+        "https://www.orsohotels.com/hotel-orphee/politique-de-confidentialite",
+        "https://www.orsohotels.com/hotel-orphee/infos-contact",
+        "https://www.orsohotels.com/hotel-orphee/chambres",
+        "https://www.orsohotels.com/hotel-rochechouart/chambres",
+        "https://www.orsohotels.com/hotel-orphee/services",
+        "https://www.orsohotels.com/"
+      ],
+      "emails": [
+        {
+          "value": "bonjour@hotelorphee.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee",
+          "snippet": "bonjour@hotelorphee.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "reservation@orsohotels.com",
+          "type": "booking",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/infos-contact",
+          "snippet": "reservation@orsohotels.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "bonjour@hotelrochechouart.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-rochechouart/chambres",
+          "snippet": "bonjour@hotelrochechouart.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "sales@orsohotels.com",
+          "type": "sales",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/services",
+          "snippet": "contact",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "contact@orsohotels.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars",
+          "snippet": "contact@orsohotels.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "pariscontact@orsohotels.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars",
+          "snippet": "ours surOrso201 rue du Faubourg Saint-Honoré75008 PARIScontact@orsohotels.com+33 1 87 58 08 43 CAR",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33143313750",
+          "valueE164": "+33143313750",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee",
+          "snippet": "Réception : +33 1 43 31 37 50"
+        },
+        {
+          "valueRaw": "+33644637451",
+          "valueE164": "+33644637451",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee",
+          "snippet": "+33644637451"
+        },
+        {
+          "valueRaw": "+33 1 49 52 93 00",
+          "valueE164": "+33149529300",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/mentions-legales",
+          "snippet": "al est situé 201 Rue du Faubourg Saint-Honoré 75008 Paris ; numéro de téléphone +33 1 49 52 93 00 (ci-après dénommée « Orso »). HÉBERGEMENTSociété : WebflowURL : www.webflow.com"
+        },
+        {
+          "valueRaw": "01 42 67 96 68",
+          "valueE164": "+33142679668",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/mentions-legales",
+          "snippet": "ONSOMMATIONMédiation Tourisme et Voyage 15 avenue Carnot 75017 ParisTéléphone : 01 42 67 96 68BP 80 303 75 823 Paris Cedex 17 Site internet : www.mtv.travelRèglement des liti"
+        },
+        {
+          "valueRaw": "+33187580848",
+          "valueE164": "+33187580848",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/infos-contact",
+          "snippet": "+33 1 87 58 08 48"
+        },
+        {
+          "valueRaw": "+33142819100",
+          "valueE164": "+33142819100",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-rochechouart/chambres",
+          "snippet": "Réception : +33 1 42 81 91 00"
+        },
+        {
+          "valueRaw": "+33187580843",
+          "valueE164": "+33187580843",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars",
+          "snippet": "+33 1 87 58 08 43"
+        }
+      ],
+      "primaryEmail": "reservation@orsohotels.com",
+      "primaryPhone": "+33143313750",
+      "socials": {
+        "linkedin": [
+          {
+            "url": "https://www.linkedin.com/company/orsohotels/",
+            "handle": "orsohotels",
+            "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars"
+          }
+        ],
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/hotelorpheeparis",
+            "handle": "hotelorpheeparis",
+            "sourceUrl": "https://www.orsohotels.com/hotel-orphee"
+          },
+          {
+            "url": "https://www.facebook.com/hotelrochechouart",
+            "handle": "hotelrochechouart",
+            "sourceUrl": "https://www.orsohotels.com/hotel-rochechouart/chambres"
+          },
+          {
+            "url": "https://www.facebook.com/groupeorsohotels",
+            "handle": "groupeorsohotels",
+            "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/hotelorphee",
+            "handle": "hotelorphee",
+            "sourceUrl": "https://www.orsohotels.com/hotel-orphee"
+          },
+          {
+            "url": "https://www.instagram.com/hotelrochechouart/",
+            "handle": "hotelrochechouart",
+            "sourceUrl": "https://www.orsohotels.com/hotel-rochechouart/chambres"
+          },
+          {
+            "url": "https://www.instagram.com/orsohotels/",
+            "handle": "orsohotels",
+            "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars"
+          }
+        ],
+        "google": [
+          {
+            "url": "https://www.google.com/maps/place/201+Rue+du+Faubourg+Saint-Honor%C3%A9,+75008+Paris/@48.8761996,2.3001124,17z/data=!3m1!4b1!4m5!3m4!1s0x47e66fc014c99627:0xe6925d0b69106c1!8m2!3d48.8761961!4d2.3023011",
+            "handle": "https://www.google.com/maps/place/201+Rue+du+Faubourg+Saint-Honor%C3%A9,+75008+Paris/@48.8761996,2.3001124,17z/data=!3m1!4b1!4m5!3m4!1s0x47e66fc014c99627:0xe6925d0b69106c1!8m2!3d48.8761961!4d2.3023011",
+            "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://www.hotel-ostella.com/",
+    "status": "success",
+    "data": {
+      "domain": "hotel-ostella.com",
+      "finalUrl": "https://www.hotel-ostella.com/",
+      "keyPages": {
+        "contact": "https://www.hotel-ostella.com/fr/contact",
+        "about": null,
+        "legal": null,
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://www.hotel-ostella.com/",
+        "https://www.hotel-ostella.com/fr/contact",
+        "https://www.hotel-ostella.com/fr/restaurant",
+        "https://www.hotel-ostella.com/fr/bien-etre",
+        "https://www.hotel-ostella.com/",
+        "https://www.hotel-ostella.com/en",
+        "https://www.hotel-ostella.com/it"
+      ],
+      "errors": [
+        {
+          "url": "mailto:contact@hotel-ostella.com",
+          "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+        }
+      ],
+      "emails": [
+        {
+          "value": "contact@hotel-ostella.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.hotel-ostella.com/",
+          "snippet": "contact@hotel-ostella.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "restaurant@hotel-ostella.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.hotel-ostella.com/fr/contact",
+          "snippet": "restaurant@hotel-ostella.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "commercial@hotel-ostella.com",
+          "type": "sales",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.hotel-ostella.com/fr/contact",
+          "snippet": "commercial@hotel-ostella.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "spa@hotel-ostella.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.hotel-ostella.com/fr/contact",
+          "snippet": "spa@hotel-ostella.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "04 95 30 97 70",
+          "valueE164": "+33495309770",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.hotel-ostella.com/",
+          "snippet": "04 95 30 97 70"
+        },
+        {
+          "valueRaw": "06 65 26 19 92",
+          "valueE164": "+33665261992",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.hotel-ostella.com/fr/contact",
+          "snippet": "Juin20600 Bastia Hébergement/Restaurant : 04 95 30 97 70 Centre de bien-être : 06 65 26 19 92 Mail hébergement : contact@hotel-ostella.com Mail restaurant : restaurant@hotel"
+        }
+      ],
+      "primaryEmail": "contact@hotel-ostella.com",
+      "primaryPhone": "+33495309770",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/Hotelspa.ostella/",
+            "handle": "hotelspa.ostella",
+            "sourceUrl": "https://www.hotel-ostella.com/"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/hotel_ostella/",
+            "handle": "hotel_ostella",
+            "sourceUrl": "https://www.hotel-ostella.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://ostoria.fr/",
+    "status": "success",
+    "data": {
+      "domain": "ostoria.fr",
+      "finalUrl": "https://ostoria.fr/",
+      "keyPages": {
+        "contact": null,
+        "about": null,
+        "legal": "https://ostoria.fr/mentions-legales/",
+        "privacy": "https://ostoria.fr/politique-confidentialite/"
+      },
+      "pagesVisited": [
+        "https://ostoria.fr/",
+        "https://ostoria.fr/mentions-legales/",
+        "https://ostoria.fr/",
+        "https://ostoria.fr/politique-confidentialite/",
+        "https://ostoria.fr/politique-confidentialite/",
+        "https://ostoria.fr/dormir-hotel-perigueux/",
+        "https://ostoria.fr/restaurant-tovera-perigueux/",
+        "https://ostoria.fr/spa-bien-etre-perigueux/"
+      ],
+      "emails": [
+        {
+          "value": "hotel.perigord@ostoria.fr",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "text",
+            "same_domain"
+          ],
+          "sourceUrl": "https://ostoria.fr/",
+          "snippet": "hotel.perigord@ostoria.fr",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "0553025025",
+          "valueE164": "+33553025025",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://ostoria.fr/",
+          "snippet": "Nous contacter"
+        }
+      ],
+      "primaryEmail": "hotel.perigord@ostoria.fr",
+      "primaryPhone": "+33553025025",
+      "socials": {
+        "linkedin": [
+          {
+            "url": "https://www.linkedin.com/company/ostoria/posts/?feedView=all",
+            "handle": "ostoria",
+            "sourceUrl": "https://ostoria.fr/"
+          }
+        ],
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/ostoriaperigord?locale=fr_FR",
+            "handle": "ostoriaperigord",
+            "sourceUrl": "https://ostoria.fr/"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/ostoria_perigord/?g=5",
+            "handle": "ostoria_perigord",
+            "sourceUrl": "https://ostoria.fr/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://www.hotel-ours-blanc.com/",
+    "status": "success",
+    "data": {
+      "domain": "hotel-ours-blanc.com",
+      "finalUrl": "https://www.hoteloursblanc.com/",
+      "keyPages": {
+        "contact": "https://www.hoteloursblanc.com/acces-contact",
+        "about": null,
+        "legal": "https://www.hotel-ours-blanc.com/mentions-legales",
+        "privacy": "https://www.hotel-ours-blanc.com/politique-de-confidentialite"
+      },
+      "pagesVisited": [
+        "https://www.hoteloursblanc.com/",
+        "https://www.hoteloursblanc.com/mentions-legales",
+        "https://medias.assas-hotels.com/HotelOursBlanc/RGPD/Politiquedeconfidentialit%C3%A9_FR.pdf",
+        "https://www.hoteloursblanc.com/acces-contact",
+        "https://www.hoteloursblanc.com/",
+        "https://www.hoteloursblanc.com/en",
+        "https://www.hoteloursblanc.com/hotel",
+        "https://www.hoteloursblanc.com/chambres"
+      ],
+      "emails": [
+        {
+          "value": "reservation@hotel-ours-blanc.com",
+          "type": "booking",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.hotel-ours-blanc.com/",
+          "snippet": "reservation@hotel-ours-blanc.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33(0)479006166",
+          "valueE164": "+33479006166",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.hotel-ours-blanc.com/",
+          "snippet": "+33(0)4 79 00 61 66"
+        },
+        {
+          "valueRaw": "0 0 595.32 841.92",
+          "valueE164": "+5953284192",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.hotel-ours-blanc.com/politique-de-confidentialite",
+          "snippet": "XObject<>/ProcSet[/PDF/Text/ImageB/ImageC/ImageI] >>/Annots[ 26 0 R] /MediaBox[ 0 0 595.32 841.92] /Contents 4 0 R/Group<>/Tabs/S/StructParents 0>> endobj 4 0 obj <> stream x��="
+        },
+        {
+          "valueRaw": "+33(0)450545556",
+          "valueE164": "+33450545556",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.hotel-ours-blanc.com/acces-contact",
+          "snippet": "‍"
+        }
+      ],
+      "primaryEmail": "reservation@hotel-ours-blanc.com",
+      "primaryPhone": "+33479006166",
+      "socials": {
+        "linkedin": [
+          {
+            "url": "https://fr.linkedin.com/company/ours-blanc-hotel-spa",
+            "handle": "ours-blanc-hotel-spa",
+            "sourceUrl": "https://www.hotel-ours-blanc.com/"
+          }
+        ],
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/OursBlancMenuires",
+            "handle": "oursblancmenuires",
+            "sourceUrl": "https://www.hotel-ours-blanc.com/"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/hoteloursblanc_lesmenuires/",
+            "handle": "hoteloursblanc_lesmenuires",
+            "sourceUrl": "https://www.hotel-ours-blanc.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://hotel-oursblanc.com/",
+    "status": "success",
+    "data": {
+      "domain": "hotel-oursblanc.com",
+      "finalUrl": "https://hotel-oursblanc.com/",
+      "keyPages": {
+        "contact": "http://wilson.hotel-oursblanc.com/fra/contact",
+        "about": null,
+        "legal": "https://hotel-oursblanc.com/fra/mentions_legales",
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://hotel-oursblanc.com/",
+        "https://wilson.hotel-oursblanc.com/fra/contact",
+        "https://hotel-oursblanc.com/fra/mentions_legales",
+        "https://centre.hotel-oursblanc.com/fra/contact",
+        "https://victor-hugo.hotel-oursblanc.com/fra/contact",
+        "https://wilson.hotel-oursblanc.com/fra/reservations/novaresa?date_from=05-02-2026&date_to=06-02-2026",
+        "https://centre.hotel-oursblanc.com/",
+        "https://victor-hugo.hotel-oursblanc.com/"
+      ],
+      "emails": [
+        {
+          "value": "danielle@otelico.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://hotel-oursblanc.com/fra/mentions_legales",
+          "snippet": "oursblanc.com Adresse électronique ou téléphone: danielle@otelico.com Numéro d'inscription au registre de commerce et",
+          "foundIn": "text"
+        },
+        {
+          "value": "contact@otelico.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://hotel-oursblanc.com/fra/mentions_legales",
+          "snippet": ", 162 bis Avenue de l'hippodrome, 33320 Eysines - contact@otelico.com En cas de réclamation nous vous redirigions ve",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33 (0)5 61 21 62 40",
+          "valueE164": "+33561216240",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://hotel-oursblanc.com/",
+          "snippet": "+33 (0)5 61 21 62 40"
+        },
+        {
+          "valueRaw": "+33 (0)5 61 21 25 97",
+          "valueE164": "+33561212597",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://hotel-oursblanc.com/",
+          "snippet": "+33 (0)5 61 21 25 97"
+        },
+        {
+          "valueRaw": "+33 (0)5 61 23 14 55",
+          "valueE164": "+33561231455",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://hotel-oursblanc.com/",
+          "snippet": "+33 (0)5 61 23 14 55"
+        },
+        {
+          "valueRaw": "43.6055545",
+          "valueE164": "+33436055545",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "http://wilson.hotel-oursblanc.com/fra/contact",
+          "snippet": "ilson (at) hotel-oursblanc (dot) com Latitude : 43.6055545 Longitude : 1.4474196 NomPrénomA"
+        },
+        {
+          "valueRaw": "43.6062028",
+          "valueE164": "+33436062028",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "http://centre.hotel-oursblanc.com/fra/contact",
+          "snippet": "entre (at) hotel-oursblanc (dot) com Latitude : 43.6062028 Longitude : 1.447199 NomPrénomAd"
+        }
+      ],
+      "primaryEmail": "danielle@otelico.com",
+      "primaryPhone": "+33561216240"
+    },
+    "issues": []
+  },
+  {
+    "url": "http://www.oustaucamarguen.com/",
+    "status": "success",
+    "data": {
+      "domain": "oustaucamarguen.com",
+      "finalUrl": "https://oustaucamarguen.com/",
+      "keyPages": {
+        "contact": "https://oustaucamarguen.com/contact/",
+        "about": null,
+        "legal": "http://www.oustaucamarguen.com/legal",
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://oustaucamarguen.com/",
+        "https://oustaucamarguen.com/contact/",
+        "https://oustaucamarguen.com/legal/",
+        "https://oustaucamarguen.com/contact/",
+        "https://oustaucamarguen.com/",
+        "https://oustaucamarguen.com/hotel/",
+        "https://oustaucamarguen.com/hotel/",
+        "https://oustaucamarguen.com/restaurant/"
+      ],
+      "emails": [
+        {
+          "value": "direction@ex.comoustaucamarguen.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "http://www.oustaucamarguen.com/legal",
+          "snippet": "/oustaucamarguen.com E-mail : direction@ex.comoustaucamarguen.com Cette politique de cookies a",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33466515165",
+          "valueE164": "+33466515165",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "http://www.oustaucamarguen.com/",
+          "snippet": "04 66 51 51 65"
+        }
+      ],
+      "primaryEmail": "direction@ex.comoustaucamarguen.com",
+      "primaryPhone": "+33466515165",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/Oustau.Camarguen",
+            "handle": "oustau.camarguen",
+            "sourceUrl": "http://www.oustaucamarguen.com/"
+          },
+          {
+            "url": "https://www.facebook.com/settings/?tab=ads",
+            "handle": "settings",
+            "sourceUrl": "http://www.oustaucamarguen.com/legal"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/oustaucamarguen/",
+            "handle": "oustaucamarguen",
+            "sourceUrl": "http://www.oustaucamarguen.com/"
+          },
+          {
+            "url": "https://www.instagram.com/reel/DUU6vgeDaiQ/",
+            "handle": "reel",
+            "sourceUrl": "http://www.oustaucamarguen.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DUP-2b5D3JU/",
+            "handle": "p",
+            "sourceUrl": "http://www.oustaucamarguen.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DUC5IM-CPOJ/",
+            "handle": "p",
+            "sourceUrl": "http://www.oustaucamarguen.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DTw3l6DiB_2/",
+            "handle": "p",
+            "sourceUrl": "http://www.oustaucamarguen.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DTe1_Pnjxj6/",
+            "handle": "p",
+            "sourceUrl": "http://www.oustaucamarguen.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DTM0bTMgc_B/",
+            "handle": "p",
+            "sourceUrl": "http://www.oustaucamarguen.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DS73hQrj_Xr/",
+            "handle": "p",
+            "sourceUrl": "http://www.oustaucamarguen.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DSp1-dVAruK/",
+            "handle": "p",
+            "sourceUrl": "http://www.oustaucamarguen.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  }
+]

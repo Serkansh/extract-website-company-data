@@ -26,6 +26,11 @@ function detectKeyPages(html, baseUrl) {
     const href = $(el).attr('href');
     if (!href) return;
     
+    // Ignore les liens mailto: et tel:
+    if (href.startsWith('mailto:') || href.startsWith('tel:')) {
+      return;
+    }
+    
     const resolvedUrl = resolveUrl(baseUrl, href);
     if (!resolvedUrl || !isSameDomain(resolvedUrl, baseUrl) || isAsset(resolvedUrl)) {
       return;
@@ -64,6 +69,11 @@ function extractInternalLinks(html, baseUrl) {
   $('a[href]').each((_, el) => {
     const href = $(el).attr('href');
     if (!href) return;
+
+    // Ignore les liens mailto: et tel:
+    if (href.startsWith('mailto:') || href.startsWith('tel:')) {
+      return;
+    }
 
     const resolvedUrl = resolveUrl(baseUrl, href);
     if (!resolvedUrl) return;

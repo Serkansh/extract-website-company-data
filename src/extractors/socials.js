@@ -9,6 +9,31 @@ function isShareLink(url) {
 }
 
 /**
+ * Vérifie si un lien social est une page de paramètres/policies (à exclure)
+ */
+function isSettingsOrPolicyLink(url) {
+  const urlLower = url.toLowerCase();
+  const excludedPatterns = [
+    /\/policies\//,
+    /\/settings\//,
+    /\/help\//,
+    /\/rules/,
+    /\/terms/,
+    /\/privacy/,
+    /\/legal/,
+    /\/cookies/,
+    /\/ads/,
+    /\/about\/ads/,
+    /\/privacy\/checkup/,
+    /\/account\/settings/,
+    /\/settings\?tab=/,
+    /\/policies\/cookies/,
+    /\/rules-and-policies/
+  ];
+  return excludedPatterns.some(pattern => pattern.test(urlLower));
+}
+
+/**
  * Extrait le handle/ID depuis une URL de réseau social
  */
 function extractSocialHandle(url, platform) {
@@ -99,6 +124,10 @@ export function extractSocials(html, sourceUrl) {
     if (!href || isShareLink(href)) return;
     
     const url = href.startsWith('http') ? href : new URL(href, sourceUrl).toString();
+    
+    // Exclut les liens de paramètres/policies
+    if (isSettingsOrPolicyLink(url)) return;
+    
     const urlLower = url.toLowerCase();
     
     // Vérifie chaque plateforme
@@ -109,7 +138,8 @@ export function extractSocials(html, sourceUrl) {
         seen.add(url);
         
         const handle = extractSocialHandle(url, platform);
-        if (handle) {
+        // Exclut les handles qui sont des mots-clés de paramètres
+        if (handle && !['policies', 'settings', 'help', 'rules', 'terms', 'privacy', 'legal', 'cookies', 'ads', 'es', 'fr', 'en'].includes(handle.toLowerCase())) {
           const socialData = {
             url,
             handle,
