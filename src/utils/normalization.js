@@ -56,8 +56,10 @@ export function cleanSnippet(snippet, maxLen = 240) {
 /**
  * Normalise un numéro de téléphone
  * Retourne { valueRaw, valueE164 }
+ * @param {string} phoneRaw - Le numéro de téléphone à normaliser
+ * @param {string|null} countryCode - Code pays ISO (ex: 'FR', 'UK', 'DE') ou null si inconnu
  */
-export function normalizePhone(phoneRaw) {
+export function normalizePhone(phoneRaw, countryCode = null) {
   if (!phoneRaw) return { valueRaw: null, valueE164: null };
   
   let cleaned = phoneRaw.trim();
@@ -77,9 +79,13 @@ export function normalizePhone(phoneRaw) {
         const phoneNumber = parsePhoneNumber(cleaned);
         if (phoneNumber?.number && isValidPhoneNumber(phoneNumber.number)) valueE164 = phoneNumber.number;
       } else {
-        // 3) Sinon, on tente uniquement FR (par défaut v1)
-        const phoneNumber = parsePhoneNumber(cleaned, 'FR');
-        if (phoneNumber?.number && isValidPhoneNumber(phoneNumber.number)) valueE164 = phoneNumber.number;
+        // 3) Si on a un code pays, on l'utilise
+        if (countryCode) {
+          const phoneNumber = parsePhoneNumber(cleaned, countryCode);
+          if (phoneNumber?.number && isValidPhoneNumber(phoneNumber.number)) valueE164 = phoneNumber.number;
+        }
+        // 4) Si pas de code pays, on ne normalise PAS (on garde le numéro tel quel avec le 0)
+        // Cela évite de transformer un numéro local d'un autre pays en numéro français
       }
     }
   } catch {
