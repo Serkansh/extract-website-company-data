@@ -16,16 +16,17 @@ if (!APIFY_TOKEN) {
 }
 
 const TEST_SITES = [
-  'https://www.courcheneige.com/',
-  'https://dauphin-arcachon.com/',
-  'https://www.paris-hotel-dauphin.com/',
-  'https://www.ledauphinhotel.com/',
-  'https://www.lediana.com/',
+  'https://www.apollo.io/',
+  'https://www.premierinn.com',
+  'https://www.blueorchid.com',
+  'https://aeriaapartments.com',
+  'https://www.plugandplaydesign.co.uk/',
+  'https://www.thewebkitchen.co.uk/',
 ];
 
 async function runTest(client, url) {
   const domain = new URL(url).hostname.replace(/^www\./, '');
-  console.log(`\n📤 Test de: ${url}`);
+  console.log(`\n📤 Testing: ${url}`);
   try {
     const run = await client.actor(ACTOR_ID).start({
       startUrls: [{ url }],
@@ -35,7 +36,7 @@ async function runTest(client, url) {
       includeSocials: true,
     });
 
-    console.log(`   ⏳ Run lancé: ${run.id}`);
+    console.log(`   ⏳ Run started: ${run.id}`);
     const finishedRun = await client.run(run.id).waitForFinish({ waitSecs: 300 });
 
     if (finishedRun.status !== 'SUCCEEDED') {
@@ -47,20 +48,20 @@ async function runTest(client, url) {
 
     const issues = [];
     
-    // Vérifie que company n'est PAS présent
+    // Check that company is NOT present
     if (data?.company) {
-      issues.push({ severity: 'high', type: 'company_present', message: 'Le champ company ne devrait pas être présent' });
+      issues.push({ severity: 'high', type: 'company_present', message: 'Company field should not be present' });
     }
     
-    // Vérifie les contacts
+    // Check contacts
     if (!data?.emails || data.emails.length === 0) {
-      issues.push({ severity: 'medium', type: 'missing_emails', message: 'Aucun email trouvé' });
+      issues.push({ severity: 'medium', type: 'missing_emails', message: 'No email found' });
     }
     if (!data?.phones || data.phones.length === 0) {
-      issues.push({ severity: 'medium', type: 'missing_phones', message: 'Aucun téléphone trouvé' });
+      issues.push({ severity: 'medium', type: 'missing_phones', message: 'No phone found' });
     }
     
-    // Vérifie les emails dupliqués (même domaine, variantes .fr/.com)
+    // Check for duplicate emails (same domain, .fr/.com variants)
     if (data?.emails) {
       const emailMap = new Map();
       for (const email of data.emails) {
@@ -69,59 +70,59 @@ async function runTest(client, url) {
         const variants = [`${local}@${domain.replace(/\.fr$/, '.com')}`, `${local}@${domain.replace(/\.com$/, '.fr')}`];
         for (const variant of variants) {
           if (emailMap.has(variant) && variant !== key) {
-            issues.push({ severity: 'medium', type: 'duplicate_email_variant', message: `Emails dupliqués détectés: ${email.value} et ${emailMap.get(variant)}` });
+            issues.push({ severity: 'medium', type: 'duplicate_email_variant', message: `Duplicate emails detected: ${email.value} and ${emailMap.get(variant)}` });
           }
         }
         emailMap.set(key, email.value);
       }
     }
     
-    // Vérifie les faux numéros RCS/SIRET
+    // Check for false RCS/SIRET numbers
     if (data?.phones) {
       for (const phone of data.phones) {
         const digits = phone.valueRaw?.replace(/\D/g, '') || '';
         if (digits.length === 9) {
           const snippet = phone.snippet?.toLowerCase() || '';
           if (/(rcs|siret|siren|immatricul|registre|commerce|soci[eé]t[eé]s?)/i.test(snippet)) {
-            issues.push({ severity: 'high', type: 'rcs_as_phone', message: `Numéro RCS détecté comme téléphone: ${phone.valueRaw}` });
+            issues.push({ severity: 'high', type: 'rcs_as_phone', message: `RCS number detected as phone: ${phone.valueRaw}` });
           }
         }
-        // Vérifie les coordonnées GPS
+        // Check for GPS coordinates
         if (phone.valueRaw && /^\d+\.\d+$/.test(phone.valueRaw)) {
           const snippet = phone.snippet?.toLowerCase() || '';
           if (/(latitude|longitude|lat|lon|coord|gps|position)/i.test(snippet)) {
-            issues.push({ severity: 'high', type: 'gps_as_phone', message: `Coordonnée GPS détectée comme téléphone: ${phone.valueRaw}` });
+            issues.push({ severity: 'high', type: 'gps_as_phone', message: `GPS coordinate detected as phone: ${phone.valueRaw}` });
           }
         }
       }
     }
     
-    // Vérifie les emails avec préfixes numériques
+    // Check for emails with numeric prefixes
     if (data?.emails) {
       for (const email of data.emails) {
         if (/^\d+[a-z]/.test(email.value)) {
-          issues.push({ severity: 'high', type: 'email_with_numeric_prefix', message: `Email avec préfixe numérique: ${email.value}` });
+          issues.push({ severity: 'high', type: 'email_with_numeric_prefix', message: `Email with numeric prefix: ${email.value}` });
         }
       }
     }
     
-    // Vérifie les fax détectés comme téléphones
+    // Check for fax detected as phones
     if (data?.phones) {
       for (const phone of data.phones) {
         const snippet = phone.snippet?.toLowerCase() || '';
         if (/(fax|télécopie|facsimile)\s*[=:]\s*/i.test(snippet)) {
-          issues.push({ severity: 'high', type: 'fax_as_phone', message: `Fax détecté comme téléphone: ${phone.valueRaw}` });
+          issues.push({ severity: 'high', type: 'fax_as_phone', message: `Fax detected as phone: ${phone.valueRaw}` });
         }
       }
     }
     
-    // Vérifie les liens sociaux de policies/settings
+    // Check for social policy/settings links
     if (data?.socials) {
       for (const [platform, links] of Object.entries(data.socials)) {
         for (const link of links) {
           const url = link.url?.toLowerCase() || '';
           if (/(policies|settings|help|rules|terms|privacy|legal|cookies|ads|account)/.test(url)) {
-            issues.push({ severity: 'medium', type: 'social_policy_link', message: `Lien social de paramètres détecté: ${link.url}` });
+            issues.push({ severity: 'medium', type: 'social_policy_link', message: `Social settings/policy link detected: ${link.url}` });
           }
         }
       }
@@ -138,8 +139,8 @@ async function main() {
   const client = new ApifyClient({ token: APIFY_TOKEN });
   const allResults = [];
 
-  console.log('🚀 Démarrage des tests sur les nouveaux hôtels...');
-  console.log(`📋 ${TEST_SITES.length} site(s) à tester\n`);
+  console.log('🚀 Starting tests on new hotels...');
+  console.log(`📋 ${TEST_SITES.length} site(s) to test\n`);
 
   for (let i = 0; i < TEST_SITES.length; i++) {
     const url = TEST_SITES[i];
@@ -151,19 +152,19 @@ async function main() {
   fs.writeFileSync(RESULTS_FILE, JSON.stringify(allResults, null, 2));
 
   console.log('\n================================================================================');
-  console.log('📊 RÉSUMÉ DES TESTS');
+  console.log('📊 TEST SUMMARY');
   console.log('================================================================================');
 
   const successful = allResults.filter(r => r.status === 'success' && r.issues.length === 0).length;
   const minorIssues = allResults.filter(r => r.status === 'success' && r.issues.length > 0).length;
   const failed = allResults.filter(r => r.status === 'failed' || r.status === 'error').length;
 
-  console.log(`\n✅ Sites sans problème: ${successful}/${TEST_SITES.length}`);
-  console.log(`⚠️  Sites avec problèmes: ${minorIssues}/${TEST_SITES.length}`);
-  console.log(`❌ Sites en échec: ${failed}/${TEST_SITES.length}`);
+  console.log(`\n✅ Sites without issues: ${successful}/${TEST_SITES.length}`);
+  console.log(`⚠️  Sites with issues: ${minorIssues}/${TEST_SITES.length}`);
+  console.log(`❌ Failed sites: ${failed}/${TEST_SITES.length}`);
 
   console.log('\n--------------------------------------------------------------------------------');
-  console.log('DÉTAILS PAR SITE:');
+  console.log('DETAILS BY SITE:');
   console.log('--------------------------------------------------------------------------------');
 
   for (const result of allResults) {
@@ -172,23 +173,23 @@ async function main() {
     console.log(`   URL: ${result.url}`);
     if (result.status === 'success') {
       if (result.issues.length === 0) {
-        console.log('   ✅ Aucun problème détecté');
+        console.log('   ✅ No issues detected');
       } else {
-        console.log(`   ⚠️  ${result.issues.length} problème(s) détecté(s):`);
+        console.log(`   ⚠️  ${result.issues.length} issue(s) detected:`);
         result.issues.forEach((issue, idx) => {
           const emoji = issue.severity === 'high' ? '🔴' : issue.severity === 'medium' ? '🟡' : '🟢';
           console.log(`      ${idx + 1}. ${emoji} [${issue.severity?.toUpperCase() || 'UNKNOWN'}] ${issue.message}`);
         });
       }
-      console.log('   📋 Données extraites:');
+      console.log('   📋 Extracted data:');
       if (result.data?.company) {
-        console.log(`      - ⚠️  COMPANY PRÉSENT (ne devrait pas l'être): ${JSON.stringify(result.data.company)}`);
+        console.log(`      - ⚠️  COMPANY PRESENT (should not be): ${JSON.stringify(result.data.company)}`);
       }
       console.log(`      - Emails: ${result.data?.emails?.length || 0}`);
       if (result.data?.emails?.length > 0) {
         const primary = result.data.emails.find(e => e.priority === 'primary');
         console.log(`        Primary: ${primary?.value || 'N/A'}`);
-        // Affiche tous les emails pour vérifier les doublons
+        // Display all emails to check for duplicates
         result.data.emails.forEach(e => {
           console.log(`        - ${e.value} (${e.priority})`);
         });
@@ -206,14 +207,14 @@ async function main() {
           }
         }
       }
-      console.log(`      - Pages visitées: ${result.data?.pagesVisited?.length || 0}`);
+      console.log(`      - Pages visited: ${result.data?.pagesVisited?.length || 0}`);
     } else {
-      console.log(`   ❌ Échec du test: ${result.error}`);
+      console.log(`   ❌ Test failed: ${result.error}`);
     }
   }
 
   console.log('\n================================================================================');
-  console.log(`\n💾 Résultats sauvegardés dans: ${RESULTS_FILE}`);
+  console.log(`\n💾 Results saved to: ${RESULTS_FILE}`);
 }
 
 main().catch(console.error);
