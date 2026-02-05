@@ -12,6 +12,11 @@ export function normalizeEmail(email) {
   // Supprime la ponctuation finale (.,;:)
   normalized = normalized.replace(/[.,;:]$/, '');
   
+  // Nettoie les préfixes numériques collés (ex: "00hotel@operaliege.com" -> "hotel@operaliege.com")
+  // Ces préfixes viennent souvent de numéros de téléphone collés au texte
+  // Pattern: un ou plusieurs digits au début, suivis directement d'une lettre
+  normalized = normalized.replace(/^\d+([a-z])/, '$1');
+  
   return normalized;
 }
 

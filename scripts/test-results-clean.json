@@ -1,0 +1,1176 @@
+[
+  {
+    "url": "http://www.hotel-opera-liege-paris.com/",
+    "status": "success",
+    "data": {
+      "domain": "hotel-opera-liege-paris.com",
+      "finalUrl": "http://www.hotel-opera-liege-paris.com/",
+      "keyPages": {
+        "contact": "http://www.hotel-opera-liege-paris.com/contact-acces",
+        "about": null,
+        "legal": "http://www.hotel-opera-liege-paris.com/mentions-legales",
+        "privacy": "http://www.hotel-opera-liege-paris.com/politique-de-confidentialite"
+      },
+      "pagesVisited": [
+        "http://www.hotel-opera-liege-paris.com/",
+        "http://www.hotel-opera-liege-paris.com/contact-acces",
+        "http://www.hotel-opera-liege-paris.com/mentions-legales",
+        "http://www.hotel-opera-liege-paris.com/politique-de-confidentialite",
+        "http://www.hotel-opera-liege-paris.com/chambres",
+        "http://www.hotel-opera-liege-paris.com/services",
+        "http://www.hotel-opera-liege-paris.com/rooftop",
+        "http://www.hotel-opera-liege-paris.com/honesty-bar",
+        "http://www.hotel-opera-liege-paris.com/en/contact-access",
+        "http://www.hotel-opera-liege-paris.com/es/contact-acces",
+        "http://www.hotel-opera-liege-paris.com/en/legal-notice",
+        "http://www.hotel-opera-liege-paris.com/es/mentions-legales",
+        "http://www.hotel-opera-liege-paris.com/en/privacy-policy",
+        "http://www.hotel-opera-liege-paris.com/es/politique-de-confidentialite",
+        "http://www.hotel-opera-liege-paris.com/quartier"
+      ],
+      "company": {
+        "name": "Base",
+        "legalName": null,
+        "country": "FR",
+        "countryName": "France"
+      },
+      "emails": [
+        {
+          "value": "hotel@operaliege.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "http://www.hotel-opera-liege-paris.com/",
+          "snippet": "hotel@operaliege.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "00hotel@operaliege.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "http://www.hotel-opera-liege-paris.com/",
+          "snippet": "PÉRA LIÈGE9 Rue de Liège75009 Paris+33 1 53 72 85 00hotel@operaliege.com",
+          "foundIn": "text"
+        },
+        {
+          "value": "officers@operaliege.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "http://www.hotel-opera-liege-paris.com/politique-de-confidentialite",
+          "snippet": "officers@operaliege.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33153728500",
+          "valueE164": "+33153728500",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "http://www.hotel-opera-liege-paris.com/",
+          "snippet": "+33 (0)1 53 72 85 00"
+        },
+        {
+          "valueRaw": "752 808 113",
+          "valueE164": "+33752808113",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "http://www.hotel-opera-liege-paris.com/mentions-legales",
+          "snippet": "€, immatriculée au Registre du Commerce et des Sociétés de Paris sous le numéro 752 808 113 et dont le siège social est situé 9, rue de Liège - 75009 PARIS (ci-après dénom"
+        }
+      ],
+      "primaryEmail": "hotel@operaliege.com",
+      "primaryPhone": "+33153728500",
+      "socials": {
+        "linkedin": [
+          {
+            "url": "https://www.linkedin.com/company/h%C3%B4tel-op%C3%A9ra-li%C3%A8ge-paris/",
+            "handle": "h%c3%b4tel-op%c3%a9ra-li%c3%a8ge-paris",
+            "sourceUrl": "http://www.hotel-opera-liege-paris.com/"
+          }
+        ],
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/HotelOperaLiege/",
+            "handle": "hoteloperaliege",
+            "sourceUrl": "http://www.hotel-opera-liege-paris.com/"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/hoteloperaliege/",
+            "handle": "hoteloperaliege",
+            "sourceUrl": "http://www.hotel-opera-liege-paris.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://www.orchidees-hotel.com/",
+    "status": "success",
+    "data": {
+      "domain": "orchidees-hotel.com",
+      "finalUrl": "https://www.orchidees-hotel.com/",
+      "keyPages": {
+        "contact": null,
+        "about": null,
+        "legal": "https://www.orchidees-hotel.com/mentions-legales",
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://www.orchidees-hotel.com/",
+        "https://www.orchidees-hotel.com/mentions-legales",
+        "https://www.orchidees-hotel.com/chambres-hotel-verdun-meuse",
+        "https://www.orchidees-hotel.com/restaurant-gastronomie-hotel-verdun-meuse",
+        "https://www.orchidees-hotel.com/offres-soirees-etapes-hotel-verdun-meuse",
+        "https://www.orchidees-hotel.com/seminaire-reception-hotel-verdun-meuse",
+        "https://www.orchidees-hotel.com/accueil-groupes-hotel-verdun-meuse",
+        "https://www.orchidees-hotel.com/sejour-verdun-hotel-verdun-meuse",
+        "https://www.orchidees-hotel.com/acces-infos-pratiques-hotel-verdun-meuse",
+        "https://www.orchidees-hotel.com/galerie-photos-hotel-verdun-meuse",
+        "https://www.orchidees-hotel.com/infos-tarifs",
+        "https://www.orchidees-hotel.com/plan-du-site",
+        "https://www.orchidees-hotel.com/charte-vie-privee",
+        "https://www.orchidees-hotel.com/synchro"
+      ],
+      "errors": [
+        {
+          "url": "mailto:info@orchidees-hotel.com",
+          "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+        }
+      ],
+      "company": {
+        "name": "Mentions légalesHôtel Orchidées",
+        "legalName": null,
+        "country": "FR",
+        "countryName": "France"
+      },
+      "emails": [
+        {
+          "value": "info@orchidees-hotel.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.orchidees-hotel.com/",
+          "snippet": "info@orchidees-hotel.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "hotel.orchidees@wanadoo.fr",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orchidees-hotel.com/mentions-legales",
+          "snippet": "ercice de ce droit peut être effectué par email à hotel.orchidees@wanadoo.fr7. Durée de conservation des données personnellesC",
+          "foundIn": "text"
+        },
+        {
+          "value": "support@ovh.com",
+          "type": "support",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orchidees-hotel.com/mentions-legales",
+          "snippet": "e Kellermann BP 80157 59053 ROUBAIX Cedex 1Email: support@ovh.comTél. : +33 (0)8 203 203 63SIRET : FR79537407926Num",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+333 29 86 46 46",
+          "valueE164": "+33329864646",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.orchidees-hotel.com/",
+          "snippet": "+33(0) 3 29 86 46 46"
+        },
+        {
+          "valueRaw": "424 761 419",
+          "valueE164": "+33424761419",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orchidees-hotel.com/mentions-legales",
+          "snippet": "26Numéro d’immatriculation au Registre du Commerce et des Sociétés de Lille : B 424 761 419Collecte des données personnellesIndiquer ici les mentions relatives à la collec"
+        },
+        {
+          "valueRaw": "02 31 89 24 20",
+          "valueE164": "+33231892420",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orchidees-hotel.com/mentions-legales",
+          "snippet": "dont le siège social est situé 4 rue Lucie Delarue Mardrus 14600 Honfleur.Tél : 02 31 89 24 20. Charte de vie privée 1. Responsable de traitement1.1 Le responsa"
+        }
+      ],
+      "primaryEmail": "info@orchidees-hotel.com",
+      "primaryPhone": "+33329864646",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/Orchideesrestaurant/",
+            "handle": "orchideesrestaurant",
+            "sourceUrl": "https://www.orchidees-hotel.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://www.vacancesbleues.fr/fr/hendaye/hotel-residence-orhoitza",
+    "status": "success",
+    "data": {
+      "domain": "vacancesbleues.fr",
+      "finalUrl": "https://www.vacancesbleues.fr/fr/vacances-en-france/sud-ouest/hendaye-hotel-orhoitza",
+      "keyPages": {
+        "contact": "https://www.vacancesbleues.fr/fr/nous-contacter",
+        "about": "https://www.vacancesbleues.fr/fr/nous-connaitre/nous-rejoindre/qui-sommes-nous2",
+        "legal": "https://www.vacancesbleues.fr/fr/mentions-legales",
+        "privacy": "https://www.vacancesbleues.fr/fr/politique-de-confidentialite"
+      },
+      "pagesVisited": [
+        "https://www.vacancesbleues.fr/fr/vacances-en-france/sud-ouest/hendaye-hotel-orhoitza",
+        "https://www.vacancesbleues.fr/fr/nous-contacter",
+        "https://www.vacancesbleues.fr/fr/nous-connaitre/nous-rejoindre/qui-sommes-nous2",
+        "https://www.vacancesbleues.fr/fr/mentions-legales",
+        "https://www.vacancesbleues.fr/fr/politique-de-confidentialite",
+        "https://www.vacancesbleues.fr/fr/seminaires/contactez-nous",
+        "https://www.vacancesbleues.fr/fr/gardons-le-lien?utm_content=barre_permanente",
+        "https://www.vacancesbleues.fr/fr/bons-plans/3-2-1-deja-l-ete",
+        "https://www.vacancesbleues.fr/fr/nous-contacter/une-question-pour-vos-prochaines-vacances",
+        "https://www.vacancesbleues.fr/fr/nous-contacter/contacter-le-service-relations-client",
+        "https://www.vacancesbleues.fr/fr/nous-contacter/donnees-personnelles/formulaire-de-contact-donnees-personnelles",
+        "https://www.vacancesbleues.fr/fr/bons-plans/3-2-1-printemps",
+        "https://www.vacancesbleues.fr/fr/bons-plans/team-winter",
+        "https://www.vacancesbleues.fr/fr/bons-plans/offre-de-lancement",
+        "https://www.vacancesbleues.fr/fr/les-podcasts-vacances-bleues"
+      ],
+      "company": {
+        "name": "Vacances Bleues",
+        "legalName": null,
+        "country": "FR",
+        "countryName": "France"
+      },
+      "emails": [
+        {
+          "value": "orhoitza@vacancesbleues.fr",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.vacancesbleues.fr/fr/hendaye/hotel-residence-orhoitza",
+          "snippet": "orhoitza@vacancesbleues.fr",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "infovb@vacancesbleues.fr",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.vacancesbleues.fr/fr/mentions-legales",
+          "snippet": "infovb@vacancesbleues.fr",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "donneespersonnelles@vacancesbleues.fr",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.vacancesbleues.fr/fr/politique-de-confidentialite",
+          "snippet": "donneespersonnelles@vacancesbleues.fr",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33 (0)4 91 00 96 48",
+          "valueE164": "+33491009648",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.vacancesbleues.fr/fr/hendaye/hotel-residence-orhoitza",
+          "snippet": "+33 (0)4 91 00 96 48"
+        },
+        {
+          "valueRaw": "05 59 48 80 00",
+          "valueE164": "+33559488000",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.vacancesbleues.fr/fr/hendaye/hotel-residence-orhoitza",
+          "snippet": "05 59 48 80 00"
+        },
+        {
+          "valueRaw": "421 866 344",
+          "valueE164": "+33421866344",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.vacancesbleues.fr/fr/mentions-legales",
+          "snippet": "€, immatriculée au Registre du Commerce et des Sociétés de Marseille sous le n° 421 866 344, représentée par son Président.Siège social : 32, rue edmond Rostand - 13006 MA"
+        },
+        {
+          "valueRaw": "522.921.634",
+          "valueE164": "+33522921634",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.vacancesbleues.fr/fr/mentions-legales",
+          "snippet": "ot, immatriculée au registre du commerce et des sociétés d’Antibes sous le n° B 522.921.634,Crédits photos : Vacances Bleues, Adobe Stock, iStockphoto, Shutterstock, Getty"
+        }
+      ],
+      "primaryEmail": "orhoitza@vacancesbleues.fr",
+      "primaryPhone": "+33491009648",
+      "socials": {
+        "linkedin": [
+          {
+            "url": "https://www.linkedin.com/company/vacances-bleues-affaires",
+            "handle": "vacances-bleues-affaires",
+            "sourceUrl": "https://www.vacancesbleues.fr/fr/hendaye/hotel-residence-orhoitza"
+          }
+        ],
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/vacancesbleues",
+            "handle": "vacancesbleues",
+            "sourceUrl": "https://www.vacancesbleues.fr/fr/hendaye/hotel-residence-orhoitza"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/vacancesbleues/",
+            "handle": "vacancesbleues",
+            "sourceUrl": "https://www.vacancesbleues.fr/fr/hendaye/hotel-residence-orhoitza"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://www.hotel-origami.com",
+    "status": "success",
+    "data": {
+      "domain": "hotel-origami.com",
+      "finalUrl": "https://www.hotel-origami.com/fr/",
+      "keyPages": {
+        "contact": null,
+        "about": null,
+        "legal": "https://www.hotel-origami.com/fr/mentions-legales.html",
+        "privacy": "https://www.hotel-origami.com/fr/confidentialite.html"
+      },
+      "pagesVisited": [
+        "https://www.hotel-origami.com/fr/",
+        "https://www.hotel-origami.com/fr/mentions-legales.html",
+        "https://www.hotel-origami.com/fr/confidentialite.html",
+        "https://www.hotel-origami.com/fr",
+        "https://www.hotel-origami.com/fr/ecodefi.html",
+        "https://www.hotel-origami.com/fr/photos/chambres.html",
+        "https://www.hotel-origami.com/fr/photos/strasbourg.html",
+        "https://www.hotel-origami.com/en/legal-information.html",
+        "https://www.hotel-origami.com/de/privacy.html",
+        "https://www.hotel-origami.com/en/privacy.html",
+        "https://www.hotel-origami.com/fr/photos/seminaires.html",
+        "https://www.hotel-origami.com/fr/photos/bar.html",
+        "https://www.hotel-origami.com/fr/chambres.html",
+        "https://www.hotel-origami.com/fr/petit-dejeuner.html"
+      ],
+      "errors": [
+        {
+          "url": "mailto:contact@hotel-origami.com",
+          "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+        },
+        {
+          "url": "mailto:contact@hotel-origami.com",
+          "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+        }
+      ],
+      "company": {
+        "name": "Hotel Origami Lifestyle Strasbourg · Privacy policy",
+        "legalName": "SARL HOTEL CRO or third parties that have authorised SARL",
+        "country": "FR",
+        "countryName": "France"
+      },
+      "emails": [
+        {
+          "value": "contact@hotel-origami.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.hotel-origami.com/",
+          "snippet": "contact@hotel-origami.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33388220202",
+          "valueE164": "+33388220202",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.hotel-origami.com/",
+          "snippet": "+33 3 88 22 02 02"
+        },
+        {
+          "valueRaw": "<ahref=\"tel:+33388220202\">+33",
+          "valueE164": null,
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.hotel-origami.com/",
+          "snippet": "+33 3 88 22 02 02"
+        },
+        {
+          "valueRaw": "+33384737010",
+          "valueE164": "+33384737010",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.hotel-origami.com/fr/mentions-legales.html",
+          "snippet": "+33 3 84 73 70 10"
+        },
+        {
+          "valueRaw": "+33384737011",
+          "valueE164": "+33384737011",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.hotel-origami.com/fr/mentions-legales.html",
+          "snippet": "+33 3 84 73 70 11"
+        }
+      ],
+      "primaryEmail": "contact@hotel-origami.com",
+      "primaryPhone": "+33388220202",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/hotelorigami/?ref=bookmarks",
+            "handle": "hotelorigami",
+            "sourceUrl": "https://www.hotel-origami.com/"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/hotelorigami/",
+            "handle": "hotelorigami",
+            "sourceUrl": "https://www.hotel-origami.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "http://www.hotelorizonte.com",
+    "status": "success",
+    "data": {
+      "domain": "hotelorizonte.com",
+      "finalUrl": "http://www.hotelorizonte.com/",
+      "errors": [
+        {
+          "url": "http://www.hotelorizonte.com/",
+          "error": "Unmatched selector: \")"
+        }
+      ]
+    },
+    "issues": [
+      {
+        "severity": "medium",
+        "type": "missing_company_name",
+        "message": "Nom entreprise manquant"
+      },
+      {
+        "severity": "medium",
+        "type": "missing_country",
+        "message": "Pays manquant"
+      },
+      {
+        "severity": "medium",
+        "type": "missing_emails",
+        "message": "Aucun email trouvé"
+      },
+      {
+        "severity": "medium",
+        "type": "missing_phones",
+        "message": "Aucun téléphone trouvé"
+      }
+    ]
+  },
+  {
+    "url": "http://www.orlysuperior.com/",
+    "status": "success",
+    "data": {
+      "domain": "orlysuperior.com",
+      "finalUrl": "https://www.orlysuperior.com/fr/",
+      "keyPages": {
+        "contact": "http://www.orlysuperior.com/contact@orlysuperior.com",
+        "about": null,
+        "legal": "https://www.orlysuperior.com/fr/mentions-legales/",
+        "privacy": "https://www.orlysuperior.com/fr/politique-des-cookies/"
+      },
+      "pagesVisited": [
+        "https://www.orlysuperior.com/fr/",
+        "https://www.orlysuperior.com/fr/mentions-legales/",
+        "https://www.orlysuperior.com/fr/politique-des-cookies/",
+        "https://www.orlysuperior.com/fr/chambres/",
+        "https://www.orlysuperior.com/fr/offres/",
+        "https://www.orlysuperior.com/fr/services/"
+      ],
+      "errors": [
+        {
+          "url": "http://www.orlysuperior.com/contact@orlysuperior.com",
+          "error": "HTTP 404"
+        },
+        {
+          "url": "mailto:contact@orlysuperior.com",
+          "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+        }
+      ],
+      "company": {
+        "name": "Mentions légales",
+        "legalName": "Mirai Espa",
+        "country": "US",
+        "countryName": "United States"
+      },
+      "emails": [
+        {
+          "value": "contact@orlysuperior.fr",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "http://www.orlysuperior.com/",
+          "snippet": "contact@orlysuperior.fr",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "contact@orlysuperior.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "http://www.orlysuperior.com/",
+          "snippet": "contact@orlysuperior.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "info@mirai.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orlysuperior.com/fr/mentions-legales",
+          "snippet": "ral 6, 4º. 28004 Madrid (Espagne) Email : info@mirai.com Tel : +34 915 913 500 C.I.F. : B8",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33169443367",
+          "valueE164": "+33169443367",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "http://www.orlysuperior.com/",
+          "snippet": "Tel: +33 (0)1 69 44 33 67"
+        },
+        {
+          "valueRaw": "+33 (0)1 60 47 13 66",
+          "valueE164": "+33160471366",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "http://www.orlysuperior.com/",
+          "snippet": "aul Demange 91200 Athis-Mons Ile de France Tel: +33 (0)1 69 44 33 67 - Fax: +33 (0)1 60 47 13 66 contact@orlysuperior.fr Nous suivre sur les réseaux sociau"
+        },
+        {
+          "valueRaw": "+34 915 913 500",
+          "valueE164": "+34915913500",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orlysuperior.com/fr/mentions-legales",
+          "snippet": "rral 6, 4º. 28004 Madrid (Espagne) Email : info@mirai.com Tel : +34 915 913 500 C.I.F. : B80039340 Copyright Tout le matériel audiovisuel,"
+        }
+      ],
+      "primaryEmail": "contact@orlysuperior.com",
+      "primaryPhone": "+33169443367",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/orlysuperiorhotel/",
+            "handle": "orlysuperiorhotel",
+            "sourceUrl": "http://www.orlysuperior.com/"
+          },
+          {
+            "url": "https://es-es.facebook.com/policies/cookies/",
+            "handle": "policies",
+            "sourceUrl": "http://www.orlysuperior.com/"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/orlysuperior/",
+            "handle": "orlysuperior",
+            "sourceUrl": "http://www.orlysuperior.com/"
+          }
+        ],
+        "x": [
+          {
+            "url": "https://help.twitter.com/es/rules-and-policies/x-cookies",
+            "handle": "es",
+            "sourceUrl": "http://www.orlysuperior.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "http://www.ormelune.com",
+    "status": "success",
+    "data": {
+      "domain": "ormelune.com",
+      "finalUrl": "https://ormelune.com/",
+      "keyPages": {
+        "contact": null,
+        "about": null,
+        "legal": null,
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://ormelune.com/",
+        "https://ormelune.com/",
+        "https://ormelune.com/hotel/chambres/",
+        "https://ormelune.com/hotel/chambres/suite-xxl/",
+        "https://ormelune.com/hotel/chambres/suite-ormelune/",
+        "https://ormelune.com/hotel/chambres/chambre-xl-enfants/",
+        "https://ormelune.com/hotel/chambres/chambre-xl/",
+        "https://ormelune.com/hotel/chambres/chambre-large-plus/",
+        "https://ormelune.com/hotel/chambres/chambre-large-mezzanine/",
+        "https://ormelune.com/hotel/chambres/chambre-large/",
+        "https://ormelune.com/hotel/chambres/chambre-medium-mezzanine/",
+        "https://ormelune.com/hotel/chambres/chambre-medium/",
+        "https://ormelune.com/hotel/chambres/chambre-small/",
+        "https://ormelune.com/hotel/tarifs/",
+        "https://ormelune.com/hotel/reservation/"
+      ],
+      "company": {
+        "name": "Hôtel Ormelune Val d'Isère - France",
+        "legalName": null,
+        "country": "FR",
+        "countryName": "France"
+      },
+      "emails": [
+        {
+          "value": "info@ormelune.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "http://www.ormelune.com/",
+          "snippet": "info@ormelune.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33 (0)4 79 06 12 93",
+          "valueE164": "+33479061293",
+          "priority": "primary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "http://www.ormelune.com/",
+          "snippet": "Hotel Ormelune – Rue Noël Machet 73150 – Val d’Isère – France – T: +33 (0)4 79 06 12 93 – E: info@ormelune.com"
+        }
+      ],
+      "primaryEmail": "info@ormelune.com",
+      "primaryPhone": "+33479061293",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://facebook.com/ormelune",
+            "handle": "ormelune",
+            "sourceUrl": "http://www.ormelune.com/"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/ormelune_valdisere/",
+            "handle": "ormelune_valdisere",
+            "sourceUrl": "http://www.ormelune.com/"
+          }
+        ],
+        "x": [
+          {
+            "url": "https://twitter.com/ormelune",
+            "handle": "ormelune",
+            "sourceUrl": "http://www.ormelune.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://www.orsohotels.com/hotel-orphee",
+    "status": "success",
+    "data": {
+      "domain": "orsohotels.com",
+      "finalUrl": "https://www.orsohotels.com/hotel-orphee",
+      "keyPages": {
+        "contact": "https://www.orsohotels.com/hotel-orphee/infos-contact",
+        "about": null,
+        "legal": "https://www.orsohotels.com/hotel-orphee/mentions-legales",
+        "privacy": "https://www.orsohotels.com/hotel-orphee/politique-de-confidentialite"
+      },
+      "pagesVisited": [
+        "https://www.orsohotels.com/hotel-orphee",
+        "https://www.orsohotels.com/hotel-orphee/mentions-legales",
+        "https://www.orsohotels.com/hotel-orphee/politique-de-confidentialite",
+        "https://www.orsohotels.com/hotel-orphee/infos-contact",
+        "https://www.orsohotels.com/hotel-orphee/chambres",
+        "https://www.orsohotels.com/hotel-rochechouart/chambres",
+        "https://www.orsohotels.com/hotel-orphee/services",
+        "https://www.orsohotels.com/",
+        "https://www.orsohotels.com/hotel-rochechouart/infos-contact",
+        "https://www.orsohotels.com/mentions-legales",
+        "https://www.orsohotels.com/hotel-rochechouart/mentions-legales",
+        "https://www.orsohotels.com/politique-de-confidentialite",
+        "https://www.orsohotels.com/hotel-rochechouart/politique-de-confidentialite"
+      ],
+      "errors": [
+        {
+          "url": "mailto:contact@orsohotels.com",
+          "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+        },
+        {
+          "url": "mailto:sales@orsohotels.com",
+          "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+        }
+      ],
+      "company": {
+        "name": "Mentions Légales",
+        "legalName": null,
+        "country": "FR",
+        "countryName": "France"
+      },
+      "emails": [
+        {
+          "value": "bonjour@hotelorphee.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee",
+          "snippet": "bonjour@hotelorphee.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "reservation@orsohotels.com",
+          "type": "booking",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/infos-contact",
+          "snippet": "reservation@orsohotels.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "bonjour@hotelrochechouart.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-rochechouart/chambres",
+          "snippet": "bonjour@hotelrochechouart.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "sales@orsohotels.com",
+          "type": "sales",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/services",
+          "snippet": "contact",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "contact@orsohotels.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars",
+          "snippet": "contact@orsohotels.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "pariscontact@orsohotels.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars",
+          "snippet": "ours surOrso201 rue du Faubourg Saint-Honoré75008 PARIScontact@orsohotels.com+33 1 87 58 08 43 CAR",
+          "foundIn": "text"
+        },
+        {
+          "value": "sales@hotelrochechouart.com",
+          "type": "sales",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-rochechouart/infos-contact",
+          "snippet": "sales@hotelrochechouart.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33143313750",
+          "valueE164": "+33143313750",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee",
+          "snippet": "Réception : +33 1 43 31 37 50"
+        },
+        {
+          "valueRaw": "+33644637451",
+          "valueE164": "+33644637451",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee",
+          "snippet": "+33644637451"
+        },
+        {
+          "valueRaw": "+33 1 49 52 93 00",
+          "valueE164": "+33149529300",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/mentions-legales",
+          "snippet": "al est situé 201 Rue du Faubourg Saint-Honoré 75008 Paris ; numéro de téléphone +33 1 49 52 93 00 (ci-après dénommée « Orso »). HÉBERGEMENTSociété : WebflowURL : www.webflow.com"
+        },
+        {
+          "valueRaw": "01 42 67 96 68",
+          "valueE164": "+33142679668",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/mentions-legales",
+          "snippet": "ONSOMMATIONMédiation Tourisme et Voyage 15 avenue Carnot 75017 ParisTéléphone : 01 42 67 96 68BP 80 303 75 823 Paris Cedex 17 Site internet : www.mtv.travelRèglement des liti"
+        },
+        {
+          "valueRaw": "+33187580848",
+          "valueE164": "+33187580848",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/infos-contact",
+          "snippet": "+33 1 87 58 08 48"
+        },
+        {
+          "valueRaw": "+33142819100",
+          "valueE164": "+33142819100",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-rochechouart/chambres",
+          "snippet": "Réception : +33 1 42 81 91 00"
+        },
+        {
+          "valueRaw": "+33187580843",
+          "valueE164": "+33187580843",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars",
+          "snippet": "+33 1 87 58 08 43"
+        },
+        {
+          "valueRaw": "+33 1 42 81 99 10",
+          "valueE164": "+33142819910",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.orsohotels.com/hotel-rochechouart/infos-contact",
+          "snippet": ":sales@hotelrochechouart.comDEMANDER UN DEVISPour réserver au restaurant :Tel : +33 1 42 81 99 10 bonjour@hotelrochechouart.comRÉSERVER UNE TABLENous contacterNom*Adresse mail*C"
+        }
+      ],
+      "primaryEmail": "reservation@orsohotels.com",
+      "primaryPhone": "+33143313750",
+      "socials": {
+        "linkedin": [
+          {
+            "url": "https://www.linkedin.com/company/orsohotels/",
+            "handle": "orsohotels",
+            "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars"
+          }
+        ],
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/hotelorpheeparis",
+            "handle": "hotelorpheeparis",
+            "sourceUrl": "https://www.orsohotels.com/hotel-orphee"
+          },
+          {
+            "url": "https://www.facebook.com/hotelrochechouart",
+            "handle": "hotelrochechouart",
+            "sourceUrl": "https://www.orsohotels.com/hotel-rochechouart/chambres"
+          },
+          {
+            "url": "https://www.facebook.com/groupeorsohotels",
+            "handle": "groupeorsohotels",
+            "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/hotelorphee",
+            "handle": "hotelorphee",
+            "sourceUrl": "https://www.orsohotels.com/hotel-orphee"
+          },
+          {
+            "url": "https://www.instagram.com/hotelrochechouart/",
+            "handle": "hotelrochechouart",
+            "sourceUrl": "https://www.orsohotels.com/hotel-rochechouart/chambres"
+          },
+          {
+            "url": "https://www.instagram.com/orsohotels/",
+            "handle": "orsohotels",
+            "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars"
+          }
+        ],
+        "google": [
+          {
+            "url": "https://www.google.com/maps/place/201+Rue+du+Faubourg+Saint-Honor%C3%A9,+75008+Paris/@48.8761996,2.3001124,17z/data=!3m1!4b1!4m5!3m4!1s0x47e66fc014c99627:0xe6925d0b69106c1!8m2!3d48.8761961!4d2.3023011",
+            "handle": "https://www.google.com/maps/place/201+Rue+du+Faubourg+Saint-Honor%C3%A9,+75008+Paris/@48.8761996,2.3001124,17z/data=!3m1!4b1!4m5!3m4!1s0x47e66fc014c99627:0xe6925d0b69106c1!8m2!3d48.8761961!4d2.3023011",
+            "sourceUrl": "https://www.orsohotels.com/hotel-orphee/nos-bars"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://www.hotel-ostella.com/",
+    "status": "success",
+    "data": {
+      "domain": "hotel-ostella.com",
+      "finalUrl": "https://www.hotel-ostella.com/",
+      "keyPages": {
+        "contact": "https://www.hotel-ostella.com/fr/contact",
+        "about": null,
+        "legal": null,
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://www.hotel-ostella.com/",
+        "https://www.hotel-ostella.com/fr/contact",
+        "https://www.hotel-ostella.com/fr/restaurant",
+        "https://www.hotel-ostella.com/fr/bien-etre",
+        "https://www.hotel-ostella.com/",
+        "https://www.hotel-ostella.com/en",
+        "https://www.hotel-ostella.com/it",
+        "https://www.hotel-ostella.com/en/contact-1",
+        "https://www.hotel-ostella.com/it/contact-2",
+        "https://www.hotel-ostella.com/es/contacto",
+        "https://www.hotel-ostella.com/",
+        "https://www.hotel-ostella.com/en",
+        "https://www.hotel-ostella.com/it",
+        "https://www.hotel-ostella.com/es"
+      ],
+      "errors": [
+        {
+          "url": "mailto:contact@hotel-ostella.com",
+          "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+        },
+        {
+          "url": "mailto:contact@hotel-ostella.com",
+          "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+        }
+      ],
+      "company": {
+        "name": "Hôtel Bastia",
+        "legalName": null,
+        "country": null,
+        "countryName": null
+      },
+      "emails": [
+        {
+          "value": "contact@hotel-ostella.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.hotel-ostella.com/",
+          "snippet": "contact@hotel-ostella.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "restaurant@hotel-ostella.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.hotel-ostella.com/fr/contact",
+          "snippet": "restaurant@hotel-ostella.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "commercial@hotel-ostella.com",
+          "type": "sales",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.hotel-ostella.com/fr/contact",
+          "snippet": "commercial@hotel-ostella.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "spa@hotel-ostella.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.hotel-ostella.com/fr/contact",
+          "snippet": "spa@hotel-ostella.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "04 95 30 97 70",
+          "valueE164": "+33495309770",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.hotel-ostella.com/",
+          "snippet": "04 95 30 97 70"
+        },
+        {
+          "valueRaw": "06 65 26 19 92",
+          "valueE164": "+33665261992",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.hotel-ostella.com/fr/contact",
+          "snippet": "Juin20600 Bastia Hébergement/Restaurant : 04 95 30 97 70 Centre de bien-être : 06 65 26 19 92 Mail hébergement : contact@hotel-ostella.com Mail restaurant : restaurant@hotel"
+        }
+      ],
+      "primaryEmail": "contact@hotel-ostella.com",
+      "primaryPhone": "+33495309770",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/Hotelspa.ostella/",
+            "handle": "hotelspa.ostella",
+            "sourceUrl": "https://www.hotel-ostella.com/"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/hotel_ostella/",
+            "handle": "hotel_ostella",
+            "sourceUrl": "https://www.hotel-ostella.com/"
+          }
+        ]
+      }
+    },
+    "issues": [
+      {
+        "severity": "medium",
+        "type": "missing_country",
+        "message": "Pays manquant"
+      }
+    ]
+  }
+]

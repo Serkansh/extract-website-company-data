@@ -103,8 +103,19 @@ export function extractCompany(html, sourceUrl) {
   if (!company.name) {
     const title = $('title').text().trim();
     if (title) {
-      // Nettoie le title (enlève souvent " - Home" ou " | Company")
-      company.name = title.split(/[-|]/)[0].trim();
+      // Exclut les titres de pages génériques (mentions légales, privacy, etc.)
+      const genericTitles = /^(mentions\s+l[eé]gales?|privacy\s+policy|politique\s+de\s+confidentialit[eé]|legal\s+notice|imprint|cgu|cgv|terms|conditions|contact|accueil|home)$/i;
+      if (genericTitles.test(title)) {
+        // Ne pas utiliser ce title, on passera au logo ou schema.org
+      } else {
+        // Nettoie le title (enlève souvent " - Home", " | Company", " · Privacy policy", etc.)
+        let cleaned = title.split(/[-|·]/)[0].trim();
+        // Enlève aussi les suffixes comme " · Privacy policy", " - Mentions légales"
+        cleaned = cleaned.replace(/\s*[·\-]\s*(privacy|mentions|l[eé]gales?|legal|policy|confidentialit[eé])/i, '').trim();
+        if (cleaned && cleaned.length > 2) {
+          company.name = cleaned;
+        }
+      }
     }
   }
   

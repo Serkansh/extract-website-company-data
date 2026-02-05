@@ -18,9 +18,22 @@ function shouldExcludePhone(phone, snippet = '') {
   if (digits.length > 15) return true;
 
   // Exclure SIRET / TVA via mots-clés proches
-  if (/(siret|siren|tva|vat|rcs|capital social)/i.test(s)) return true;
+  if (/(siret|siren|tva|vat|rcs|capital social|registre du commerce|immatricul)/i.test(s)) return true;
   // Exclure IDs/refs d'hébergement / tracking (cas datawords: ovh etablissement)
   if (/(ovh|societe\.com\/etablissement|appId|tracking|initApollo|data center)/i.test(snippet || '')) return true;
+  
+  // Exclure les numéros RCS/SIRET (format: XXX XXX XXX ou XXX.XXX.XXX avec 9 digits)
+  // Exemples: "752 808 113", "522.921.634", "424 761 419"
+  const digitsOnly = phone.replace(/\D/g, '');
+  if (digitsOnly.length === 9) {
+    // Si le snippet contient "RCS", "SIRET", "immatricul", "registre", c'est probablement un numéro RCS
+    if (/(rcs|siret|siren|immatricul|registre|commerce|soci[eé]t[eé]s?)/i.test(s)) return true;
+    // Si le format est XXX XXX XXX ou XXX.XXX.XXX (avec espaces ou points), c'est souvent un RCS
+    if (/^\d{3}[\s.]\d{3}[\s.]\d{3}$/.test(phone.trim())) {
+      // Vérifie le contexte : si c'est proche de "RCS", "SIRET", "n°", "numéro", c'est un RCS
+      if (/(rcs|siret|siren|n[°º]|num[eé]ro|immatricul|registre)/i.test(s)) return true;
+    }
+  }
 
   return PHONE_EXCLUSIONS.some(pattern => pattern.test(phone) || pattern.test(digits));
 }

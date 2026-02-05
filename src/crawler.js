@@ -317,19 +317,70 @@ export async function crawlDomain(startUrl, options) {
     }
   }
   
-  // 1. Fetch homepage
+  // 1. Fetch homepage (avec fallback sur variantes d'URL)
   let homepageHtml;
+  let finalStartUrl = startUrl;
+  
+  // Liste des variantes à tester (http/https, avec/sans tiret, avec/sans www)
+  const urlVariants = [startUrl];
+  
   try {
-    const result = await fetchPage(startUrl);
-    homepageHtml = result.html;
-    domainData.finalUrl = result.finalUrl || startUrl;
+    const urlObj = new URL(startUrl);
+    const hostname = urlObj.hostname;
+    
+    // Génère des variantes si nécessaire
+    if (hostname.includes('-')) {
+      // Si l'URL contient un tiret, teste aussi sans tiret
+      const hostnameWithoutDash = hostname.replace(/-/g, '');
+      urlVariants.push(startUrl.replace(hostname, hostnameWithoutDash));
+    } else {
+      // Si l'URL n'a pas de tiret, teste avec tiret (ex: hotelorizonte -> hotel-orizonte)
+      // On essaie d'ajouter un tiret après "hotel" ou avant le TLD
+      const parts = hostname.split('.');
+      if (parts.length >= 2 && parts[0].length > 5) {
+        // Exemple: hotelorizonte.com -> hotel-orizonte.com
+        const mainPart = parts[0];
+        if (mainPart.startsWith('hotel') && mainPart.length > 5) {
+          const withDash = mainPart.replace(/^hotel/, 'hotel-');
+          urlVariants.push(startUrl.replace(mainPart, withDash));
+        }
+      }
+    }
+    
+    // Teste aussi https si http, et vice versa
+    if (urlObj.protocol === 'http:') {
+      urlVariants.push(startUrl.replace('http:', 'https:'));
+    } else if (urlObj.protocol === 'https:') {
+      urlVariants.push(startUrl.replace('https:', 'http:'));
+    }
+    
+    // Essaie chaque variante jusqu'à ce qu'une fonctionne
+    let lastError = null;
+    for (const variant of urlVariants) {
+      try {
+        const result = await fetchPage(variant);
+        homepageHtml = result.html;
+        domainData.finalUrl = result.finalUrl || variant;
+        finalStartUrl = variant;
+        break; // Succès, on sort de la boucle
+      } catch (err) {
+        lastError = err;
+        continue; // Essaie la variante suivante
+      }
+    }
+    
+    if (!homepageHtml) {
+      // Toutes les variantes ont échoué
+      domainData.errors.push({ url: startUrl, error: `All URL variants failed. Last error: ${lastError?.message || 'Unknown'}` });
+      throw lastError || new Error('Failed to fetch homepage');
+    }
   } catch (error) {
     domainData.errors.push({ url: startUrl, error: error.message });
     throw error;
   }
   
-  // 2. Détecte les pages clés
-  keyPagesDetected = detectKeyPages(homepageHtml, startUrl);
+  // 2. Détecte les pages clés (utilise l'URL qui a fonctionné)
+  keyPagesDetected = detectKeyPages(homepageHtml, finalStartUrl);
   domainData.keyPages = { ...keyPagesDetected };
   
   // 3. Détermine le tier initial (commence toujours en STANDARD)
@@ -337,7 +388,7 @@ export async function crawlDomain(startUrl, options) {
   crawlTier = CRAWL_TIERS.STANDARD;
   
   // 4. Liste des URLs à crawler (homepage + pages clés + pages internes)
-  const urlsToCrawl = new Set([normalizeUrl(startUrl)]);
+  const urlsToCrawl = new Set([normalizeUrl(finalStartUrl)]);
   
   // Ajoute les pages clés détectées
   Object.values(keyPagesDetected).forEach(url => {
@@ -349,7 +400,7 @@ export async function crawlDomain(startUrl, options) {
   const candidateSeen = new Set(urlsToCrawl);
 
   // Ajoute des liens internes depuis la homepage (header/footer prioritaires)
-  for (const l of extractInternalLinks(homepageHtml, startUrl)) {
+  for (const l of extractInternalLinks(homepageHtml, finalStartUrl)) {
     if (!candidateSeen.has(l.url)) {
       candidateSeen.add(l.url);
       candidateLinks.push(l);
