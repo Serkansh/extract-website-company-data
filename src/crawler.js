@@ -213,18 +213,18 @@ function selectPrimaryPhone(phones) {
   // Marque tous comme secondary d'abord
   phones.forEach(p => p.priority = 'secondary');
   
-  // 1. tel: link
-  const tel = phones.find(p => p.signals.includes('tel'));
-  if (tel) {
-    tel.priority = 'primary';
-    return tel;
-  }
-  
-  // 2. Footer/contact
+  // 1. Footer/contact (priorité la plus haute)
   const footer = phones.find(p => p.signals.includes('footer_or_contact'));
   if (footer) {
     footer.priority = 'primary';
     return footer;
+  }
+  
+  // 2. tel: link
+  const tel = phones.find(p => p.signals.includes('tel'));
+  if (tel) {
+    tel.priority = 'primary';
+    return tel;
   }
   
   // 3. E.164
