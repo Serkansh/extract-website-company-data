@@ -1,5 +1,5 @@
 {
-  "title": "Company Data Extraction Results",
+  "title": "Contact Data Extraction Results",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
@@ -14,9 +14,6 @@
     },
     "pagesVisited": {
       "type": "array"
-    },
-    "company": {
-      "type": "object"
     },
     "emails": {
       "type": "array"

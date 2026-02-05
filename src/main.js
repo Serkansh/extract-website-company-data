@@ -16,7 +16,6 @@ const {
   startUrls,
   timeoutSecs = 30,
   usePlaywrightFallback = true,
-  includeCompany = true,
   includeContacts = true,
   includeSocials = true,
   keyPaths = []
@@ -81,7 +80,6 @@ for (const url of uniqueDomains) {
     const domainData = await crawlDomain(url, {
       timeoutSecs,
       usePlaywrightFallback,
-      includeCompany,
       includeContacts,
       includeSocials,
       keyPaths
@@ -97,10 +95,6 @@ for (const url of uniqueDomains) {
     };
     
     // Ajoute les données selon les options
-    if (includeCompany && domainData.company) {
-      record.company = domainData.company;
-    }
-    
     if (includeContacts) {
       record.emails = domainData.emails;
       record.phones = domainData.phones;

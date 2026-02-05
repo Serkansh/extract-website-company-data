@@ -2,7 +2,7 @@
   "actorSpecification": 1,
   "name": "extract-website-company-data",
   "title": "Extract Website Company Data – Email, Phone, Social",
-  "description": "Extract company profile, contacts and social profiles from websites",
+  "description": "Extract contacts (emails, phones) and social profiles from websites",
   "version": "1.0.0",
   "meta": {
     "templateId": "puppeteer-crawler"

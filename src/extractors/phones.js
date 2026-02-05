@@ -55,6 +55,13 @@ export function extractPhones(html, sourceUrl) {
     if (phoneMatch) {
       const phoneValue = phoneMatch[1].trim();
       const text = $(el).text().trim();
+      const context = $(el).closest('section, div, article, p').text().substring(0, 200).toLowerCase();
+      
+      // Exclut les fax (détectés dans le contexte ou le texte)
+      if (/(fax|télécopie|facsimile)/i.test(text + ' ' + context)) {
+        return; // Skip ce numéro, c'est un fax
+      }
+      
       if (!shouldExcludePhone(phoneValue, text)) {
         const normalized = normalizePhone(phoneValue);
         
@@ -91,6 +98,11 @@ export function extractPhones(html, sourceUrl) {
       continue;
     }
 
+    // Exclut les fax (détectés dans le snippet)
+    if (/(fax|télécopie|facsimile)\s*[=:]\s*/i.test(snippet)) {
+      continue; // Skip ce numéro, c'est un fax
+    }
+    
     if (!shouldExcludePhone(phoneValue, snippet)) {
       const normalized = normalizePhone(phoneValue);
 

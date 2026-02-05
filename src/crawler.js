@@ -5,7 +5,6 @@ import { DEFAULT_KEY_PATHS, CRAWL_TIERS, USER_AGENT } from './constants.js';
 import { extractEmails } from './extractors/emails.js';
 import { extractPhones } from './extractors/phones.js';
 import { extractSocials } from './extractors/socials.js';
-import { extractCompany } from './extractors/company.js';
 import { deduplicateEmails, deduplicatePhones } from './utils/deduplication.js';
 
 /**
@@ -115,7 +114,7 @@ function extractInternalLinks(html, baseUrl) {
 /**
  * Détermine si le mode "deep" doit être activé
  */
-function shouldUseDeepCrawl({ keyPages, pagesVisited, usedPlaywright, includeContacts, includeCompany, emailsCount, phonesCount, company }) {
+function shouldUseDeepCrawl({ keyPages, pagesVisited, usedPlaywright, includeContacts, emailsCount, phonesCount }) {
   // 1. Site fortement structuré (plusieurs pages clés pertinentes)
   const keyPagesCount = Object.values(keyPages).filter(Boolean).length;
   if (keyPagesCount >= 4) {
@@ -129,10 +128,6 @@ function shouldUseDeepCrawl({ keyPages, pagesVisited, usedPlaywright, includeCon
 
   // 3. Manque de données critiques -> on pousse en DEEP
   if (includeContacts && emailsCount === 0 && phonesCount === 0) return true;
-  if (includeCompany) {
-    const missingLegal = !company?.legalName;
-    if (missingLegal) return true;
-  }
   
   return false;
 }
@@ -241,7 +236,6 @@ export async function crawlDomain(startUrl, options) {
   const {
     timeoutSecs = 30,
     usePlaywrightFallback = true,
-    includeCompany = true,
     includeContacts = true,
     includeSocials = true,
     keyPaths = []
@@ -270,8 +264,7 @@ export async function crawlDomain(startUrl, options) {
       youtube: [],
       pinterest: [],
       google: []
-    },
-    company: null
+    }
   };
   
   // Tier de crawl (commence en standard)
@@ -501,40 +494,6 @@ export async function crawlDomain(startUrl, options) {
       }
     }
     
-    if (includeCompany) {
-      const company = extractCompany(html, url);
-      if (!domainData.company) domainData.company = { name: null, legalName: null, country: null, countryName: null };
-
-      // Détecte si c'est une page légale (legal/privacy/mentions légales)
-      // Ces pages ont priorité absolue pour country
-      const urlLower = url.toLowerCase();
-      const isLegalPage = urlLower.includes('/legal') || 
-                         urlLower.includes('/privacy') || 
-                         urlLower.includes('/mentions') ||
-                         urlLower.includes('/terms') ||
-                         urlLower.includes('/cgv') ||
-                         urlLower.includes('/cgu');
-
-      // Merge: stratégie différente selon le type de page
-      if (isLegalPage) {
-        // PRIORITÉ ABSOLUE pour les pages légales : on écrase country même s'il existe déjà
-        if (company.name) domainData.company.name = company.name;
-        if (company.legalName) domainData.company.legalName = company.legalName;
-        if (company.country) {
-          domainData.company.country = company.country;
-          domainData.company.countryName = company.countryName;
-        }
-      } else {
-        // Pour les autres pages : on ne remplace que les champs manquants
-        if (!domainData.company.name && company.name) domainData.company.name = company.name;
-        if (!domainData.company.legalName && company.legalName) domainData.company.legalName = company.legalName;
-        // IMPORTANT: Ne pas écraser country depuis les pages non-légales si il existe déjà
-        if (!domainData.company.country && company.country) {
-          domainData.company.country = company.country;
-          domainData.company.countryName = company.countryName;
-        }
-      }
-    }
     
     return true;
   }
@@ -550,10 +509,8 @@ export async function crawlDomain(startUrl, options) {
     pagesVisited: domainData.pagesVisited,
     usedPlaywright,
     includeContacts,
-    includeCompany,
     emailsCount: domainData.emails.length,
     phonesCount: domainData.phones.length,
-    company: domainData.company,
   })) {
     crawlTier = CRAWL_TIERS.DEEP;
     

@@ -26,12 +26,6 @@
       "description": "Use Playwright for dynamic pages if HTTP fails",
       "default": true
     },
-    "includeCompany": {
-      "title": "Include Company Profile",
-      "type": "boolean",
-      "description": "Extract company information",
-      "default": true
-    },
     "includeContacts": {
       "title": "Include Contacts",
       "type": "boolean",
