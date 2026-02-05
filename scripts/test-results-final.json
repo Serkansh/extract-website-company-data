@@ -1,22 +1,324 @@
 [
   {
     "url": "https://www.hospedajecolonia.es/",
-    "status": "failed",
-    "error": "Run failed with status: FAILED - Last log: No details"
+    "status": "success",
+    "data": {
+      "domain": "hospedajecolonia.es",
+      "finalUrl": "https://www.hospedajecolonia.es/",
+      "errors": [
+        {
+          "url": "https://www.hospedajecolonia.es/",
+          "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+        }
+      ]
+    },
+    "issues": [
+      {
+        "severity": "medium",
+        "type": "missing_emails",
+        "message": "No email found"
+      },
+      {
+        "severity": "medium",
+        "type": "missing_phones",
+        "message": "No phone found"
+      }
+    ]
   },
   {
     "url": "http://www.hospedajenuevanumancia.com/",
-    "status": "failed",
-    "error": "Run failed with status: FAILED - Last log: No details"
+    "status": "success",
+    "data": {
+      "domain": "hospedajenuevanumancia.com",
+      "finalUrl": "http://www.hospedajenuevanumancia.com/",
+      "keyPages": {
+        "contact": null,
+        "about": null,
+        "legal": null,
+        "privacy": null
+      },
+      "pagesVisited": [
+        "http://www.hospedajenuevanumancia.com/",
+        "http://www.hospedajenuevanumancia.com/es/hospedaje-nueva-numancia",
+        "http://www.hospedajenuevanumancia.com/es/hostal-nueva-numancia",
+        "http://www.hospedajenuevanumancia.com/es/Habitaciones-en-madrid",
+        "http://www.hospedajenuevanumancia.com/es/Im%C3%A1genes-nueva-numancia",
+        "http://www.hospedajenuevanumancia.com/es/hostal-en-madrid",
+        "http://www.hospedajenuevanumancia.com/en/Start"
+      ],
+      "errors": [
+        {
+          "url": "http://www.hospedajenuevanumancia.com/www.fnsrooms.com",
+          "error": "HTTP 404"
+        }
+      ],
+      "emails": [
+        {
+          "value": "reservas@nombrepag.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "http://www.hospedajenuevanumancia.com/",
+          "snippet": "hospedaje.nuevanumancia@gmail.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "hospedaje.nuevanumancia@gmail.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "http://www.hospedajenuevanumancia.com/",
+          "snippet": "Email hospedaje.nuevanumancia@gmail.com Teléfono",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+34643923132",
+          "valueE164": "+34643923132",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "http://www.hospedajenuevanumancia.com/",
+          "snippet": "(+34) 643 923 132"
+        }
+      ],
+      "primaryEmail": "reservas@nombrepag.com",
+      "primaryPhone": "+34643923132"
+    },
+    "issues": []
   },
   {
     "url": "https://www.olalahomes.com/",
-    "status": "failed",
-    "error": "Run failed with status: FAILED - Last log: No details"
+    "status": "success",
+    "data": {
+      "domain": "olalahomes.com",
+      "finalUrl": "https://www.olalahomes.com/",
+      "keyPages": {
+        "contact": "https://www.olalahomes.com/contact-us",
+        "about": "https://www.olalahomes.com/about",
+        "legal": null,
+        "privacy": "https://www.olalahomes.com/privacy/policy"
+      },
+      "pagesVisited": [
+        "https://www.olalahomes.com/",
+        "https://www.olalahomes.com/contact-us",
+        "https://www.olalahomes.com/about",
+        "https://www.olalahomes.com/privacy/policy",
+        "https://www.olalahomes.com/en/properties?city=Valencia&country=Spain&minOccupancy=1",
+        "https://www.olalahomes.com/en/properties?city=Barcelona&country=Spain&minOccupancy=1",
+        "https://www.olalahomes.com/en/properties?city=Sitges&country=Spain&minOccupancy=1",
+        "https://www.olalahomes.com/en/properties?city=Madrid&country=Spain&minOccupancy=1"
+      ],
+      "emails": [
+        {
+          "value": "555-555-5555mymail@mailservice.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/",
+          "snippet": "Contact Get in touch 555-555-5555mymail@mailservice.com English en Es",
+          "foundIn": "text"
+        },
+        {
+          "value": "support@olalahomes.com",
+          "type": "support",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/contact-us",
+          "snippet": "support@olalahomes.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "info@agpd.es",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/privacy/policy",
+          "snippet": "info@agpd.es",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "anne.evans@mail.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/privacy/policy",
+          "snippet": "Last Name Email Address 1 Anne Evans anne.evans@mail.com 2 Bill Fernandez bill.fernandez@mail.c",
+          "foundIn": "text"
+        },
+        {
+          "value": "bill.fernandez@mail.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/privacy/policy",
+          "snippet": "anne.evans@mail.com 2 Bill Fernandez bill.fernandez@mail.com 3 Candice Gates candice.gates@mail.com",
+          "foundIn": "text"
+        },
+        {
+          "value": "candice.gates@mail.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/privacy/policy",
+          "snippet": "ill.fernandez@mail.com 3 Candice Gates candice.gates@mail.com 4 Dave Hill dave.hill@mail.com",
+          "foundIn": "text"
+        },
+        {
+          "value": "dave.hill@mail.com",
+          "type": "support",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/privacy/policy",
+          "snippet": "s candice.gates@mail.com 4 Dave Hill dave.hill@mail.com Help",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+34 911 23 41 40",
+          "valueE164": "+34911234140",
+          "priority": "primary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/",
+          "snippet": "er General ConditionsPrivacy & Cookies PolicyGet Help Guest Care Spain +34 911 23 41 40Greece +30 2311 180 404Romania +40 31 630 1440Portugal +351 308 814 335Israel +9"
+        },
+        {
+          "valueRaw": "+30 2311 180 404",
+          "valueE164": "+302311180404",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/",
+          "snippet": "Privacy & Cookies PolicyGet Help Guest Care Spain +34 911 23 41 40Greece +30 2311 180 404Romania +40 31 630 1440Portugal +351 308 814 335Israel +972 55 685 3833Taiwan +8"
+        },
+        {
+          "valueRaw": "+40 31 630 1440",
+          "valueE164": "+40316301440",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/",
+          "snippet": "Get Help Guest Care Spain +34 911 23 41 40Greece +30 2311 180 404Romania +40 31 630 1440Portugal +351 308 814 335Israel +972 55 685 3833Taiwan +886 2 2966 1976UAE +1 23"
+        },
+        {
+          "valueRaw": "+351 308 814 335",
+          "valueE164": "+351308814335",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/",
+          "snippet": "Spain +34 911 23 41 40Greece +30 2311 180 404Romania +40 31 630 1440Portugal +351 308 814 335Israel +972 55 685 3833Taiwan +886 2 2966 1976UAE +1 2395227733 Subscribe t"
+        },
+        {
+          "valueRaw": "+972 55 685 3833",
+          "valueE164": "+972556853833",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/",
+          "snippet": "40Greece +30 2311 180 404Romania +40 31 630 1440Portugal +351 308 814 335Israel +972 55 685 3833Taiwan +886 2 2966 1976UAE +1 2395227733 Subscribe to our newsletter Con"
+        },
+        {
+          "valueRaw": "+886 2 2966 1976",
+          "valueE164": "+886229661976",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/",
+          "snippet": "04Romania +40 31 630 1440Portugal +351 308 814 335Israel +972 55 685 3833Taiwan +886 2 2966 1976UAE +1 2395227733 Subscribe to our newsletter Contact Us Email"
+        },
+        {
+          "valueRaw": "+1 2395227733",
+          "valueE164": "+12395227733",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.olalahomes.com/",
+          "snippet": "1440Portugal +351 308 814 335Israel +972 55 685 3833Taiwan +886 2 2966 1976UAE +1 2395227733 Subscribe to our newsletter Contact Us Email Than"
+        }
+      ],
+      "primaryEmail": "support@olalahomes.com",
+      "primaryPhone": "+34911234140",
+      "socials": {
+        "linkedin": [
+          {
+            "url": "https://es.linkedin.com/company/olala-homes?utm_source=website&utm_medium=icon&utm_campaign=linkedin",
+            "handle": "olala-homes",
+            "sourceUrl": "https://www.olalahomes.com/"
+          }
+        ],
+        "tiktok": [
+          {
+            "url": "https://www.tiktok.com/@olalahomes?utm_source=website&utm_medium=icon&utm_campaign=tiktok",
+            "handle": "olalahomes",
+            "sourceUrl": "https://www.olalahomes.com/"
+          }
+        ],
+        "pinterest": [
+          {
+            "url": "https://es.pinterest.com/olalahomes/?utm_source=website&utm_medium=icon&utm_campaign=pinterest",
+            "handle": "olalahomes",
+            "sourceUrl": "https://www.olalahomes.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
   },
   {
     "url": "https://www.madridurbansuites.com/fr",
-    "status": "failed",
-    "error": "Run failed with status: FAILED - Last log: No details"
+    "status": "success",
+    "data": {
+      "domain": "madridurbansuites.com",
+      "finalUrl": "https://www.madridurbansuites.com/fr",
+      "errors": [
+        {
+          "url": "https://www.madridurbansuites.com/fr",
+          "error": "HTTP 403"
+        }
+      ]
+    },
+    "issues": [
+      {
+        "severity": "medium",
+        "type": "missing_emails",
+        "message": "No email found"
+      },
+      {
+        "severity": "medium",
+        "type": "missing_phones",
+        "message": "No phone found"
+      }
+    ]
   }
 ]

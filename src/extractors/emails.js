@@ -27,6 +27,42 @@ export function extractEmails(html, sourceUrl) {
     // Accepte le registrable domain ou un sous-domaine de celui-ci
     return full === registrable || full.endsWith(`.${registrable}`);
   };
+
+  /**
+   * Vérifie si un email est concaténé avec un numéro de téléphone ou d'autres éléments
+   * Exemples à rejeter : "555-555-5555mymail@mailservice.com", "123email@domain.com"
+   */
+  const isConcatenatedEmail = (emailValue, context) => {
+    if (!emailValue || !context) return false;
+    
+    // Trouve la position de l'email dans le contexte
+    const emailIndex = context.toLowerCase().indexOf(emailValue.toLowerCase());
+    if (emailIndex === -1) return false;
+    
+    // Vérifie les caractères avant l'email (sur une fenêtre de 20 caractères)
+    const beforeEmail = context.substring(Math.max(0, emailIndex - 20), emailIndex);
+    
+    // Pattern pour détecter un numéro de téléphone avant l'email
+    // Exemples : "555-555-5555", "+1 555 555 5555", "(555) 555-5555", etc.
+    const phonePattern = /[\d\s\-+().]{7,}$/;
+    if (phonePattern.test(beforeEmail.trim())) {
+      // Vérifie si le dernier caractère avant l'email est un chiffre ou un séparateur de téléphone
+      const lastChar = beforeEmail.trim().slice(-1);
+      if (/\d[\-+().]/.test(beforeEmail.trim().slice(-2))) {
+        return true; // Probablement un numéro de téléphone collé à l'email
+      }
+    }
+    
+    // Vérifie si l'email commence directement après des chiffres sans séparateur
+    // Exemple : "5555555555email@domain.com"
+    const digitsBefore = beforeEmail.match(/\d+$/);
+    if (digitsBefore && digitsBefore[0].length >= 7) {
+      // Si on a 7+ chiffres consécutifs juste avant l'email, c'est suspect
+      return true;
+    }
+    
+    return false;
+  };
   
   // 1. Liens mailto
   $('a[href^="mailto:"]').each((_, el) => {
@@ -69,11 +105,17 @@ export function extractEmails(html, sourceUrl) {
       const emailDomain = normalized.split('@')[1];
       if (!isValidEmailDomain(emailDomain)) continue;
       
+      // Trouve le contexte autour de l'email pour vérifier les concaténations
+      const index = textContent.indexOf(emailMatch);
+      const snippet = textContent.substring(Math.max(0, index - 50), index + emailMatch.length + 50).trim();
+      
+      // Vérifie si l'email est concaténé avec un numéro de téléphone ou d'autres éléments
+      if (isConcatenatedEmail(emailValue, snippet)) {
+        continue; // Ignore cet email car il est concaténé
+      }
+      
       // Vérifie si déjà trouvé via mailto
       if (!emails.some(e => normalizeEmail(e.value) === normalized)) {
-        // Trouve le contexte autour de l'email
-        const index = textContent.indexOf(emailMatch);
-        const snippet = textContent.substring(Math.max(0, index - 50), index + emailMatch.length + 50).trim();
         const signals = ['text'];
         if (emailDomain === domain) {
           signals.push('same_domain');
