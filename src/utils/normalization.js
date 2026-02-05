@@ -57,13 +57,17 @@ export function cleanSnippet(snippet, maxLen = 240) {
  * Normalise un numéro de téléphone
  * Retourne { valueRaw, valueE164 }
  * @param {string} phoneRaw - Le numéro de téléphone à normaliser
- * @param {string|null} countryCode - Code pays ISO (ex: 'FR', 'UK', 'DE') ou null si inconnu
+ * @param {string|null} countryCodeFromUrl - Code pays ISO détecté depuis l'URL (ex: 'FR', 'UK', 'DE') ou null
+ * @param {string|null} countryCodeFromContext - Code pays ISO détecté depuis le contexte (snippet) ou null
  */
-export function normalizePhone(phoneRaw, countryCode = null) {
+export function normalizePhone(phoneRaw, countryCodeFromUrl = null, countryCodeFromContext = null) {
   if (!phoneRaw) return { valueRaw: null, valueE164: null };
   
   let cleaned = phoneRaw.trim();
   let valueE164 = null;
+  
+  // Priorité : contexte > URL (le contexte est plus fiable car spécifique au numéro)
+  const countryCode = countryCodeFromContext || countryCodeFromUrl;
   
   try {
     // Normalisation CONSERVATRICE pour éviter de transformer des IDs en numéros (ex: appId/ovh)
@@ -79,7 +83,7 @@ export function normalizePhone(phoneRaw, countryCode = null) {
         const phoneNumber = parsePhoneNumber(cleaned);
         if (phoneNumber?.number && isValidPhoneNumber(phoneNumber.number)) valueE164 = phoneNumber.number;
       } else {
-        // 3) Si on a un code pays, on l'utilise
+        // 3) Si on a un code pays (depuis contexte ou URL), on l'utilise
         if (countryCode) {
           const phoneNumber = parsePhoneNumber(cleaned, countryCode);
           if (phoneNumber?.number && isValidPhoneNumber(phoneNumber.number)) valueE164 = phoneNumber.number;

@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
 import { PHONE_REGEX, PHONE_EXCLUSIONS } from '../constants.js';
 import { normalizePhone, cleanSnippet } from '../utils/normalization.js';
-import { detectCountryFromUrl } from '../utils/url-utils.js';
+import { detectCountryFromUrl, detectCountryFromSnippet } from '../utils/url-utils.js';
 
 /**
  * Vérifie si un numéro doit être exclu
@@ -67,7 +67,9 @@ export function extractPhones(html, sourceUrl) {
       }
       
       if (!shouldExcludePhone(phoneValue, text)) {
-        const normalized = normalizePhone(phoneValue, countryCode);
+        // Détecte le pays depuis le contexte (plus fiable que l'URL pour ce numéro spécifique)
+        const countryFromContext = detectCountryFromSnippet(text + ' ' + context);
+        const normalized = normalizePhone(phoneValue, countryCode, countryFromContext);
         
         phones.push({
           valueRaw: normalized.valueRaw,
@@ -123,11 +125,14 @@ export function extractPhones(html, sourceUrl) {
     }
     
     if (!shouldExcludePhone(phoneValue, snippet)) {
-      const normalized = normalizePhone(phoneValue, countryCode);
+      // Détecte le pays depuis le contexte (plus fiable que l'URL pour ce numéro spécifique)
+      const countryFromContext = detectCountryFromSnippet(snippet);
+      const normalized = normalizePhone(phoneValue, countryCode, countryFromContext);
 
       // Pour les numéros trouvés dans le texte (pas tel:), on exige une normalisation E.164
-      // seulement si on a un code pays. Sinon, on garde le numéro tel quel (avec le 0 initial).
-      if (countryCode && !normalized.valueE164) continue;
+      // seulement si on a un code pays (depuis contexte ou URL). Sinon, on garde le numéro tel quel (avec le 0 initial).
+      const finalCountryCode = countryFromContext || countryCode;
+      if (finalCountryCode && !normalized.valueE164) continue;
       // Si pas de code pays et pas de E.164, on garde quand même le numéro (valueRaw)
 
       // Vérifie si déjà trouvé via tel:
