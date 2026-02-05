@@ -104,7 +104,7 @@ export function extractCompany(html, sourceUrl) {
     const title = $('title').text().trim();
     if (title) {
       // Exclut les titres de pages génériques (mentions légales, privacy, etc.)
-      const genericTitles = /^(mentions\s+l[eé]gales?|privacy\s+policy|politique\s+de\s+confidentialit[eé]|legal\s+notice|imprint|cgu|cgv|terms|conditions|contact|accueil|home)$/i;
+      const genericTitles = /^(mentions\s+l[eé]gales?|privacy\s+policy|politique\s+de\s+confidentialit[eé]|legal\s+notice|imprint|cgu|cgv|terms|conditions|contact|accueil|home|confidentiality|privacy)$/i;
       if (genericTitles.test(title)) {
         // Ne pas utiliser ce title, on passera au logo ou schema.org
       } else {
@@ -112,7 +112,9 @@ export function extractCompany(html, sourceUrl) {
         let cleaned = title.split(/[-|·]/)[0].trim();
         // Enlève aussi les suffixes comme " · Privacy policy", " - Mentions légales"
         cleaned = cleaned.replace(/\s*[·\-]\s*(privacy|mentions|l[eé]gales?|legal|policy|confidentialit[eé])/i, '').trim();
-        if (cleaned && cleaned.length > 2) {
+        // Enlève les préfixes comme "CGV" (Conditions Générales de Vente)
+        cleaned = cleaned.replace(/^cgv\s+/i, '').trim();
+        if (cleaned && cleaned.length > 2 && !genericTitles.test(cleaned)) {
           company.name = cleaned;
         }
       }
@@ -142,24 +144,37 @@ export function extractCompany(html, sourceUrl) {
         }
         
         if (obj['@type'] === 'Organization' || obj['@type'] === 'LocalBusiness') {
-          if (obj.name && !company.name) {
-            company.name = obj.name.trim();
-          }
-          if (obj.legalName && !company.legalName) {
-            company.legalName = obj.legalName.trim();
-          }
+          // Ignore les données schema.org des hébergeurs (ex: AWS, OVH) si c'est un sous-domaine
+          const domain = getRegistrableDomain(sourceUrl);
+          const isHostingSubdomain = domain && (
+            domain.includes('site-solocal.com') ||
+            domain.includes('ovh.com') ||
+            domain.includes('amazonaws.com') ||
+            domain.includes('wixsite.com') ||
+            domain.includes('wordpress.com')
+          );
           
-          // Pays depuis l'adresse schema.org (sans extraire l'adresse complète)
-          if (obj.address && typeof obj.address === 'object') {
-            const address = obj.address;
-            if (address.addressCountry && !company.country) {
-              const countryValue = typeof address.addressCountry === 'object' 
-                ? address.addressCountry.name || address.addressCountry
-                : address.addressCountry;
-              const countryInfo = getCountryInfo(countryValue);
-              if (countryInfo.code) {
-                company.country = countryInfo.code;
-                company.countryName = countryInfo.name;
+          // Si c'est un sous-domaine d'hébergeur, ignore les données schema.org (sauf si c'est vraiment l'organisation)
+          if (!isHostingSubdomain || (obj.name && obj.name.toLowerCase().includes(domain.split('.')[0]))) {
+            if (obj.name && !company.name) {
+              company.name = obj.name.trim();
+            }
+            if (obj.legalName && !company.legalName) {
+              company.legalName = obj.legalName.trim();
+            }
+            
+            // Pays depuis l'adresse schema.org (sans extraire l'adresse complète)
+            if (obj.address && typeof obj.address === 'object') {
+              const address = obj.address;
+              if (address.addressCountry && !company.country) {
+                const countryValue = typeof address.addressCountry === 'object' 
+                  ? address.addressCountry.name || address.addressCountry
+                  : address.addressCountry;
+                const countryInfo = getCountryInfo(countryValue);
+                if (countryInfo.code) {
+                  company.country = countryInfo.code;
+                  company.countryName = countryInfo.name;
+                }
               }
             }
           }
