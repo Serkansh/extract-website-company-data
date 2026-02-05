@@ -91,9 +91,18 @@ export function extractPhones(html, sourceUrl) {
         // Si valueE164 est null et que valueRaw semble invalide, on skip
         if (!normalized.valueE164 && normalized.valueRaw) {
           const rawDigits = normalized.valueRaw.replace(/\D/g, '');
-          // Si le numéro brut a plus de 15 chiffres ou commence par un code pays invalide, on skip
-          if (rawDigits.length > 15 || (rawDigits.startsWith('20') && rawDigits.length > 13)) {
+          // Si le numéro brut a plus de 15 chiffres, on skip (E.164 max 15)
+          if (rawDigits.length > 15) {
             return; // Skip ce numéro invalide
+          }
+          // Exclut les numéros avec code pays +20 (Égypte) qui ont plus de 13 chiffres
+          if (rawDigits.startsWith('20') && rawDigits.length > 13) {
+            return; // Skip ce numéro invalide (Égypte max 13 chiffres)
+          }
+          // Exclut les numéros qui semblent être des concaténations (ex: +2034931830300)
+          // Si le numéro commence par +20 et a exactement 14 chiffres, c'est suspect
+          if ((normalized.valueRaw.startsWith('+20') || normalized.valueRaw.startsWith('0020')) && rawDigits.length === 14) {
+            return; // Skip ce numéro suspect (probablement une concaténation)
           }
         }
         
