@@ -18,6 +18,17 @@ export const EMAIL_FILTERS = [
   'mailer-daemon', 'postmaster', 'abuse', 'webmaster'
 ];
 
+// Domaines d'autorités publiques et de test à exclure
+export const EMAIL_EXCLUDED_DOMAINS = [
+  'agpd.es',           // Autorité espagnole de protection des données
+  'cnil.fr',           // Commission française de protection des données
+  'ico.org.uk',        // Information Commissioner's Office (UK)
+  'mail.com',          // Emails de test/exemple
+  'example.com',       // Emails d'exemple
+  'test.com',          // Emails de test
+  'mailservice.com'    // Emails de test (comme dans olalahomes.com)
+];
+
 // Types d'emails possibles
 export const EMAIL_TYPES = {
   GENERAL: 'general',

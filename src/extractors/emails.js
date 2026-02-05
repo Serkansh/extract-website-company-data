@@ -81,13 +81,24 @@ export function extractEmails(html, sourceUrl) {
           signals.push('same_domain');
         }
         
+        // Utilise l'email normalisé comme snippet si le texte du lien ne contient pas l'email
+        // ou si le texte contient un autre email (cas de hospedajenuevanumancia.com)
+        let snippet = cleanSnippet(text) || normalized;
+        if (!text.toLowerCase().includes(normalized.toLowerCase())) {
+          // Si le texte du lien ne contient pas l'email, utilise l'email lui-même
+          snippet = normalized;
+        } else {
+          // Sinon, utilise le contexte autour du lien pour avoir plus d'infos
+          snippet = cleanSnippet(context) || normalized;
+        }
+        
         emails.push({
           value: normalized,
           type: detectEmailType(normalized, text + ' ' + context),
           priority: 'secondary',
           signals,
           sourceUrl,
-          snippet: cleanSnippet(text) || normalized,
+          snippet: snippet,
           foundIn: 'mailto'
         });
       }

@@ -1,5 +1,5 @@
 import { parsePhoneNumber, isValidPhoneNumber } from 'libphonenumber-js';
-import { EMAIL_FILTERS, EMAIL_TYPE_PATTERNS } from '../constants.js';
+import { EMAIL_FILTERS, EMAIL_TYPE_PATTERNS, EMAIL_EXCLUDED_DOMAINS } from '../constants.js';
 
 /**
  * Normalise un email (lowercase, trim, strip ponctuation finale)
@@ -27,7 +27,18 @@ export function shouldFilterEmail(email) {
   const normalized = normalizeEmail(email);
   if (!normalized) return true;
   
-  return EMAIL_FILTERS.some(filter => normalized.includes(filter));
+  // Vérifie les filtres de mots-clés
+  if (EMAIL_FILTERS.some(filter => normalized.includes(filter))) {
+    return true;
+  }
+  
+  // Vérifie les domaines exclus (autorités publiques, emails de test)
+  const emailDomain = normalized.split('@')[1];
+  if (emailDomain && EMAIL_EXCLUDED_DOMAINS.includes(emailDomain.toLowerCase())) {
+    return true;
+  }
+  
+  return false;
 }
 
 /**
