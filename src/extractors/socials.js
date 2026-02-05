@@ -34,6 +34,21 @@ function isSettingsOrPolicyLink(url) {
 }
 
 /**
+ * Vérifie si un lien social est un lien de service/plateforme (Wix, etc.) à exclure
+ */
+function isServiceLink(url) {
+  const urlLower = url.toLowerCase();
+  const servicePatterns = [
+    /wixfrancais/i,
+    /wixfrance/i,
+    /wix\.com/i,
+    /facebook\.com\/Wix/i,
+    /twitter\.com\/Wix/i
+  ];
+  return servicePatterns.some(pattern => pattern.test(urlLower));
+}
+
+/**
  * Extrait le handle/ID depuis une URL de réseau social
  */
 function extractSocialHandle(url, platform) {
@@ -127,6 +142,9 @@ export function extractSocials(html, sourceUrl) {
     
     // Exclut les liens de paramètres/policies
     if (isSettingsOrPolicyLink(url)) return;
+    
+    // Exclut les liens de services (Wix, etc.)
+    if (isServiceLink(url)) return;
     
     const urlLower = url.toLowerCase();
     
