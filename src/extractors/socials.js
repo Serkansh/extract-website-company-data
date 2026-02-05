@@ -35,7 +35,7 @@ function isSettingsOrPolicyLink(url) {
 }
 
 /**
- * Vérifie si un lien social est un lien de service/plateforme (Wix, etc.) à exclure
+ * Vérifie si un lien social est un lien de service/plateforme (Wix, Dropbox, etc.) à exclure
  */
 function isServiceLink(url) {
   const urlLower = url.toLowerCase();
@@ -44,7 +44,10 @@ function isServiceLink(url) {
     /wixfrance/i,
     /wix\.com/i,
     /facebook\.com\/Wix/i,
-    /twitter\.com\/Wix/i
+    /twitter\.com\/Wix/i,
+    /dropbox\.com/i,  // Exclut les liens Dropbox (fichiers PDF, etc.)
+    /drive\.google\.com/i,  // Exclut les liens Google Drive
+    /onedrive\.live\.com/i  // Exclut les liens OneDrive
   ];
   return servicePatterns.some(pattern => pattern.test(urlLower));
 }

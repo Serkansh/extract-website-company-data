@@ -16,10 +16,13 @@ if (!APIFY_TOKEN) {
 }
 
 const TEST_SITES = [
-  'https://www.hospedajecolonia.es/',
-  'http://www.hospedajenuevanumancia.com/',
-  'https://www.olalahomes.com/',
-  'https://www.madridurbansuites.com/fr',
+  'https://arcelonhotel.com/',
+  'https://www.hotelesinstant.com/hostal-sant-pau-barcelona/',
+  'https://www.hotelsantpau.com/',
+  'https://apartamentsmarina.com/',
+  'https://www.hotelsagradafamilia.com/',
+  'https://www.hispanos7suiza.com/fr',
+  'https://hostemplo.com/',
 ];
 
 async function runTest(client, url) {

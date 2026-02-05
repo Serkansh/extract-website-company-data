@@ -66,10 +66,29 @@ export function extractPhones(html, sourceUrl) {
         return; // Skip ce numéro, c'est un fax
       }
       
+      // Validation supplémentaire : exclut les numéros invalides avec code pays +20 (Égypte)
+      // qui ont plus de 11 chiffres après le code pays (format invalide)
+      const digitsOnly = phoneValue.replace(/\D/g, '');
+      if (digitsOnly.startsWith('20') && digitsOnly.length > 13) {
+        // +20 (Égypte) suivi de plus de 11 chiffres est invalide
+        // Un numéro égyptien valide a au maximum 11 chiffres après le code pays
+        return; // Skip ce numéro invalide
+      }
+      
       if (!shouldExcludePhone(phoneValue, text)) {
         // Détecte le pays depuis le contexte (plus fiable que l'URL pour ce numéro spécifique)
         const countryFromContext = detectCountryFromSnippet(text + ' ' + context);
         const normalized = normalizePhone(phoneValue, countryCode, countryFromContext);
+        
+        // Vérifie que la normalisation a produit un résultat valide
+        // Si valueE164 est null et que valueRaw semble invalide, on skip
+        if (!normalized.valueE164 && normalized.valueRaw) {
+          const rawDigits = normalized.valueRaw.replace(/\D/g, '');
+          // Si le numéro brut a plus de 15 chiffres ou commence par un code pays invalide, on skip
+          if (rawDigits.length > 15 || (rawDigits.startsWith('20') && rawDigits.length > 13)) {
+            return; // Skip ce numéro invalide
+          }
+        }
         
         phones.push({
           valueRaw: normalized.valueRaw,

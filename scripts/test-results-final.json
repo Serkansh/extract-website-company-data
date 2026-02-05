@@ -1,36 +1,10 @@
 [
   {
-    "url": "https://www.hospedajecolonia.es/",
+    "url": "https://arcelonhotel.com/",
     "status": "success",
     "data": {
-      "domain": "hospedajecolonia.es",
-      "finalUrl": "https://www.hospedajecolonia.es/",
-      "errors": [
-        {
-          "url": "https://www.hospedajecolonia.es/",
-          "error": "browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-        }
-      ]
-    },
-    "issues": [
-      {
-        "severity": "medium",
-        "type": "missing_emails",
-        "message": "No email found"
-      },
-      {
-        "severity": "medium",
-        "type": "missing_phones",
-        "message": "No phone found"
-      }
-    ]
-  },
-  {
-    "url": "http://www.hospedajenuevanumancia.com/",
-    "status": "success",
-    "data": {
-      "domain": "hospedajenuevanumancia.com",
-      "finalUrl": "http://www.hospedajenuevanumancia.com/",
+      "domain": "arcelonhotel.com",
+      "finalUrl": "https://arcelonhotel.com/",
       "keyPages": {
         "contact": null,
         "about": null,
@@ -38,257 +12,48 @@
         "privacy": null
       },
       "pagesVisited": [
-        "http://www.hospedajenuevanumancia.com/",
-        "http://www.hospedajenuevanumancia.com/es/hospedaje-nueva-numancia",
-        "http://www.hospedajenuevanumancia.com/es/hostal-nueva-numancia",
-        "http://www.hospedajenuevanumancia.com/es/Habitaciones-en-madrid",
-        "http://www.hospedajenuevanumancia.com/es/Im%C3%A1genes-nueva-numancia",
-        "http://www.hospedajenuevanumancia.com/es/hostal-en-madrid",
-        "http://www.hospedajenuevanumancia.com/en/Start"
-      ],
-      "errors": [
-        {
-          "url": "http://www.hospedajenuevanumancia.com/www.fnsrooms.com",
-          "error": "HTTP 404"
-        }
+        "https://arcelonhotel.com/",
+        "https://arcelonhotel.com/ca/",
+        "https://arcelonhotel.com/en/",
+        "https://arcelonhotel.com/de/",
+        "https://arcelonhotel.com/ru/",
+        "https://arcelonhotel.com/fr/",
+        "https://arcelonhotel.com/it/",
+        "https://arcelonhotel.com/galeria/"
       ],
       "emails": [
         {
-          "value": "reservas@nombrepag.com",
+          "value": "arcelon@ohotels.es",
           "type": "general",
           "priority": "primary",
           "signals": [
             "mailto"
           ],
-          "sourceUrl": "http://www.hospedajenuevanumancia.com/",
-          "snippet": "hospedaje.nuevanumancia@gmail.com",
+          "sourceUrl": "https://arcelonhotel.com/",
+          "snippet": "C/ de Mallorca, 661, 08027 Barcelona Tel. 930 460 910",
           "foundIn": "mailto"
-        },
-        {
-          "value": "hospedaje.nuevanumancia@gmail.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "http://www.hospedajenuevanumancia.com/",
-          "snippet": "Email hospedaje.nuevanumancia@gmail.com Teléfono",
-          "foundIn": "text"
         }
       ],
       "phones": [
         {
-          "valueRaw": "+34643923132",
-          "valueE164": "+34643923132",
+          "valueRaw": "+34930460910",
+          "valueE164": "+34930460910",
           "priority": "primary",
           "signals": [
             "tel"
           ],
-          "sourceUrl": "http://www.hospedajenuevanumancia.com/",
-          "snippet": "(+34) 643 923 132"
+          "sourceUrl": "https://arcelonhotel.com/",
+          "snippet": "Tel. 930 460 910"
         }
       ],
-      "primaryEmail": "reservas@nombrepag.com",
-      "primaryPhone": "+34643923132"
-    },
-    "issues": []
-  },
-  {
-    "url": "https://www.olalahomes.com/",
-    "status": "success",
-    "data": {
-      "domain": "olalahomes.com",
-      "finalUrl": "https://www.olalahomes.com/",
-      "keyPages": {
-        "contact": "https://www.olalahomes.com/contact-us",
-        "about": "https://www.olalahomes.com/about",
-        "legal": null,
-        "privacy": "https://www.olalahomes.com/privacy/policy"
-      },
-      "pagesVisited": [
-        "https://www.olalahomes.com/",
-        "https://www.olalahomes.com/contact-us",
-        "https://www.olalahomes.com/about",
-        "https://www.olalahomes.com/privacy/policy",
-        "https://www.olalahomes.com/en/properties?city=Valencia&country=Spain&minOccupancy=1",
-        "https://www.olalahomes.com/en/properties?city=Barcelona&country=Spain&minOccupancy=1",
-        "https://www.olalahomes.com/en/properties?city=Sitges&country=Spain&minOccupancy=1",
-        "https://www.olalahomes.com/en/properties?city=Madrid&country=Spain&minOccupancy=1"
-      ],
-      "emails": [
-        {
-          "value": "555-555-5555mymail@mailservice.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/",
-          "snippet": "Contact Get in touch 555-555-5555mymail@mailservice.com English en Es",
-          "foundIn": "text"
-        },
-        {
-          "value": "support@olalahomes.com",
-          "type": "support",
-          "priority": "primary",
-          "signals": [
-            "mailto",
-            "same_domain"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/contact-us",
-          "snippet": "support@olalahomes.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "info@agpd.es",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "mailto"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/privacy/policy",
-          "snippet": "info@agpd.es",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "anne.evans@mail.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/privacy/policy",
-          "snippet": "Last Name Email Address 1 Anne Evans anne.evans@mail.com 2 Bill Fernandez bill.fernandez@mail.c",
-          "foundIn": "text"
-        },
-        {
-          "value": "bill.fernandez@mail.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/privacy/policy",
-          "snippet": "anne.evans@mail.com 2 Bill Fernandez bill.fernandez@mail.com 3 Candice Gates candice.gates@mail.com",
-          "foundIn": "text"
-        },
-        {
-          "value": "candice.gates@mail.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/privacy/policy",
-          "snippet": "ill.fernandez@mail.com 3 Candice Gates candice.gates@mail.com 4 Dave Hill dave.hill@mail.com",
-          "foundIn": "text"
-        },
-        {
-          "value": "dave.hill@mail.com",
-          "type": "support",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/privacy/policy",
-          "snippet": "s candice.gates@mail.com 4 Dave Hill dave.hill@mail.com Help",
-          "foundIn": "text"
-        }
-      ],
-      "phones": [
-        {
-          "valueRaw": "+34 911 23 41 40",
-          "valueE164": "+34911234140",
-          "priority": "primary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/",
-          "snippet": "er General ConditionsPrivacy & Cookies PolicyGet Help Guest Care Spain +34 911 23 41 40Greece +30 2311 180 404Romania +40 31 630 1440Portugal +351 308 814 335Israel +9"
-        },
-        {
-          "valueRaw": "+30 2311 180 404",
-          "valueE164": "+302311180404",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/",
-          "snippet": "Privacy & Cookies PolicyGet Help Guest Care Spain +34 911 23 41 40Greece +30 2311 180 404Romania +40 31 630 1440Portugal +351 308 814 335Israel +972 55 685 3833Taiwan +8"
-        },
-        {
-          "valueRaw": "+40 31 630 1440",
-          "valueE164": "+40316301440",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/",
-          "snippet": "Get Help Guest Care Spain +34 911 23 41 40Greece +30 2311 180 404Romania +40 31 630 1440Portugal +351 308 814 335Israel +972 55 685 3833Taiwan +886 2 2966 1976UAE +1 23"
-        },
-        {
-          "valueRaw": "+351 308 814 335",
-          "valueE164": "+351308814335",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/",
-          "snippet": "Spain +34 911 23 41 40Greece +30 2311 180 404Romania +40 31 630 1440Portugal +351 308 814 335Israel +972 55 685 3833Taiwan +886 2 2966 1976UAE +1 2395227733 Subscribe t"
-        },
-        {
-          "valueRaw": "+972 55 685 3833",
-          "valueE164": "+972556853833",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/",
-          "snippet": "40Greece +30 2311 180 404Romania +40 31 630 1440Portugal +351 308 814 335Israel +972 55 685 3833Taiwan +886 2 2966 1976UAE +1 2395227733 Subscribe to our newsletter Con"
-        },
-        {
-          "valueRaw": "+886 2 2966 1976",
-          "valueE164": "+886229661976",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/",
-          "snippet": "04Romania +40 31 630 1440Portugal +351 308 814 335Israel +972 55 685 3833Taiwan +886 2 2966 1976UAE +1 2395227733 Subscribe to our newsletter Contact Us Email"
-        },
-        {
-          "valueRaw": "+1 2395227733",
-          "valueE164": "+12395227733",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.olalahomes.com/",
-          "snippet": "1440Portugal +351 308 814 335Israel +972 55 685 3833Taiwan +886 2 2966 1976UAE +1 2395227733 Subscribe to our newsletter Contact Us Email Than"
-        }
-      ],
-      "primaryEmail": "support@olalahomes.com",
-      "primaryPhone": "+34911234140",
+      "primaryEmail": "arcelon@ohotels.es",
+      "primaryPhone": "+34930460910",
       "socials": {
-        "linkedin": [
+        "google": [
           {
-            "url": "https://es.linkedin.com/company/olala-homes?utm_source=website&utm_medium=icon&utm_campaign=linkedin",
-            "handle": "olala-homes",
-            "sourceUrl": "https://www.olalahomes.com/"
-          }
-        ],
-        "tiktok": [
-          {
-            "url": "https://www.tiktok.com/@olalahomes?utm_source=website&utm_medium=icon&utm_campaign=tiktok",
-            "handle": "olalahomes",
-            "sourceUrl": "https://www.olalahomes.com/"
-          }
-        ],
-        "pinterest": [
-          {
-            "url": "https://es.pinterest.com/olalahomes/?utm_source=website&utm_medium=icon&utm_campaign=pinterest",
-            "handle": "olalahomes",
-            "sourceUrl": "https://www.olalahomes.com/"
+            "url": "https://www.google.com/maps/place/Hotel+Arcelon/@41.4145092,2.1870914,17z/data=!3m2!4b1!5s0xd704317f7d671ab:0x8384b04f3320f3e0!4m6!3m5!1s0x12a4a3720afaca63:0x3b92722ca2ab3a81!8m2!3d41.4145052!4d2.1896663!16s%2Fg%2F11sjy43gqw?entry=ttu",
+            "handle": "https://www.google.com/maps/place/Hotel+Arcelon/@41.4145092,2.1870914,17z/data=!3m2!4b1!5s0xd704317f7d671ab:0x8384b04f3320f3e0!4m6!3m5!1s0x12a4a3720afaca63:0x3b92722ca2ab3a81!8m2!3d41.4145052!4d2.1896663!16s%2Fg%2F11sjy43gqw?entry=ttu",
+            "sourceUrl": "https://arcelonhotel.com/"
           }
         ]
       }
@@ -296,17 +61,38 @@
     "issues": []
   },
   {
-    "url": "https://www.madridurbansuites.com/fr",
+    "url": "https://www.hotelesinstant.com/hostal-sant-pau-barcelona/",
     "status": "success",
     "data": {
-      "domain": "madridurbansuites.com",
-      "finalUrl": "https://www.madridurbansuites.com/fr",
+      "domain": "hotelesinstant.com",
+      "finalUrl": "https://www.hotelesinstant.com/hostal-sant-pau-barcelona/",
+      "keyPages": {
+        "contact": null,
+        "about": null,
+        "legal": "https://www.hotelesinstant.com/aviso-legal/",
+        "privacy": "https://www.hotelesinstant.com/politica-de-cookies/"
+      },
+      "pagesVisited": [
+        "https://www.hotelesinstant.com/hostal-sant-pau-barcelona/",
+        "https://www.hotelesinstant.com/aviso-legal/",
+        "https://www.hotelesinstant.com/politica-de-cookies/",
+        "https://www.hotelesinstant.com/",
+        "https://www.hotelesinstant.com/politica-de-privacidad/",
+        "https://www.hotelesinstant.com/pension-setas-sevilla/",
+        "https://www.hotelesinstant.com/hotel-casa-ramon-molina-real/",
+        "https://www.hotelesinstant.com/hostal-bed-sea/",
+        "https://www.hotelesinstant.com/reina-107-beach-boutique/",
+        "https://www.hotelesinstant.com/habitacion-calle-molino/",
+        "https://www.hotelesinstant.com/hotel-plaza-alaquas/"
+      ],
       "errors": [
         {
-          "url": "https://www.madridurbansuites.com/fr",
-          "error": "HTTP 403"
+          "url": "https://www.hotelesinstant.com/cdn-cgi/l/email-protection",
+          "error": "HTTP 404"
         }
-      ]
+      ],
+      "emails": [],
+      "phones": []
     },
     "issues": [
       {
@@ -320,5 +106,374 @@
         "message": "No phone found"
       }
     ]
+  },
+  {
+    "url": "https://www.hotelsantpau.com/",
+    "status": "success",
+    "data": {
+      "domain": "hotelsantpau.com",
+      "finalUrl": "https://www.hotelsantpau.com/",
+      "keyPages": {
+        "contact": "https://www.hotelsantpau.com/contacto.html",
+        "about": null,
+        "legal": "https://www.hotelsantpau.com/aviso-legal.html",
+        "privacy": "https://www.hotelsantpau.com/cookies.html"
+      },
+      "pagesVisited": [
+        "https://www.hotelsantpau.com/",
+        "https://www.hotelsantpau.com/contacto.html",
+        "https://www.hotelsantpau.com/aviso-legal.html",
+        "https://www.hotelsantpau.com/cookies.html",
+        "https://www.hotelsantpau.com/CA/home.html",
+        "https://www.hotelsantpau.com/EN/home.html",
+        "https://www.hotelsantpau.com/FR/home.html",
+        "https://www.hotelsantpau.com/-Hotel-Sant-Pau-.html"
+      ],
+      "emails": [
+        {
+          "value": "booking@hotelsantpua.com",
+          "type": "booking",
+          "priority": "primary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.hotelsantpau.com/aviso-legal.html",
+          "snippet": "con CIF B61945119 teléfono +34 934334151 e e-mail booking@hotelsantpua.com, inscrita en el Registro Mercantil de Esplugues d",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+34 934334151",
+          "valueE164": "+34934334151",
+          "priority": "primary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.hotelsantpau.com/aviso-legal.html",
+          "snippet": "L.U., con domicilio en Sant Antoni Maria Claret, 173 con CIF B61945119 teléfono +34 934334151 e e-mail booking@hotelsantpua.com, inscrita en el Registro Mercantil de Esplugu"
+        }
+      ],
+      "primaryEmail": "booking@hotelsantpua.com",
+      "primaryPhone": "+34934334151",
+      "socials": {
+        "linkedin": [
+          {
+            "url": "https://www.linkedin.com/company/99024577/admin/dashboard/",
+            "handle": "99024577",
+            "sourceUrl": "https://www.hotelsantpau.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://apartamentsmarina.com/",
+    "status": "success",
+    "data": {
+      "domain": "apartamentsmarina.com",
+      "finalUrl": "https://apartamentsmarina.com/",
+      "keyPages": {
+        "contact": "https://apartamentsmarina.com/contacto/",
+        "about": null,
+        "legal": null,
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://apartamentsmarina.com/",
+        "https://apartamentsmarina.com/contacto/",
+        "https://apartamentsmarina.com/politica-de-privacidad/",
+        "https://apartamentsmarina.com/apartamentos-apartaments-marina-barcelona/",
+        "https://apartamentsmarina.com/hb_accommodation/apartamento-2-habs-3-pax-vistas-sagrada-familia/",
+        "https://apartamentsmarina.com/hb_accommodation/apartamento-2-habs-3-pax/",
+        "https://apartamentsmarina.com/hb_accommodation/apartamento-2-habs-4-pax/",
+        "https://apartamentsmarina.com/tarifas/"
+      ],
+      "emails": [
+        {
+          "value": "info@apartamentsmarina.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "text",
+            "same_domain"
+          ],
+          "sourceUrl": "https://apartamentsmarina.com/contacto",
+          "snippet": "info@apartamentsmarina.com",
+          "foundIn": "text"
+        },
+        {
+          "value": "oficina@napols.net",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://apartamentsmarina.com/politica-de-privacidad",
+          "snippet": "08013 Barcelona.. Correo electrónico de contacto: oficina@napols.net2. USUARIOSEl acceso y/o uso de este portal de HER",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+2034931830300",
+          "valueE164": null,
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://apartamentsmarina.com/",
+          "snippet": "+2034931830300"
+        },
+        {
+          "valueRaw": "+34931830300",
+          "valueE164": "+34931830300",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://apartamentsmarina.com/contacto",
+          "snippet": "+34931830300"
+        }
+      ],
+      "primaryEmail": "info@apartamentsmarina.com",
+      "primaryPhone": "+2034931830300"
+    },
+    "issues": []
+  },
+  {
+    "url": "https://www.hotelsagradafamilia.com/",
+    "status": "success",
+    "data": {
+      "domain": "hotelsagradafamilia.com",
+      "finalUrl": "https://www.hotelsagradafamilia.com/",
+      "keyPages": {
+        "contact": null,
+        "about": null,
+        "legal": null,
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://www.hotelsagradafamilia.com/",
+        "https://www.hotelsagradafamilia.com/galeria/",
+        "https://www.hotelsagradafamilia.com/home/habitaciones/",
+        "https://www.hotelsagradafamilia.com/home/ofertas/",
+        "https://www.hotelsagradafamilia.com/servicios/",
+        "https://www.hotelsagradafamilia.com/situacion-barcelona/",
+        "https://www.hotelsagradafamilia.com/eventos/",
+        "https://www.hotelsagradafamilia.com/que-hacer/"
+      ],
+      "emails": [
+        {
+          "value": "reservas@hotelsagradafamilia.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.hotelsagradafamilia.com/",
+          "snippet": "reservas@hotelsagradafamilia.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+34934366115",
+          "valueE164": "+34934366115",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.hotelsagradafamilia.com/",
+          "snippet": "+34934366115"
+        },
+        {
+          "valueRaw": "+34687292660",
+          "valueE164": "+34687292660",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.hotelsagradafamilia.com/",
+          "snippet": "+34 687 29 26 60"
+        }
+      ],
+      "primaryEmail": "reservas@hotelsagradafamilia.com",
+      "primaryPhone": "+34934366115",
+      "socials": {
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/hotelsagradafamilia/",
+            "handle": "hotelsagradafamilia",
+            "sourceUrl": "https://www.hotelsagradafamilia.com/"
+          }
+        ],
+        "x": [
+          {
+            "url": "https://www.dropbox.com/scl/fi/pjl50kq643w6wn614lf44/HSF-Pol-tica-de-cookies.pdf?rlkey=wz9wxm47m0a9hu8j6sg44ryg8&st=fdlo3s0o&raw=1",
+            "handle": "scl",
+            "sourceUrl": "https://www.hotelsagradafamilia.com/"
+          }
+        ]
+      }
+    },
+    "issues": [
+      {
+        "severity": "medium",
+        "type": "social_policy_link",
+        "message": "Social settings/policy link detected: https://www.dropbox.com/scl/fi/pjl50kq643w6wn614lf44/HSF-Pol-tica-de-cookies.pdf?rlkey=wz9wxm47m0a9hu8j6sg44ryg8&st=fdlo3s0o&raw=1"
+      }
+    ]
+  },
+  {
+    "url": "https://www.hispanos7suiza.com/fr",
+    "status": "success",
+    "data": {
+      "domain": "hispanos7suiza.com",
+      "finalUrl": "https://www.hispanos7suiza.com/fr",
+      "keyPages": {
+        "contact": "https://www.hispanos7suiza.com/fr/contactez",
+        "about": null,
+        "legal": null,
+        "privacy": "https://www.hispanos7suiza.com/fr/politique-de-confidentialite"
+      },
+      "pagesVisited": [
+        "https://www.hispanos7suiza.com/fr",
+        "https://www.hispanos7suiza.com/fr/contactez",
+        "https://www.hispanos7suiza.com/fr/politique-de-confidentialite",
+        "https://www.hispanos7suiza.com/fr/politique-de-cookies",
+        "https://www.hispanos7suiza.com/fr/hebergement-barcelone-espagne",
+        "https://www.hispanos7suiza.com/fr/appartements-barcelone-espagne",
+        "https://www.hispanos7suiza.com/fr/services",
+        "https://www.hispanos7suiza.com/fr/musee"
+      ],
+      "emails": [
+        {
+          "value": "comercial@hispanos7suiza.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.hispanos7suiza.com/fr",
+          "snippet": "C/ de Sicília, 255, Eixample, 08025 Barcelona, España comercial@hispanos7suiza.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "marketing@wilsonbcn.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.hispanos7suiza.com/fr/politique-de-confidentialite",
+          "snippet": "INFORMATIONS DE BASE SUR LA PROTECTION DES DONNÉES Responsable : TURISTCOLET, SL (ci-après HISPANOS SIETE SUIZA).OBJECTIFPrestation de services en ligne.Gestion des réservations d'hôtel.G",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+34932082051",
+          "valueE164": "+34932082051",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.hispanos7suiza.com/fr",
+          "snippet": "+34932082051"
+        }
+      ],
+      "primaryEmail": "comercial@hispanos7suiza.com",
+      "primaryPhone": "+34932082051",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/apartamentoshispanos7suiza",
+            "handle": "apartamentoshispanos7suiza",
+            "sourceUrl": "https://www.hispanos7suiza.com/fr"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/apartamentoshispanos7suiza",
+            "handle": "apartamentoshispanos7suiza",
+            "sourceUrl": "https://www.hispanos7suiza.com/fr"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://hostemplo.com/",
+    "status": "success",
+    "data": {
+      "domain": "hostemplo.com",
+      "finalUrl": "https://hostemplo.com/",
+      "keyPages": {
+        "contact": "https://hostemplo.com/contacto/",
+        "about": null,
+        "legal": null,
+        "privacy": "https://hostemplo.com/politica-de-cookies/"
+      },
+      "pagesVisited": [
+        "https://hostemplo.com/",
+        "https://hostemplo.com/contacto/",
+        "https://hostemplo.com/politica-de-cookies/",
+        "https://hostemplo.com/apart-suites-hostemplo-ash/",
+        "https://hostemplo.com/hotel-boutique-hostemplo-hbh/",
+        "https://hostemplo.com/hostemplo-sagrada-familia-hsf/",
+        "https://hostemplo.com/como-llegar/",
+        "https://hostemplo.com/barcelona/"
+      ],
+      "emails": [
+        {
+          "value": "info@hostemplo.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://hostemplo.com/",
+          "snippet": "Info@hostemplo.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+34934765575",
+          "valueE164": "+34934765575",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://hostemplo.com/",
+          "snippet": "+34 93 476 55 75"
+        }
+      ],
+      "primaryEmail": "info@hostemplo.com",
+      "primaryPhone": "+34934765575",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/Hostemplo/",
+            "handle": "hostemplo",
+            "sourceUrl": "https://hostemplo.com/"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/hostemplo/",
+            "handle": "hostemplo",
+            "sourceUrl": "https://hostemplo.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
   }
 ]
