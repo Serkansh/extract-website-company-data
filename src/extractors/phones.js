@@ -66,13 +66,20 @@ export function extractPhones(html, sourceUrl) {
         return; // Skip ce numéro, c'est un fax
       }
       
-      // Validation supplémentaire : exclut les numéros invalides avec code pays +20 (Égypte)
-      // qui ont plus de 11 chiffres après le code pays (format invalide)
+      // Validation supplémentaire : exclut les numéros invalides
       const digitsOnly = phoneValue.replace(/\D/g, '');
+      
+      // Exclut les numéros avec code pays +20 (Égypte) qui ont plus de 13 chiffres au total
+      // Un numéro égyptien valide a au maximum 11 chiffres après le code pays (total max 13)
       if (digitsOnly.startsWith('20') && digitsOnly.length > 13) {
-        // +20 (Égypte) suivi de plus de 11 chiffres est invalide
-        // Un numéro égyptien valide a au maximum 11 chiffres après le code pays
         return; // Skip ce numéro invalide
+      }
+      
+      // Exclut les numéros qui commencent par +20 et ont plus de 15 chiffres (format E.164 invalide)
+      if (phoneValue.startsWith('+20') || phoneValue.startsWith('0020')) {
+        if (digitsOnly.length > 13) {
+          return; // Skip ce numéro invalide (Égypte max 13 chiffres)
+        }
       }
       
       if (!shouldExcludePhone(phoneValue, text)) {

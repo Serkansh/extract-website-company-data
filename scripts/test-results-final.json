@@ -309,23 +309,10 @@
             "handle": "hotelsagradafamilia",
             "sourceUrl": "https://www.hotelsagradafamilia.com/"
           }
-        ],
-        "x": [
-          {
-            "url": "https://www.dropbox.com/scl/fi/pjl50kq643w6wn614lf44/HSF-Pol-tica-de-cookies.pdf?rlkey=wz9wxm47m0a9hu8j6sg44ryg8&st=fdlo3s0o&raw=1",
-            "handle": "scl",
-            "sourceUrl": "https://www.hotelsagradafamilia.com/"
-          }
         ]
       }
     },
-    "issues": [
-      {
-        "severity": "medium",
-        "type": "social_policy_link",
-        "message": "Social settings/policy link detected: https://www.dropbox.com/scl/fi/pjl50kq643w6wn614lf44/HSF-Pol-tica-de-cookies.pdf?rlkey=wz9wxm47m0a9hu8j6sg44ryg8&st=fdlo3s0o&raw=1"
-      }
-    ]
+    "issues": []
   },
   {
     "url": "https://www.hispanos7suiza.com/fr",
