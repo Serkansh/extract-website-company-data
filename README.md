@@ -1,41 +1,41 @@
 # Extract Website Contact Data – Email, Phone, Social
 
-Actor Apify pour extraire les données de contact depuis des sites web : emails, téléphones et réseaux sociaux.
+Apify Actor to extract contact data from websites: emails, phone numbers, and social media profiles.
 
 ## Description
 
-Cet Actor traite une liste de domaines et extrait automatiquement :
+This Actor processes a list of domains and automatically extracts:
 
-1. **Emails** : Détection depuis liens mailto, texte brut et JSON-LD. Normalisation, filtrage et déduplication automatiques.
-2. **Téléphones** : Extraction depuis liens tel: et texte brut. Normalisation E.164 avec détection automatique du pays.
-3. **Réseaux sociaux** : LinkedIn, Facebook, Instagram, Twitter/X, TikTok, YouTube, Pinterest, Google Maps. Filtrage des liens de partage et services.
+1. ✅ **Emails**: Detection from mailto links, raw text, and JSON-LD schemas. Automatic normalization, filtering, and deduplication.
+2. ✅ **Phone Numbers**: Extraction from tel: links and raw text. E.164 normalization with automatic country detection.
+3. ✅ **Social Media**: LinkedIn, Facebook, Instagram, Twitter/X, TikTok, YouTube, Pinterest, Google Maps. Filtering of share links and service links.
 
-## Caractéristiques
+## Features
 
-- ✅ **Crawling intelligent** : Détection automatique des pages clés (contact, about, legal, privacy). Crawl adaptatif (8-15 pages selon la structure du site)
-- ✅ **Rapide et efficace** : Utilise Cheerio/HTTP par défaut, Playwright uniquement en fallback pour les pages dynamiques
-- ✅ **Déterministe** : Résultats stables et traçables (sourceUrl + snippet pour chaque extraction)
-- ✅ **Déduplication** : Emails et phones dédupliqués automatiquement
-- ✅ **Sélection intelligente** : Email et phone "primary" sélectionnés selon des règles précises
-- ✅ **Normalisation E.164** : Téléphones normalisés au format international avec détection automatique du pays
-- ✅ **Filtrage intelligent** : Exclusion automatique des emails de test, autorités publiques, numéros invalides
-- ✅ **Résilience** : Gestion automatique des erreurs, retry sur timeout, tentatives sur variantes d'URL (http/https, www/non-www)
+- ✅ **Intelligent Crawling**: Automatic detection of key pages (contact, about, legal, privacy). Adaptive crawl (8-15 pages depending on site structure)
+- ✅ **Fast and Efficient**: Uses Cheerio/HTTP by default, Playwright only as fallback for dynamic pages
+- ✅ **Deterministic**: Stable and traceable results (sourceUrl + snippet for each extraction)
+- ✅ **Deduplication**: Emails and phones automatically deduplicated
+- ✅ **Smart Selection**: Primary email and phone selected according to precise rules
+- ✅ **E.164 Normalization**: Phone numbers normalized to international format with automatic country detection
+- ✅ **Smart Filtering**: Automatic exclusion of test emails, public authorities, invalid numbers
+- ✅ **Resilience**: Automatic error handling, retry on timeout, attempts on URL variants (http/https, www/non-www)
 
 ## Input
 
-### Paramètres requis
+### Required Parameters
 
-- **startUrls** (array ou string) : Liste des URLs à traiter. Format array `[{ url: "https://example.com" }]` ou texte multi-ligne (une URL par ligne).
+- **startUrls** (array or string): List of URLs to process. Array format `[{ url: "https://example.com" }]` or multi-line text (one URL per line).
 
-### Paramètres optionnels
+### Optional Parameters
 
-- **timeoutSecs** (number, default: 30) : Timeout par requête en secondes (5-120)
-- **usePlaywrightFallback** (boolean, default: true) : Utiliser Playwright pour les pages dynamiques si HTTP échoue
-- **includeContacts** (boolean, default: true) : Extraire emails et téléphones
-- **includeSocials** (boolean, default: true) : Extraire les réseaux sociaux
-- **keyPaths** (array, default: []) : Chemins personnalisés pour surcharger les chemins clés par défaut
+- **timeoutSecs** (number, default: 30): Request timeout in seconds (5-120)
+- **usePlaywrightFallback** (boolean, default: true): Use Playwright for dynamic pages if HTTP fails
+- **includeContacts** (boolean, default: true): Extract emails and phones
+- **includeSocials** (boolean, default: true): Extract social media links
+- **keyPaths** (array, default: []): Custom paths to override default key paths
 
-### Exemple d'input
+### Input Example
 
 ```json
 {
@@ -51,9 +51,9 @@ Cet Actor traite une liste de domaines et extrait automatiquement :
 
 ## Output
 
-Un seul record JSON par domaine dans le dataset par défaut.
+A single JSON record per domain in the default dataset.
 
-### Structure du record
+### Record Structure
 
 ```json
 {
@@ -113,84 +113,83 @@ Un seul record JSON par domaine dans le dataset par défaut.
 }
 ```
 
-### Champs principaux
+### Main Fields
 
-- **domain** : Domaine enregistrable (ex: "example.com")
-- **finalUrl** : URL finale après redirections
-- **keyPages** : Pages clés détectées (contact, about, legal, privacy)
-- **pagesVisited** : Liste des pages crawlées pour ce domaine
-- **emails** : Liste des emails extraits avec métadonnées
-- **primaryEmail** : Email principal sélectionné (same-domain > mailto > contact page)
-- **phones** : Liste des téléphones extraits avec normalisation E.164
-- **primaryPhone** : Téléphone principal sélectionné (tel: > footer/contact > E.164)
-- **socials** : Réseaux sociaux par plateforme
-- **errors** : Erreurs rencontrées lors du crawl (si présentes)
+- **domain**: Registrable domain (e.g., "example.com")
+- **finalUrl**: Final URL after redirects
+- **keyPages**: Detected key pages (contact, about, legal, privacy)
+- **pagesVisited**: List of crawled pages for this domain
+- **emails**: List of extracted emails with metadata
+- **primaryEmail**: Primary email selected (same-domain > mailto > contact page)
+- **phones**: List of extracted phones with E.164 normalization
+- **primaryPhone**: Primary phone selected (footer/contact > tel: > E.164)
+- **socials**: Social media by platform
+- **errors**: Errors encountered during crawl (if present)
 
-## Stratégie de crawl
+## Crawl Strategy
 
-### Pages clés prioritaires
+### Priority Key Pages
 
-L'Actor détecte et visite automatiquement les pages clés suivantes :
+The Actor automatically detects and visits the following key pages:
 
-- **Contact** : `/contact`, `/contact-us`, `/nous-contacter`
-- **About** : `/about`, `/about-us`, `/a-propos`
-- **Legal** : `/legal`, `/mentions-legales`, `/imprint`
-- **Privacy** : `/privacy`, `/politique-de-confidentialite`
+- **Contact**: `/contact`, `/contact-us`, `/nous-contacter`
+- **About**: `/about`, `/about-us`, `/a-propos`
+- **Legal**: `/legal`, `/mentions-legales`, `/imprint`
+- **Privacy**: `/privacy`, `/politique-de-confidentialite`
 
-### Tiers de crawl (interne)
+### Crawl Tiers (Internal)
 
-L'Actor utilise deux tiers de crawl internes (non configurables) :
+The Actor uses two internal crawl tiers (non-configurable):
 
-- **Standard** : Maximum 8 pages par domaine (défaut)
-- **Deep** : Maximum 15 pages par domaine (activation automatique)
+- **Standard**: Maximum 8 pages per domain (default)
+- **Deep**: Maximum 15 pages per domain (automatic activation)
 
-Le mode "deep" est activé automatiquement si :
-- Le site est fortement structuré (4+ pages clés pertinentes)
-- Un fallback Playwright est requis pour pages dynamiques
+Deep mode is automatically activated if:
+- The site is highly structured (4+ relevant key pages)
+- A Playwright fallback is required for dynamic pages
 
-**Important** : Le changement de tier n'affecte pas l'output. Un seul record est toujours produit par domaine.
+**Important**: Tier change does not affect output. A single record is always produced per domain.
 
 ## Extraction
 
 ### Emails
 
-- **Détection** : Liens `mailto:`, texte brut (regex), JSON-LD schema.org
-- **Normalisation** : Lowercase, trim, suppression ponctuation finale
-- **Filtrage** : Exclut noreply, donotreply, example, test, autorités publiques (agpd.es, cnil.fr, etc.), emails de test (mail.com, example.com, etc.)
-- **Déduplication** : Sur email normalisé (lowercase)
-- **Sélection primary** : Same-domain > mailto > contact page > premier valide
-- **Validation** : Exclusion des emails concaténés avec numéros de téléphone
+- **Detection**: `mailto:` links, raw text (regex), JSON-LD schema.org
+- **Normalization**: Lowercase, trim, final punctuation removal
+- **Filtering**: Excludes noreply, donotreply, example, test, public authorities (agpd.es, cnil.fr, etc.), test emails (mail.com, example.com, etc.)
+- **Deduplication**: On normalized email (lowercase)
+- **Primary selection**: Same-domain > mailto > contact page > first valid
+- **Validation**: Exclusion of emails concatenated with phone numbers
 
-### Téléphones
+### Phone Numbers
 
-- **Détection** : Liens `tel:`, texte brut (regex international)
-- **Normalisation** : `valueRaw` (original) + `valueE164` (si possible via libphonenumber-js)
-- **Détection pays** : Automatique depuis URL (TLD, sous-domaine) et contexte
-- **Filtrage** : Exclut SIRET, TVA, numéros non téléphones, fax, coordonnées GPS, dates
-- **Déduplication** : Sur `valueE164` si disponible, sinon `digitsOnly(valueRaw)`
-- **Sélection primary** : Footer/contact > tel: > E.164 > premier valide
-- **Validation** : Exclusion des numéros invalides (>15 chiffres, formats incorrects)
+- **Detection**: `tel:` links, raw text (international regex)
+- **Normalization**: `valueRaw` (original) + `valueE164` (if possible via libphonenumber-js)
+- **Country detection**: Automatic from URL (TLD, subdomain) and context
+- **Filtering**: Excludes SIRET, VAT, non-phone numbers, fax, GPS coordinates, dates
+- **Deduplication**: On `valueE164` if available, otherwise `digitsOnly(valueRaw)`
+- **Primary selection**: Footer/contact > tel: > E.164 > first valid
+- **Validation**: Exclusion of invalid numbers (>15 digits, incorrect formats)
 
-### Réseaux sociaux
+### Social Media
 
-- **Plateformes** : LinkedIn (company), Facebook, Instagram, Twitter/X, TikTok, YouTube, Pinterest, Google Maps
-- **Filtrage** : Exclut les liens de partage, paramètres/policies, services (Wix, Dropbox, Google Drive, OneDrive)
-- **Déduplication** : Par URL normalisée et handle
-- **Validation** : Exclusion des posts individuels Instagram, liens internes
+- **Platforms**: LinkedIn (company), Facebook, Instagram, Twitter/X, TikTok, YouTube, Pinterest, Google Maps
+- **Filtering**: Excludes share links, settings/policies, services (Wix, Dropbox, Google Drive, OneDrive)
+- **Deduplication**: By normalized URL and handle
+- **Validation**: Exclusion of individual Instagram posts, internal links
 
-## Gestion des erreurs
+## Error Handling
 
-- **Retry** : Tentatives automatiques sur timeout/network/429/5xx uniquement
-- **Pas de retry** : Sur 404 (page non trouvée)
-- **Timeout** : Par requête (`timeoutSecs`), pas de timeout global par domaine
-- **Résilience** : Les erreurs sont enregistrées dans `errors[]` sans bloquer le traitement
-- **Variantes d'URL** : Tentatives automatiques sur variantes (http/https, www/non-www, tirets)
+- **Retry**: Automatic attempts on timeout/network/429/5xx only
+- **No retry**: On 404 (page not found)
+- **Timeout**: Per request (`timeoutSecs`), no global timeout per domain
+- **Resilience**: Errors are recorded in `errors[]` without blocking processing
+- **URL Variants**: Automatic attempts on variants (http/https, www/non-www, hyphens)
 
 ## Limitations
 
-- Maximum 200 domaines par exécution
-- Pas de proxy (crawl direct)
-- Pas de respect robots.txt configurable
-- Pas d'OCR ni scraping d'images
-- Un seul résultat par domaine (canonicalisation www/non-www)
-
+- Maximum 200 domains per execution
+- No proxy (direct crawl)
+- No configurable robots.txt respect
+- No OCR or image scraping
+- Single result per domain (www/non-www canonicalization)
