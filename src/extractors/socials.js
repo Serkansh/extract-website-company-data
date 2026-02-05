@@ -175,7 +175,7 @@ export function extractSocials(html, sourceUrl) {
     
     // Normalise l'URL pour la déduplication (supprime trailing slash, paramètres, etc.)
     const normalizedUrl = normalizeUrl(url);
-    if (seen.has(normalizedUrl)) continue;
+    if (seen.has(normalizedUrl)) return; // Skip this iteration (we're in a callback, not a loop)
     
     const urlLower = url.toLowerCase();
     

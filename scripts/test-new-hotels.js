@@ -16,12 +16,10 @@ if (!APIFY_TOKEN) {
 }
 
 const TEST_SITES = [
-  'https://www.apollo.io/',
-  'https://www.premierinn.com',
-  'https://www.blueorchid.com',
-  'https://aeriaapartments.com',
-  'https://www.plugandplaydesign.co.uk/',
-  'https://www.thewebkitchen.co.uk/',
+  'https://www.hospedajecolonia.es/',
+  'http://www.hospedajenuevanumancia.com/',
+  'https://www.olalahomes.com/',
+  'https://www.madridurbansuites.com/fr',
 ];
 
 async function runTest(client, url) {
@@ -40,7 +38,27 @@ async function runTest(client, url) {
     const finishedRun = await client.run(run.id).waitForFinish({ waitSecs: 300 });
 
     if (finishedRun.status !== 'SUCCEEDED') {
-      return { url, status: 'failed', error: `Run failed with status: ${finishedRun.status}` };
+      // Try to get error details from logs
+      let errorDetails = `Run failed with status: ${finishedRun.status}`;
+      try {
+        const logStream = await client.log(run.id).get();
+        const allLogs = [];
+        for await (const log of logStream) {
+          allLogs.push(log);
+        }
+        const errorLogs = allLogs.filter(log => log.level === 'ERROR' || log.level === 'EXCEPTION' || log.level === 'WARNING');
+        if (errorLogs.length > 0) {
+          const lastError = errorLogs[errorLogs.length - 1];
+          errorDetails += ` - ${lastError.message || lastError.text || 'Unknown error'}`;
+        } else if (allLogs.length > 0) {
+          // Get last log entry
+          const lastLog = allLogs[allLogs.length - 1];
+          errorDetails += ` - Last log: ${lastLog.message || lastLog.text || 'No details'}`;
+        }
+      } catch (e) {
+        errorDetails += ` - Could not retrieve logs: ${e.message}`;
+      }
+      return { url, status: 'failed', error: errorDetails };
     }
 
     const { items } = await client.dataset(finishedRun.defaultDatasetId).listItems();
