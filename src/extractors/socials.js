@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 import { SOCIAL_PLATFORMS, SOCIAL_SHARE_PATTERNS } from '../constants.js';
-import { getRegistrableDomain, isSameDomain } from '../utils/url-utils.js';
+import { getRegistrableDomain, isSameDomain, normalizeUrl } from '../utils/url-utils.js';
 
 /**
  * Vérifie si un lien social est un lien de partage (à exclure)
@@ -148,8 +148,14 @@ export function extractSocials(html, sourceUrl) {
   };
   
   const $ = cheerio.load(html);
-  const seen = new Set();
+  const seen = new Set(); // URLs normalisées vues
+  const seenHandles = new Map(); // Platform -> Set of handles (pour déduplication par handle)
   const sourceDomain = getRegistrableDomain(sourceUrl);
+  
+  // Initialise les sets de handles par plateforme
+  for (const platform of Object.keys(socials)) {
+    seenHandles.set(platform, new Set());
+  }
   
   // Cherche dans tous les liens
   $('a[href]').each((_, el) => {
@@ -167,14 +173,16 @@ export function extractSocials(html, sourceUrl) {
     // Exclut les liens de services (Wix, etc.)
     if (isServiceLink(url)) return;
     
+    // Normalise l'URL pour la déduplication (supprime trailing slash, paramètres, etc.)
+    const normalizedUrl = normalizeUrl(url);
+    if (seen.has(normalizedUrl)) continue;
+    
     const urlLower = url.toLowerCase();
     
     // Vérifie chaque plateforme
     for (const [platform, patterns] of Object.entries(SOCIAL_PLATFORMS)) {
       if (patterns.some(pattern => urlLower.includes(pattern))) {
-        // Évite les doublons
-        if (seen.has(url)) continue;
-        seen.add(url);
+        seen.add(normalizedUrl);
         
         const handle = extractSocialHandle(url, platform);
         // Exclut les handles qui sont des mots-clés de paramètres
@@ -187,18 +195,26 @@ export function extractSocials(html, sourceUrl) {
           
           // Gère twitter/x comme une seule entité
           if (platform === 'twitter' || platform === 'x') {
-            if (socials.x.length === 0 && socials.twitter.length === 0) {
-              socials.x.push(socialData);
-            }
-          } else if (platform === 'instagram') {
-            // Pour Instagram, on ne garde que le profil principal (pas les posts individuels)
-            // On déduplique par handle
-            const existingHandle = socials.instagram.find(s => s.handle === handle);
-            if (!existingHandle) {
-              socials[platform].push(socialData);
+            const xHandles = seenHandles.get('x');
+            if (!xHandles.has(handle)) {
+              xHandles.add(handle);
+              if (socials.x.length === 0 && socials.twitter.length === 0) {
+                socials.x.push(socialData);
+              }
             }
           } else {
-            socials[platform].push(socialData);
+            // Déduplique par handle pour éviter les doublons (ex: /company/name/ et /company/name)
+            const platformHandles = seenHandles.get(platform);
+            if (!platformHandles.has(handle)) {
+              platformHandles.add(handle);
+              
+              if (platform === 'instagram') {
+                // Pour Instagram, on ne garde que le profil principal (pas les posts individuels)
+                socials[platform].push(socialData);
+              } else {
+                socials[platform].push(socialData);
+              }
+            }
           }
         }
         break;
