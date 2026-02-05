@@ -283,6 +283,19 @@ export function extractCompany(html, sourceUrl) {
     }
   }
   
+  // Fallback supplémentaire : détecte les villes françaises dans le nom ou le texte
+  if (!company.country) {
+    const textToCheck = (company.name || '') + ' ' + legalText;
+    const frenchCities = ['paris', 'lyon', 'marseille', 'toulouse', 'nice', 'nantes', 'strasbourg', 'montpellier', 
+                          'bordeaux', 'lille', 'rennes', 'bastia', 'cervione', 'corsica', 'corse', 'corte', 'ajaccio',
+                          'cannes', 'antibes', 'saint-tropez', 'val-d\'isère', 'chamonix'];
+    const hasFrenchCity = frenchCities.some(city => textToCheck.toLowerCase().includes(city));
+    if (hasFrenchCity) {
+      company.country = 'FR';
+      company.countryName = 'France';
+    }
+  }
+  
   // Fallback: pays depuis le domaine
   if (!company.country) {
     const domain = getRegistrableDomain(sourceUrl);
