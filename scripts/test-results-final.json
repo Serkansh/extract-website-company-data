@@ -1,23 +1,249 @@
 [
   {
     "url": "https://www.le-guyane-hotel.com/",
-    "status": "failed",
-    "error": "Run failed with status: FAILED"
+    "status": "success",
+    "data": {
+      "domain": "le-guyane-hotel.com",
+      "finalUrl": "https://www.le-guyane-hotel.com/",
+      "keyPages": {
+        "contact": "https://www.le-guyane-hotel.com/contact",
+        "about": null,
+        "legal": "https://www.le-guyane-hotel.com/mentionslegales",
+        "privacy": "https://www.le-guyane-hotel.com/privacy"
+      },
+      "pagesVisited": [
+        "https://www.le-guyane-hotel.com/",
+        "https://www.le-guyane-hotel.com/contact",
+        "https://www.le-guyane-hotel.com/mentionslegales",
+        "https://www.le-guyane-hotel.com/privacy",
+        "https://www.le-guyane-hotel.com/hotel",
+        "https://www.le-guyane-hotel.com/location-salles",
+        "https://www.le-guyane-hotel.com/condition-g%C3%A9n%C3%A9rale-de-vente",
+        "https://www.le-guyane-hotel.com/vieprivee"
+      ],
+      "emails": [
+        {
+          "value": "guyane.hotel@gmail.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.le-guyane-hotel.com/",
+          "snippet": "✉️ guyane.hotel@gmail.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "cecile.nguyen973@orange.fr",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.le-guyane-hotel.com/mentionslegales",
+          "snippet": "97300 Cayenne Adresse électronique : cecile.nguyen973@orange.fr Téléphone : 0594382828 N° Re",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "05 94 38 28 28",
+          "valueE164": "+33594382828",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.le-guyane-hotel.com/",
+          "snippet": "05 94 38 28 28"
+        }
+      ],
+      "primaryEmail": "guyane.hotel@gmail.com",
+      "primaryPhone": "+33594382828"
+    },
+    "issues": []
   },
   {
     "url": "https://legeneralhotel.com/fr/",
-    "status": "failed",
-    "error": "Run failed with status: FAILED"
+    "status": "success",
+    "data": {
+      "domain": "legeneralhotel.com",
+      "finalUrl": "https://legeneralhotel.com/fr",
+      "keyPages": {
+        "contact": "https://legeneralhotel.com/fr/contact.html",
+        "about": null,
+        "legal": "https://legeneralhotel.com/fr/disclaimer.html",
+        "privacy": "https://legeneralhotel.com/fr/privacy-policy.html"
+      },
+      "pagesVisited": [
+        "https://legeneralhotel.com/fr",
+        "https://legeneralhotel.com/fr/contact.html",
+        "https://legeneralhotel.com/fr/privacy-policy.html",
+        "https://legeneralhotel.com/fr/disclaimer.html",
+        "https://www.legeneralhotel.com/fr/",
+        "https://legeneralhotel.com/fr/rooms.html",
+        "https://legeneralhotel.com/fr/services.html",
+        "https://legeneralhotel.com/fr/bar.html"
+      ],
+      "emails": [
+        {
+          "value": "info@legeneralhotel.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://legeneralhotel.com/fr",
+          "snippet": "Contactez-nous",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "info@www.legeneralhotel.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "https://www.legeneralhotel.com/fr",
+          "snippet": "Contactez-nous",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33-1-47-00-41-57",
+          "valueE164": "+33147004157",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://legeneralhotel.com/fr",
+          "snippet": "+33 1 47 00 41 57"
+        }
+      ],
+      "primaryEmail": "info@legeneralhotel.com",
+      "primaryPhone": "+33147004157",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/LeGeneral.hotel",
+            "handle": "legeneral.hotel",
+            "sourceUrl": "https://legeneralhotel.com/fr"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/le_general_hotel/",
+            "handle": "le_general_hotel",
+            "sourceUrl": "https://legeneralhotel.com/fr"
+          }
+        ],
+        "x": [
+          {
+            "url": "https://twitter.com/LeGeneralHotel",
+            "handle": "legeneralhotel",
+            "sourceUrl": "https://legeneralhotel.com/fr"
+          }
+        ],
+        "pinterest": [
+          {
+            "url": "https://fr.pinterest.com/legeneralhotel",
+            "handle": "legeneralhotel",
+            "sourceUrl": "https://legeneralhotel.com/fr"
+          }
+        ]
+      }
+    },
+    "issues": []
   },
   {
     "url": "https://www.lemhotelhonfleur.com/",
-    "status": "failed",
-    "error": "Run failed with status: FAILED"
+    "status": "success",
+    "data": {
+      "domain": "lemhotelhonfleur.com",
+      "finalUrl": "https://www.lemhotelhonfleur.com/",
+      "keyPages": {
+        "contact": "https://www.lemhotelhonfleur.com/contact/",
+        "about": null,
+        "legal": "https://www.lemhotelhonfleur.com/mentions-legales/",
+        "privacy": "https://www.lemhotelhonfleur.com/gestion-des-cookies"
+      },
+      "pagesVisited": [
+        "https://www.lemhotelhonfleur.com/",
+        "https://www.lemhotelhonfleur.com/contact",
+        "https://www.lemhotelhonfleur.com/mentions-legales",
+        "https://www.lemhotelhonfleur.com/gestion-des-cookies",
+        "https://www.lemhotelhonfleur.com/galerie-photos",
+        "https://www.lemhotelhonfleur.com/en",
+        "https://www.lemhotelhonfleur.com/les-chambres",
+        "https://www.lemhotelhonfleur.com/spa-du-m-hotel"
+      ],
+      "emails": [
+        {
+          "value": "info@lemhotelhonfleur.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.lemhotelhonfleur.com/",
+          "snippet": "info@lemhotelhonfleur.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33 (0)2 31 89 41 77",
+          "valueE164": "+33231894177",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.lemhotelhonfleur.com/",
+          "snippet": "+33 (0)2 31 89 41 77"
+        },
+        {
+          "valueRaw": "+33 (0) 1 76 44 04 35",
+          "valueE164": "+33176440435",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.lemhotelhonfleur.com/mentions-legales",
+          "snippet": "us concernant. » Hébergeur D-Edge 66 rue des archives – 75003 Paris Téléphone : +33 (0) 1 76 44 04 35 Site : https://www.d-edge.com/fr/ La Mediation de la consommation Après avoir s"
+        }
+      ],
+      "primaryEmail": "info@lemhotelhonfleur.com",
+      "primaryPhone": "+33231894177"
+    },
+    "issues": []
   },
   {
     "url": "https://www.letouquetgolfresort.com/fr/notre-hotel/le-manoir-hotel/",
-    "status": "failed",
-    "error": "Run failed with status: FAILED"
+    "status": "success",
+    "data": {
+      "domain": "letouquetgolfresort.com",
+      "finalUrl": "https://www.letouquetgolfresort.com/fr/notre-hotel/le-manoir-hotel",
+      "errors": [
+        {
+          "url": "https://www.letouquetgolfresort.com/fr/notre-hotel/le-manoir-hotel",
+          "error": "Invalid URL"
+        }
+      ]
+    },
+    "issues": [
+      {
+        "severity": "medium",
+        "type": "missing_emails",
+        "message": "Aucun email trouvé"
+      },
+      {
+        "severity": "medium",
+        "type": "missing_phones",
+        "message": "Aucun téléphone trouvé"
+      }
+    ]
   },
   {
     "url": "https://www.lenexhotel.com/",
@@ -54,23 +280,7 @@
           "snippet": "ER VENIR AU NEX HOTEL***Réserver NEX HOTEL*** | TarbesTel : 05 62 360 360 ​ 2, Avenue des Forges 65000 TARBESUne demande ? Un devis sur-mesure ? Une q"
         }
       ],
-      "primaryPhone": "+33562360360",
-      "socials": {
-        "facebook": [
-          {
-            "url": "https://www.facebook.com/WixFrancais?",
-            "handle": "wixfrancais",
-            "sourceUrl": "https://www.lenexhotel.com/"
-          }
-        ],
-        "x": [
-          {
-            "url": "https://twitter.com/WixFrance",
-            "handle": "wixfrance",
-            "sourceUrl": "https://www.lenexhotel.com/"
-          }
-        ]
-      }
+      "primaryPhone": "+33562360360"
     },
     "issues": [
       {

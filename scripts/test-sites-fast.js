@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const RESULTS_FILE = path.join(__dirname, 'test-results-fast.json');
+const RESULTS_FILE = path.join(__dirname, 'test-results-final.json');
 
 const APIFY_TOKEN = process.env.APIFY_TOKEN;
 const ACTOR_ID = process.env.ACTOR_ID || 'smart-digital/extract-website-company-data-email-phone-social';

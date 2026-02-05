@@ -247,7 +247,7 @@ async function testSites() {
   displaySummary(results);
   
   // Sauvegarde les résultats dans un fichier JSON
-  const outputPath = path.join(__dirname, 'test-results.json');
+  const outputPath = path.join(__dirname, 'test-results-final.json');
   fs.writeFileSync(outputPath, JSON.stringify(results, null, 2));
   console.log(`\n💾 Résultats sauvegardés dans: ${outputPath}`);
   
