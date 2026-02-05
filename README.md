@@ -6,18 +6,20 @@ Actor Apify pour extraire les données de contact depuis des sites web : emails,
 
 Cet Actor traite une liste de domaines et extrait automatiquement :
 
-1. **Contacts** : emails et téléphones avec normalisation et déduplication
-2. **Réseaux sociaux** : LinkedIn, Facebook, Instagram, Twitter/X, TikTok, YouTube, Pinterest, Google Maps
+1. **Emails** : Détection depuis liens mailto, texte brut et JSON-LD. Normalisation, filtrage et déduplication automatiques.
+2. **Téléphones** : Extraction depuis liens tel: et texte brut. Normalisation E.164 avec détection automatique du pays.
+3. **Réseaux sociaux** : LinkedIn, Facebook, Instagram, Twitter/X, TikTok, YouTube, Pinterest, Google Maps. Filtrage des liens de partage et services.
 
 ## Caractéristiques
 
-- ✅ **Rapide et économique** : Utilise Cheerio/HTTP par défaut, Playwright uniquement en fallback
-- ✅ **Déterministe** : Résultats stables et traçables (sourceUrl + snippet)
+- ✅ **Crawling intelligent** : Détection automatique des pages clés (contact, about, legal, privacy). Crawl adaptatif (8-15 pages selon la structure du site)
+- ✅ **Rapide et efficace** : Utilise Cheerio/HTTP par défaut, Playwright uniquement en fallback pour les pages dynamiques
+- ✅ **Déterministe** : Résultats stables et traçables (sourceUrl + snippet pour chaque extraction)
 - ✅ **Déduplication** : Emails et phones dédupliqués automatiquement
 - ✅ **Sélection intelligente** : Email et phone "primary" sélectionnés selon des règles précises
-- ✅ **Pay per result** : 1 résultat = 1 domaine traité (facturation unique)
-- ✅ **Normalisation E.164** : Téléphones normalisés au format international
+- ✅ **Normalisation E.164** : Téléphones normalisés au format international avec détection automatique du pays
 - ✅ **Filtrage intelligent** : Exclusion automatique des emails de test, autorités publiques, numéros invalides
+- ✅ **Résilience** : Gestion automatique des erreurs, retry sur timeout, tentatives sur variantes d'URL (http/https, www/non-www)
 
 ## Input
 
@@ -192,26 +194,3 @@ Le mode "deep" est activé automatiquement si :
 - Pas d'OCR ni scraping d'images
 - Un seul résultat par domaine (canonicalisation www/non-www)
 
-## Installation locale
-
-```bash
-npm install
-```
-
-## Exécution locale
-
-```bash
-npm start
-```
-
-## Dépendances
-
-- `apify` : SDK Apify
-- `cheerio` : Parser HTML côté serveur
-- `playwright` : Navigateur headless (fallback)
-- `libphonenumber-js` : Normalisation téléphones E.164
-- `tldts` : Extraction domaine enregistrable
-
-## Support
-
-Pour toute question ou problème, consultez la documentation Apify ou contactez le support.
