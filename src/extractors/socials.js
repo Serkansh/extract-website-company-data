@@ -1,5 +1,6 @@
 import * as cheerio from 'cheerio';
 import { SOCIAL_PLATFORMS, SOCIAL_SHARE_PATTERNS } from '../constants.js';
+import { getRegistrableDomain, isSameDomain } from '../utils/url-utils.js';
 
 /**
  * Vérifie si un lien social est un lien de partage (à exclure)
@@ -70,12 +71,28 @@ function extractSocialHandle(url, platform) {
         return fbMatch ? fbMatch[1] : null;
         
       case 'instagram':
-        const igMatch = pathname.match(/\/([^\/\?]+)/);
+        // Exclut les posts individuels (format /p/...)
+        if (pathname.includes('/p/') || pathname.includes('/reel/') || pathname.includes('/tv/')) {
+          return null;
+        }
+        // Exclut les liens avec paramètres (ex: ?utm_medium=copy_link)
+        if (urlObj.search && urlObj.search.length > 0) {
+          // On accepte seulement si c'est le profil principal (pas un post)
+          if (!pathname.match(/^\/[^\/]+$/)) {
+            return null;
+          }
+        }
+        const igMatch = pathname.match(/^\/([^\/\?]+)/);
         return igMatch ? igMatch[1].replace('@', '') : null;
         
       case 'twitter':
       case 'x':
-        const twMatch = pathname.match(/\/([^\/\?]+)/);
+        // Exclut les liens qui ne sont pas vraiment Twitter/X (vérifie le domaine)
+        if (!urlObj.hostname.toLowerCase().includes('twitter.com') && 
+            !urlObj.hostname.toLowerCase().includes('x.com')) {
+          return null;
+        }
+        const twMatch = pathname.match(/^\/([^\/\?]+)/);
         return twMatch ? twMatch[1].replace('@', '') : null;
         
       case 'tiktok':
@@ -132,6 +149,7 @@ export function extractSocials(html, sourceUrl) {
   
   const $ = cheerio.load(html);
   const seen = new Set();
+  const sourceDomain = getRegistrableDomain(sourceUrl);
   
   // Cherche dans tous les liens
   $('a[href]').each((_, el) => {
@@ -139,6 +157,9 @@ export function extractSocials(html, sourceUrl) {
     if (!href || isShareLink(href)) return;
     
     const url = href.startsWith('http') ? href : new URL(href, sourceUrl).toString();
+    
+    // Exclut les liens internes (même domaine) - ce ne sont pas des réseaux sociaux
+    if (isSameDomain(url, sourceUrl)) return;
     
     // Exclut les liens de paramètres/policies
     if (isSettingsOrPolicyLink(url)) return;
@@ -168,6 +189,13 @@ export function extractSocials(html, sourceUrl) {
           if (platform === 'twitter' || platform === 'x') {
             if (socials.x.length === 0 && socials.twitter.length === 0) {
               socials.x.push(socialData);
+            }
+          } else if (platform === 'instagram') {
+            // Pour Instagram, on ne garde que le profil principal (pas les posts individuels)
+            // On déduplique par handle
+            const existingHandle = socials.instagram.find(s => s.handle === handle);
+            if (!existingHandle) {
+              socials[platform].push(socialData);
             }
           } else {
             socials[platform].push(socialData);

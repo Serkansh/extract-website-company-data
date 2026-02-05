@@ -16,13 +16,12 @@ if (!APIFY_TOKEN) {
 }
 
 const TEST_SITES = [
-  'http://www.hotel-leliondor.fr/',
-  'https://hotellittreparis.com/fr/',
-  'https://www.lodgepark.com/fr',
-  'https://www.hotel-le-louvre-cherbourg.com/',
-  'https://www.lumierehotel.fr/',
-  'https://hotelmparis.com/fr/',
-  'http://www.hotelmagellan.com',
+  'https://www.hotel-fontarabie.com',
+  'https://www.lefregateprovence.com/',
+  'http://www.hotellegalice-aix.com/',
+  'https://www.legayant-hotel.fr',
+  'https://www.grand-monarque.com/fr/',
+  'https://www.legrandquartier.com/',
 ];
 
 async function runTest(client, url) {

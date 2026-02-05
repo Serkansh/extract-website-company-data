@@ -1,82 +1,72 @@
 [
   {
-    "url": "http://www.hotel-leliondor.fr/",
+    "url": "https://www.hotel-fontarabie.com",
     "status": "success",
     "data": {
-      "domain": "hotel-leliondor.fr",
-      "finalUrl": "https://www.hotel-leliondor.fr/fr/",
+      "domain": "hotel-fontarabie.com",
+      "finalUrl": "https://www.hotel-fontarabie.com/",
       "keyPages": {
-        "contact": "https://www.hotel-leliondor.fr/fr/contact/",
+        "contact": null,
         "about": null,
-        "legal": "https://www.hotel-leliondor.fr/fr/mentions-legales/",
+        "legal": "https://www.hotel-fontarabie.com/mentions-legales/",
         "privacy": null
       },
       "pagesVisited": [
-        "https://www.hotel-leliondor.fr/fr/",
-        "https://www.hotel-leliondor.fr/fr/contact",
-        "https://www.hotel-leliondor.fr/fr/mentions-legales",
-        "https://www.hotel-leliondor.fr/fr/panier",
-        "https://www.hotel-leliondor.fr/fr/",
-        "https://www.hotel-leliondor.fr/en/",
-        "https://www.hotel-leliondor.fr/fr/hotel",
-        "https://www.hotel-leliondor.fr/fr/hotel/chambre-premium"
+        "https://www.hotel-fontarabie.com/",
+        "https://www.hotel-fontarabie.com/mentions-legales/",
+        "https://www.hotel-fontarabie.com/hotel-fontenay-le-comte-pas-cher/",
+        "https://www.hotel-fontarabie.com/photos/",
+        "https://www.hotel-fontarabie.com/offres-speciales/",
+        "https://www.hotel-fontarabie.com/actualites/",
+        "https://www.hotel-fontarabie.com/en/",
+        "https://www.hotel-fontarabie.com/hotel-fontenay-le-comte/"
       ],
       "emails": [
         {
-          "value": "contact@hotel-leliondor.fr",
+          "value": "reception@hotel-fontarabie.com",
           "type": "general",
           "priority": "primary",
           "signals": [
             "mailto",
             "same_domain"
           ],
-          "sourceUrl": "http://www.hotel-leliondor.fr/",
-          "snippet": "contact@hotel-leliondor.fr",
+          "sourceUrl": "https://www.hotel-fontarabie.com/",
+          "snippet": "reception@hotel-fontarabie.com",
           "foundIn": "mailto"
         }
       ],
       "phones": [
         {
-          "valueRaw": "02 99 98 61 44",
-          "valueE164": "+33299986144",
+          "valueRaw": "+33251691724",
+          "valueE164": "+33251691724",
           "priority": "primary",
           "signals": [
-            "text"
+            "tel"
           ],
-          "sourceUrl": "http://www.hotel-leliondor.fr/",
-          "snippet": "02 99 98 61 44"
-        },
-        {
-          "valueRaw": "02 23 45 06 31",
-          "valueE164": "+33223450631",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.hotel-leliondor.fr/fr/mentions-legales",
-          "snippet": "gistre du Commerce et des Sociétés de Rennes sous le numéro 424 967 552. Tél. : 02 23 45 06 31"
+          "sourceUrl": "https://www.hotel-fontarabie.com/",
+          "snippet": "+33 (0)2 51 69 17 24"
         }
       ],
-      "primaryEmail": "contact@hotel-leliondor.fr",
-      "primaryPhone": "+33299986144",
+      "primaryEmail": "reception@hotel-fontarabie.com",
+      "primaryPhone": "+33251691724",
       "socials": {
         "facebook": [
           {
-            "url": "https://www.facebook.com/people/Le-Lion-dOr-The-Originals-Boutique-H%C3%B4tel-Restaurant/61574316841731/",
-            "handle": "people",
-            "sourceUrl": "http://www.hotel-leliondor.fr/"
-          },
-          {
-            "url": "https://fr-fr.facebook.com/leliondor35/",
-            "handle": "leliondor35",
-            "sourceUrl": "https://www.hotel-leliondor.fr/en"
+            "url": "https://www.facebook.com/hotel.fontarabie/",
+            "handle": "hotel.fontarabie",
+            "sourceUrl": "https://www.hotel-fontarabie.com/"
           }
         ],
         "instagram": [
           {
-            "url": "https://www.instagram.com/hotel_le_lion_dor",
-            "handle": "hotel_le_lion_dor",
-            "sourceUrl": "http://www.hotel-leliondor.fr/"
+            "url": "https://www.instagram.com/hotelfontarabielaglycine/",
+            "handle": "hotelfontarabielaglycine",
+            "sourceUrl": "https://www.hotel-fontarabie.com/"
+          },
+          {
+            "url": "https://www.instagram.com/hotelfontarabielaglycine/?utm_medium=copy_link",
+            "handle": "hotelfontarabielaglycine",
+            "sourceUrl": "https://www.hotel-fontarabie.com/hotel-fontenay-le-comte-pas-cher"
           }
         ]
       }
@@ -84,432 +74,1851 @@
     "issues": []
   },
   {
-    "url": "https://hotellittreparis.com/fr/",
+    "url": "https://www.lefregateprovence.com/",
     "status": "success",
     "data": {
-      "domain": "hotellittreparis.com",
-      "finalUrl": "https://hotellittreparis.com/fr/",
+      "domain": "lefregateprovence.com",
+      "finalUrl": "https://www.lefregateprovence.com/",
       "keyPages": {
-        "contact": "https://hotellittreparis.com/fr/contactez-nous.html",
+        "contact": "https://www.lefregateprovence.com/fr/page/contact-acces.11521.html",
         "about": null,
-        "legal": "https://hotellittreparis.com/fr/mentions-legales.html",
-        "privacy": "https://hotellittreparis.com/fr/politique-confidentialite.html"
+        "legal": "https://www.lefregateprovence.com/fr/page/mentions-legales.11749.html",
+        "privacy": "https://www.lefregateprovence.com/fr/page/politique-cookies.11751.html"
       },
       "pagesVisited": [
-        "https://hotellittreparis.com/fr/",
-        "https://hotellittreparis.com/fr/contactez-nous.html",
-        "https://hotellittreparis.com/fr/mentions-legales.html",
-        "https://hotellittreparis.com/fr/politique-confidentialite.html",
-        "https://hotellittreparis.com/fr/presentation-chambres.html",
-        "https://hotellittreparis.com/fr/chambre-classique.html",
-        "https://hotellittreparis.com/fr/chambre-superieure.html",
-        "https://hotellittreparis.com/fr/chambre-pmr.html"
+        "https://www.lefregateprovence.com/",
+        "https://www.lefregateprovence.com/fr/page/contact-acces.11521.html",
+        "https://www.lefregateprovence.com/fr/page/mentions-legales.11749.html",
+        "https://www.lefregateprovence.com/fr/page/politique-cookies.11751.html",
+        "https://www.lefregateprovence.com/en/",
+        "https://www.lefregateprovence.com/fr/page/sejour-hotel-4-etoiles-appartement-bandol.11498.html",
+        "https://www.lefregateprovence.com/fr/page/offres-packages-promotions.11694.html",
+        "https://www.lefregateprovence.com/fr/page/golf-piscines-massages-tennis-bandol.11504.html"
       ],
       "emails": [
         {
-          "value": "hotellittre@hotellittreparis.com",
+          "value": "reception@lefregateprovence.com",
           "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text",
-            "same_domain"
-          ],
-          "sourceUrl": "https://hotellittreparis.com/fr",
-          "snippet": "ents Avis Clients Blog Contact + 33 (0)1 53 63 07 07hotellittre@hotellittreparis.com EnglishFrançaisPortuguês RÉSERVEZ RÉSERVEZ Vue",
-          "foundIn": "text"
-        },
-        {
-          "value": "sales@hotellittreparis.com",
-          "type": "sales",
           "priority": "primary",
           "signals": [
             "mailto",
             "same_domain"
           ],
-          "sourceUrl": "https://hotellittreparis.com/fr/contactez-nous.html",
-          "snippet": "SALES@HOTELLITTREPARIS.COM",
+          "sourceUrl": "https://www.lefregateprovence.com/",
+          "snippet": "reception@lefregateprovence.com",
           "foundIn": "mailto"
         },
         {
-          "value": "communication@hotellittreparis.com",
-          "type": "sales",
+          "value": "reservations@lefregateprovence.com",
+          "type": "booking",
           "priority": "secondary",
           "signals": [
             "mailto",
             "same_domain"
           ],
-          "sourceUrl": "https://hotellittreparis.com/fr/contactez-nous.html",
-          "snippet": "COMMUNICATION@HOTELLITTREPARIS.COM",
+          "sourceUrl": "https://www.lefregateprovence.com/fr/page/contact-acces.11521.html",
+          "snippet": "reservations@lefregateprovence.com",
           "foundIn": "mailto"
         },
         {
-          "value": "ms.bahler@hotellitreparis.com",
-          "type": "sales",
+          "value": "alexandrine.valor@lefregateprovence.com",
+          "type": "general",
           "priority": "secondary",
           "signals": [
-            "mailto"
+            "mailto",
+            "same_domain"
           ],
-          "sourceUrl": "https://hotellittreparis.com/fr/contactez-nous.html",
-          "snippet": "MSBAHLER@HOTELLITTREPARIS.COM",
+          "sourceUrl": "https://www.lefregateprovence.com/fr/page/contact-acces.11521.html",
+          "snippet": "alexandrine.valor@lefregateprovence.com",
           "foundIn": "mailto"
+        },
+        {
+          "value": "golf@lefregateprovence.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.lefregateprovence.com/fr/page/contact-acces.11521.html",
+          "snippet": "golf@lefregateprovence.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "service-client@indevho.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.lefregateprovence.com/fr/page/mentions-legales.11749.html",
+          "snippet": "mation: Après avoir saisi le service contentieux service-client@indevho.com et à défaut de réponse satisfaisante dans un déla",
+          "foundIn": "text"
         }
       ],
       "phones": [
         {
-          "valueRaw": "+33-1-53-63-0707",
-          "valueE164": "+33153630707",
+          "valueRaw": "+33 4 94 29 39 39",
+          "valueE164": "+33494293939",
           "priority": "primary",
           "signals": [
-            "tel"
+            "text"
           ],
-          "sourceUrl": "https://hotellittreparis.com/fr",
-          "snippet": "+ 33 (0)1 53 63 07 07"
+          "sourceUrl": "https://www.lefregateprovence.com/",
+          "snippet": "CONTACT 2810 Route de Bandol Saint Cyr sur Mer France, 83270, Accueil: +33 4 94 29 39 39 Golf: +33 4 94 29 38 00"
+        },
+        {
+          "valueRaw": "+33 4 94 29 38 00",
+          "valueE164": "+33494293800",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.lefregateprovence.com/",
+          "snippet": "ute de Bandol Saint Cyr sur Mer France, 83270, Accueil: +33 4 94 29 39 39 Golf: +33 4 94 29 38 00"
         }
       ],
-      "primaryEmail": "sales@hotellittreparis.com",
-      "primaryPhone": "+33153630707",
+      "primaryEmail": "reception@lefregateprovence.com",
+      "primaryPhone": "+33494293939",
       "socials": {
+        "linkedin": [
+          {
+            "url": "https://www.linkedin.com/company/le-fregate-provence/",
+            "handle": "le-fregate-provence",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          }
+        ],
         "facebook": [
           {
-            "url": "https://www.facebook.com/Hotel.Littre.Paris",
-            "handle": "hotel.littre.paris",
-            "sourceUrl": "https://hotellittreparis.com/fr"
+            "url": "https://www.facebook.com/LeFregateProvence/",
+            "handle": "lefregateprovence",
+            "sourceUrl": "https://www.lefregateprovence.com/"
           }
         ],
         "instagram": [
           {
-            "url": "https://www.instagram.com/hotellelittre/",
-            "handle": "hotellelittre",
-            "sourceUrl": "https://hotellittreparis.com/fr"
+            "url": "https://www.instagram.com/LeFregateProvence/",
+            "handle": "lefregateprovence",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CwAqFertheZ/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DUBr2_eCIXu",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DT8Z74hDRnH",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DT00knwj0dc",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DTvpnHyk0pb",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DTn88y8DWtC",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DTk1eoij5lf",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DTiWhtyjHY7",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DTbCk1TkphY",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DTTF4VXjKXB",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DTLfrTYiQ-1",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DTDXXuXDtG7",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DS-Ig3vjPPe",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DS8ebmmEgtB",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DSxsHooggIs",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DSs7kFYgqE4",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DSqHgWBE-Id",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DSlRT1SAhQ0",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DSkl1mSkWVH",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DSfyiSRgRp9",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DScDm3rgNSt",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DSSmsh5AsjK",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DSIal_UD-Jk",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DSDc8V6gGCP",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DR97mUjkl9w",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DR5JYQUEn1H",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DRyxhHIimC8",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DRrv_kalOeS",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DRkZS32Eh2v",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DRhHw2QAv_Y",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DRcrP28gnlH",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DRWsLnxFP3E",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DRSSeNzAfSD",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DRIPg1zD_w4",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DRC57dxDkGU",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DQ_co0Qijv4",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DQxAD1SiOoJ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DQjGI4Fjs7D",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DQba29CgnFG",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DQW7m9OjtR9",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DQQ8N7kE3vp",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DQMxzw7DXZw",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DQFDp62kcQL",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DPy92rVgIpP",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DPs6eQtjDWR",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DPoQ75rgqXp",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DPiZYbkCV6t",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DPbtd2LDPJr",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DPbFfV7ju1K",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DPWVS-Ij0ZI",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DPRGc3ACLpW",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DPL26xMjvnF",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DPGW5evE82R",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DPBbuCeihwb",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DO6BPsMiiSg",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DO0jEXGgGIe",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DOvwtUgkzRL",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DOlzftQjsgU",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DOf0CItCO11",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DOYO3dyCIHQ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DORD3kHkVSw",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DOL-n2XjUO2",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DOEVIlbMetU",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DN8SaTSkXMD",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DN0p3SI5Ez0",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DNqLbu_s4II",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DNi5V0VuABW",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DNdtdjPKmv0",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DNXhajzpjwZ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DNTWZkOPdcz",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DNNbtUBtZAL",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DNIPYP5OvXI",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DNDJdb1MNnN",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DM-g1B4PgJO",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DM5dZy-Cv9n",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DMz7NkdPxHM",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DMvLtinPsyl",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DMcRf6_Psu8",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DMXWHBcJoha",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DMQSLGcp1aV",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DMKfS_WBXZk",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DL5CGlhMvUf",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DL0GHyiIPag",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DLujIeZo1Lw",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DLpx8lYMC9-",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DLfdtX8PKi2",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DLXavj_q178",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DLJ5qojPcrF",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DLFrBWnoCs6",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DLAIj4YsWVZ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DKwbb7woBsu",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DKwR8iwo-HB",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DKjUaaMRHTp",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DKbmLZRBo3a",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DKU8SSRsL_A",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DKMHsDNNKQC",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DKHGmGXNF2s",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DJ1HSOKIR3A",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DJ1HBZIoJ9M",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DJ1CY4hoEFP",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DJjPM-5oncY",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DJjO9JCIRI-",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DJjNkOUI-_8",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DIlJb0btNWt",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DIdbE_9hb4h",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DIYhPa3Perr",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DITH2iONoy6",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DINwkMNobMm",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DIGP6CjB1jl",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DH8F4YuNGOf",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DH8FOHgte0q",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DH8E-l7N0Or",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DH5hcOtNY97",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DHGhPfZsuv2",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DHsSM5_v3X_",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DHiafsIuRXa",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DHc8W4dv5tP",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DHNtRIMi9Ta",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DHLBmFeJIbV",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DHBArEdA3Vx",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DG7mrHoOja0",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DHgwohoJhhT",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DG1BLLKBYLQ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DGnF8JPsry0",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DGlNKwQsI7E",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DGXolhnBNPb",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DGJBscTh9jh",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DGDrdNXh4gA",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DF4vC54hr43",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DF0MsFIN2rv",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DFro-nshvA7",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DFpZQcyPhai",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DFiaz8zJgiF",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DFayfixPG88",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DFNDXXCoStX",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DFFqmGPR7uq",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DE9gzK6qVLA",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DE2dKCUM9jj",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DEuMymEB4aZ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DEpN5XzM8cK",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DEeuL1Ji1XX",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DEc2JS1p4TD",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DESlQY4s12C",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DERyt70NZnA",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DEMsDTvMUlN",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DEIEOqbiCfP",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DD_koRGO90O",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DD4mFKxs8mT",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DDwXbNisZq7",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DDj-lkfpyDm",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DDdE9DAMkRz",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DDXYeQ3JdN8",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DDUKfFEM1iJ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DDPgH8WJmDL",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DDJQXobsXRZ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DDDClOvh_5d",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DC9n7Z2vXrN",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DC4ty5ahiBD",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DCj8jodoiXP",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DCteTgLIrCq",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DCmcytTNvm9",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DCg_LvrMCgP",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DCcQlXMoSDZ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DCWuuupq0Ub",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DCMjVlBspVX",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DCHU0UGCRDA",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DCCdbunP3Cr",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DBqnoq-Mupp",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DBirhmwMehz",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DBeJlRjp_5-",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DBRg5-fsF3S",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DBMQ8gZNWO6",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DBHG4S1Mf7H",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DA54OKEor7a",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DA5DDtkvtmW",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DA0lw5_sBD0",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DAnssEUM1eg",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DAgRuHssqDy",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DARMDfJI1I1",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/DAGvmd1B6iv",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_-ORP4MqMS",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_yKWxgMhgd",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_x9PB8vtkc",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_upy3yMyMP",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_s9QtquXiu",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_sIBk8IWO0",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_nfMLzix5y",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_YR-ZsvFsB",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_X751Mu43e",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_V2quJCQG-",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_TUMp8sSaO",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_QzmTit_yq",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C_LI8EuIvN8",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C--xW1wtbD3",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C-2vK9NsvE8",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C-xRqdkP8Ys",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C-shmsAIM7S",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C-nk8cusrJu",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C-kGa_BMWbs",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C-gAEAjhBQY",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C-dR_XOCZ6Z",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C-SKvLKJ2Mp",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C-QQLaCscS4",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C-NiPd8vAmZ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C-F2nVzMjfP",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C-A7hqTuUZQ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C9-TsWxsevW",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C92XsMHs6Vw",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C9wlZWyM42G",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C9m-bo0PUkb",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C9iCN_jCFF1",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C9cMVnTNeJX",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C9X2mUdPdV7",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C9SjCHfsgTz",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C9KfyBYM0o4",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C9JquDmshsJ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C9ISQcIIwCs",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C9IMqLfM5YJ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C9C6hZ4sVQU",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C89-tcpMjOS",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C835axUC-VE",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C8zq8MesyoT",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C8pc4B2s3n0",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C8o74m7sm1Z",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C8WpjpPM2CE",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C8eHLntooNy",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C8Y7FDoprLz",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C8RoSgiiDWh",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C8MMUGFilfg",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C7uNhC2MPeY",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C8AP6IbhH70",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C76ILC0Biy9",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C706dzXsmjK",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C7yJZOHof9g",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C7mm0uUy-YM",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C7gMv4oMfvg",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C7bE4-1sGRM",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C7YtuyIIyng",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C7UL9zhMemX",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C7OTBSCMjOY",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C7L13FMs7jO",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C7Grju9tgJx",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C6_hkSNha9C",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C62_uYeMar1",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C6yFz3oLJ7K",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C6oCqHcq2pN",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C6imStOsDiZ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C6bhckfv0I6",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C6TcNUOtkPV",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C6JNzWXNbfW",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C585E8aIHl5",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C53Q1hDr2UT",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C5wIMwyNJpe",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C5qGw7dqOyC",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C5iKFmIrIcB",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C5WP6tcqvQp",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C5SdhnnCuJ8",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C5I8G_GNKNi",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C5DkUi6spet",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C4_XvbKJEDF",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C42bwLvvOoZ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C4uvNLArG4h",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C4qT3DWMZee",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C4kkBcAsH7N",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C4c14wQpi7B",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C4V6TsaPuJJ",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C4NiCoMhwIh",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C4A0QCeiC7C",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C34mKfeMjrp",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C3xs_39PaEv",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C3mrbF_sjO4",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C3Uffb5spRx",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C2zBpBiMocY",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C1jTO0kMY8d",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C1WcFGksgJk",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C0_KStRpfmW",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C0yk_GmiZ6w",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C0dvmLjPPk9",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C0UXf10t9rr",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C0RJJ8KM6ZV",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C0L-qetpvvn",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/C0EAKwmB5Ab/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Cz_Y_kex7qN/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Cz625IdMIso/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CzyJyD1h-l4/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Czqx9VIJ_LA/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CzgkLaepvu-/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CzZDCtpsgzR/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CzB9tqfitUC/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Cy8mZ-opHQ5/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Cy3sS84sev5/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CytT0DBt7d3/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Cyoa-sqOvHZ/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CyiGCEth_Z6/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CydhaQpMr_l/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CyWLpQpssTh/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CyOTiSsMHga/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CyIfpqHMO2A/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CyEPNe7sUms/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Cx-JxPtI8YZ/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Cx5zGtINkAG/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Cx0UyUNMFCa/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CxvhEqYv75m/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Cxp9CBfsr4x/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CxkvXUMM_B9/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CxfRLNqLnVt/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CqN6JRrN00n/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CxagDX0oWNU/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CxXfRxCrOcY/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CxJeHM3ozxB/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CxBvumUolJy/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Cw-KnvfI3e7/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Cw2uSdTsfaF/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CwplLRyv-2m/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Cwk73Bfvhca/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CtOBdwAsJwn/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/Csql8G_hYJx/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CwZo4Phs4zE/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CwVhYBhIKnh/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CwPv9VrtHcI/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CwK2azksRR8/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          },
+          {
+            "url": "https://www.instagram.com/p/CwFpnLHosWX/",
+            "handle": "p",
+            "sourceUrl": "https://www.lefregateprovence.com/"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "http://www.hotellegalice-aix.com/",
+    "status": "success",
+    "data": {
+      "domain": "hotellegalice-aix.com",
+      "finalUrl": "https://www.hotellegalice-aix.com/",
+      "keyPages": {
+        "contact": "https://www.hotellegalice-aix.com/contact/",
+        "about": null,
+        "legal": "https://www.hotellegalice-aix.com/mentions-legales/",
+        "privacy": null
+      },
+      "pagesVisited": [
+        "https://www.hotellegalice-aix.com/",
+        "https://www.hotellegalice-aix.com/contact/",
+        "https://www.hotellegalice-aix.com/mentions-legales/",
+        "https://www.hotellegalice-aix.com/",
+        "https://www.hotellegalice-aix.com/en/",
+        "https://www.hotellegalice-aix.com/chambres-suites/",
+        "https://www.hotellegalice-aix.com/chambres-suites/chambre-standard/",
+        "https://www.hotellegalice-aix.com/chambres-suites/chambre-superieure/"
+      ],
+      "emails": [
+        {
+          "value": "hotelgalice@bestwestern-aix.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto"
+          ],
+          "sourceUrl": "http://www.hotellegalice-aix.com/",
+          "snippet": "hotelgalice@bestwestern-aix.com",
+          "foundIn": "mailto"
+        },
+        {
+          "value": "direction@bestwestern-aix.com",
+          "type": "general",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "https://www.hotellegalice-aix.com/mentions-legales",
+          "snippet": "ez pas, n’hésitez pas à nous contacter par mail : direction@bestwestern-aix.com Chaque établissement BWH Hotels est individuell",
+          "foundIn": "text"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33 (0)4 42 52 75 27",
+          "valueE164": "+33442527527",
+          "priority": "primary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "http://www.hotellegalice-aix.com/",
+          "snippet": "Galice 13090 Aix-en-Provence France Téléphone +33 (0)4 42 52 75 27 Fax +33 (0)4 42 52 75 28"
+        },
+        {
+          "valueRaw": "+33 (0)4 42 52 75 28",
+          "valueE164": "+33442527528",
+          "priority": "secondary",
+          "signals": [
+            "text"
+          ],
+          "sourceUrl": "http://www.hotellegalice-aix.com/",
+          "snippet": "Téléphone +33 (0)4 42 52 75 27 Fax +33 (0)4 42 52 75 28 Email hotelgalice@bestwestern-aix.c"
+        }
+      ],
+      "primaryEmail": "hotelgalice@bestwestern-aix.com",
+      "primaryPhone": "+33442527527",
+      "socials": {
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/bwgalice/ ",
+            "handle": "bwgalice",
+            "sourceUrl": "http://www.hotellegalice-aix.com/"
           }
         ],
         "x": [
           {
-            "url": "https://twitter.com/Le_Littre",
-            "handle": "le_littre",
-            "sourceUrl": "https://hotellittreparis.com/fr"
-          }
-        ]
-      }
-    },
-    "issues": []
-  },
-  {
-    "url": "https://www.lodgepark.com/fr",
-    "status": "success",
-    "data": {
-      "domain": "lodgepark.com",
-      "finalUrl": "https://www.lodgepark.com/",
-      "keyPages": {
-        "contact": "https://www.lodgepark.com/contactez-nous",
-        "about": "https://www.lodgepark.com/a-propos-de-nous",
-        "legal": "https://www.lodgepark.com/mentions-legales",
-        "privacy": "https://www.lodgepark.com/politique-de-confidentialite"
-      },
-      "pagesVisited": [
-        "https://www.lodgepark.com/",
-        "https://www.lodgepark.com/contactez-nous",
-        "https://www.lodgepark.com/a-propos-de-nous",
-        "https://www.lodgepark.com/mentions-legales",
-        "https://www.lodgepark.com/politique-de-confidentialite",
-        "https://www.lodgepark.com/?r=0",
-        "https://www.lodgepark.com/en",
-        "https://www.lodgepark.com/es",
-        "https://www.lodgepark.com/en/contactez-nous",
-        "https://www.lodgepark.com/es/contactez-nous",
-        "https://www.lodgepark.com/ar/contactez-nous",
-        "https://www.lodgepark.com/en/mentions-legales",
-        "https://www.lodgepark.com/es/mentions-legales",
-        "https://www.lodgepark.com/ar/mentions-legales",
-        "https://www.lodgepark.com/formulaire-evenements"
-      ],
-      "emails": [
-        {
-          "value": "contact@lodgepark.com",
-          "type": "general",
-          "priority": "primary",
-          "signals": [
-            "mailto",
-            "same_domain"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/fr",
-          "snippet": "contact@lodgepark.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "sibuet@birdtravelpr.com",
-          "type": "press",
-          "priority": "secondary",
-          "signals": [
-            "mailto"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
-          "snippet": "sibuet@birdtravelpr.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "‍magazinesibuet@mhsibuet.com",
-          "type": "press",
-          "priority": "secondary",
-          "signals": [
-            "mailto"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
-          "snippet": "magazinesibuet@mhsibuet.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "mtissot@mhsibuet.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "mailto"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
-          "snippet": "mtissot@mhsibuet.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "events@mhsibuet.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "mailto"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
-          "snippet": "events@mhsibuet.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "allyouneed@gypsea-beach.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "mailto"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
-          "snippet": "events@mhsibuet.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "contact@mcpmediation.org",
-          "type": "press",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/mentions-legales",
-          "snippet": "ation 12 square Desnouettes 75015 PARISPar Mail : contact@mcpmediation.org‍‍ARTICLE 10 – MODIFICATIONS ET JURIDICTIONS COMPÉ",
-          "foundIn": "text"
-        },
-        {
-          "value": "dpo@mhsibuet.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/politique-de-confidentialite",
-          "snippet": "ls Sibuet est :Monsieur Frédéric MOUNIER, Email : dpo@mhsibuet.com‍‍Pour toute question de l'utilisateur s'agissant",
-          "foundIn": "text"
-        },
-        {
-          "value": "privacy@mhsibuet.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/politique-de-confidentialite",
-          "snippet": "144 chemin du petit Darbon – 74120 MEGEVE, Email: privacy@mhsibuet.comLe délégué à la protection des données personnelle",
-          "foundIn": "text"
-        },
-        {
-          "value": "quotereservationcontact@lodgepark.com",
-          "type": "booking",
-          "priority": "secondary",
-          "signals": [
-            "text",
-            "same_domain"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/en/contactez-nous",
-          "snippet": "y74120 Megève - ENTel: +33 4 50 93 05 03Request a quoteReservationcontact@lodgepark.com",
-          "foundIn": "text"
-        },
-        {
-          "value": "ncontact@lodgepark.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text",
-            "same_domain"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/es/contactez-nous",
-          "snippet": "+33 4 50 93 05 03Solicita una cotizaciónReservacióncontact@lodgepark.com",
-          "foundIn": "text"
-        },
-        {
-          "value": "magazinesibuet@mhsibuet.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/ar/contactez-nous",
-          "snippet": "magazinesibuet@mhsibuet.comقسم المبيعات الوكالة ومشغل الرح",
-          "foundIn": "text"
-        },
-        {
-          "value": "vecontact@lodgepark.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text",
-            "same_domain"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/evenements-contact",
-          "snippet": "omething went wrong while submitting the form.Megèvecontact@lodgepark.com+33 4 50 93 09 77Réserver en lignerejoignez le lod",
-          "foundIn": "text"
-        }
-      ],
-      "phones": [
-        {
-          "valueRaw": "+33450930977",
-          "valueE164": "+33450930977",
-          "priority": "primary",
-          "signals": [
-            "tel"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/fr",
-          "snippet": "+33 4 50 93 09 77"
-        },
-        {
-          "valueRaw": "+33450930503",
-          "valueE164": "+33450930503",
-          "priority": "secondary",
-          "signals": [
-            "tel"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/fr",
-          "snippet": "Appeler +33 4 50 93 05 03Hôtel Lodge Park"
-        },
-        {
-          "valueRaw": "+33450930863",
-          "valueE164": "+33450930863",
-          "priority": "secondary",
-          "signals": [
-            "tel"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/fr",
-          "snippet": "Appeler+33 4 50 93 08 63Spa Pure Altitude"
-        },
-        {
-          "valueRaw": "+590590775303",
-          "valueE164": "+590590775303",
-          "priority": "secondary",
-          "signals": [
-            "tel"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
-          "snippet": "+33 4 50 93 09 77"
-        },
-        {
-          "valueRaw": "+590590775252",
-          "valueE164": "+590590775252",
-          "priority": "secondary",
-          "signals": [
-            "tel"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
-          "snippet": "+590590775252"
-        },
-        {
-          "valueRaw": "+33450906336",
-          "valueE164": "+33450906336",
-          "priority": "secondary",
-          "signals": [
-            "tel"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
-          "snippet": "+33 4 50 90 63 36"
-        },
-        {
-          "valueRaw": "+33450906337",
-          "valueE164": "+33450906337",
-          "priority": "secondary",
-          "signals": [
-            "tel"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/contactez-nous",
-          "snippet": "+33 4 50 90 63 37"
-        },
-        {
-          "valueRaw": "479 345 001",
-          "valueE164": "+33479345001",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://www.lodgepark.com/ar/mentions-legales",
-          "snippet": "00 يوروضريبة القيمة المضافة الداخلية: FR24479345001الصليب الأحمر القطري: بونفيل 479 345 001المنشئ: مجتمع التأثيرمدير النشر: ماري سيبويهالمسؤول عن الموقع: التأثير على المجت"
-        }
-      ],
-      "primaryEmail": "contact@lodgepark.com",
-      "primaryPhone": "+33450930977",
-      "socials": {
-        "instagram": [
+            "url": "https://www.hotellegalice-aix.com/chambres-suites/",
+            "handle": "chambres-suites",
+            "sourceUrl": "http://www.hotellegalice-aix.com/"
+          },
           {
-            "url": "https://www.instagram.com/lodgeparkmegeve/",
-            "handle": "lodgeparkmegeve",
-            "sourceUrl": "https://www.lodgepark.com/fr"
-          }
-        ]
-      }
-    },
-    "issues": []
-  },
-  {
-    "url": "https://www.hotel-le-louvre-cherbourg.com/",
-    "status": "success",
-    "data": {
-      "domain": "hotel-le-louvre-cherbourg.com",
-      "finalUrl": "https://www.hotel-le-louvre-cherbourg.com/de",
-      "keyPages": {
-        "contact": null,
-        "about": null,
-        "legal": "https://www.hotel-le-louvre-cherbourg.com/de/mentions-legales",
-        "privacy": null
-      },
-      "pagesVisited": [
-        "https://www.hotel-le-louvre-cherbourg.com/de",
-        "https://www.hotel-le-louvre-cherbourg.com/de/mentions-legales",
-        "https://www.hotel-le-louvre-cherbourg.com/de",
-        "https://www.hotel-le-louvre-cherbourg.com/de/hotel",
-        "https://www.hotel-le-louvre-cherbourg.com/de/tarife",
-        "https://www.hotel-le-louvre-cherbourg.com/de/bietetan",
-        "https://www.hotel-le-louvre-cherbourg.com/de/schlafzimmer",
-        "https://www.hotel-le-louvre-cherbourg.com/de/galerie"
-      ],
-      "emails": [],
-      "phones": [
-        {
-          "valueRaw": "0233530228",
-          "valueE164": "+33233530228",
-          "priority": "primary",
-          "signals": [
-            "tel"
-          ],
-          "sourceUrl": "https://www.hotel-le-louvre-cherbourg.com/",
-          "snippet": "02 33 53 02 28"
-        }
-      ],
-      "primaryPhone": "+33233530228",
-      "socials": {
-        "facebook": [
+            "url": "https://www.hotellegalice-aix.com/contact/",
+            "handle": "contact",
+            "sourceUrl": "https://www.hotellegalice-aix.com/contact"
+          },
           {
-            "url": "https://www.facebook.com/H%C3%B4tel-Le-Louvre-Cherbourg-870052819691997",
-            "handle": "h%c3%b4tel-le-louvre-cherbourg-870052819691997",
-            "sourceUrl": "https://www.hotel-le-louvre-cherbourg.com/"
+            "url": "https://www.hotellegalice-aix.com/mentions-legales/",
+            "handle": "mentions-legales",
+            "sourceUrl": "https://www.hotellegalice-aix.com/mentions-legales"
+          },
+          {
+            "url": "https://www.hotellegalice-aix.com/chambres-suites/chambre-standard/",
+            "handle": "chambres-suites",
+            "sourceUrl": "https://www.hotellegalice-aix.com/chambres-suites/chambre-standard"
+          },
+          {
+            "url": "https://www.hotellegalice-aix.com/chambres-suites/chambre-superieure/",
+            "handle": "chambres-suites",
+            "sourceUrl": "https://www.hotellegalice-aix.com/chambres-suites/chambre-superieure"
           }
         ]
       }
@@ -517,180 +1926,97 @@
     "issues": [
       {
         "severity": "medium",
-        "type": "missing_emails",
-        "message": "Aucun email trouvé"
+        "type": "social_policy_link",
+        "message": "Lien social de paramètres détecté: https://www.hotellegalice-aix.com/chambres-suites/"
+      },
+      {
+        "severity": "medium",
+        "type": "social_policy_link",
+        "message": "Lien social de paramètres détecté: https://www.hotellegalice-aix.com/contact/"
+      },
+      {
+        "severity": "medium",
+        "type": "social_policy_link",
+        "message": "Lien social de paramètres détecté: https://www.hotellegalice-aix.com/mentions-legales/"
+      },
+      {
+        "severity": "medium",
+        "type": "social_policy_link",
+        "message": "Lien social de paramètres détecté: https://www.hotellegalice-aix.com/chambres-suites/chambre-standard/"
+      },
+      {
+        "severity": "medium",
+        "type": "social_policy_link",
+        "message": "Lien social de paramètres détecté: https://www.hotellegalice-aix.com/chambres-suites/chambre-superieure/"
       }
     ]
   },
   {
-    "url": "https://www.lumierehotel.fr/",
+    "url": "https://www.legayant-hotel.fr",
     "status": "success",
     "data": {
-      "domain": "lumierehotel.fr",
-      "finalUrl": "https://lumierehotel.fr/",
+      "domain": "legayant-hotel.fr",
+      "finalUrl": "https://www.legayant-hotel.fr/",
       "keyPages": {
-        "contact": null,
+        "contact": "https://www.legayant-hotel.fr/the-originals-a-douai/contact-hotel-le-gayant.php",
         "about": null,
-        "legal": "https://lumierehotel.fr/fr/page/mentions-legales.26045.html",
+        "legal": "https://www.legayant-hotel.fr/the-originals-nord-pas-de-calais/mentions-legales.php",
         "privacy": null
       },
       "pagesVisited": [
-        "https://lumierehotel.fr/",
-        "https://lumierehotel.fr/fr/page/mentions-legales.26045.html",
-        "https://lumierehotel.fr/",
-        "https://lumierehotel.fr/en/",
-        "https://lumierehotel.fr/fr/book.html"
+        "https://www.legayant-hotel.fr/",
+        "https://www.legayant-hotel.fr/the-originals-a-douai/contact-hotel-le-gayant.php",
+        "https://www.legayant-hotel.fr/the-originals-nord-pas-de-calais/mentions-legales.php",
+        "https://www.legayant-hotel.fr/the-originals-nord-pas-de-calais/acces-hotel-douai-a21.php",
+        "https://www.legayant-hotel.fr/hotel-a-douai/hotel-douai-centre.php",
+        "https://www.legayant-hotel.fr/hotel-a-douai/chambres-nord-pas-de-calais.php",
+        "https://www.legayant-hotel.fr/hotel-a-douai/services-tarifs-reservation.php",
+        "https://www.legayant-hotel.fr/week-end-nord-pas-de-calais/sejour-pas-cher-douai.php"
       ],
       "emails": [
         {
-          "value": "contact@lumierehotel.fr",
+          "value": "contact@legayant-hotel.fr",
           "type": "general",
           "priority": "primary",
           "signals": [
             "mailto",
             "same_domain"
           ],
-          "sourceUrl": "https://www.lumierehotel.fr/",
-          "snippet": "contact@lumierehotel.fr",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "info@mmcreation.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "mailto"
-          ],
-          "sourceUrl": "https://lumierehotel.fr/fr/page/mentions-legales.26045.html",
-          "snippet": "info@mmcreation.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "cil@ovh.net",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "mailto"
-          ],
-          "sourceUrl": "https://lumierehotel.fr/fr/page/mentions-legales.26045.html",
-          "snippet": "cil@ovh.net",
+          "sourceUrl": "https://www.legayant-hotel.fr/",
+          "snippet": "contact@legayant-hotel.fr",
           "foundIn": "mailto"
         }
       ],
       "phones": [
         {
-          "valueRaw": "+33 4 78 00 66 81",
-          "valueE164": "+33478006681",
+          "valueRaw": "+330327882997",
+          "valueE164": "+33327882997",
           "priority": "primary",
           "signals": [
             "tel"
           ],
-          "sourceUrl": "https://www.lumierehotel.fr/",
-          "snippet": "+33 4 78 00 66 81"
+          "sourceUrl": "https://www.legayant-hotel.fr/",
+          "snippet": "+33 (0)3 27 88 29 97"
         },
         {
-          "valueRaw": "+33972101007",
-          "valueE164": "+33972101007",
-          "priority": "secondary",
-          "signals": [
-            "tel"
-          ],
-          "sourceUrl": "https://lumierehotel.fr/fr/page/mentions-legales.26045.html",
-          "snippet": "+33 9 72 10 10 07"
-        }
-      ],
-      "primaryEmail": "contact@lumierehotel.fr",
-      "primaryPhone": "+33478006681"
-    },
-    "issues": []
-  },
-  {
-    "url": "https://hotelmparis.com/fr/",
-    "status": "success",
-    "data": {
-      "domain": "hotelmparis.com",
-      "finalUrl": "https://hotelmparis.com/fr/",
-      "keyPages": {
-        "contact": "https://hotelmparis.com/contactez-nous.html",
-        "about": null,
-        "legal": "https://hotelmparis.com/mentions-legales.html",
-        "privacy": null
-      },
-      "pagesVisited": [
-        "https://hotelmparis.com/fr/",
-        "https://hotelmparis.com/fr/chambres.html",
-        "https://hotelmparis.com/fr/offres.html",
-        "https://hotelmparis.com/fr/hotel.html"
-      ],
-      "errors": [
-        {
-          "url": "https://hotelmparis.com/contactez-nous.html",
-          "error": "HTTP 403"
-        },
-        {
-          "url": "https://hotelmparis.com/mentions-legales.html",
-          "error": "HTTP 403"
-        },
-        {
-          "url": "https://hotelmparis.com/politique-confidentialite.html",
-          "error": "HTTP 403"
-        },
-        {
-          "url": "https://hotelmparis.com/politica-de-cookies.html",
-          "error": "HTTP 403"
-        }
-      ],
-      "emails": [
-        {
-          "value": "reception@hotelmparis.com",
-          "type": "general",
-          "priority": "primary",
-          "signals": [
-            "mailto",
-            "same_domain"
-          ],
-          "sourceUrl": "https://hotelmparis.com/fr",
-          "snippet": "Contactez-nous",
-          "foundIn": "mailto"
-        }
-      ],
-      "phones": [
-        {
-          "valueRaw": "+33-1-40-47-48-49",
-          "valueE164": "+33140474849",
-          "priority": "primary",
-          "signals": [
-            "tel"
-          ],
-          "sourceUrl": "https://hotelmparis.com/fr",
-          "snippet": "+33 1 40 47 48 49"
-        },
-        {
-          "valueRaw": "+33 (0) 1 45 53 76 01",
-          "valueE164": "+33145537601",
+          "valueRaw": "02 97 54 77 90",
+          "valueE164": "+33297547790",
           "priority": "secondary",
           "signals": [
             "text"
           ],
-          "sourceUrl": "https://hotelmparis.com/fr",
-          "snippet": "érieures :Hôtel Victor Hugo Paris Kléber ****19 Rue Copernic - 75116 ParisTél : +33 (0) 1 45 53 76 01 - contact@victorhugohotel.comDécouvrez l'Hôtel Le Magnifique"
+          "sourceUrl": "https://www.legayant-hotel.fr/the-originals-nord-pas-de-calais/mentions-legales.php",
+          "snippet": "teur PIBS 2 - Le Radium 8 rue Pierre et Marie Curie - 56000 Vannes Téléphone : 02 97 54 77 90Médiation du Commerce Coopératif et Associé : Fédération du Commerce Coopératif"
         }
       ],
-      "primaryEmail": "reception@hotelmparis.com",
-      "primaryPhone": "+33140474849",
+      "primaryEmail": "contact@legayant-hotel.fr",
+      "primaryPhone": "+33327882997",
       "socials": {
         "facebook": [
           {
-            "url": "https://www.facebook.com/HotelLeM",
-            "handle": "hotellem",
-            "sourceUrl": "https://hotelmparis.com/fr"
-          }
-        ],
-        "instagram": [
-          {
-            "url": "https://www.instagram.com/hotelmparis/",
-            "handle": "hotelmparis",
-            "sourceUrl": "https://hotelmparis.com/fr"
+            "url": "https://www.facebook.com/The-Originals-Hotel-Le-Gayant-106298466130202/",
+            "handle": "the-originals-hotel-le-gayant-106298466130202",
+            "sourceUrl": "https://www.legayant-hotel.fr/"
           }
         ]
       }
@@ -698,137 +2024,202 @@
     "issues": []
   },
   {
-    "url": "http://www.hotelmagellan.com",
+    "url": "https://www.grand-monarque.com/fr/",
     "status": "success",
     "data": {
-      "domain": "hotelmagellan.com",
-      "finalUrl": "https://hotelmagellan.com/",
+      "domain": "grand-monarque.com",
+      "finalUrl": "https://www.grand-monarque.com/fr",
       "keyPages": {
-        "contact": "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-pereire-contact-acces-hotel-magellan.23941.html",
+        "contact": "https://www.grand-monarque.com/fr/contactez-nous.html",
         "about": null,
-        "legal": "https://hotelmagellan.com/fr/page/mentions-legales.23942.html",
-        "privacy": null
+        "legal": "https://www.grand-monarque.com/fr/mentions-legales.html",
+        "privacy": "https://www.grand-monarque.com/fr/confidentialite.html"
       },
       "pagesVisited": [
-        "https://hotelmagellan.com/",
-        "https://hotelmagellan.com/fr/page/mentions-legales.23942.html",
-        "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-pereire-contact-acces-hotel-magellan.23941.html",
-        "https://hotelmagellan.com/",
-        "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-17eme-hotel-magellan.23933.html",
-        "https://hotelmagellan.com/fr/page/hotel-de-charme-paris-17eme-chambres-hotel-magellan.23934.html",
-        "https://hotelmagellan.com/fr/page/petit-dejeuner.23935.html",
-        "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-17eme-bar-hotel-magellan.23936.html"
+        "https://www.grand-monarque.com/fr",
+        "https://www.grand-monarque.com/fr/contactez-nous.html",
+        "https://www.grand-monarque.com/fr/mentions-legales.html",
+        "https://www.grand-monarque.com/fr/confidentialite.html",
+        "https://www.grand-monarque.com/fr/magazine.html",
+        "https://www.grand-monarque.com/fr/actualites.html",
+        "https://www.grand-monarque.com/en",
+        "https://www.grand-monarque.com/fr/univers/maison-de-famille.html"
       ],
       "emails": [
         {
-          "value": "paris@hotelmagellan.com",
+          "value": "info@monarque.fr",
           "type": "general",
           "priority": "primary",
           "signals": [
-            "mailto",
-            "same_domain"
+            "mailto"
           ],
-          "sourceUrl": "http://www.hotelmagellan.com/",
-          "snippet": "paris@hotelmagellan.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "reception@hotelmagellan.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "mailto",
-            "same_domain"
-          ],
-          "sourceUrl": "https://hotelmagellan.com/fr/page/mentions-legales.23942.html",
-          "snippet": "reception@hotelmagellan.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "info@mmcreation.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "text"
-          ],
-          "sourceUrl": "https://hotelmagellan.com/fr/page/mentions-legales.23942.html",
-          "snippet": "ieu - 75008 Paris Tel : +33 1 45 74 76 00 Email : info@mmcreation.com",
-          "foundIn": "text"
-        },
-        {
-          "value": "olivier.payeux@hotelmagellan.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "mailto",
-            "same_domain"
-          ],
-          "sourceUrl": "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-pereire-contact-acces-hotel-magellan.23941.html",
-          "snippet": "olivier.payeux@hotelmagellan.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "gouvernante@hotelmagellan.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "mailto",
-            "same_domain"
-          ],
-          "sourceUrl": "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-pereire-contact-acces-hotel-magellan.23941.html",
-          "snippet": "gouvernante@hotelmagellan.com",
-          "foundIn": "mailto"
-        },
-        {
-          "value": "frederic.martin@hotelmagellan.com",
-          "type": "general",
-          "priority": "secondary",
-          "signals": [
-            "mailto",
-            "same_domain"
-          ],
-          "sourceUrl": "https://hotelmagellan.com/fr/page/hotel-3-etoiles-paris-pereire-contact-acces-hotel-magellan.23941.html",
-          "snippet": "frederic.martin@hotelmagellan.com",
+          "sourceUrl": "https://www.grand-monarque.com/fr",
+          "snippet": "info@monarque.fr",
           "foundIn": "mailto"
         }
       ],
       "phones": [
         {
-          "valueRaw": "+33 1 45 72 44 51",
-          "valueE164": "+33145724451",
+          "valueRaw": "0237181507",
+          "valueE164": null,
           "priority": "primary",
           "signals": [
             "tel"
           ],
-          "sourceUrl": "http://www.hotelmagellan.com/",
-          "snippet": "Tél. +33 1 45 72 44 51"
+          "sourceUrl": "https://www.grand-monarque.com/fr",
+          "snippet": "Lounge bar Le Madrigal"
         },
         {
-          "valueRaw": "+33 1 45 74 76 00",
-          "valueE164": "+33145747600",
+          "valueRaw": "+33237181515",
+          "valueE164": "+33237181515",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.grand-monarque.com/fr",
+          "snippet": "+33 2 37 18 15 15"
+        },
+        {
+          "valueRaw": "+33237181507",
+          "valueE164": "+33237181507",
+          "priority": "secondary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.grand-monarque.com/en",
+          "snippet": "Bar Lounge Le Madrigal"
+        }
+      ],
+      "primaryEmail": "info@monarque.fr",
+      "primaryPhone": "0237181507",
+      "socials": {
+        "linkedin": [
+          {
+            "url": "https://fr.linkedin.com/company/best-western-hotel-le-grand-monarque?trk=public_post_follow-view-profile",
+            "handle": "best-western-hotel-le-grand-monarque",
+            "sourceUrl": "https://www.grand-monarque.com/fr"
+          }
+        ],
+        "facebook": [
+          {
+            "url": "https://www.facebook.com/legrandmonarquechartres/",
+            "handle": "legrandmonarquechartres",
+            "sourceUrl": "https://www.grand-monarque.com/fr"
+          }
+        ],
+        "instagram": [
+          {
+            "url": "https://www.instagram.com/legrandmonarquechartres/",
+            "handle": "legrandmonarquechartres",
+            "sourceUrl": "https://www.grand-monarque.com/fr"
+          }
+        ],
+        "youtube": [
+          {
+            "url": "https://www.youtube.com/channel/UCqucR_0bncB6GFeOzIoPv8A",
+            "handle": "ucqucr_0bncb6gfeoziopv8a",
+            "sourceUrl": "https://www.grand-monarque.com/fr"
+          }
+        ]
+      }
+    },
+    "issues": []
+  },
+  {
+    "url": "https://www.legrandquartier.com/",
+    "status": "success",
+    "data": {
+      "domain": "legrandquartier.com",
+      "finalUrl": "https://www.legrandquartier.com/",
+      "keyPages": {
+        "contact": "https://www.legrandquartier.com/acces-contact",
+        "about": null,
+        "legal": "https://www.legrandquartier.com/mentions-legales",
+        "privacy": "https://www.legrandquartier.com/politique-confidentialite"
+      },
+      "pagesVisited": [
+        "https://www.legrandquartier.com/",
+        "https://www.legrandquartier.com/mentions-legales",
+        "https://www.legrandquartier.com/acces-contact",
+        "https://www.legrandquartier.com/politique-confidentialite",
+        "https://www.legrandquartier.com/calendrier",
+        "https://www.legrandquartier.com/bons-cadeaux",
+        "https://www.legrandquartier.com/hotel"
+      ],
+      "errors": [
+        {
+          "url": "https://www.legrandquartier.com/en",
+          "error": "HTTP 404"
+        }
+      ],
+      "emails": [
+        {
+          "value": "bonjour@legrandquartier.com",
+          "type": "general",
+          "priority": "primary",
+          "signals": [
+            "mailto",
+            "same_domain"
+          ],
+          "sourceUrl": "https://www.legrandquartier.com/",
+          "snippet": "bonjour@legrandquartier.com",
+          "foundIn": "mailto"
+        }
+      ],
+      "phones": [
+        {
+          "valueRaw": "+33176216161",
+          "valueE164": "+33176216161",
+          "priority": "primary",
+          "signals": [
+            "tel"
+          ],
+          "sourceUrl": "https://www.legrandquartier.com/",
+          "snippet": "+33176216161"
+        },
+        {
+          "valueRaw": "01 83 56 95 62",
+          "valueE164": "+33183569562",
           "priority": "secondary",
           "signals": [
             "text"
           ],
-          "sourceUrl": "https://hotelmagellan.com/fr/page/mentions-legales.23942.html",
-          "snippet": "été agence MMCREATION, 32 avenue de Wagram, 75008 PARIS ; numéro de téléphone : +33 1 45 74 76 00 ; site officiel : www.mmcreation.com PROPRIÉTÉ INTELLECTUELLE Le site dans so"
+          "sourceUrl": "https://www.legrandquartier.com/mentions-legales",
+          "snippet": "gistre du commerce et des sociétés de Paris sous le No 500 333 745. Téléphone : 01 83 56 95 62 - www.agencewebcom.com CONDITIONS GÉNÉRALES D’UTILISATION DU SITE L’utili"
         }
       ],
-      "primaryEmail": "paris@hotelmagellan.com",
-      "primaryPhone": "+33145724451",
+      "primaryEmail": "bonjour@legrandquartier.com",
+      "primaryPhone": "+33176216161",
       "socials": {
         "facebook": [
           {
-            "url": "https://www.facebook.com/magellanhotel/",
-            "handle": "magellanhotel",
-            "sourceUrl": "http://www.hotelmagellan.com/"
+            "url": "https://www.facebook.com/Le-Grand-Quartier-1720323954934584/",
+            "handle": "le-grand-quartier-1720323954934584",
+            "sourceUrl": "https://www.legrandquartier.com/"
           }
         ],
-        "x": [
+        "instagram": [
           {
-            "url": "https://x.com/magellanparis",
-            "handle": "magellanparis",
-            "sourceUrl": "http://www.hotelmagellan.com/"
+            "url": "https://www.instagram.com/legrandquartier/",
+            "handle": "legrandquartier",
+            "sourceUrl": "https://www.legrandquartier.com/"
+          }
+        ],
+        "google": [
+          {
+            "url": "https://maps.google.com/?q=15+rue+de+Nancy+75010%C2%A0Paris&entry=gmail&source=g",
+            "handle": "https://maps.google.com/?q=15+rue+de+Nancy+75010%C2%A0Paris&entry=gmail&source=g",
+            "sourceUrl": "https://www.legrandquartier.com/mentions-legales"
+          },
+          {
+            "url": "https://maps.google.com/?q=83+rue+Saint+Honor%C3%A9,+75001+Paris&entry=gmail&source=g",
+            "handle": "https://maps.google.com/?q=83+rue+Saint+Honor%C3%A9,+75001+Paris&entry=gmail&source=g",
+            "sourceUrl": "https://www.legrandquartier.com/mentions-legales"
+          },
+          {
+            "url": "https://www.google.com/maps/place/15+Rue+de+Nancy,+75010+Paris/@48.8722491,2.3563144,17z/data=!3m1!4b1!4m5!3m4!1s0x47e66e0dea807cd9:0x82e023972ad9e6a8!8m2!3d48.8722456!4d2.3585031",
+            "handle": "https://www.google.com/maps/place/15+Rue+de+Nancy,+75010+Paris/@48.8722491,2.3563144,17z/data=!3m1!4b1!4m5!3m4!1s0x47e66e0dea807cd9:0x82e023972ad9e6a8!8m2!3d48.8722456!4d2.3585031",
+            "sourceUrl": "https://www.legrandquartier.com/acces-contact"
           }
         ]
       }
